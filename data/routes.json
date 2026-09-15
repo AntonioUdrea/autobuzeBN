@@ -1,0 +1,259 @@
+{
+  "transmixt": {
+    "5": {
+      "indicative": "1"
+    },
+    "23": {
+      "indicative": "1B"
+    },
+    "22": {
+      "indicative": "1A"
+    },
+    "7": {
+      "indicative": "2"
+    },
+    "4": {
+      "indicative": "3"
+    },
+    "40": {
+      "indicative": "4"
+    },
+    "8": {
+      "indicative": "5"
+    },
+    "9": {
+      "indicative": "6"
+    },
+    "10": {
+      "indicative": "7"
+    },
+    "11": {
+      "indicative": "8"
+    },
+    "12": {
+      "indicative": "9"
+    },
+    "13": {
+      "indicative": "10"
+    },
+    "15": {
+      "indicative": "11"
+    },
+    "28": {
+      "indicative": "11A"
+    },
+    "16": {
+      "indicative": "12"
+    },
+    "21": {
+      "indicative": "13"
+    },
+    "17": {
+      "indicative": "13A"
+    },
+    "18": {
+      "indicative": "14"
+    },
+    "30": {
+      "indicative": "16"
+    },
+    "27": {
+      "indicative": "18"
+    },
+    "41": {
+      "indicative": "136 Bistrița - Molișet"
+    },
+    "42": {
+      "indicative": "138 Beclean - Agrieșel"
+    },
+    "43": {
+      "indicative": "188 Bistrița - Șendroaia"
+    },
+    "45": {
+      "indicative": "139 Bistrița - Beclean"
+    },
+    "46": {
+      "indicative": "140 Bistrița - Ciceu Poieni"
+    },
+    "47": {
+      "indicative": "142 Bistrița - Breaza"
+    },
+    "49": {
+      "indicative": "195 Beclean - Dumbrăveni"
+    },
+    "74": {
+      "indicative": "244 Beclean - Cireșoaia"
+    },
+    "75": {
+      "indicative": "246 Beclean - Chiochiș"
+    },
+    "76": {
+      "indicative": "247 Beclean - Jimbor"
+    },
+    "77": {
+      "indicative": "249 Beclean - Sânicoară"
+    },
+    "78": {
+      "indicative": "252 Beclean - Agrișu de Jos"
+    },
+    "79": {
+      "indicative": "320 Bistrița - Tărpiu"
+    },
+    "80": {
+      "indicative": "329 Bistrița - Bretea"
+    },
+    "81": {
+      "indicative": "354 Bistrița - Caila"
+    },
+    "82": {
+      "indicative": "358 Bistrița - Fântânele"
+    },
+    "83": {
+      "indicative": "359 Bistrița - Țăgșor"
+    },
+    "84": {
+      "indicative": "361 Bistrița - Vermeș"
+    },
+    "85": {
+      "indicative": "363 Bistrița - Urmeniș"
+    },
+    "86": {
+      "indicative": "364 Bistrița - Milaș"
+    },
+    "87": {
+      "indicative": "366 Bistrița - Archiud"
+    },
+    "88": {
+      "indicative": "367 Bistrița - Pinticu"
+    },
+    "89": {
+      "indicative": "368 Bistrița - Teaca"
+    },
+    "90": {
+      "indicative": "384 Bistrița - Albeștii Bistriței"
+    },
+    "91": {
+      "indicative": "387 Bistrița - Silivașu de Câmpie"
+    },
+    "92": {
+      "indicative": "390 Bistrița - Sâniacob"
+    },
+    "50": {
+      "indicative": "470 Bistrița - Posmuș"
+    },
+    "51": {
+      "indicative": "471 Bistrița - Ardan"
+    },
+    "52": {
+      "indicative": "472 Bistrița - Sebiș"
+    },
+    "55": {
+      "indicative": "474 Bistrița - Buduș"
+    },
+    "56": {
+      "indicative": "476 Bistrița - Budacu de Sus"
+    },
+    "67": {
+      "indicative": "476 Bistrița - Budacu de Sus (via Satu Nou)"
+    },
+    "68": {
+      "indicative": "476 Bistrița - Dumitrița"
+    },
+    "57": {
+      "indicative": "478 Bistrița - Satu Nou"
+    },
+    "53": {
+      "indicative": "485 Bistrița - Lunca"
+    },
+    "54": {
+      "indicative": "493 Bistrița - Gledin"
+    },
+    "58": {
+      "indicative": "501 Bistrița - Piatra Fântânele"
+    },
+    "59": {
+      "indicative": "502 Bistrița - Mureșenii Bârgăului"
+    },
+    "60": {
+      "indicative": "503 Bistrița - Bistrița Bârgăului - Colibița"
+    },
+    "61": {
+      "indicative": "506 Bistrița - Cușma"
+    },
+    "62": {
+      "indicative": "909 Bistrița - Valea Mare"
+    },
+    "63": {
+      "indicative": "910 Bistrița - Valea Vinului"
+    },
+    "64": {
+      "indicative": "911 Bistrița - Șanț"
+    },
+    "65": {
+      "indicative": "912 Bistrița - Șanț"
+    }
+  },
+
+  "ani-tour": {
+    "1": {
+      "indicative": "615 Bistrița - Năsăud"
+    },
+    "3": {
+      "indicative": "633 Bistrița - Săsarm"
+    },
+    "2": {
+      "indicative": "628 Bistrița - Suplai"
+    },
+    "5": {
+      "indicative": "630 Năsăud - Suplai"
+    },
+    "4": {
+      "indicative": "631 Năsăud - Săsarm"
+    },
+    "6": {
+      "indicative": "632 Năsăud - Runcu Salvei"
+    },
+    "21": {
+      "indicative": "628B Năsăud - Săsarm - Beclean - Suplai"
+    },
+    "20": {
+      "indicative": "628C Năsăud - Beclean"
+    },
+    "22": {
+      "indicative": "632 Năsăud - Runcu Salvei"
+    },
+    "7": {
+      "indicative": "721 Bistrița - Dealul Ștefăniței"
+    },
+    "9": {
+      "indicative": "723 Bistrița - Romuli"
+    },
+    "8": {
+      "indicative": "722 Năsăud - Dealul Ștefăniței"
+    },
+    "10": {
+      "indicative": "726 Năsăud - Bichigiu"
+    },
+    "12": {
+      "indicative": "727 Năsăud - Telcișor"
+    },
+    "11": {
+      "indicative": "725 Năsăud - Telciu"
+    },
+    "14": {
+      "indicative": "808 Bistrița - Lunca Ilvei"
+    },
+    "13": {
+      "indicative": "807 Bistrița - Leșu Ilvei"
+    },
+    "16": {
+      "indicative": "816 Năsăud - Lunca Leșului"
+    },
+    "15": {
+      "indicative": "817 Bistrița - Parva"
+    },
+    "17": {
+      "indicative": "818 Năsăud - Parva"
+    }
+  }
+}
