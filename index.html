@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Bistrița Bus Tracker</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>Bistrița Bus Tracker</h1>
+
+    <div class="controls">
+
+      <label>
+        Operator:
+        <select id="operatorFilter">
+          <option value="all">All operators</option>
+          <option value="transmixt">Transmixt</option>
+          <option value="ani-tour">Ani Tour</option>
+        </select>
+      </label>
+
+      <label>
+        Route:
+        <select id="routeFilter">
+          <option value="all">All routes</option>
+        </select>
+      </label>
+
+      <button id="refreshButton">
+        Refresh
+      </button>
+
+    </div>
+
+    <div id="status">
+      Loading...
+    </div>
+  </header>
+
+  <main>
+    <div id="map"></div>
+  </main>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  </script>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
