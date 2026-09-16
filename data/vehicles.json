@@ -28,6 +28,10 @@
       "licensePlate": "BN 74 TMX",
       "model": "Mercedes-Benz Citaro Facelift"
     },
+    "51": {
+      "licensePlate": "BN 20 TMX",
+      "model": "Mercedes-Benz Citaro Ü"
+    },
     "52": {
       "licensePlate": "BN 07 TMX",
       "model": "Mercedes-Benz Citaro"
@@ -303,6 +307,10 @@
     "170": {
       "licensePlate": "B 172 TMX",
       "model": "Mercedes-Benz Sprinter"
+    },
+    "172": {
+      "licensePlate": "B 136 TMX",
+      "model": "Mercedes-Benz Intouro II L"
     },
     "173": {
       "licensePlate": "B 140 TMX",
