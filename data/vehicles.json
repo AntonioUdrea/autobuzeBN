@@ -60,12 +60,20 @@
       "licensePlate": "BN 75 TMX",
       "model": "Mercedes-Benz Citaro Facelift"
     },
+    "64": {
+      "licensePlate": "BN 59 TMX",
+      "model": "Mercedes-Benz Citaro C2"
+    },
     "65": {
       "licensePlate": "BN 61 TMX",
       "model": "Mercedes-Benz Citaro C2"
     },
     "66": {
       "licensePlate": "BN 62 TMX",
+      "model": "Mercedes-Benz Citaro C2"
+    },
+    "67": {
+      "licensePlate": "BN 57 TMX",
       "model": "Mercedes-Benz Citaro C2"
     },
     "68": {
@@ -101,11 +109,15 @@
       "model": "Guleryuz Ecoline 10"
     },
     "76": {
-      "licensePlate": "Unknown",
+      "licensePlate": "B 162 TMX",
       "model": "Mercedes-Benz Sprinter"
     },
     "80": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 95 TMX",
+      "model": "Mercedes-Benz Citaro G"
+    },
+    "82": {
+      "licensePlate": "BN 37 TMX",
       "model": "Mercedes-Benz Citaro G"
     },
     "83": {
@@ -121,7 +133,11 @@
       "model": "SOR EBN 9,5"
     },
     "88": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 61 ECO",
+      "model": "SOR EBN 9,5"
+    },
+    "89": {
+      "licensePlate": "BN 67 ECO",
       "model": "SOR EBN 9,5"
     },
     "90": {
@@ -149,11 +165,15 @@
       "model": "SOR EBN 9,5"
     },
     "101": {
-      "licensePlate": "Unknown",
+      "licensePlate": "B 161 TMX",
+      "model": "Mercedes-Benz Sprinter"
+    },
+    "102": {
+      "licensePlate": "B 163 TMX",
       "model": "Mercedes-Benz Sprinter"
     },
     "103": {
-      "licensePlate": "Unknown",
+      "licensePlate": "B 166 TMX",
       "model": "Mercedes-Benz Sprinter"
     },
     "104": {
@@ -161,8 +181,8 @@
       "model": "Mercedes-Benz Sprinter"
     },
     "105": {
-      "licensePlate": "Unknown",
-      "model": "Mercedes-Benz Sprinter"
+      "licensePlate": "BN 09 TNR",
+      "model": "Mercedes-Benz Integro II"
     },
     "106": {
       "licensePlate": "BN 12 TNR",
@@ -178,6 +198,10 @@
     },
     "110": {
       "licensePlate": "BN 75 TNR",
+      "model": "VW Crafter"
+    },
+    "112": {
+      "licensePlate": "B 78 KAJ",
       "model": "VW Crafter"
     },
     "113": {
@@ -226,6 +250,10 @@
     },
     "133": {
       "licensePlate": "BN 21 TMX",
+      "model": "Mercedes-Benz Citaro Facelift"
+    },
+    "142": {
+      "licensePlate": "BN 21 TNR",
       "model": "Mercedes-Benz Citaro Facelift"
     },
     "143": {
@@ -281,8 +309,8 @@
       "model": "Setra S416 UL"
     },
     "161": {
-      "licensePlate": "Unknown",
-      "model": "Unknown"
+      "licensePlate": "B 182 TMX",
+      "model": "Setra S416 UL"
     },
     "162": {
       "licensePlate": "Unknown",
@@ -290,6 +318,10 @@
     },
     "164": {
       "licensePlate": "B 170 TMX",
+      "model": "Mercedes-Benz Sprinter"
+    },
+    "165": {
+      "licensePlate": "B 171 TMX",
       "model": "Mercedes-Benz Sprinter"
     },
     "166": {
@@ -327,6 +359,10 @@
     "176": {
       "licensePlate": "B 190 TMX",
       "model": "Ford e-Transit"
+    },
+    "177": {
+      "licensePlate": "Unknown",
+      "model": "Karsan e-ATA 10"
     },
     "178": {
       "licensePlate": "BN 55 PMB",
@@ -405,47 +441,50 @@
       "model": "Karsan e-ATA 10"
     },
     "197": {
-      "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
-    },
-    "198": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 98 PMB",
       "model": "Karsan e-ATA 10"
     }
   },
-
   "ani-tour": {
-  "1": {
-    "licensePlate": "B 140 ANY",
-    "model": "Mercedes-Benz Sprinter"
-  },
-  "7": {
-    "licensePlate": "BN 75 ANY",
-    "model": "Mercedes-Benz Sprinter"
-  },
-  "9": {
-    "licensePlate": "BN 54 ANY",
-    "model": "Setra S416 GT-HD"
-  },
-  "20": {
-    "licensePlate": "BN 08 ANY",
-    "model": "Setra S416 NF"
-  },
-  "21": {
-    "licensePlate": "BN 76 ANY",
-    "model": "Setra S415 NF"
-  },
-  "22": {
-    "licensePlate": "BN 65 ANY",
-    "model": "Mercedes-Benz Integro I"
-  },
-  "31": {
-    "licensePlate": "BN 06 ANI",
-    "model": "Mercedes-Benz Integro II L"
-  },
-  "32": {
-    "licensePlate": "BN 30 ANY",
-    "model": "Mercedes-Benz Integro II L"
+    "1": {
+      "licensePlate": "B 140 ANY",
+      "model": "Mercedes-Benz Sprinter"
+    },
+    "4": {
+      "licensePlate": "Unknown",
+      "model": "Mercedes-Benz Sprinter"
+    },
+    "7": {
+      "licensePlate": "BN 75 ANY",
+      "model": "Mercedes-Benz Sprinter"
+    },
+    "9": {
+      "licensePlate": "BN 54 ANY",
+      "model": "Setra S416 GT-HD"
+    },
+    "20": {
+      "licensePlate": "BN 08 ANY",
+      "model": "Setra S416 NF"
+    },
+    "21": {
+      "licensePlate": "BN 76 ANY",
+      "model": "Setra S415 NF"
+    },
+    "22": {
+      "licensePlate": "BN 65 ANY",
+      "model": "Mercedes-Benz Integro I"
+    },
+    "27": {
+      "licensePlate": "B 138 ANY",
+      "model": "Mercedes-Benz Sprinter"
+    },
+    "31": {
+      "licensePlate": "BN 06 ANI",
+      "model": "Mercedes-Benz Integro II L"
+    },
+    "32": {
+      "licensePlate": "BN 30 ANY",
+      "model": "Mercedes-Benz Integro II L"
+    }
   }
-}
 }
