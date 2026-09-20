@@ -2,15 +2,19 @@
   "transmixt": {
     "8": {
       "licensePlate": "B 126 TMX",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["471", "503"]
     },
     "28": {
       "licensePlate": "BN 10 TMX",
       "model": "Mercedes-Benz Citaro"
+      ,
+      "assignedRoutes": ["10"]
     },
     "34": {
       "licensePlate": "BN 38 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["3"]
     },
     "36": {
       "licensePlate": "Unknown",
@@ -18,39 +22,48 @@
     },
     "43": {
       "licensePlate": "BN 79 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["3"]
     },
     "47": {
       "licensePlate": "BN 04 TMX",
-      "model": "Mercedes-Benz Citaro"
+      "model": "Mercedes-Benz Citaro",
+      "assignedRoutes": ["13", "7"]
     },
     "49": {
       "licensePlate": "BN 74 TMX",
-      "model": "Mercedes-Benz Citaro Facelift"
+      "model": "Mercedes-Benz Citaro Facelift",
+      "assignedRoutes": ["13"]
     },
     "51": {
       "licensePlate": "BN 20 TMX",
-      "model": "Mercedes-Benz Citaro Ü"
+      "model": "Mercedes-Benz Citaro Ü",
+      "assignedRoutes": ["6"]
     },
     "52": {
       "licensePlate": "BN 07 TMX",
-      "model": "Mercedes-Benz Citaro"
+      "model": "Mercedes-Benz Citaro",
+      "assignedRoutes": ["5","13"]
     },
     "53": {
       "licensePlate": "B 156 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["3"]
     },
     "54": {
       "licensePlate": "B 157 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["3"]
     },
     "55": {
       "licensePlate": "B 158 TMX",
-      "model": "Guleryuz Ecoline 12"
+      "model": "Guleryuz Ecoline 12",
+      "assignedRoutes": ["1"]
     },
     "61": {
       "licensePlate": "BN 70 TMX",
-      "model": "Mercedes-Benz Citaro Facelift"
+      "model": "Mercedes-Benz Citaro Facelift",
+      "assignedRoutes": ["9","13","18"]
     },
     "62": {
       "licensePlate": "BN 72 TMX",
@@ -58,55 +71,68 @@
     },
     "63": {
       "licensePlate": "BN 75 TMX",
-      "model": "Mercedes-Benz Citaro Facelift"
+      "model": "Mercedes-Benz Citaro Facelift",
+      "assignedRoutes": ["5","13"]
     },
     "64": {
       "licensePlate": "BN 59 TMX",
-      "model": "Mercedes-Benz Citaro C2"
+      "model": "Mercedes-Benz Citaro C2",
+      "assignedRoutes": ["13"]
     },
     "65": {
       "licensePlate": "BN 61 TMX",
-      "model": "Mercedes-Benz Citaro C2"
+      "model": "Mercedes-Benz Citaro C2",
+      "assignedRoutes": ["2"]
     },
     "66": {
       "licensePlate": "BN 62 TMX",
-      "model": "Mercedes-Benz Citaro C2"
+      "model": "Mercedes-Benz Citaro C2",
+      "assignedRoutes": ["13"]
     },
     "67": {
       "licensePlate": "BN 57 TMX",
-      "model": "Mercedes-Benz Citaro C2"
+      "model": "Mercedes-Benz Citaro C2",
+      "assignedRoutes": ["8"]
     },
     "68": {
       "licensePlate": "B 01 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["1"]
     },
     "69": {
       "licensePlate": "B 107 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["2"]
     },
     "70": {
       "licensePlate": "B 108 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["1"]
     },
     "71": {
       "licensePlate": "B 115 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["2"]
     },
     "72": {
       "licensePlate": "B 116 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["2"]
     },
     "73": {
       "licensePlate": "B 118 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["2"]
     },
     "74": {
       "licensePlate": "B 159 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["2"]
     },
     "75": {
       "licensePlate": "B 165 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["1"]
     },
     "76": {
       "licensePlate": "B 162 TMX",
@@ -122,7 +148,8 @@
     },
     "83": {
       "licensePlate": "BN 74 TNR",
-      "model": "VW Crafter"
+      "model": "VW Crafter",
+      "assignedRoutes": ["18"]
     },
     "86": {
       "licensePlate": "BN 71 ECO",
@@ -182,63 +209,78 @@
     },
     "105": {
       "licensePlate": "BN 09 TNR",
-      "model": "Mercedes-Benz Integro II"
+      "model": "Mercedes-Benz Integro II",
+      "assignedRoutes": ["138"]
     },
     "106": {
       "licensePlate": "BN 12 TNR",
-      "model": "Mercedes-Benz Integro II M"
+      "model": "Mercedes-Benz Integro II M",
+      "assignedRoutes": ["142"]
     },
     "107": {
       "licensePlate": "BN 01 TMX",
-      "model": "Mercedes-Benz Integro II M"
+      "model": "Mercedes-Benz Integro II M",
+      "assignedRoutes": ["493"]
     },
     "109": {
       "licensePlate": "BN 05 TNR",
-      "model": "Irisbus Crossway"
+      "model": "Irisbus Crossway",
+      "assignedRoutes": ["478"]
     },
     "110": {
       "licensePlate": "BN 75 TNR",
-      "model": "VW Crafter"
+      "model": "VW Crafter",
+      "assignedRoutes": ["474","478"]
     },
     "112": {
       "licensePlate": "B 78 KAJ",
-      "model": "VW Crafter"
+      "model": "VW Crafter",
+      "assignedRoutes": ["506"]
     },
     "113": {
       "licensePlate": "BN 68 TMX",
-      "model": "Irisbus Crossway"
+      "model": "Irisbus Crossway",
+      "assignedRoutes": ["503"]
     },
     "114": {
       "licensePlate": "BN 90 TMX",
-      "model": "Setra S419 UL-GT"
+      "model": "Setra S419 UL-GT",
+      "assignedRoutes": ["502"]
     },
     "115": {
       "licensePlate": "BN 91 TMX",
-      "model": "Setra S419 UL-GT"
+      "model": "Setra S419 UL-GT",
+      "assignedRoutes": ["502"]
     },
     "116": {
       "licensePlate": "BN 92 TMX",
-      "model": "Setra S419 UL-GT"
+      "model": "Setra S419 UL-GT",
+      "assignedRoutes": ["502"]
     },
     "118": {
       "licensePlate": "BN 03 TNR",
-      "model": "Mercedes-Benz Integro II M"
+      "model": "Mercedes-Benz Integro II M",
+      "assignedRoutes": ["910"]
     },
     "119": {
       "licensePlate": "BN 04 TNR",
-      "model": "Mercedes-Benz Integro II"
+      "model": "Mercedes-Benz Integro II",
+      "assignedRoutes": ["911","912"]
     },
     "120": {
       "licensePlate": "BN 07 TNR",
-      "model": "Mercedes-Benz Integro II"
+      "model": "Mercedes-Benz Integro II",
+      "assignedRoutes": ["911","912"]
     },
     "121": {
       "licensePlate": "BN 08 TNR",
-      "model": "Mercedes-Benz Integro II"
+      "model": "Mercedes-Benz Integro II",
+      "assignedRoutes": ["911","912"]
     },
     "122": {
       "licensePlate": "BN 55 TMX",
-      "model": "Setra S419 UL-GT"
+      "model": "Setra S419 UL-GT",
+      "assignedRoutes": ["502"]
     },
     "123": {
       "licensePlate": "BN 02 TNR",
@@ -254,15 +296,18 @@
     },
     "141": {
       "licensePlate": "BN 21 TNR",
-      "model": "Mercedes-Benz Citaro Facelift"
+      "model": "Mercedes-Benz Citaro Facelift",
+      "assignedRoutes": ["13"]
     },
     "142": {
       "licensePlate": "BN 44 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["3"]
     },
     "143": {
       "licensePlate": "BN 14 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["3"]
     },
     "145": {
       "licensePlate": "BN 43 TMX",
@@ -270,7 +315,8 @@
     },
     "147": {
       "licensePlate": "BN 42 TMX",
-      "model": "Mercedes-Benz Citaro"
+      "model": "Mercedes-Benz Citaro",
+      "assignedRoutes": ["8"]
     },
     "149": {
       "licensePlate": "B 191 TMX",
@@ -298,19 +344,23 @@
     },
     "156": {
       "licensePlate": "B 197 TMX",
-      "model": "Guleryuz Ecoline 12"
+      "model": "Guleryuz Ecoline 12",
+      "assignedRoutes": ["2"]
     },
     "157": {
       "licensePlate": "B 198 TMX",
-      "model": "Guleryuz Ecoline 12"
+      "model": "Guleryuz Ecoline 12",
+      "assignedRoutes": ["1"]
     },
     "159": {
       "licensePlate": "B 199 TMX",
-      "model": "Guleryuz Ecoline 12"
+      "model": "Guleryuz Ecoline 12",
+      "assignedRoutes": ["1"]
     },
     "160": {
       "licensePlate": "B 181 TMX",
-      "model": "Setra S416 UL"
+      "model": "Setra S416 UL",
+      "assignedRoutes": ["364"]
     },
     "161": {
       "licensePlate": "B 182 TMX",
@@ -322,131 +372,163 @@
     },
     "164": {
       "licensePlate": "B 170 TMX",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["358"]
     },
     "165": {
       "licensePlate": "B 171 TMX",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["387"]
     },
     "166": {
       "licensePlate": "B 174 TMX",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["361"]
     },
     "167": {
       "licensePlate": "B 180 TMX",
-      "model": "Setra S416 UL"
+      "model": "Setra S416 UL",
+      "assignedRoutes": ["363","368","366"]
     },
     "168": {
       "licensePlate": "B 104 TMX",
-      "model": "Mercedes-Benz Intouro II"
+      "model": "Mercedes-Benz Intouro II",
+      "assignedRoutes": ["367","320","368"]
     },
     "169": {
       "licensePlate": "B 173 TMX",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["384","364"]
     },
     "170": {
       "licensePlate": "B 172 TMX",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["329","354"]
     },
     "172": {
       "licensePlate": "B 136 TMX",
-      "model": "Mercedes-Benz Intouro II L"
+      "model": "Mercedes-Benz Intouro II L",
+      "assignedRoutes": ["136"]
     },
     "173": {
       "licensePlate": "B 140 TMX",
-      "model": "Mercedes-Benz Intouro II"
+      "model": "Mercedes-Benz Intouro II",
+      "assignedRoutes": ["470"]
     },
     "175": {
       "licensePlate": "B 24 TMX",
-      "model": "Setra S415 UL Business"
+      "model": "Setra S415 UL Business",
+      "assignedRoutes": ["359","368"]
     },
     "176": {
       "licensePlate": "B 190 TMX",
-      "model": "Ford e-Transit"
+      "model": "Ford e-Transit",
+      "assignedRoutes": ["329"]
     },
     "177": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "178": {
       "licensePlate": "BN 55 PMB",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "179": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "180": {
       "licensePlate": "BN 71 PMB",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "181": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "182": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "183": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "184": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "185": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "186": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "187": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "188": {
       "licensePlate": "BN 89 PMB",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "189": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "190": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "191": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "192": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "193": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "194": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "195": {
       "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "196": {
       "licensePlate": "BN 97 PMB",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "197": {
       "licensePlate": "BN 98 PMB",
-      "model": "Karsan e-ATA 10"
+      "model": "Karsan e-ATA 10",
+      "assignedRoutes": ["2"]
     },
     "41": {
       "licensePlate": "BN 73 TMX",
@@ -454,7 +536,8 @@
     },
     "42": {
       "licensePlate": "BN 76 TMX",
-      "model": "Guleryuz Ecoline 10"
+      "model": "Guleryuz Ecoline 10",
+      "assignedRoutes": ["3"]
     },
     "77": {
       "licensePlate": "B 164 TMX",
@@ -466,12 +549,8 @@
       "licensePlate": "B 140 ANY",
       "model": "Mercedes-Benz Sprinter"
     },
-    "3": {
-      "licensePlate": "BN 20 ANY",
-      "model": "Mercedes-Benz Sprinter"
-    },
     "4": {
-      "licensePlate": "B 772 ANY",
+      "licensePlate": "Unknown",
       "model": "Mercedes-Benz Sprinter"
     },
     "7": {

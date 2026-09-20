@@ -61,141 +61,137 @@
       "indicative": "18"
     },
     "41": {
-      "indicative": "136 Bistrița - Molișet"
+      "indicative": "136"
     },
     "42": {
-      "indicative": "138 Beclean - Agrieșel"
+      "indicative": "138"
     },
     "43": {
-      "indicative": "188 Bistrița - Șendroaia"
+      "indicative": "188"
     },
     "45": {
-      "indicative": "139 Bistrița - Beclean"
+      "indicative": "139"
     },
     "46": {
-      "indicative": "140 Bistrița - Ciceu Poieni"
+      "indicative": "140"
     },
     "47": {
-      "indicative": "142 Bistrița - Breaza"
+      "indicative": "142"
     },
     "49": {
-      "indicative": "195 Beclean - Dumbrăveni"
+      "indicative": "195"
     },
     "74": {
-      "indicative": "244 Beclean - Cireșoaia"
+      "indicative": "244"
     },
     "75": {
-      "indicative": "246 Beclean - Chiochiș"
+      "indicative": "246"
     },
     "76": {
-      "indicative": "247 Beclean - Jimbor"
+      "indicative": "247"
     },
     "77": {
-      "indicative": "249 Beclean - Sânicoară"
+      "indicative": "249"
     },
     "78": {
-      "indicative": "252 Beclean - Agrișu de Jos"
+      "indicative": "252"
     },
     "79": {
-      "indicative": "320 Bistrița - Tărpiu"
+      "indicative": "320"
     },
     "80": {
-      "indicative": "329 Bistrița - Bretea"
+      "indicative": "329"
     },
     "81": {
-      "indicative": "354 Bistrița - Caila"
+      "indicative": "354"
     },
     "82": {
-      "indicative": "358 Bistrița - Fântânele"
+      "indicative": "358"
     },
     "83": {
-      "indicative": "359 Bistrița - Țăgșor"
+      "indicative": "359"
     },
     "84": {
-      "indicative": "361 Bistrița - Vermeș"
+      "indicative": "361"
     },
     "85": {
-      "indicative": "363 Bistrița - Urmeniș"
+      "indicative": "363"
     },
     "86": {
-      "indicative": "364 Bistrița - Milaș"
+      "indicative": "364"
     },
     "87": {
-      "indicative": "366 Bistrița - Archiud"
+      "indicative": "366"
     },
     "88": {
-      "indicative": "367 Bistrița - Pinticu"
+      "indicative": "367"
     },
     "89": {
-      "indicative": "368 Bistrița - Teaca"
+      "indicative": "368"
     },
     "90": {
-      "indicative": "384 Bistrița - Albeștii Bistriței"
+      "indicative": "384"
     },
     "91": {
-      "indicative": "387 Bistrița - Silivașu de Câmpie"
+      "indicative": "387"
     },
     "92": {
-      "indicative": "390 Bistrița - Sâniacob"
+      "indicative": "390"
     },
     "50": {
-      "indicative": "470 Bistrița - Posmuș"
+      "indicative": "470"
     },
     "51": {
-      "indicative": "471 Bistrița - Ardan"
+      "indicative": "471"
     },
     "52": {
-      "indicative": "472 Bistrița - Sebiș"
+      "indicative": "472"
     },
     "55": {
-      "indicative": "474 Bistrița - Buduș"
+      "indicative": "474"
     },
     "56": {
-      "indicative": "476 Bistrița - Budacu de Sus"
+      "indicative": "476"
     },
     "67": {
-      "indicative": "476 Bistrița - Budacu de Sus (via Satu Nou)"
+      "indicative": "476"
     },
     "68": {
-      "indicative": "476 Bistrița - Dumitrița"
+      "indicative": "476"
     },
     "57": {
-      "indicative": "478 Bistrița - Satu Nou"
+      "indicative": "478"
     },
     "53": {
-      "indicative": "485 Bistrița - Lunca"
+      "indicative": "485"
     },
     "54": {
-      "indicative": "493 Bistrița - Gledin"
+      "indicative": "493"
     },
     "58": {
-      "indicative": "501 Bistrița - Piatra Fântânele"
+      "indicative": "501"
     },
     "59": {
-      "indicative": "502 Bistrița - Mureșenii Bârgăului"
+      "indicative": "502"
     },
     "60": {
-      "indicative": "503 Bistrița - Bistrița Bârgăului - Colibița"
+      "indicative": "503"
     },
     "61": {
-      "indicative": "506 Bistrița - Cușma"
+      "indicative": "506"
     },
     "62": {
-      "indicative": "909 Bistrița - Valea Mare"
+      "indicative": "909"
     },
     "63": {
-      "indicative": "910 Bistrița - Valea Vinului"
+      "indicative": "910"
     },
     "64": {
-      "indicative": "911 Bistrița - Șanț"
+      "indicative": "911"
     },
     "65": {
-      "indicative": "912 Bistrița - Șanț"
-    },
-    "36": {
-      "indicative": "16-Meci"
+      "indicative": "912"
     }
-
   },
 
   "ani-tour": {
