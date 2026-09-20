@@ -22,7 +22,32 @@ const RARE_VEHICLES = new Set([
 // Optionally restrict rare bus alerts to specific routes (leave [] for all routes)
 const TARGET_ROUTES = []; 
 
+
+
 async function run() {
+  // ------------------------------------------------------------
+  // Time-of-Day Guard (Bistrița local time: Europe/Bucharest)
+  // ------------------------------------------------------------
+  const now = new Date();
+  const timeString = now.toLocaleString("en-GB", {
+    timeZone: "Europe/Bucharest",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  });
+
+  const [hour, minute] = timeString.split(":").map(Number);
+  const currentMinutes = hour * 60 + minute;
+
+  const startMinutes = 5 * 60;          // 05:00 AM (300 mins)
+  const stopMinutes = 22 * 60 + 30;     // 10:30 PM (1350 mins)
+
+  // Skip if time is at/after 22:30 OR before 05:00
+  if (currentMinutes >= stopMinutes || currentMinutes < startMinutes) {
+    console.log(`Skipping: Outside active bus hours (${timeString} local time).`);
+    return;
+  }
+  // ------------------------------------------------------------
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) {
     console.error("Missing DISCORD_WEBHOOK_URL environment variable.");
@@ -106,5 +131,7 @@ async function run() {
     }
   }
 }
+
+
 
 run();
