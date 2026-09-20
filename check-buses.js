@@ -15,8 +15,7 @@ const API_URLS = [
 
 // Defined as "operator:vehicleId" or license plate string
 const RARE_VEHICLES = new Set([
-  "transmixt:101",
-  "ani-tour:12",
+  "transmixt:41,53,62,133,145"
 ]);
 
 // Optionally restrict rare bus alerts to specific routes (leave [] for all routes)
