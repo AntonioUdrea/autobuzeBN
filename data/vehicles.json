@@ -426,7 +426,7 @@
       "assignedRoutes": ["329"]
     },
     "177": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 70 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
@@ -549,8 +549,12 @@
       "licensePlate": "B 140 ANY",
       "model": "Mercedes-Benz Sprinter"
     },
+    "3": {
+      "licensePlate": "BN 20 ANY",
+      "model": "Mercedes-Benz Sprinter"
+    },
     "4": {
-      "licensePlate": "Unknown",
+      "licensePlate": "B 772 ANY",
       "model": "Mercedes-Benz Sprinter"
     },
     "7": {
