@@ -103,10 +103,7 @@ async function run() {
     const isTargetRoute = TARGET_ROUTES.length === 0 || TARGET_ROUTES.includes(String(bus.routeId));
 
     if (isRare && isTargetRoute) {
-      const content = `**Apariție rară**\n` +
-        `• **Bus:** ${licensePlate} (${model})\n` +
-        `• **Linia:** ${routeIndicative}\n` +
-        `• **Ora:** <t:${Math.floor(Date.now() / 1000)}:R>`;
+      const content = `${licensePlate} (${model}) e pe linia ${routeIndicative}`;
 
       await fetch(webhookUrl, {
         method: 'POST',
@@ -117,10 +114,7 @@ async function run() {
 
     // 2. Unusual Route Check (compares against indicative e.g. "1", "3", "5")
     if (assignedRoutes.length > 0 && !assignedRoutes.includes(routeIndicative)) {
-      const content = `**Apariție rară**\n` +
-        `• **Bus:** ${licensePlate} (${model})\n` +
-        `• **Linia: ${routeIndicative}**\n` +
-        `• **Ora:** <t:${Math.floor(Date.now() / 1000)}:R>`;
+      const content = `${licensePlate} (${model}) e pe linia ${routeIndicative}`;
 
       await fetch(webhookUrl, {
         method: 'POST',
