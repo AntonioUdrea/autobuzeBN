@@ -2,9 +2,7 @@ name: Check Rare Buses
 
 on:
   schedule:
-    # Runs every 10 minutes between 02:00 UTC and 19:59 UTC
-    # (Matches ~05:00 AM to ~10:59 PM Romania local time)
-    - cron: '3,13,23,33,43,53 2-19 * * *'
+    - cron: '7,17,27,37,47,57 * * * *'
   workflow_dispatch:
 
 jobs:
