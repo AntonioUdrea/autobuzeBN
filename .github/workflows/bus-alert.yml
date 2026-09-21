@@ -2,9 +2,10 @@ name: Check Rare Buses
 
 on:
   schedule:
-    # Runs every 10 minutes
-    - cron: '*/10 * * * *'
-  workflow_dispatch: # Allows you to trigger manually from GitHub Actions tab
+    # Runs every 10 minutes between 02:00 UTC and 19:59 UTC
+    # (Matches ~05:00 AM to ~10:59 PM Romania local time)
+    - cron: '3,13,23,33,43,53 2-19 * * *'
+  workflow_dispatch:
 
 jobs:
   check-buses:
