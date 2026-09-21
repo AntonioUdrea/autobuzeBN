@@ -406,6 +406,11 @@
       "model": "Mercedes-Benz Sprinter",
       "assignedRoutes": ["329 Bistrița - Bretea","354 Bistrița - Caila"]
     },
+    "171": {
+      "licensePlate": "B 175 TMX",
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["354 Bistrița - Caila"]
+    },
     "172": {
       "licensePlate": "B 136 TMX",
       "model": "Mercedes-Benz Intouro II L",
