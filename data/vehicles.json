@@ -3,7 +3,7 @@
     "8": {
       "licensePlate": "B 126 TMX",
       "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["471", "503"]
+      "assignedRoutes": ["471 Bistrița - Ardan", "503 Bistrița - Bistrița Bârgăului - Colibița"]
     },
     "28": {
       "licensePlate": "BN 10 TMX",
@@ -210,77 +210,77 @@
     "105": {
       "licensePlate": "BN 09 TNR",
       "model": "Mercedes-Benz Integro II",
-      "assignedRoutes": ["138"]
+      "assignedRoutes": ["138 Beclean - Agrieșel"]
     },
     "106": {
       "licensePlate": "BN 12 TNR",
       "model": "Mercedes-Benz Integro II M",
-      "assignedRoutes": ["142"]
+      "assignedRoutes": ["142 Bistrița - Breaza"]
     },
     "107": {
       "licensePlate": "BN 01 TMX",
       "model": "Mercedes-Benz Integro II M",
-      "assignedRoutes": ["493"]
+      "assignedRoutes": ["493 Bistrița - Gledin"]
     },
     "109": {
       "licensePlate": "BN 05 TNR",
       "model": "Irisbus Crossway",
-      "assignedRoutes": ["478"]
+      "assignedRoutes": ["478 Bistrița - Satu Nou"]
     },
     "110": {
       "licensePlate": "BN 75 TNR",
       "model": "VW Crafter",
-      "assignedRoutes": ["474","478"]
+      "assignedRoutes": ["474 Bistrița - Buduș","478 Bistrița - Satu Nou"]
     },
     "112": {
       "licensePlate": "B 78 KAJ",
       "model": "VW Crafter",
-      "assignedRoutes": ["506"]
+      "assignedRoutes": ["506 Bistrița - Cușma"]
     },
     "113": {
       "licensePlate": "BN 68 TMX",
       "model": "Irisbus Crossway",
-      "assignedRoutes": ["503"]
+      "assignedRoutes": ["503 Bistrița - Bistrița Bârgăului - Colibița"]
     },
     "114": {
       "licensePlate": "BN 90 TMX",
       "model": "Setra S419 UL-GT",
-      "assignedRoutes": ["502"]
+      "assignedRoutes": ["502 Bistrița - Mureșenii Bârgăului"]
     },
     "115": {
       "licensePlate": "BN 91 TMX",
       "model": "Setra S419 UL-GT",
-      "assignedRoutes": ["502"]
+      "assignedRoutes": ["502 Bistrița - Mureșenii Bârgăului"]
     },
     "116": {
       "licensePlate": "BN 92 TMX",
       "model": "Setra S419 UL-GT",
-      "assignedRoutes": ["502"]
+      "assignedRoutes": ["502 Bistrița - Mureșenii Bârgăului"]
     },
     "118": {
       "licensePlate": "BN 03 TNR",
       "model": "Mercedes-Benz Integro II M",
-      "assignedRoutes": ["910"]
+      "assignedRoutes": ["910 Bistrița - Valea Vinului"]
     },
     "119": {
       "licensePlate": "BN 04 TNR",
       "model": "Mercedes-Benz Integro II",
-      "assignedRoutes": ["911","912"]
+      "assignedRoutes": ["911 Bistrița - Șanț","912 Bistrița - Șanț"]
     },
     "120": {
       "licensePlate": "BN 07 TNR",
       "model": "Mercedes-Benz Integro II",
-      "assignedRoutes": ["911","912"]
+      "assignedRoutes": ["911 Bistrița - Șanț","912 Bistrița - Șanț"]
     },
     "121": {
       "licensePlate": "BN 08 TNR",
       "model": "Mercedes-Benz Integro II",
-      "assignedRoutes": ["911","912"]
+      "assignedRoutes": ["911 Bistrița - Șanț","912 Bistrița - Șanț"]
     },
     "122": {
       "licensePlate": "BN 55 TMX",
       "model": "Setra S419 UL-GT",
-      "assignedRoutes": ["502"]
+      "assignedRoutes": ["502 Bistrița - Mureșenii Bârgăului"]
     },
     "123": {
       "licensePlate": "BN 02 TNR",
@@ -288,7 +288,8 @@
     },
     "124": {
       "licensePlate": "B 160 TMX",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["485 Bistrița - Lunca"]
     },
     "133": {
       "licensePlate": "BN 21 TMX",
@@ -360,11 +361,12 @@
     "160": {
       "licensePlate": "B 181 TMX",
       "model": "Setra S416 UL",
-      "assignedRoutes": ["364"]
+      "assignedRoutes": ["364 Bistrița - Milaș"]
     },
     "161": {
       "licensePlate": "B 182 TMX",
-      "model": "Setra S416 UL"
+      "model": "Setra S416 UL",
+      "assignedRoutes": ["244 Beclean - Cireșoaia", "247 Beclean - Jimbor"]
     },
     "162": {
       "licensePlate": "Unknown",
@@ -373,57 +375,57 @@
     "164": {
       "licensePlate": "B 170 TMX",
       "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["358"]
+      "assignedRoutes": ["358 Bistrița - Fântânele"]
     },
     "165": {
       "licensePlate": "B 171 TMX",
       "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["387"]
+      "assignedRoutes": ["387 Bistrița - Silivașu de Câmpie"]
     },
     "166": {
       "licensePlate": "B 174 TMX",
       "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["361"]
+      "assignedRoutes": ["361 Bistrița - Vermeș"]
     },
     "167": {
       "licensePlate": "B 180 TMX",
       "model": "Setra S416 UL",
-      "assignedRoutes": ["363","368","366"]
+      "assignedRoutes": ["363 Bistrița - Urmeniș","368 Bistrița - Teaca","366 Bistrița - Archiud"]
     },
     "168": {
       "licensePlate": "B 104 TMX",
       "model": "Mercedes-Benz Intouro II",
-      "assignedRoutes": ["367","320","368"]
+      "assignedRoutes": ["367 Bistrița - Pinticu","320 Bistrița - Tărpiu","368 Bistrița - Teaca"]
     },
     "169": {
       "licensePlate": "B 173 TMX",
       "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["384","364"]
+      "assignedRoutes": ["384 Bistrița - Albeștii Bistriței","364 Bistrița - Milaș"]
     },
     "170": {
       "licensePlate": "B 172 TMX",
       "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["329","354"]
+      "assignedRoutes": ["329 Bistrița - Bretea","354 Bistrița - Caila"]
     },
     "172": {
       "licensePlate": "B 136 TMX",
       "model": "Mercedes-Benz Intouro II L",
-      "assignedRoutes": ["136"]
+      "assignedRoutes": ["136 Bistrița - Molișet"]
     },
     "173": {
       "licensePlate": "B 140 TMX",
       "model": "Mercedes-Benz Intouro II",
-      "assignedRoutes": ["470"]
+      "assignedRoutes": ["470 Bistrița - Posmuș"]
     },
     "175": {
       "licensePlate": "B 24 TMX",
       "model": "Setra S415 UL Business",
-      "assignedRoutes": ["359","368"]
+      "assignedRoutes": ["359 Bistrița - Țăgșor","368 Bistrița - Teaca"]
     },
     "176": {
       "licensePlate": "B 190 TMX",
       "model": "Ford e-Transit",
-      "assignedRoutes": ["329"]
+      "assignedRoutes": ["329 Bistrița - Bretea"]
     },
     "177": {
       "licensePlate": "BN 70 PMB",
@@ -496,7 +498,7 @@
       "assignedRoutes": ["2"]
     },
     "191": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 91 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
