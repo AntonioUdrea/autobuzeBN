@@ -3,6 +3,9 @@ name: Check Rare Buses
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   check-buses:
     runs-on: ubuntu-latest
