@@ -1,3 +1,4 @@
+```javascript
 const fs = require('fs');
 const { execSync } = require('child_process');
 
@@ -14,7 +15,7 @@ const API_URLS = [
   }
 ];
 
-// Defined as "operator:vehicleId" or license plate string
+// Rare vehicles: "operator:vehicleId" or license plate.
 const RARE_VEHICLES = new Set([
   "transmixt:41",
   "transmixt:53",
@@ -23,8 +24,7 @@ const RARE_VEHICLES = new Set([
   "transmixt:145"
 ]);
 
-// Optionally restrict rare-bus alerts to specific routes.
-// Leave [] for all routes.
+// Leave [] to allow all routes.
 const TARGET_ROUTES = [];
 
 const STATE_FILE = 'data/rare-bus-state.json';
@@ -63,7 +63,7 @@ async function sendDiscord(webhookUrl, content) {
 
 
 // ============================================================
-// State file
+// Write state safely
 // ============================================================
 
 function writeStateFile(state) {
@@ -77,13 +77,15 @@ function writeStateFile(state) {
     'utf8'
   );
 
-  // Atomic replacement.
-  fs.renameSync(temporaryFile, STATE_FILE);
+  fs.renameSync(
+    temporaryFile,
+    STATE_FILE
+  );
 }
 
 
 // ============================================================
-// Git persistence
+// Commit + push state
 // ============================================================
 
 function persistStateToGit() {
@@ -98,7 +100,6 @@ function persistStateToGit() {
       { stdio: 'inherit' }
     );
 
-    // Make sure the local repository knows about the latest main.
     console.log("Fetching latest main...");
 
     execSync(
@@ -106,13 +107,11 @@ function persistStateToGit() {
       { stdio: 'inherit' }
     );
 
-    // Stage the state file.
     execSync(
       `git add ${STATE_FILE}`,
       { stdio: 'inherit' }
     );
 
-    // Check whether the state actually changed.
     let hasChanges = false;
 
     try {
@@ -121,7 +120,7 @@ function persistStateToGit() {
       );
 
       console.log(
-        "Git reports that rare-bus state has not changed."
+        "Git reports no change to rare-bus state."
       );
 
     } catch {
@@ -136,16 +135,11 @@ function persistStateToGit() {
       return true;
     }
 
-    // Commit the state.
     execSync(
       `git commit -m "Update rare bus state [skip ci]"`,
       { stdio: 'inherit' }
     );
 
-    // Push.
-    //
-    // Normally the workflow concurrency setting prevents
-    // simultaneous jobs. The retry is an additional safeguard.
     for (let attempt = 1; attempt <= 3; attempt++) {
 
       try {
@@ -160,7 +154,7 @@ function persistStateToGit() {
         );
 
         console.log(
-          "Rare-bus state successfully pushed to GitHub."
+          "Rare-bus state successfully pushed."
         );
 
         return true;
@@ -196,7 +190,7 @@ function persistStateToGit() {
   } catch (err) {
 
     console.error(
-      "CRITICAL: Could not persist rare-bus state."
+      "CRITICAL: Failed to persist rare-bus state."
     );
 
     console.error(err.message);
@@ -264,7 +258,7 @@ async function run() {
 
 
   // ==========================================================
-  // Discord environment
+  // Discord
   // ==========================================================
 
   const webhookUrl =
@@ -316,7 +310,9 @@ async function run() {
 
 
   // ==========================================================
-  // Load today's previous rare-bus state
+  // Load previous state
+  //
+  // Each rare vehicle has its own independent object.
   // ==========================================================
 
   let previousState = {};
@@ -342,16 +338,22 @@ async function run() {
           `Loaded rare-bus state for ${localDate}.`
         );
 
+        console.log(
+          `Previously stored rare vehicles: ${
+            Object.keys(previousState).length
+          }`
+        );
+
       } else {
 
         console.log(
           `New day detected: ${
             savedState.date ?? "none"
-          } -> ${localDate}`
+          } -> ${localDate}.`
         );
 
         console.log(
-          "Starting with a fresh rare-bus state."
+          "Resetting rare-bus state."
         );
 
         previousState = {};
@@ -376,7 +378,7 @@ async function run() {
 
 
   // ==========================================================
-  // Fetch buses
+  // Fetch all buses
   // ==========================================================
 
   const activeBuses = [];
@@ -429,17 +431,16 @@ async function run() {
 
 
   // ==========================================================
-  // Resolve duplicate vehicle entries
+  // Group API entries by vehicle ID
   //
-  // The API can apparently return the same vehicle more than
-  // once, sometimes with different routes.
+  // Multiple rare buses are completely independent:
   //
-  // Example:
+  // transmixt:41
+  // transmixt:53
+  // transmixt:62
   //
-  // transmixt:53 -> route 1
-  // transmixt:53 -> route 476
-  //
-  // We resolve this BEFORE sending notifications.
+  // Duplicate entries ONLY get grouped when they refer to the
+  // SAME vehicle ID.
   // ==========================================================
 
   const busesByKey = new Map();
@@ -450,17 +451,17 @@ async function run() {
       `${bus.operator}:${bus.vehicleId}`;
 
     if (!busesByKey.has(key)) {
-
       busesByKey.set(key, []);
-
     }
 
-    busesByKey.get(key).push(bus);
+    busesByKey
+      .get(key)
+      .push(bus);
   }
 
 
   // ==========================================================
-  // Build one definitive entry per vehicle
+  // Resolve duplicate entries for EACH vehicle independently
   // ==========================================================
 
   const resolvedBuses = [];
@@ -469,82 +470,79 @@ async function run() {
 
     if (entries.length === 1) {
 
-      resolvedBuses.push(entries[0]);
+      resolvedBuses.push(
+        entries[0]
+      );
+
       continue;
     }
 
     console.log(
-      `Duplicate API entries found for ${key}: ${entries.length}`
+      `Duplicate entries for ${key}: ${entries.length}`
     );
 
-    const previousRoute =
+    const previousEntry =
       previousState[key];
 
-    // Convert each entry to a route string.
-    const routes = entries.map(entry => {
+    const previousRoute =
+      previousEntry?.route ??
+      previousEntry;
 
-      const routeInfo =
-        routesMeta[
-          entry.operator
-        ]?.[
-          String(entry.routeId)
-        ];
+    const candidates =
+      entries.map(entry => {
 
-      return {
-        bus: entry,
-        route:
-          String(
+        const routeInfo =
+          routesMeta[
+            entry.operator
+          ]?.[
+            String(entry.routeId)
+          ];
+
+        return {
+          bus: entry,
+          route: String(
             routeInfo?.indicative ??
             entry.routeId
           )
-      };
-    });
+        };
+      });
 
     console.log(
-      `${key} reported routes: ${routes.map(r => r.route).join(', ')}`
+      `${key} API routes: ${
+        candidates.map(
+          item => item.route
+        ).join(', ')
+      }`
     );
 
-    // --------------------------------------------------------
-    // If we already know this bus's previous route, prefer
-    // a route that is DIFFERENT from the previous route.
-    //
-    // This handles:
-    //
-    // previous: 1
-    // API:      1 + 476
-    //
-    // Result:   476
-    // --------------------------------------------------------
 
+    // If this vehicle previously had a route,
+    // prefer a candidate representing a route change.
     if (previousRoute !== undefined) {
 
-      const changedRoute =
-        routes.find(
-          item => item.route !== String(previousRoute)
+      const changed =
+        candidates.find(
+          candidate =>
+            candidate.route !==
+            String(previousRoute)
         );
 
-      if (changedRoute) {
+      if (changed) {
 
         console.log(
-          `${key}: choosing changed route ${changedRoute.route} over previous route ${previousRoute}.`
+          `${key}: selecting changed route ${changed.route}.`
         );
 
         resolvedBuses.push(
-          changedRoute.bus
+          changed.bus
         );
 
         continue;
       }
     }
 
-    // --------------------------------------------------------
-    // Otherwise use the first API entry.
-    // --------------------------------------------------------
 
-    console.log(
-      `${key}: no clear route change; using first API entry.`
-    );
-
+    // Otherwise keep the first API entry.
     resolvedBuses.push(
       entries[0]
     );
@@ -552,16 +550,12 @@ async function run() {
 
 
   // ==========================================================
-  // Start today's state with previous state
-  //
   // IMPORTANT:
-  // A missing bus is NOT removed.
   //
-  // This prevents:
+  // Start with ALL previous rare buses.
   //
-  // bus disappears
-  // -> bus reappears
-  // -> duplicate alert
+  // Nothing gets deleted merely because the API temporarily
+  // stops reporting it.
   // ==========================================================
 
   const currentState = {
@@ -570,7 +564,7 @@ async function run() {
 
 
   // ==========================================================
-  // Evaluate each unique vehicle ONCE
+  // Process EVERY resolved vehicle independently
   // ==========================================================
 
   for (const bus of resolvedBuses) {
@@ -609,7 +603,7 @@ async function run() {
 
 
     // --------------------------------------------------------
-    // Rare bus
+    // Rare check
     // --------------------------------------------------------
 
     const isRare =
@@ -629,7 +623,7 @@ async function run() {
 
 
     // --------------------------------------------------------
-    // Unusual route
+    // Unusual route check
     // --------------------------------------------------------
 
     const isUnusualRoute =
@@ -640,22 +634,26 @@ async function run() {
 
 
     // --------------------------------------------------------
-    // Rare-bus notification
+    // Rare bus
     // --------------------------------------------------------
 
-    let sentRareNotification = false;
+    let rareNotificationSent = false;
 
     if (isRare && isTargetRoute) {
 
       const currentRoute =
         String(routeIndicative);
 
-      const previousRoute =
+      const previousEntry =
         previousState[key];
 
-      if (
-        previousRoute === undefined
-      ) {
+      const previousRoute =
+        previousEntry?.route ??
+        previousEntry;
+
+
+      // First sighting today
+      if (previousRoute === undefined) {
 
         console.log(
           `${key}: first sighting today on line ${currentRoute}.`
@@ -664,18 +662,17 @@ async function run() {
         const content =
           `${licensePlate} (${model}) e pe linia ${routeIndicative}`;
 
-        const sent =
+        rareNotificationSent =
           await sendDiscord(
             webhookUrl,
             content
           );
 
-        if (sent) {
-          sentRareNotification = true;
-        }
 
+      // Route changed
       } else if (
-        String(previousRoute) !== currentRoute
+        String(previousRoute) !==
+        currentRoute
       ) {
 
         console.log(
@@ -685,40 +682,41 @@ async function run() {
         const content =
           `${licensePlate} (${model}) e pe linia ${routeIndicative}`;
 
-        const sent =
+        rareNotificationSent =
           await sendDiscord(
             webhookUrl,
             content
           );
 
-        if (sent) {
-          sentRareNotification = true;
-        }
 
       } else {
 
         console.log(
-          `${key} still on line ${currentRoute}; no rare-bus notification needed.`
+          `${key}: still on line ${currentRoute}; no notification needed.`
         );
       }
 
 
-      // Always remember the latest resolved route.
-      currentState[key] =
-        currentRoute;
+      // ------------------------------------------------------
+      // Store THIS vehicle independently.
+      // ------------------------------------------------------
+
+      currentState[key] = {
+        route: currentRoute
+      };
     }
 
 
     // --------------------------------------------------------
-    // Unusual-route notification
+    // Unusual route
     //
-    // Do NOT send another message if the rare-bus check already
-    // sent one for this same bus during this run.
+    // If the rare-bus check already sent a message for this
+    // vehicle, don't send a second message.
     // --------------------------------------------------------
 
     if (
       isUnusualRoute &&
-      !sentRareNotification &&
+      !rareNotificationSent &&
       !(isRare && isTargetRoute)
     ) {
 
@@ -734,7 +732,7 @@ async function run() {
 
 
   // ==========================================================
-  // Create final state
+  // Final state
   // ==========================================================
 
   const finalState = {
@@ -744,26 +742,27 @@ async function run() {
 
 
   // ==========================================================
-  // Show state in Actions log
-  //
-  // This makes debugging much easier.
+  // Show EVERY stored vehicle in the Actions log
   // ==========================================================
 
   console.log(
-    "Final rare-bus state:"
+    `Storing ${Object.keys(currentState).length} rare vehicle(s):`
   );
 
-  console.log(
-    JSON.stringify(
-      finalState,
-      null,
-      2
-    )
-  );
+  for (const [key, data] of Object.entries(currentState)) {
+
+    const route =
+      data?.route ??
+      data;
+
+    console.log(
+      `  ${key} -> line ${route}`
+    );
+  }
 
 
   // ==========================================================
-  // Write state locally
+  // Write state
   // ==========================================================
 
   writeStateFile(
@@ -776,16 +775,12 @@ async function run() {
 
 
   // ==========================================================
-  // Commit + push
+  // Persist state to GitHub
   // ==========================================================
 
   const pushSuccessful =
     persistStateToGit();
 
-
-  // ==========================================================
-  // Do NOT silently continue if persistence failed
-  // ==========================================================
 
   if (!pushSuccessful) {
 
@@ -804,3 +799,4 @@ async function run() {
 
 
 run();
+```
