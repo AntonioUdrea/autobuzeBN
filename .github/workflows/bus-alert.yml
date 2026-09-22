@@ -6,6 +6,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: rare-bus-check
+  cancel-in-progress: false
+
 jobs:
   check-buses:
     runs-on: ubuntu-latest
