@@ -2,7 +2,7 @@
   "date": "2026-09-22",
   "buses": {
     "transmixt:176": {
-      "route": "361 Bistrița - Vermeș",
+      "route": "354 Bistrița - Caila",
       "rare": false,
       "unusual": false
     },
@@ -15,6 +15,11 @@
       "route": "13A",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:169": {
+      "route": "367 Bistrița - Pinticu",
+      "rare": false,
+      "unusual": true
     }
   }
 }
