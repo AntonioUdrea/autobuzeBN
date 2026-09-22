@@ -19,7 +19,6 @@ const RARE_VEHICLES = new Set([
   "transmixt:41",
   "transmixt:53",
   "transmixt:62",
-  "transmixt:77",
   "transmixt:133",
   "transmixt:145"
 ]);
@@ -32,7 +31,7 @@ const STATE_FILE = 'data/rare-bus-state.json';
 
 
 // ============================================================
-// Helper: send Discord notification
+// Discord
 // ============================================================
 
 async function sendDiscord(webhookUrl, content) {
@@ -50,6 +49,7 @@ async function sendDiscord(webhookUrl, content) {
     }
 
     console.log(`Discord notification sent: ${content}`);
+
     return true;
 
   } catch (err) {
@@ -63,36 +63,31 @@ async function sendDiscord(webhookUrl, content) {
 
 
 // ============================================================
-// Helper: save state to disk
+// State file
 // ============================================================
 
-function saveState(state) {
+function writeStateFile(state) {
   fs.mkdirSync('data', { recursive: true });
 
-  // Write to a temporary file first.
-  // This prevents leaving a partially-written JSON file if
-  // something goes wrong during the write.
-  const tempFile = `${STATE_FILE}.tmp`;
+  const temporaryFile = `${STATE_FILE}.tmp`;
 
   fs.writeFileSync(
-    tempFile,
+    temporaryFile,
     JSON.stringify(state, null, 2) + '\n',
     'utf8'
   );
 
-  fs.renameSync(tempFile, STATE_FILE);
+  // Atomic replacement.
+  fs.renameSync(temporaryFile, STATE_FILE);
 }
 
 
 // ============================================================
-// Helper: commit and push state robustly
+// Git persistence
 // ============================================================
 
-function commitAndPushState() {
+function persistStateToGit() {
   try {
-    // --------------------------------------------------------
-    // Configure Git identity
-    // --------------------------------------------------------
     execSync(
       `git config user.name "github-actions[bot]"`,
       { stdio: 'inherit' }
@@ -103,57 +98,60 @@ function commitAndPushState() {
       { stdio: 'inherit' }
     );
 
-    // --------------------------------------------------------
-    // Make sure we are working with the latest main branch
-    // --------------------------------------------------------
-    console.log("Fetching latest repository state...");
+    // Make sure the local repository knows about the latest main.
+    console.log("Fetching latest main...");
 
     execSync(
       `git fetch origin main`,
       { stdio: 'inherit' }
     );
 
-    // --------------------------------------------------------
-    // Stage our state file
-    // --------------------------------------------------------
+    // Stage the state file.
     execSync(
       `git add ${STATE_FILE}`,
       { stdio: 'inherit' }
     );
 
-    // --------------------------------------------------------
-    // Check whether there is actually anything to commit
-    // --------------------------------------------------------
+    // Check whether the state actually changed.
+    let hasChanges = false;
+
     try {
       execSync(
         `git diff --cached --quiet -- ${STATE_FILE}`
       );
 
-      console.log("Rare bus state has not changed.");
-      return true;
+      console.log(
+        "Git reports that rare-bus state has not changed."
+      );
 
     } catch {
-      // Exit code 1 means the staged file has changed.
-      console.log("Rare bus state has changed.");
+      hasChanges = true;
+
+      console.log(
+        "Git detected a change to rare-bus state."
+      );
     }
 
-    // --------------------------------------------------------
-    // Commit
-    // --------------------------------------------------------
+    if (!hasChanges) {
+      return true;
+    }
+
+    // Commit the state.
     execSync(
       `git commit -m "Update rare bus state [skip ci]"`,
       { stdio: 'inherit' }
     );
 
-    // --------------------------------------------------------
-    // Push with retry logic
-    // --------------------------------------------------------
-    const maxAttempts = 3;
+    // Push.
+    //
+    // Normally the workflow concurrency setting prevents
+    // simultaneous jobs. The retry is an additional safeguard.
+    for (let attempt = 1; attempt <= 3; attempt++) {
 
-    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       try {
+
         console.log(
-          `Pushing rare bus state (attempt ${attempt}/${maxAttempts})...`
+          `Pushing state to main (attempt ${attempt}/3)...`
         );
 
         execSync(
@@ -161,24 +159,24 @@ function commitAndPushState() {
           { stdio: 'inherit' }
         );
 
-        console.log("Rare bus state successfully pushed.");
-        return true;
-
-      } catch (pushError) {
-        console.error(
-          `Git push failed on attempt ${attempt}.`
+        console.log(
+          "Rare-bus state successfully pushed to GitHub."
         );
 
-        if (attempt === maxAttempts) {
-          throw pushError;
+        return true;
+
+      } catch (err) {
+
+        console.error(
+          `Push attempt ${attempt} failed.`
+        );
+
+        if (attempt === 3) {
+          throw err;
         }
 
-        // ------------------------------------------------------
-        // Someone may have pushed to main while this job was
-        // running. Fetch their changes and rebase our commit.
-        // ------------------------------------------------------
         console.log(
-          "Fetching latest main and rebasing before retry..."
+          "Fetching latest main and rebasing..."
         );
 
         execSync(
@@ -196,8 +194,9 @@ function commitAndPushState() {
     return false;
 
   } catch (err) {
+
     console.error(
-      "CRITICAL: Failed to save rare bus state to GitHub."
+      "CRITICAL: Could not persist rare-bus state."
     );
 
     console.error(err.message);
@@ -213,10 +212,9 @@ function commitAndPushState() {
 
 async function run() {
 
-  // ------------------------------------------------------------
-  // Time-of-Day Guard
-  // Bistrița local time: Europe/Bucharest
-  // ------------------------------------------------------------
+  // ==========================================================
+  // Time guard
+  // ==========================================================
 
   const now = new Date();
 
@@ -227,45 +225,50 @@ async function run() {
     hour12: false
   });
 
-  const [hour, minute] = timeString.split(":").map(Number);
-  const currentMinutes = hour * 60 + minute;
+  const [hour, minute] =
+    timeString.split(":").map(Number);
 
-  const startMinutes = 5 * 60;          // 05:00
-  const stopMinutes = 22 * 60 + 30;     // 22:30
+  const currentMinutes =
+    hour * 60 + minute;
+
+  const startMinutes = 5 * 60;
+  const stopMinutes = 22 * 60 + 30;
 
   if (
     currentMinutes >= stopMinutes ||
     currentMinutes < startMinutes
   ) {
     console.log(
-      `Skipping: Outside active bus hours (${timeString} local time).`
+      `Skipping: Outside active bus hours (${timeString} Europe/Bucharest).`
     );
 
     return;
   }
 
 
-  // ------------------------------------------------------------
-  // Current local date
-  // ------------------------------------------------------------
+  // ==========================================================
+  // Local date
+  // ==========================================================
 
-  const localDate = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Europe/Bucharest",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit"
-  }).format(now);
+  const localDate =
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Bucharest",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).format(now);
 
   console.log(
     `Bus checker running at ${timeString} Europe/Bucharest (${localDate}).`
   );
 
 
-  // ------------------------------------------------------------
-  // Environment
-  // ------------------------------------------------------------
+  // ==========================================================
+  // Discord environment
+  // ==========================================================
 
-  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  const webhookUrl =
+    process.env.DISCORD_WEBHOOK_URL;
 
   if (!webhookUrl) {
     console.error(
@@ -276,9 +279,9 @@ async function run() {
   }
 
 
-  // ------------------------------------------------------------
+  // ==========================================================
   // Load metadata
-  // ------------------------------------------------------------
+  // ==========================================================
 
   let vehiclesMeta = {};
   let routesMeta = {};
@@ -306,28 +309,29 @@ async function run() {
   } catch (err) {
 
     console.warn(
-      "Warning loading local metadata:",
+      "Warning loading metadata:",
       err.message
     );
   }
 
 
-  // ------------------------------------------------------------
-  // Load previous rare-bus state
-  // ------------------------------------------------------------
+  // ==========================================================
+  // Load today's previous rare-bus state
+  // ==========================================================
 
   let previousState = {};
 
-  try {
+  if (fs.existsSync(STATE_FILE)) {
 
-    if (fs.existsSync(STATE_FILE)) {
+    try {
 
-      const savedState = JSON.parse(
-        fs.readFileSync(
-          STATE_FILE,
-          'utf8'
-        )
-      );
+      const savedState =
+        JSON.parse(
+          fs.readFileSync(
+            STATE_FILE,
+            'utf8'
+          )
+        );
 
       if (savedState.date === localDate) {
 
@@ -342,38 +346,38 @@ async function run() {
 
         console.log(
           `New day detected: ${
-            savedState.date ?? "no previous date"
-          } -> ${localDate}.`
+            savedState.date ?? "none"
+          } -> ${localDate}`
         );
 
         console.log(
-          "Resetting rare-bus state for today."
+          "Starting with a fresh rare-bus state."
         );
 
         previousState = {};
       }
 
-    } else {
+    } catch (err) {
 
-      console.log(
-        "No previous rare-bus state found."
+      console.warn(
+        "Could not read rare-bus state:",
+        err.message
       );
+
+      previousState = {};
     }
 
-  } catch (err) {
+  } else {
 
-    console.warn(
-      "Warning loading rare-bus state:",
-      err.message
+    console.log(
+      "No rare-bus state file exists yet."
     );
-
-    previousState = {};
   }
 
 
-  // ------------------------------------------------------------
-  // Fetch active buses
-  // ------------------------------------------------------------
+  // ==========================================================
+  // Fetch buses
+  // ==========================================================
 
   const activeBuses = [];
 
@@ -381,29 +385,36 @@ async function run() {
 
     try {
 
-      const res = await fetch(api.url);
+      const response =
+        await fetch(api.url);
 
-      if (!res.ok) {
+      if (!response.ok) {
 
         console.error(
-          `Failed to fetch ${api.name}: HTTP ${res.status}`
+          `Failed to fetch ${api.name}: HTTP ${response.status}`
         );
 
         continue;
       }
 
-      const data = await res.json();
+      const data =
+        await response.json();
 
-      if (Array.isArray(data)) {
+      if (!Array.isArray(data)) {
 
-        data.forEach(v => {
+        console.error(
+          `${api.name} returned unexpected data.`
+        );
 
-          activeBuses.push({
-            ...v,
-            operator: api.operator,
-            operatorName: api.name
-          });
+        continue;
+      }
 
+      for (const vehicle of data) {
+
+        activeBuses.push({
+          ...vehicle,
+          operator: api.operator,
+          operatorName: api.name
         });
       }
 
@@ -417,36 +428,167 @@ async function run() {
   }
 
 
-  // ------------------------------------------------------------
-  // IMPORTANT:
+  // ==========================================================
+  // Resolve duplicate vehicle entries
   //
-  // Start with the previous state instead of an empty object.
+  // The API can apparently return the same vehicle more than
+  // once, sometimes with different routes.
   //
-  // This means a bus that temporarily disappears from the API
-  // remains remembered.
-  // ------------------------------------------------------------
+  // Example:
+  //
+  // transmixt:53 -> route 1
+  // transmixt:53 -> route 476
+  //
+  // We resolve this BEFORE sending notifications.
+  // ==========================================================
 
-  const currentState = {
-    ...previousState
-  };
-
-
-  // ------------------------------------------------------------
-  // Main evaluation loop
-  // ------------------------------------------------------------
+  const busesByKey = new Map();
 
   for (const bus of activeBuses) {
 
     const key =
       `${bus.operator}:${bus.vehicleId}`;
 
+    if (!busesByKey.has(key)) {
+
+      busesByKey.set(key, []);
+
+    }
+
+    busesByKey.get(key).push(bus);
+  }
+
+
+  // ==========================================================
+  // Build one definitive entry per vehicle
+  // ==========================================================
+
+  const resolvedBuses = [];
+
+  for (const [key, entries] of busesByKey.entries()) {
+
+    if (entries.length === 1) {
+
+      resolvedBuses.push(entries[0]);
+      continue;
+    }
+
+    console.log(
+      `Duplicate API entries found for ${key}: ${entries.length}`
+    );
+
+    const previousRoute =
+      previousState[key];
+
+    // Convert each entry to a route string.
+    const routes = entries.map(entry => {
+
+      const routeInfo =
+        routesMeta[
+          entry.operator
+        ]?.[
+          String(entry.routeId)
+        ];
+
+      return {
+        bus: entry,
+        route:
+          String(
+            routeInfo?.indicative ??
+            entry.routeId
+          )
+      };
+    });
+
+    console.log(
+      `${key} reported routes: ${routes.map(r => r.route).join(', ')}`
+    );
+
+    // --------------------------------------------------------
+    // If we already know this bus's previous route, prefer
+    // a route that is DIFFERENT from the previous route.
+    //
+    // This handles:
+    //
+    // previous: 1
+    // API:      1 + 476
+    //
+    // Result:   476
+    // --------------------------------------------------------
+
+    if (previousRoute !== undefined) {
+
+      const changedRoute =
+        routes.find(
+          item => item.route !== String(previousRoute)
+        );
+
+      if (changedRoute) {
+
+        console.log(
+          `${key}: choosing changed route ${changedRoute.route} over previous route ${previousRoute}.`
+        );
+
+        resolvedBuses.push(
+          changedRoute.bus
+        );
+
+        continue;
+      }
+    }
+
+    // --------------------------------------------------------
+    // Otherwise use the first API entry.
+    // --------------------------------------------------------
+
+    console.log(
+      `${key}: no clear route change; using first API entry.`
+    );
+
+    resolvedBuses.push(
+      entries[0]
+    );
+  }
+
+
+  // ==========================================================
+  // Start today's state with previous state
+  //
+  // IMPORTANT:
+  // A missing bus is NOT removed.
+  //
+  // This prevents:
+  //
+  // bus disappears
+  // -> bus reappears
+  // -> duplicate alert
+  // ==========================================================
+
+  const currentState = {
+    ...previousState
+  };
+
+
+  // ==========================================================
+  // Evaluate each unique vehicle ONCE
+  // ==========================================================
+
+  for (const bus of resolvedBuses) {
+
+    const key =
+      `${bus.operator}:${bus.vehicleId}`;
+
     const vehicleInfo =
-      vehiclesMeta[bus.operator]?.[
+      vehiclesMeta[
+        bus.operator
+      ]?.[
         String(bus.vehicleId)
       ];
 
     const routeInfo =
-      routesMeta[bus.operator]?.[
+      routesMeta[
+        bus.operator
+      ]?.[
         String(bus.routeId)
       ];
 
@@ -466,9 +608,9 @@ async function run() {
       vehicleInfo?.assignedRoutes ?? [];
 
 
-    // ----------------------------------------------------------
-    // Determine whether this is a rare bus
-    // ----------------------------------------------------------
+    // --------------------------------------------------------
+    // Rare bus
+    // --------------------------------------------------------
 
     const isRare =
       RARE_VEHICLES.has(key) ||
@@ -479,7 +621,6 @@ async function run() {
         )
       );
 
-
     const isTargetRoute =
       TARGET_ROUTES.length === 0 ||
       TARGET_ROUTES.includes(
@@ -487,18 +628,22 @@ async function run() {
       );
 
 
-    // ----------------------------------------------------------
-    // Determine whether route is unusual
-    // ----------------------------------------------------------
+    // --------------------------------------------------------
+    // Unusual route
+    // --------------------------------------------------------
 
     const isUnusualRoute =
       assignedRoutes.length > 0 &&
-      !assignedRoutes.includes(routeIndicative);
+      !assignedRoutes.includes(
+        routeIndicative
+      );
 
 
-    // ----------------------------------------------------------
-    // ONE notification maximum per bus per run
-    // ----------------------------------------------------------
+    // --------------------------------------------------------
+    // Rare-bus notification
+    // --------------------------------------------------------
+
+    let sentRareNotification = false;
 
     if (isRare && isTargetRoute) {
 
@@ -508,20 +653,47 @@ async function run() {
       const previousRoute =
         previousState[key];
 
-
-      // First sighting today OR route changed
       if (
-        previousRoute === undefined ||
-        previousRoute !== currentRoute
+        previousRoute === undefined
       ) {
+
+        console.log(
+          `${key}: first sighting today on line ${currentRoute}.`
+        );
 
         const content =
           `${licensePlate} (${model}) e pe linia ${routeIndicative}`;
 
-        await sendDiscord(
-          webhookUrl,
-          content
+        const sent =
+          await sendDiscord(
+            webhookUrl,
+            content
+          );
+
+        if (sent) {
+          sentRareNotification = true;
+        }
+
+      } else if (
+        String(previousRoute) !== currentRoute
+      ) {
+
+        console.log(
+          `${key}: route changed ${previousRoute} -> ${currentRoute}.`
         );
+
+        const content =
+          `${licensePlate} (${model}) e pe linia ${routeIndicative}`;
+
+        const sent =
+          await sendDiscord(
+            webhookUrl,
+            content
+          );
+
+        if (sent) {
+          sentRareNotification = true;
+        }
 
       } else {
 
@@ -531,22 +703,22 @@ async function run() {
       }
 
 
-      // Always remember the latest known route.
+      // Always remember the latest resolved route.
       currentState[key] =
         currentRoute;
-
     }
 
 
-    // ----------------------------------------------------------
-    // Unusual route notification
+    // --------------------------------------------------------
+    // Unusual-route notification
     //
-    // Only send this if the bus was NOT already handled by the
-    // rare-bus notification above.
-    // ----------------------------------------------------------
+    // Do NOT send another message if the rare-bus check already
+    // sent one for this same bus during this run.
+    // --------------------------------------------------------
 
     if (
       isUnusualRoute &&
+      !sentRareNotification &&
       !(isRare && isTargetRoute)
     ) {
 
@@ -561,47 +733,64 @@ async function run() {
   }
 
 
-  // ------------------------------------------------------------
-  // Prepare state for saving
-  // ------------------------------------------------------------
+  // ==========================================================
+  // Create final state
+  // ==========================================================
 
-  const stateToSave = {
+  const finalState = {
     date: localDate,
     buses: currentState
   };
 
 
-  // ------------------------------------------------------------
-  // Save state locally FIRST
-  // ------------------------------------------------------------
-
-  saveState(stateToSave);
+  // ==========================================================
+  // Show state in Actions log
+  //
+  // This makes debugging much easier.
+  // ==========================================================
 
   console.log(
-    `Rare bus state written locally to ${STATE_FILE}.`
+    "Final rare-bus state:"
+  );
+
+  console.log(
+    JSON.stringify(
+      finalState,
+      null,
+      2
+    )
   );
 
 
-  // ------------------------------------------------------------
-  // Persist state to GitHub
-  // ------------------------------------------------------------
+  // ==========================================================
+  // Write state locally
+  // ==========================================================
+
+  writeStateFile(
+    finalState
+  );
+
+  console.log(
+    `Rare-bus state written to ${STATE_FILE}.`
+  );
+
+
+  // ==========================================================
+  // Commit + push
+  // ==========================================================
 
   const pushSuccessful =
-    commitAndPushState();
+    persistStateToGit();
 
 
-  // ------------------------------------------------------------
-  // IMPORTANT:
-  //
-  // If GitHub persistence fails, fail the Action visibly.
-  // This makes the problem obvious instead of silently
-  // allowing duplicate alerts on the next run.
-  // ------------------------------------------------------------
+  // ==========================================================
+  // Do NOT silently continue if persistence failed
+  // ==========================================================
 
   if (!pushSuccessful) {
 
     console.error(
-      "WARNING: Rare bus state could not be persisted to GitHub."
+      "ERROR: Rare-bus state could not be persisted to GitHub."
     );
 
     process.exit(1);
