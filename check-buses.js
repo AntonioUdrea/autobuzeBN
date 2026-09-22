@@ -19,6 +19,7 @@ const RARE_VEHICLES = new Set([
   "transmixt:41",
   "transmixt:53",
   "transmixt:62",
+  "transmixt:77",
   "transmixt:133",
   "transmixt:145"
 ]);
