@@ -337,7 +337,7 @@
     "147": {
       "licensePlate": "BN 42 TMX",
       "model": "Mercedes-Benz Citaro",
-      "assignedRoutes": ["8"]
+      "assignedRoutes": ["8", "12"]
     },
     "149": {
       "licensePlate": "B 191 TMX",
@@ -400,7 +400,7 @@
     "165": {
       "licensePlate": "B 171 TMX",
       "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["387 Bistrița - Silivașu de Câmpie"]
+      "assignedRoutes": ["387 Bistrița - Silivașu de Câmpie", "471 Bistrița - Ardan"]
     },
     "166": {
       "licensePlate": "B 174 TMX",
@@ -425,7 +425,7 @@
     "170": {
       "licensePlate": "B 172 TMX",
       "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["329 Bistrița - Bretea","354 Bistrița - Caila","501 Bistrița - Piatra Fântânele"]
+      "assignedRoutes": ["329 Bistrița - Bretea","354 Bistrița - Caila","501 Bistrița - Piatra Fântânele","390 Bistrița - Sâniacob"]
     },
     "171": {
       "licensePlate": "B 175 TMX",
@@ -445,7 +445,7 @@
     "175": {
       "licensePlate": "B 24 TMX",
       "model": "Setra S415 UL Business",
-      "assignedRoutes": ["359 Bistrița - Țăgșor","368 Bistrița - Teaca"]
+      "assignedRoutes": ["359 Bistrița - Țăgșor","368 Bistrița - Teaca","476 Bistrița - Budacu de Sus"]
     },
     "176": {
       "licensePlate": "B 190 TMX",
