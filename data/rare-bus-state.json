@@ -10,6 +10,21 @@
       "route": "13A",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:62": {
+      "route": "13",
+      "rare": true,
+      "unusual": false
+    },
+    "transmixt:165": {
+      "route": "471 Bistrița - Ardan",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:147": {
+      "route": "12",
+      "rare": false,
+      "unusual": true
     }
   }
 }
