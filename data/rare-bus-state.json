@@ -30,6 +30,11 @@
       "route": "476 Bistrița - Budacu de Sus",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:170": {
+      "route": "390 Bistrița - Sâniacob",
+      "rare": false,
+      "unusual": true
     }
   }
 }
