@@ -1,3 +1,4 @@
+
 // ============================================================
 // API CONFIGURATION
 // ============================================================
@@ -29,8 +30,7 @@ let markers = {};
 
 let selectedOperator = "all";
 let selectedRoute = "all";
-
-
+let selectedModel = "all";
 
 
 // ============================================================
@@ -42,7 +42,12 @@ const map = L.map("map").setView(
   13
 );
 
-const markerBus = L.icon({ iconUrl: 'markerBus.png', iconSize: [75, 65], iconAnchor: [35, 32], popupAnchor: [0, -32] });
+const markerBus = L.icon({
+  iconUrl: "markerBus.png",
+  iconSize: [75, 65],
+  iconAnchor: [35, 32],
+  popupAnchor: [0, -32]
+});
 
 L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -102,6 +107,7 @@ function enrichVehicle(vehicle) {
 
   // Debug information
   if (!routeInfo) {
+
     console.warn(
       "Route not found:",
       {
@@ -115,6 +121,7 @@ function enrichVehicle(vehicle) {
   }
 
   if (!directionName) {
+
     console.warn(
       "Direction not found:",
       {
@@ -127,24 +134,25 @@ function enrichVehicle(vehicle) {
   }
 
   return {
-  ...vehicle,
 
-  licensePlate:
-    !vehicleInfo?.licensePlate ||
-    vehicleInfo.licensePlate.toLowerCase() === "unknown"
-      ? `Unknown (vehicle ${vehicle.vehicleId})`
-      : vehicleInfo.licensePlate,
+    ...vehicle,
 
-  model:
-    vehicleInfo?.model ?? "Unknown",
+    licensePlate:
+      !vehicleInfo?.licensePlate ||
+      vehicleInfo.licensePlate.toLowerCase() === "unknown"
+        ? `Unknown (vehicle ${vehicle.vehicleId})`
+        : vehicleInfo.licensePlate,
 
-  routeIndicative:
-    routeInfo?.indicative ??
-    String(vehicle.routeId),
+    model:
+      vehicleInfo?.model ?? "Unknown",
 
-  direction:
-    directionName ?? "Unknown"
-};
+    routeIndicative:
+      routeInfo?.indicative ??
+      String(vehicle.routeId),
+
+    direction:
+      directionName ?? "Unknown"
+  };
 }
 
 
@@ -157,6 +165,7 @@ async function fetchFromAPI(api) {
   const response = await fetch(api.url);
 
   if (!response.ok) {
+
     throw new Error(
       `${api.name} API returned ${response.status}`
     );
@@ -165,12 +174,14 @@ async function fetchFromAPI(api) {
   const vehicles = await response.json();
 
   if (!Array.isArray(vehicles)) {
+
     throw new Error(
       `${api.name} API did not return an array`
     );
   }
 
   return vehicles.map(vehicle => ({
+
     ...vehicle,
 
     operator: api.operator,
@@ -274,11 +285,15 @@ function getRouteId(vehicle) {
 // ============================================================
 
 function normalizeVehicle(vehicle) {
+
   return {
+
     ...vehicle,
 
     vehicleId: vehicle.vehicleId,
+
     routeId: vehicle.routeId,
+
     direction: vehicle.direction
   };
 }
@@ -289,20 +304,35 @@ function normalizeVehicle(vehicle) {
 // ============================================================
 
 function createPopup(vehicle) {
-  const delaySeconds = Number(vehicle.delaySeconds ?? 0);
-  const delayMinutes = Math.round(Math.abs(delaySeconds) / 60);
+
+  const delaySeconds =
+    Number(vehicle.delaySeconds ?? 0);
+
+  const delayMinutes =
+    Math.round(
+      Math.abs(delaySeconds) / 60
+    );
 
   let delayText;
 
   if (delaySeconds < -60) {
-    delayText = `${delayMinutes} min în avans`;
+
+    delayText =
+      `${delayMinutes} min în avans`;
+
   } else if (delaySeconds > 60) {
-    delayText = `${delayMinutes} min întârziere`;
+
+    delayText =
+      `${delayMinutes} min întârziere`;
+
   } else {
-    delayText = "La timp";
+
+    delayText =
+      "La timp";
   }
 
   return `
+
     <div class="vehicle-popup">
 
       <p>
@@ -331,6 +361,7 @@ function createPopup(vehicle) {
       </p>
 
     </div>
+
   `;
 }
 
@@ -341,8 +372,11 @@ function createPopup(vehicle) {
 
 function updateMarker(vehicle) {
 
-  const latitude = vehicle.latitude;
-  const longitude = vehicle.longitude;
+  const latitude =
+    getLatitude(vehicle);
+
+  const longitude =
+    getLongitude(vehicle);
 
   if (
     latitude === null ||
@@ -350,12 +384,14 @@ function updateMarker(vehicle) {
     latitude === undefined ||
     longitude === undefined
   ) {
+
     return;
   }
 
   // Important:
   // Vehicle IDs can overlap between operators.
   // Therefore we use operator + vehicle ID.
+
   const vehicleKey =
     `${vehicle.operator}-${vehicle.vehicleId}`;
 
@@ -368,8 +404,10 @@ function updateMarker(vehicle) {
     Number.isNaN(position[0]) ||
     Number.isNaN(position[1])
   ) {
+
     return;
   }
+
 
   // ----------------------------------------------------------
   // Existing marker
@@ -391,7 +429,13 @@ function updateMarker(vehicle) {
   // New marker
   // ----------------------------------------------------------
 
-  const marker = L.marker(position, {icon: markerBus}).addTo(map);
+  const marker =
+    L.marker(
+      position,
+      {
+        icon: markerBus
+      }
+    ).addTo(map);
 
   marker.bindPopup(
     createPopup(vehicle)
@@ -399,7 +443,8 @@ function updateMarker(vehicle) {
 
   marker.addTo(map);
 
-  markers[vehicleKey] = marker;
+  markers[vehicleKey] =
+    marker;
 }
 
 
@@ -409,7 +454,8 @@ function updateMarker(vehicle) {
 
 function removeOldMarkers(currentVehicles) {
 
-  const currentKeys = new Set();
+  const currentKeys =
+    new Set();
 
   currentVehicles.forEach(vehicle => {
 
@@ -424,7 +470,9 @@ function removeOldMarkers(currentVehicles) {
 
     if (!currentKeys.has(key)) {
 
-      map.removeLayer(markers[key]);
+      map.removeLayer(
+        markers[key]
+      );
 
       delete markers[key];
     }
@@ -441,20 +489,42 @@ function displayVehicles() {
   const filteredVehicles =
     allVehicles.filter(vehicle => {
 
+      // ------------------------------------------------------
       // Operator filter
+      // ------------------------------------------------------
+
       if (
         selectedOperator !== "all" &&
         vehicle.operator !== selectedOperator
       ) {
+
         return false;
       }
 
 
+      // ------------------------------------------------------
       // Route filter
+      // ------------------------------------------------------
+
       if (
         selectedRoute !== "all" &&
-        String(vehicle.routeId) !== String(selectedRoute)
+        String(vehicle.routeId) !==
+          String(selectedRoute)
       ) {
+
+        return false;
+      }
+
+
+      // ------------------------------------------------------
+      // Model filter
+      // ------------------------------------------------------
+
+      if (
+        selectedModel !== "all" &&
+        vehicle.model !== selectedModel
+      ) {
+
         return false;
       }
 
@@ -463,7 +533,9 @@ function displayVehicles() {
     });
 
 
-  removeOldMarkers(filteredVehicles);
+  removeOldMarkers(
+    filteredVehicles
+  );
 
 
   filteredVehicles.forEach(vehicle => {
@@ -473,7 +545,127 @@ function displayVehicles() {
   });
 
 
-  updateStatus(filteredVehicles);
+  updateStatus(
+    filteredVehicles
+  );
+}
+
+
+// ============================================================
+// UPDATE MODEL FILTER
+// ============================================================
+
+function updateModelFilter() {
+
+  const modelFilter =
+    document.getElementById(
+      "modelFilter"
+    );
+
+  if (!modelFilter) {
+    return;
+  }
+
+  const previousValue =
+    modelFilter.value;
+
+
+  modelFilter.innerHTML = `
+
+    <option value="all">
+      All models
+    </option>
+
+  `;
+
+
+  const models =
+    new Set();
+
+
+  allVehicles.forEach(vehicle => {
+
+    // If an operator is selected,
+    // only show models from that operator.
+
+    if (
+      selectedOperator !== "all" &&
+      vehicle.operator !== selectedOperator
+    ) {
+
+      return;
+    }
+
+
+    if (
+      vehicle.model &&
+      vehicle.model !== "Unknown"
+    ) {
+
+      models.add(
+        vehicle.model
+      );
+    }
+
+  });
+
+
+  const sortedModels =
+    [...models].sort(
+      (a, b) =>
+        String(a).localeCompare(
+          String(b),
+          undefined,
+          {
+            numeric: true
+          }
+        )
+    );
+
+
+  sortedModels.forEach(model => {
+
+    const option =
+      document.createElement(
+        "option"
+      );
+
+    option.value =
+      model;
+
+    option.textContent =
+      model;
+
+    modelFilter.appendChild(
+      option
+    );
+
+  });
+
+
+  // Restore previous selection
+  // if it is still available.
+
+  if (
+    [...modelFilter.options]
+      .some(
+        option =>
+          option.value ===
+          previousValue
+      )
+  ) {
+
+    modelFilter.value =
+      previousValue;
+
+  } else {
+
+    modelFilter.value =
+      "all";
+
+    selectedModel =
+      "all";
+  }
 }
 
 
@@ -484,20 +676,25 @@ function displayVehicles() {
 function updateRouteFilter() {
 
   const routeFilter =
-    document.getElementById("routeFilter");
+    document.getElementById(
+      "routeFilter"
+    );
 
   const previousValue =
     routeFilter.value;
 
 
   routeFilter.innerHTML = `
+
     <option value="all">
       All routes
     </option>
+
   `;
 
 
-  const routes = new Map();
+  const routes =
+    new Map();
 
 
   allVehicles.forEach(vehicle => {
@@ -506,6 +703,7 @@ function updateRouteFilter() {
       selectedOperator !== "all" &&
       vehicle.operator !== selectedOperator
     ) {
+
       return;
     }
 
@@ -514,6 +712,7 @@ function updateRouteFilter() {
       vehicle.routeId === null ||
       vehicle.routeId === undefined
     ) {
+
       return;
     }
 
@@ -524,63 +723,88 @@ function updateRouteFilter() {
 
     if (!routes.has(key)) {
 
-      routes.set(key, {
-        operator: vehicle.operator,
-        routeId: vehicle.routeId,
-        indicative: vehicle.routeIndicative
-      });
+      routes.set(
+        key,
+        {
+          operator:
+            vehicle.operator,
 
+          routeId:
+            vehicle.routeId,
+
+          indicative:
+            vehicle.routeIndicative
+        }
+      );
     }
 
   });
 
 
   const sortedRoutes =
-    [...routes.values()].sort((a, b) => {
+    [...routes.values()]
+      .sort((a, b) => {
 
-      return String(a.indicative)
-        .localeCompare(
-          String(b.indicative),
-          undefined,
-          {
-            numeric: true
-          }
-        );
+        return String(a.indicative)
+          .localeCompare(
+            String(b.indicative),
+            undefined,
+            {
+              numeric: true
+            }
+          );
 
-    });
+      });
 
 
   sortedRoutes.forEach(route => {
 
     const option =
-      document.createElement("option");
+      document.createElement(
+        "option"
+      );
+
 
     option.value =
       `${route.operator}|${route.routeId}`;
 
-    option.textContent =
-      `${route.indicative} (${route.operator === "transmixt"
-        ? "Transmixt"
-        : "Ani Tour"})`;
 
-    routeFilter.appendChild(option);
+    option.textContent =
+      `${route.indicative} (${
+        route.operator === "transmixt"
+          ? "Transmixt"
+          : "Ani Tour"
+      })`;
+
+
+    routeFilter.appendChild(
+      option
+    );
 
   });
 
 
   // Restore selection if possible
+
   if (
     [...routeFilter.options]
-      .some(option => option.value === previousValue)
+      .some(
+        option =>
+          option.value ===
+          previousValue
+      )
   ) {
 
-    routeFilter.value = previousValue;
+    routeFilter.value =
+      previousValue;
 
   } else {
 
-    routeFilter.value = "all";
+    routeFilter.value =
+      "all";
 
-    selectedRoute = "all";
+    selectedRoute =
+      "all";
   }
 }
 
@@ -592,10 +816,13 @@ function updateRouteFilter() {
 function updateStatus(vehicles) {
 
   const status =
-    document.getElementById("status");
+    document.getElementById(
+      "status"
+    );
 
   const time =
-    new Date().toLocaleTimeString();
+    new Date()
+      .toLocaleTimeString();
 
 
   status.textContent =
@@ -610,7 +837,9 @@ function updateStatus(vehicles) {
 async function updateVehicles() {
 
   const status =
-    document.getElementById("status");
+    document.getElementById(
+      "status"
+    );
 
 
   status.textContent =
@@ -622,9 +851,14 @@ async function updateVehicles() {
     allVehicles =
       await fetchVehicles();
 
-    allVehicles =
-      allVehicles.map(normalizeVehicle);
 
+    allVehicles =
+      allVehicles.map(
+        normalizeVehicle
+      );
+
+
+    updateModelFilter();
 
     updateRouteFilter();
 
@@ -635,6 +869,7 @@ async function updateVehicles() {
       "Vehicles:",
       allVehicles
     );
+
 
   } catch (error) {
 
@@ -651,7 +886,9 @@ async function updateVehicles() {
 // ============================================================
 
 document
-  .getElementById("operatorFilter")
+  .getElementById(
+    "operatorFilter"
+  )
   .addEventListener(
     "change",
     event => {
@@ -659,10 +896,19 @@ document
       selectedOperator =
         event.target.value;
 
+
+      // Changing operator resets route
       selectedRoute =
         "all";
 
+
+      // Changing operator also refreshes
+      // the available models.
+
+      updateModelFilter();
+
       updateRouteFilter();
+
 
       displayVehicles();
     }
@@ -674,7 +920,9 @@ document
 // ============================================================
 
 document
-  .getElementById("routeFilter")
+  .getElementById(
+    "routeFilter"
+  )
   .addEventListener(
     "change",
     event => {
@@ -696,7 +944,8 @@ document
         const [
           operator,
           routeId
-        ] = value.split("|");
+        ] =
+          value.split("|");
 
 
         // Make sure the selected operator
@@ -705,14 +954,45 @@ document
         selectedOperator =
           operator;
 
+
         document
-          .getElementById("operatorFilter")
-          .value = operator;
+          .getElementById(
+            "operatorFilter"
+          )
+          .value =
+            operator;
 
 
         selectedRoute =
           routeId;
+
+
+        // Refresh available models
+        // for the selected operator.
+
+        updateModelFilter();
       }
+
+
+      displayVehicles();
+    }
+  );
+
+
+// ============================================================
+// MODEL FILTER
+// ============================================================
+
+document
+  .getElementById(
+    "modelFilter"
+  )
+  .addEventListener(
+    "change",
+    event => {
+
+      selectedModel =
+        event.target.value;
 
 
       displayVehicles();
@@ -725,7 +1005,9 @@ document
 // ============================================================
 
 document
-  .getElementById("refreshButton")
+  .getElementById(
+    "refreshButton"
+  )
   .addEventListener(
     "click",
     updateVehicles
@@ -741,24 +1023,29 @@ async function startApp() {
   try {
 
     document
-      .getElementById("status")
+      .getElementById(
+        "status"
+      )
       .textContent =
-      "Loading local data...";
+        "Loading local data...";
 
 
     await loadLocalData();
 
 
     document
-      .getElementById("status")
+      .getElementById(
+        "status"
+      )
       .textContent =
-      "Loading buses...";
+        "Loading buses...";
 
 
     await updateVehicles();
 
 
     // Refresh every 10 seconds
+
     setInterval(
       updateVehicles,
       10000
@@ -769,12 +1056,16 @@ async function startApp() {
 
     console.error(error);
 
+
     document
-      .getElementById("status")
+      .getElementById(
+        "status"
+      )
       .textContent =
-      `Startup error: ${error.message}`;
+        `Startup error: ${error.message}`;
   }
 }
 
 
 startApp();
+
