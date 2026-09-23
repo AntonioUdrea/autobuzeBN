@@ -35,6 +35,11 @@
       "route": "501 Bistrița - Piatra Fântânele",
       "rare": false,
       "unusual": false
+    },
+    "transmixt:171": {
+      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "rare": false,
+      "unusual": true
     }
   }
 }
