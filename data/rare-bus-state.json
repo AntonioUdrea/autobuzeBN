@@ -22,7 +22,12 @@
       "unusual": true
     },
     "transmixt:147": {
-      "route": "12",
+      "route": "8",
+      "rare": false,
+      "unusual": false
+    },
+    "transmixt:175": {
+      "route": "476 Bistrița - Budacu de Sus",
       "rare": false,
       "unusual": true
     }
