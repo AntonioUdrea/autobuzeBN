@@ -10,6 +10,11 @@
       "route": "13A",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:171": {
+      "route": "361 Bistrița - Vermeș",
+      "rare": false,
+      "unusual": true
     }
   }
 }
