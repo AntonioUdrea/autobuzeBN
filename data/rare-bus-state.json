@@ -1,25 +1,4 @@
 {
-  "date": "2026-09-24",
-  "buses": {
-    "transmixt:53": {
-      "route": "1",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:77": {
-      "route": "13A",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:171": {
-      "route": "354 Bistrița - Caila",
-      "rare": false,
-      "unusual": false
-    },
-    "transmixt:124": {
-      "route": "470 Bistrița - Posmuș",
-      "rare": false,
-      "unusual": true
-    }
-  }
+  "date": "2026-09-25",
+  "buses": {}
 }
