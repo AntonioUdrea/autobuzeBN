@@ -5,6 +5,11 @@
       "route": "13",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:112": {
+      "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "rare": false,
+      "unusual": true
     }
   }
 }
