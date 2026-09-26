@@ -10,6 +10,11 @@
       "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
       "rare": false,
       "unusual": true
+    },
+    "ani-tour:10": {
+      "route": "615 Bistrița - Năsăud",
+      "rare": false,
+      "unusual": true
     }
   }
 }
