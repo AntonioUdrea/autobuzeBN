@@ -561,51 +561,88 @@
   "ani-tour": {
     "1": {
       "licensePlate": "B 140 ANY",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["615 Bistrița - Năsăud", "808 Bistrița - Lunca Ilvei"]
     },
     "3": {
       "licensePlate": "BN 20 ANY",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["615 Bistrița - Năsăud"]
     },
     "4": {
       "licensePlate": "B 772 ANY",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["615 Bistrița - Năsăud"]
+    },
+    "6": {
+      "licensePlate": "BN 66 ANY (neconfirmat)",
+      "model": "Mercedes-Benz Integro II",
+      "assignedRoutes": ["628A Năsăud - Săsarm - Beclean - Suplai"]
     },
     "7": {
       "licensePlate": "BN 75 ANY",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["628 Bistrița - Suplai", "630 Năsăud - Suplai"]
+    },
+    "8": {
+      "licensePlate": "BN 26 ANI (neconfirmat)",
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["628B Năsăud - Beclean"]
     },
     "9": {
       "licensePlate": "BN 54 ANY",
       "model": "Setra S416 GT-HD"
+      "assignedRoutes": ["615 Bistrița - Năsăud", "633 Bistrița - Săsarm"]
+    },
+    "10": {
+      "licensePlate": "B 882 ANY",
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["631 Năsăud - Săsarm", "630 Năsăud - Suplai"]
+    },
+    "11": {
+      "licensePlate": "BN 37 ANY (neconfirmat)",
+      "model": "Setra S416 GT-HD",
+      "assignedRoutes": ["630 Năsăud - Suplai"]
+    },
+    "15": {
+      "licensePlate": "BN 51 ANY (neconfirmat)",
+      "model": "Mercedes-Benz Citaro Facelift Ü",
+      "assignedRoutes": ["725 Năsăud - Telciu"]
     },
     "20": {
       "licensePlate": "BN 08 ANY",
-      "model": "Setra S416 NF"
+      "model": "Setra S416 NF",
+      "assignedRoutes": ["817 Bistrița - Parva", "818 Năsăud - Parva"]
     },
     "21": {
       "licensePlate": "BN 76 ANY",
-      "model": "Setra S415 NF"
+      "model": "Setra S415 NF",
+      "assignedRoutes": ["817 Bistrița - Parva", "818 Năsăud - Parva"]
     },
     "22": {
       "licensePlate": "BN 65 ANY",
-      "model": "Mercedes-Benz Integro I"
+      "model": "Mercedes-Benz Integro I",
+      "assignedRoutes": ["816 Năsăud - Lunca Leșului"]
     },
     "27": {
       "licensePlate": "B 138 ANY",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["615 Bistrița - Năsăud"]
     },
     "29": {
       "licensePlate": "BN 85 ANY",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["807 Bistrița - Leșu Ilvei"]
     },
     "31": {
       "licensePlate": "BN 06 ANI",
-      "model": "Mercedes-Benz Integro II L"
+      "model": "Mercedes-Benz Integro II L",
+      "assignedRoutes": ["721 Bistrița - Romuli", "723 Bistrița - Dealul Ștefăniței"]
     },
     "32": {
       "licensePlate": "BN 30 ANY",
-      "model": "Mercedes-Benz Integro II L"
+      "model": "Mercedes-Benz Integro II L",
+      "assignedRoutes": ["721 Bistrița - Romuli", "723 Bistrița - Dealul Ștefăniței"]
     }
   }
 }
