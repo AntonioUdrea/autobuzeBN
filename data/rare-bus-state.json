@@ -1,30 +1,4 @@
 {
-  "date": "2026-09-25",
-  "buses": {
-    "transmixt:53": {
-      "route": "1",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:62": {
-      "route": "7",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:165": {
-      "route": "387 Bistrița - Silivașu de Câmpie",
-      "rare": false,
-      "unusual": false
-    },
-    "transmixt:77": {
-      "route": "13A",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:171": {
-      "route": "354 Bistrița - Caila",
-      "rare": false,
-      "unusual": false
-    }
-  }
+  "date": "2026-09-26",
+  "buses": {}
 }
