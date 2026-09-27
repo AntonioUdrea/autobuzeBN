@@ -5,6 +5,11 @@
       "route": "615 Bistrița - Năsăud",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:112": {
+      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "rare": false,
+      "unusual": true
     }
   }
 }
