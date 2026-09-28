@@ -637,12 +637,12 @@
     "31": {
       "licensePlate": "BN 06 ANI",
       "model": "Mercedes-Benz Integro II L",
-      "assignedRoutes": ["721 Bistrița - Romuli", "723 Bistrița - Dealul Ștefăniței"]
+      "assignedRoutes": ["723 Bistrița - Romuli", "721 Bistrița - Dealul Ștefăniței"]
     },
     "32": {
       "licensePlate": "BN 30 ANY",
       "model": "Mercedes-Benz Integro II L",
-      "assignedRoutes": ["721 Bistrița - Romuli", "723 Bistrița - Dealul Ștefăniței"]
+      "assignedRoutes": ["723 Bistrița - Romuli", "721 Bistrița - Dealul Ștefăniței"]
     }
   }
 }
