@@ -629,6 +629,11 @@
       "model": "Mercedes-Benz Sprinter",
       "assignedRoutes": ["615 Bistrița - Năsăud"]
     },
+    "28": {
+      "licensePlate": "B 139 ANY",
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["722 Năsăud - Dealu Stefaniței","726 Năsăud - Telcișor"]
+    },
     "29": {
       "licensePlate": "BN 85 ANY",
       "model": "Mercedes-Benz Sprinter",
