@@ -30,6 +30,16 @@
       "route": "726 Năsăud - Bichigiu",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:42": {
+      "route": "2",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:171": {
+      "route": "361 Bistrița - Vermeș",
+      "rare": false,
+      "unusual": true
     }
   }
 }
