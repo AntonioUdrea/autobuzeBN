@@ -1,15 +1,4 @@
 {
-  "date": "2026-09-27",
-  "buses": {
-    "ani-tour:10": {
-      "route": "615 Bistrița - Năsăud",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:112": {
-      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
-      "rare": false,
-      "unusual": true
-    }
-  }
+  "date": "2026-09-28",
+  "buses": {}
 }
