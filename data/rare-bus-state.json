@@ -15,6 +15,11 @@
       "route": "7",
       "rare": true,
       "unusual": false
+    },
+    "ani-tour:32": {
+      "route": "721 Bistrița - Dealul Ștefăniței",
+      "rare": false,
+      "unusual": true
     }
   }
 }
