@@ -20,6 +20,11 @@
       "route": "721 Bistrița - Dealul Ștefăniței",
       "rare": false,
       "unusual": false
+    },
+    "transmixt:53": {
+      "route": "2",
+      "rare": true,
+      "unusual": false
     }
   }
 }
