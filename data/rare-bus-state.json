@@ -2,7 +2,7 @@
   "date": "2026-09-29",
   "buses": {
     "transmixt:145": {
-      "route": "12",
+      "route": "8",
       "rare": true,
       "unusual": false
     },
@@ -10,6 +10,11 @@
       "route": "2",
       "rare": true,
       "unusual": false
+    },
+    "ani-tour:28": {
+      "route": "726 Năsăud - Bichigiu",
+      "rare": false,
+      "unusual": true
     }
   }
 }
