@@ -15,6 +15,11 @@
       "route": "722 Năsăud - Dealul Ștefăniței",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:62": {
+      "route": "1",
+      "rare": true,
+      "unusual": false
     }
   }
 }
