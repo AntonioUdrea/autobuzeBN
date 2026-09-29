@@ -243,6 +243,11 @@
       "model": "Mercedes-Benz Integro II M",
       "assignedRoutes": ["493 Bistrița - Gledin"]
     },
+    "108": {
+      "licensePlate": "BN 02 TMX",
+      "model": "Setra S419 UL-GT",
+      "assignedRoutes": ["476 Bistrița - Budacu de Sus", "476 Bistrița - Budacu de Sus (via Satu Nou)"]
+    },
     "109": {
       "licensePlate": "BN 05 TNR",
       "model": "Irisbus Crossway",
@@ -488,7 +493,7 @@
       "assignedRoutes": ["2"]
     },
     "184": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 76 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
