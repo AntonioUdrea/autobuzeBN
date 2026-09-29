@@ -1,45 +1,4 @@
 {
-  "date": "2026-09-28",
-  "buses": {
-    "transmixt:69": {
-      "route": "3",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:156": {
-      "route": "1",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:62": {
-      "route": "7",
-      "rare": true,
-      "unusual": false
-    },
-    "ani-tour:32": {
-      "route": "721 Bistrița - Dealul Ștefăniței",
-      "rare": false,
-      "unusual": false
-    },
-    "transmixt:53": {
-      "route": "2",
-      "rare": true,
-      "unusual": false
-    },
-    "ani-tour:28": {
-      "route": "726 Năsăud - Bichigiu",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:42": {
-      "route": "2",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:171": {
-      "route": "354 Bistrița - Caila",
-      "rare": false,
-      "unusual": false
-    }
-  }
+  "date": "2026-09-29",
+  "buses": {}
 }
