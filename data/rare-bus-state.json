@@ -20,6 +20,11 @@
       "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:124": {
+      "route": "472 Bistrița - Sebiș",
+      "rare": false,
+      "unusual": true
     }
   }
 }
