@@ -31,6 +31,7 @@ let markers = {};
 let selectedOperator = "all";
 let selectedRoute = "all";
 let selectedModel = "all";
+let selectedUnknown = "all";
 
 
 // ============================================================
@@ -102,7 +103,7 @@ function enrichVehicle(vehicle) {
 
   const vehicleInfo =
     VEHICLES[vehicle.operator]?.[
-      String(vehicle.vehicleId)
+    String(vehicle.vehicleId)
     ];
 
   // Debug information
@@ -133,18 +134,28 @@ function enrichVehicle(vehicle) {
     );
   }
 
+  const hasPlate =
+    vehicleInfo?.licensePlate &&
+    vehicleInfo.licensePlate.toLowerCase() !== "unknown";
+
+  const hasModel =
+    vehicleInfo?.model &&
+    vehicleInfo.model.toLowerCase() !== "unknown";
+
   return {
 
     ...vehicle,
 
-    licensePlate:
-      !vehicleInfo?.licensePlate ||
-      vehicleInfo.licensePlate.toLowerCase() === "unknown"
-        ? `Unknown (vehicle ${vehicle.vehicleId})`
-        : vehicleInfo.licensePlate,
+    unknownPlate: !hasPlate,
+    unknownModel: !hasModel,
 
-    model:
-      vehicleInfo?.model ?? "Unknown",
+    licensePlate: hasPlate
+      ? vehicleInfo.licensePlate
+      : `Unknown (vehicle ${vehicle.vehicleId})`,
+
+    model: hasModel
+      ? vehicleInfo.model
+      : "Unknown",
 
     routeIndicative:
       routeInfo?.indicative ??
@@ -509,7 +520,7 @@ function displayVehicles() {
       if (
         selectedRoute !== "all" &&
         String(vehicle.routeId) !==
-          String(selectedRoute)
+        String(selectedRoute)
       ) {
 
         return false;
@@ -525,6 +536,23 @@ function displayVehicles() {
         vehicle.model !== selectedModel
       ) {
 
+        return false;
+      }
+
+      // ------------------------------------------------------
+      // Unknown plate / model filter
+      // ------------------------------------------------------
+
+      if (selectedUnknown === "any" &&
+        !vehicle.unknownPlate && !vehicle.unknownModel) {
+        return false;
+      }
+
+      if (selectedUnknown === "plate" && !vehicle.unknownPlate) {
+        return false;
+      }
+
+      if (selectedUnknown === "model" && !vehicle.unknownModel) {
         return false;
       }
 
@@ -561,6 +589,13 @@ function updateModelFilter() {
     document.getElementById(
       "modelFilter"
     );
+
+  document
+    .getElementById("unknownFilter")
+    .addEventListener("change", event => {
+      selectedUnknown = event.target.value;
+      displayVehicles();
+    });
 
   if (!modelFilter) {
     return;
@@ -770,10 +805,9 @@ function updateRouteFilter() {
 
 
     option.textContent =
-      `${route.indicative} (${
-        route.operator === "transmixt"
-          ? "Transmixt"
-          : "Ani Tour"
+      `${route.indicative} (${route.operator === "transmixt"
+        ? "Transmixt"
+        : "Ani Tour"
       })`;
 
 
@@ -960,7 +994,7 @@ document
             "operatorFilter"
           )
           .value =
-            operator;
+          operator;
 
 
         selectedRoute =
@@ -1027,7 +1061,7 @@ async function startApp() {
         "status"
       )
       .textContent =
-        "Loading local data...";
+      "Loading local data...";
 
 
     await loadLocalData();
@@ -1038,7 +1072,7 @@ async function startApp() {
         "status"
       )
       .textContent =
-        "Loading buses...";
+      "Loading buses...";
 
 
     await updateVehicles();
@@ -1062,7 +1096,7 @@ async function startApp() {
         "status"
       )
       .textContent =
-        `Startup error: ${error.message}`;
+      `Startup error: ${error.message}`;
   }
 }
 

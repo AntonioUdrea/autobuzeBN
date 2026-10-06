@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Bistrița Bus Tracker</title>
 
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  >
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -41,6 +39,13 @@
         <option value="all">All models</option>
       </select>
 
+      <select id="unknownFilter">
+        <option value="all">All vehicles</option>
+        <option value="any">Unknown plate or model</option>
+        <option value="plate">Unknown plate only</option>
+        <option value="model">Unknown model only</option>
+      </select>
+
       <button id="refreshButton">
         Refresh
       </button>
@@ -58,11 +63,11 @@
 
   </main>
 
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
   </script>
 
   <script src="app.js"></script>
 
 </body>
+
 </html>
