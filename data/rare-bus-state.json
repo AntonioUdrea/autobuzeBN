@@ -20,6 +20,11 @@
       "route": "1",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:166": {
+      "route": "387 Bistrița - Silivașu de Câmpie",
+      "rare": false,
+      "unusual": true
     }
   }
 }
