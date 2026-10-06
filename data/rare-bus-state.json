@@ -1,30 +1,4 @@
 {
-  "date": "2026-10-05",
-  "buses": {
-    "transmixt:141": {
-      "route": "8",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:77": {
-      "route": "10",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:133": {
-      "route": "13",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:170": {
-      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:124": {
-      "route": "485 Bistrița - Lunca",
-      "rare": false,
-      "unusual": false
-    }
-  }
+  "date": "2026-10-06",
+  "buses": {}
 }
