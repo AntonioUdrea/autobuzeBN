@@ -2,7 +2,7 @@
   "date": "2026-10-07",
   "buses": {
     "transmixt:62": {
-      "route": "8",
+      "route": "11",
       "rare": true,
       "unusual": false
     },
@@ -13,6 +13,86 @@
     },
     "transmixt:68": {
       "route": "36",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:49": {
+      "route": "21",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:28": {
+      "route": "13",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:73": {
+      "route": "7",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:197": {
+      "route": "7",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:182": {
+      "route": "7",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:176": {
+      "route": "80",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:110": {
+      "route": "55",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:165": {
+      "route": "91",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:164": {
+      "route": "82",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:54": {
+      "route": "4",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:172": {
+      "route": "41",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:173": {
+      "route": "50",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:159": {
+      "route": "5",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:141": {
+      "route": "21",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:120": {
+      "route": "65",
+      "rare": false,
+      "unusual": true
+    },
+    "ani-tour:4": {
+      "route": "1",
       "rare": false,
       "unusual": true
     }
