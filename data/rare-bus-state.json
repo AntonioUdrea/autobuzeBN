@@ -10,6 +10,11 @@
       "route": "16",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:68": {
+      "route": "36",
+      "rare": false,
+      "unusual": true
     }
   }
 }
