@@ -1,25 +1,4 @@
 {
-  "date": "2026-10-09",
-  "buses": {
-    "transmixt:187": {
-      "route": "2",
-      "rare": false,
-      "unusual": false
-    },
-    "transmixt:145": {
-      "route": "8",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:62": {
-      "route": "13",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:53": {
-      "route": "3",
-      "rare": true,
-      "unusual": false
-    }
-  }
+  "date": "2026-10-10",
+  "buses": {}
 }
