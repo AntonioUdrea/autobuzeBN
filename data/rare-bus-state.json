@@ -1,4 +1,15 @@
 {
   "date": "2026-10-10",
-  "buses": {}
+  "buses": {
+    "transmixt:124": {
+      "route": "493 Bistrița - Gledin",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:112": {
+      "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "rare": false,
+      "unusual": true
+    }
+  }
 }
