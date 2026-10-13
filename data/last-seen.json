@@ -317,6 +317,13 @@
         "502 Bistrița - Mureșenii Bârgăului"
       ]
     },
+    "124": {
+      "date": "2026-10-13",
+      "route": "485 Bistrița - Lunca",
+      "routes": [
+        "485 Bistrița - Lunca"
+      ]
+    },
     "141": {
       "date": "2026-10-13",
       "route": "13",
@@ -572,7 +579,10 @@
     },
     "10": {
       "date": "2026-10-13",
-      "route": "630 Năsăud - Suplai"
+      "route": "631 Năsăud - Săsarm",
+      "routes": [
+        "631 Năsăud - Săsarm"
+      ]
     },
     "11": {
       "date": "2026-10-13",
