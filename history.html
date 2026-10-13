@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle history - Bistrița Bus Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    header a {
+      color: white;
+    }
+
+    main {
+      overflow: auto;
+      padding: 12px 16px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 6px 10px;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f2f2f2;
+      position: sticky;
+      top: 0;
+    }
+
+    select {
+      max-width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Vehicle history</h1>
+
+    <div class="controls">
+      <a href="last-seen.html">&larr; Last seen</a>
+      <select id="vehicle"></select>
+    </div>
+
+    <div id="status">Loading...</div>
+  </header>
+
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Routes</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </main>
+
+  <script>
+    const OPERATOR_NAMES = { "transmixt": "Transmixt", "ani-tour": "Ani Tour" };
+
+    const el = id => document.getElementById(id);
+
+    // vehicle key ("operator:id") -> Map(date -> [routes])
+    const history = new Map();
+    let vehicles = {};
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"]/g, c =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+    }
+
+    function parseCsv(text) {
+      const rows = [];
+      let row = [], field = "", quoted = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+
+        if (quoted) {
+          if (c === '"') {
+            if (text[i + 1] === '"') { field += '"'; i++; }
+            else quoted = false;
+          } else {
+            field += c;
+          }
+        } else if (c === '"') {
+          quoted = true;
+        } else if (c === ",") {
+          row.push(field); field = "";
+        } else if (c === "\n") {
+          row.push(field); rows.push(row); row = []; field = "";
+        } else if (c !== "\r") {
+          field += c;
+        }
+      }
+
+      if (field || row.length) { row.push(field); rows.push(row); }
+      return rows;
+    }
+
+    async function loadText(url) {
+      try {
+        const r = await fetch(url, { cache: "no-store" });
+        return r.ok ? await r.text() : "";
+      } catch {
+        return "";
+      }
+    }
+
+    function label(key) {
+      const [operator, id] = key.split(":");
+      const info = vehicles[operator]?.[id];
+      return `${OPERATOR_NAMES[operator] ?? operator} - ${info?.licensePlate ?? "Unknown plate"} ` +
+        `(ID ${id}${info?.model ? ", " + info.model : ""})`;
+    }
+
+    function render() {
+      const days = history.get(el("vehicle").value);
+      if (!days) { el("rows").innerHTML = ""; return; }
+
+      const dates = [...days.keys()].sort().reverse();
+
+      el("rows").innerHTML = dates.map(d =>
+        `<tr><td>${escapeHtml(d)}</td><td>${escapeHtml(days.get(d).join(", "))}</td></tr>`
+      ).join("");
+
+      el("status").textContent =
+        `Seen on ${dates.length} day${dates.length === 1 ? "" : "s"} ` +
+        `(first: ${dates[dates.length - 1]}, latest: ${dates[0]})`;
+    }
+
+    async function load() {
+      const [csv, vehiclesText] = await Promise.all([
+        loadText("data/history.csv"),
+        loadText("data/vehicles.json")
+      ]);
+
+      try { vehicles = JSON.parse(vehiclesText); } catch { vehicles = {}; }
+
+      parseCsv(csv).slice(1).forEach(([date, operator, id, route]) => {
+        if (!date || !operator || !id) return;
+        const key = `${operator}:${id}`;
+        if (!history.has(key)) history.set(key, new Map());
+        const days = history.get(key);
+        if (!days.has(date)) days.set(date, []);
+        if (route) days.get(date).push(route);
+      });
+
+      const keys = [...history.keys()].sort((a, b) => label(a).localeCompare(label(b), undefined, { numeric: true }));
+
+      if (keys.length === 0) {
+        el("status").textContent = "No history recorded yet. The first entries appear after tonight's archive run.";
+        return;
+      }
+
+      el("vehicle").innerHTML = keys.map(k =>
+        `<option value="${escapeHtml(k)}">${escapeHtml(label(k))}</option>`).join("");
+
+      const params = new URLSearchParams(location.search);
+      const wanted = `${params.get("operator")}:${params.get("id")}`;
+      if (history.has(wanted)) el("vehicle").value = wanted;
+
+      render();
+    }
+
+    el("vehicle").addEventListener("change", render);
+    load();
+  </script>
+
+</body>
+
+</html>

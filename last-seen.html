@@ -230,7 +230,7 @@
         const d = describe(r);
         return `<tr>
           <td>${escapeHtml(OPERATOR_NAMES[r.operator] ?? r.operator)}</td>
-          <td>${escapeHtml(r.id)}</td>
+          <td><a href="history.html?operator=${encodeURIComponent(r.operator)}&id=${encodeURIComponent(r.id)}">${escapeHtml(r.id)}</a></td>
           <td class="${r.plate === "Unknown" ? "muted" : ""}">${escapeHtml(r.plate)}</td>
           <td class="${r.model === "Unknown" ? "muted" : ""}">${escapeHtml(r.model)}</td>
           <td class="${d.cls}">${escapeHtml(d.text)}</td>

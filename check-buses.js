@@ -97,7 +97,7 @@ function writeStateFile(state) {
 //
 // Format:
 // {
-//   "transmixt": { "8": { "date": "2026-10-13", "route": "10" } },
+//   "transmixt": { "8": { "date": "2026-10-13", "route": "10", "routes": ["10"] } },
 //   "ani-tour": { "3": { "date": "2026-10-12", "route": "633 Bistrița - Săsarm" } }
 // }
 // ============================================================
@@ -145,14 +145,37 @@ function updateLastSeen(buses, localDate, routesMeta) {
         String(bus.routeId)
       ];
 
+    const route = String(
+      routeInfo?.indicative ??
+      bus.routeId
+    );
+
+    // Keep every route this vehicle ran today (for the daily history)
+    const previous =
+      lastSeen[bus.operator][
+        String(bus.vehicleId)
+      ];
+
+    const routes =
+      (
+        previous &&
+        typeof previous === 'object' &&
+        previous.date === localDate &&
+        Array.isArray(previous.routes)
+      )
+        ? previous.routes
+        : [];
+
+    if (!routes.includes(route)) {
+      routes.push(route);
+    }
+
     lastSeen[bus.operator][
       String(bus.vehicleId)
     ] = {
       date: localDate,
-      route: String(
-        routeInfo?.indicative ??
-        bus.routeId
-      )
+      route,
+      routes
     };
   }
 
