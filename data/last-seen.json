@@ -169,10 +169,11 @@
     },
     "83": {
       "date": "2026-10-13",
-      "route": "16",
+      "route": "18",
       "routes": [
         "14",
-        "16"
+        "16",
+        "18"
       ]
     },
     "86": {
@@ -210,9 +211,19 @@
         "139 Bistrița - Beclean"
       ]
     },
+    "106": {
+      "date": "2026-10-13",
+      "route": "142 Bistrița - Breaza",
+      "routes": [
+        "142 Bistrița - Breaza"
+      ]
+    },
     "107": {
       "date": "2026-10-13",
-      "route": "493 Bistrița - Gledin"
+      "route": "493 Bistrița - Gledin",
+      "routes": [
+        "493 Bistrița - Gledin"
+      ]
     },
     "108": {
       "date": "2026-10-13",
@@ -369,6 +380,20 @@
       "route": "1",
       "routes": [
         "1"
+      ]
+    },
+    "160": {
+      "date": "2026-10-13",
+      "route": "364 Bistrița - Milaș",
+      "routes": [
+        "364 Bistrița - Milaș"
+      ]
+    },
+    "162": {
+      "date": "2026-10-13",
+      "route": "244 Beclean - Cireșoaia",
+      "routes": [
+        "244 Beclean - Cireșoaia"
       ]
     },
     "165": {
