@@ -57,6 +57,13 @@
         "13"
       ]
     },
+    "52": {
+      "date": "2026-10-13",
+      "route": "5",
+      "routes": [
+        "5"
+      ]
+    },
     "53": {
       "date": "2026-10-13",
       "route": "3",
@@ -389,7 +396,7 @@
     },
     "154": {
       "date": "2026-10-13",
-      "route": "1B",
+      "route": "1A",
       "routes": [
         "1A",
         "1B",
@@ -419,9 +426,10 @@
     },
     "161": {
       "date": "2026-10-13",
-      "route": "244 Beclean - Cireșoaia",
+      "route": "247 Beclean - Jimbor",
       "routes": [
-        "244 Beclean - Cireșoaia"
+        "244 Beclean - Cireșoaia",
+        "247 Beclean - Jimbor"
       ]
     },
     "162": {
@@ -501,6 +509,13 @@
       "route": "470 Bistrița - Posmuș",
       "routes": [
         "470 Bistrița - Posmuș"
+      ]
+    },
+    "175": {
+      "date": "2026-10-13",
+      "route": "359 Bistrița - Țăgșor",
+      "routes": [
+        "359 Bistrița - Țăgșor"
       ]
     },
     "176": {
@@ -586,9 +601,10 @@
     },
     "10": {
       "date": "2026-10-13",
-      "route": "631 Năsăud - Săsarm",
+      "route": "630 Năsăud - Suplai",
       "routes": [
-        "631 Năsăud - Săsarm"
+        "631 Năsăud - Săsarm",
+        "630 Năsăud - Suplai"
       ]
     },
     "11": {
