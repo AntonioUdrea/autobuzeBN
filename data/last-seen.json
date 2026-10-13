@@ -396,7 +396,7 @@
     },
     "154": {
       "date": "2026-10-13",
-      "route": "1A",
+      "route": "1B",
       "routes": [
         "1A",
         "1B",
@@ -470,10 +470,11 @@
     },
     "168": {
       "date": "2026-10-13",
-      "route": "320 Bistrița - Tărpiu",
+      "route": "367 Bistrița - Pinticu",
       "routes": [
         "368 Bistrița - Teaca",
-        "320 Bistrița - Tărpiu"
+        "320 Bistrița - Tărpiu",
+        "367 Bistrița - Pinticu"
       ]
     },
     "169": {
