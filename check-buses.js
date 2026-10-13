@@ -30,6 +30,7 @@ const RARE_VEHICLES = new Set([
 const TARGET_ROUTES = [];
 
 const STATE_FILE = 'data/rare-bus-state.json';
+const LAST_SEEN_FILE = 'data/last-seen.json';
 
 
 // ============================================================
@@ -92,6 +93,95 @@ function writeStateFile(state) {
 
 
 // ============================================================
+// Last seen dates (date only, never reset)
+//
+// Format:
+// {
+//   "transmixt": { "8": { "date": "2026-10-13", "route": "10" } },
+//   "ani-tour": { "3": { "date": "2026-10-12", "route": "633 Bistrița - Săsarm" } }
+// }
+// ============================================================
+
+function updateLastSeen(buses, localDate, routesMeta) {
+
+  let lastSeen = {};
+
+  try {
+
+    if (fs.existsSync(LAST_SEEN_FILE)) {
+
+      lastSeen = JSON.parse(
+        fs.readFileSync(
+          LAST_SEEN_FILE,
+          'utf8'
+        )
+      );
+    }
+
+  } catch (err) {
+
+    console.warn(
+      "Could not read last seen file:",
+      err.message
+    );
+  }
+
+
+  for (const bus of buses) {
+
+    if (
+      bus.vehicleId === undefined ||
+      bus.vehicleId === null
+    ) {
+      continue;
+    }
+
+    lastSeen[bus.operator] ??= {};
+
+    const routeInfo =
+      routesMeta[
+        bus.operator
+      ]?.[
+        String(bus.routeId)
+      ];
+
+    lastSeen[bus.operator][
+      String(bus.vehicleId)
+    ] = {
+      date: localDate,
+      route: String(
+        routeInfo?.indicative ??
+        bus.routeId
+      )
+    };
+  }
+
+
+  fs.mkdirSync('data', {
+    recursive: true
+  });
+
+  const temporaryFile =
+    `${LAST_SEEN_FILE}.tmp`;
+
+  fs.writeFileSync(
+    temporaryFile,
+    JSON.stringify(lastSeen, null, 2) + '\n',
+    'utf8'
+  );
+
+  fs.renameSync(
+    temporaryFile,
+    LAST_SEEN_FILE
+  );
+
+  console.log(
+    `Last seen dates updated in ${LAST_SEEN_FILE}.`
+  );
+}
+
+
+// ============================================================
 // Commit + push state
 // ============================================================
 
@@ -126,7 +216,7 @@ function persistStateToGit() {
 
 
     execSync(
-      `git add ${STATE_FILE}`,
+      `git add ${STATE_FILE} ${LAST_SEEN_FILE}`,
       {
         stdio: 'inherit'
       }
@@ -138,7 +228,7 @@ function persistStateToGit() {
     try {
 
       execSync(
-        `git diff --cached --quiet -- ${STATE_FILE}`
+        `git diff --cached --quiet -- ${STATE_FILE} ${LAST_SEEN_FILE}`
       );
 
       console.log(
@@ -682,6 +772,17 @@ async function run() {
       entries[0]
     );
   }
+
+
+  // ==========================================================
+  // Record last seen date + route for every vehicle in the API
+  // ==========================================================
+
+  updateLastSeen(
+    resolvedBuses,
+    localDate,
+    routesMeta
+  );
 
 
   // ==========================================================

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Last seen - Bistrița Bus Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    header a {
+      color: white;
+    }
+
+    main {
+      overflow: auto;
+      padding: 12px 16px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 6px 10px;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    th {
+      cursor: pointer;
+      position: sticky;
+      top: 0;
+      background: #f2f2f2;
+      user-select: none;
+    }
+
+    td.muted {
+      color: #999;
+    }
+
+    td.today {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    input[type="search"] {
+      padding: 6px 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Last seen</h1>
+
+    <div class="controls">
+      <a href="index.html">&larr; Map</a>
+
+      <select id="operatorFilter">
+        <option value="all">All operators</option>
+        <option value="transmixt">Transmixt</option>
+        <option value="ani-tour">Ani Tour</option>
+      </select>
+
+      <select id="modelFilter">
+        <option value="all">All models</option>
+      </select>
+
+      <select id="ageFilter">
+        <option value="all">Any date</option>
+        <option value="today">Seen today</option>
+        <option value="7">Not seen for 7+ days</option>
+        <option value="30">Not seen for 30+ days</option>
+        <option value="never">Not recorded yet</option>
+      </select>
+
+      <input id="search" type="search" placeholder="Plate, ID or route">
+    </div>
+
+    <div id="status">Loading...</div>
+  </header>
+
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th data-key="operator">Operator</th>
+          <th data-key="id">ID</th>
+          <th data-key="plate">Plate</th>
+          <th data-key="model">Model</th>
+          <th data-key="days">Last seen</th>
+          <th data-key="route">Route</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </main>
+
+  <script>
+    const OPERATOR_NAMES = { "transmixt": "Transmixt", "ani-tour": "Ani Tour" };
+    const NEVER = 1e9;
+
+    let rows = [];
+    let sortKey = "days";
+    let sortDir = 1;
+
+    const el = id => document.getElementById(id);
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"]/g, c =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+    }
+
+    function bucharestToday() {
+      return new Intl.DateTimeFormat("en-CA", {
+        timeZone: "Europe/Bucharest",
+        year: "numeric", month: "2-digit", day: "2-digit"
+      }).format(new Date());
+    }
+
+    async function loadJson(url) {
+      try {
+        const r = await fetch(url, { cache: "no-store" });
+        return r.ok ? await r.json() : {};
+      } catch {
+        return {};
+      }
+    }
+
+    async function load() {
+      const [vehicles, seen] = await Promise.all([
+        loadJson("data/vehicles.json"),
+        loadJson("data/last-seen.json")
+      ]);
+
+      const today = Date.parse(bucharestToday());
+      rows = [];
+
+      const operators = new Set([...Object.keys(vehicles), ...Object.keys(seen)]);
+
+      for (const operator of operators) {
+        const ids = new Set([
+          ...Object.keys(vehicles[operator] ?? {}),
+          ...Object.keys(seen[operator] ?? {})
+        ]);
+
+        for (const id of ids) {
+          const info = vehicles[operator]?.[id];
+          const entry = seen[operator]?.[id] ?? null;
+          // Entries are { date, route }; older files stored just the date string
+          const date = typeof entry === "string" ? entry : (entry?.date ?? null);
+          const route = typeof entry === "object" && entry ? (entry.route ?? "") : "";
+
+          rows.push({
+            operator,
+            id,
+            plate: info?.licensePlate ?? "Unknown",
+            model: info?.model ?? "Unknown",
+            date,
+            route,
+            days: date ? Math.round((today - Date.parse(date)) / 86400000) : null
+          });
+        }
+      }
+
+      const models = [...new Set(rows.map(r => r.model))].sort();
+      for (const m of models) {
+        const o = document.createElement("option");
+        o.value = m;
+        o.textContent = m;
+        el("modelFilter").appendChild(o);
+      }
+
+      render();
+    }
+
+    function matches(r) {
+      if (el("operatorFilter").value !== "all" && r.operator !== el("operatorFilter").value) return false;
+      if (el("modelFilter").value !== "all" && r.model !== el("modelFilter").value) return false;
+
+      const age = el("ageFilter").value;
+      if (age === "today" && r.days !== 0) return false;
+      if (age === "never" && r.date !== null) return false;
+      if ((age === "7" || age === "30") && !(r.days !== null && r.days >= Number(age))) return false;
+
+      const q = el("search").value.trim().toLowerCase();
+      if (q && !(r.plate.toLowerCase().includes(q) || r.route.toLowerCase().includes(q) || r.id.toLowerCase() === q)) return false;
+
+      return true;
+    }
+
+    function compare(a, b) {
+      let x, y;
+      if (sortKey === "days") {
+        x = a.days ?? NEVER;
+        y = b.days ?? NEVER;
+      } else if (sortKey === "route") {
+        x = a.route.toLowerCase();
+        y = b.route.toLowerCase();
+      } else if (sortKey === "id") {
+        x = Number(a.id);
+        y = Number(b.id);
+      } else {
+        x = a[sortKey].toLowerCase();
+        y = b[sortKey].toLowerCase();
+      }
+      if (x < y) return -1 * sortDir;
+      if (x > y) return 1 * sortDir;
+      return 0;
+    }
+
+    function describe(r) {
+      if (r.date === null) return { text: "Not recorded yet", cls: "muted" };
+      if (r.days === 0) return { text: "Today", cls: "today" };
+      if (r.days === 1) return { text: `${r.date} (yesterday)`, cls: "" };
+      return { text: `${r.date} (${r.days} days ago)`, cls: "" };
+    }
+
+    function render() {
+      const shown = rows.filter(matches).sort(compare);
+
+      el("rows").innerHTML = shown.map(r => {
+        const d = describe(r);
+        return `<tr>
+          <td>${escapeHtml(OPERATOR_NAMES[r.operator] ?? r.operator)}</td>
+          <td>${escapeHtml(r.id)}</td>
+          <td class="${r.plate === "Unknown" ? "muted" : ""}">${escapeHtml(r.plate)}</td>
+          <td class="${r.model === "Unknown" ? "muted" : ""}">${escapeHtml(r.model)}</td>
+          <td class="${d.cls}">${escapeHtml(d.text)}</td>
+          <td>${escapeHtml(r.route)}</td>
+        </tr>`;
+      }).join("");
+
+      document.querySelectorAll("th").forEach(th => {
+        const label = th.textContent.replace(/ [▲▼]$/, "");
+        th.textContent = th.dataset.key === sortKey
+          ? `${label} ${sortDir === 1 ? "▲" : "▼"}`
+          : label;
+      });
+
+      el("status").textContent = `${shown.length} of ${rows.length} vehicles`;
+    }
+
+    document.querySelectorAll("th").forEach(th => {
+      th.addEventListener("click", () => {
+        if (sortKey === th.dataset.key) {
+          sortDir = -sortDir;
+        } else {
+          sortKey = th.dataset.key;
+          sortDir = 1;
+        }
+        render();
+      });
+    });
+
+    ["operatorFilter", "modelFilter", "ageFilter"].forEach(id =>
+      el(id).addEventListener("change", render));
+    el("search").addEventListener("input", render);
+
+    load();
+  </script>
+
+</body>
+
+</html>
