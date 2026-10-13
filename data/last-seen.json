@@ -57,6 +57,13 @@
         "13"
       ]
     },
+    "51": {
+      "date": "2026-10-13",
+      "route": "6",
+      "routes": [
+        "6"
+      ]
+    },
     "52": {
       "date": "2026-10-13",
       "route": "5",
@@ -493,9 +500,10 @@
     },
     "171": {
       "date": "2026-10-13",
-      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "route": "329 Bistrița - Bretea",
       "routes": [
-        "503 Bistrița - Bistrița Bârgăului - Colibița"
+        "503 Bistrița - Bistrița Bârgăului - Colibița",
+        "329 Bistrița - Bretea"
       ]
     },
     "172": {
