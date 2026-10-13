@@ -42,6 +42,13 @@
         "3"
       ]
     },
+    "47": {
+      "date": "2026-10-13",
+      "route": "13",
+      "routes": [
+        "13"
+      ]
+    },
     "49": {
       "date": "2026-10-13",
       "route": "13",
@@ -365,6 +372,13 @@
       "route": "817 Bistrița - Parva",
       "routes": [
         "817 Bistrița - Parva"
+      ]
+    },
+    "23": {
+      "date": "2026-10-13",
+      "route": "818 Năsăud - Parva",
+      "routes": [
+        "818 Năsăud - Parva"
       ]
     },
     "31": {
