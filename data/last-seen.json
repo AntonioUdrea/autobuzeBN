@@ -44,9 +44,10 @@
     },
     "47": {
       "date": "2026-10-13",
-      "route": "13",
+      "route": "7",
       "routes": [
-        "13"
+        "13",
+        "7"
       ]
     },
     "49": {
@@ -153,9 +154,10 @@
     },
     "83": {
       "date": "2026-10-13",
-      "route": "14",
+      "route": "16",
       "routes": [
-        "14"
+        "14",
+        "16"
       ]
     },
     "86": {
@@ -217,6 +219,13 @@
       "route": "502 Bistrița - Mureșenii Bârgăului",
       "routes": [
         "502 Bistrița - Mureșenii Bârgăului"
+      ]
+    },
+    "118": {
+      "date": "2026-10-13",
+      "route": "910 Bistrița - Valea Vinului",
+      "routes": [
+        "910 Bistrița - Valea Vinului"
       ]
     },
     "119": {
