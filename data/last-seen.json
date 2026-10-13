@@ -2,7 +2,10 @@
   "transmixt": {
     "8": {
       "date": "2026-10-13",
-      "route": "503 Bistrița - Bistrița Bârgăului - Colibița"
+      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "routes": [
+        "503 Bistrița - Bistrița Bârgăului - Colibița"
+      ]
     },
     "34": {
       "date": "2026-10-13",
@@ -14,11 +17,24 @@
     },
     "49": {
       "date": "2026-10-13",
-      "route": "13"
+      "route": "13",
+      "routes": [
+        "13"
+      ]
+    },
+    "53": {
+      "date": "2026-10-13",
+      "route": "3",
+      "routes": [
+        "3"
+      ]
     },
     "54": {
       "date": "2026-10-13",
-      "route": "3"
+      "route": "3",
+      "routes": [
+        "3"
+      ]
     },
     "55": {
       "date": "2026-10-13",
@@ -28,13 +44,26 @@
       "date": "2026-10-13",
       "route": "18"
     },
+    "64": {
+      "date": "2026-10-13",
+      "route": "13",
+      "routes": [
+        "13"
+      ]
+    },
     "65": {
       "date": "2026-10-13",
-      "route": "2"
+      "route": "2",
+      "routes": [
+        "2"
+      ]
     },
     "66": {
       "date": "2026-10-13",
-      "route": "13"
+      "route": "13",
+      "routes": [
+        "13"
+      ]
     },
     "68": {
       "date": "2026-10-13",
@@ -42,31 +71,52 @@
     },
     "72": {
       "date": "2026-10-13",
-      "route": "2"
+      "route": "2",
+      "routes": [
+        "2"
+      ]
     },
     "73": {
       "date": "2026-10-13",
-      "route": "2"
+      "route": "2",
+      "routes": [
+        "2"
+      ]
     },
     "74": {
       "date": "2026-10-13",
-      "route": "2"
+      "route": "2",
+      "routes": [
+        "2"
+      ]
     },
     "75": {
       "date": "2026-10-13",
-      "route": "1"
+      "route": "1",
+      "routes": [
+        "1"
+      ]
     },
     "89": {
       "date": "2026-10-13",
-      "route": "4"
+      "route": "4",
+      "routes": [
+        "4"
+      ]
     },
     "90": {
       "date": "2026-10-13",
-      "route": "4"
+      "route": "4",
+      "routes": [
+        "4"
+      ]
     },
     "104": {
       "date": "2026-10-13",
-      "route": "139 Bistrița - Beclean"
+      "route": "139 Bistrița - Beclean",
+      "routes": [
+        "139 Bistrița - Beclean"
+      ]
     },
     "107": {
       "date": "2026-10-13",
@@ -74,15 +124,24 @@
     },
     "115": {
       "date": "2026-10-13",
-      "route": "502 Bistrița - Mureșenii Bârgăului"
+      "route": "502 Bistrița - Mureșenii Bârgăului",
+      "routes": [
+        "502 Bistrița - Mureșenii Bârgăului"
+      ]
     },
     "120": {
       "date": "2026-10-13",
-      "route": "911 Bistrița - Șanț"
+      "route": "911 Bistrița - Șanț",
+      "routes": [
+        "911 Bistrița - Șanț"
+      ]
     },
     "122": {
       "date": "2026-10-13",
-      "route": "502 Bistrița - Mureșenii Bârgăului"
+      "route": "502 Bistrița - Mureșenii Bârgăului",
+      "routes": [
+        "502 Bistrița - Mureșenii Bârgăului"
+      ]
     },
     "141": {
       "date": "2026-10-13",
@@ -94,47 +153,94 @@
     },
     "145": {
       "date": "2026-10-13",
-      "route": "8"
+      "route": "8",
+      "routes": [
+        "8"
+      ]
     },
     "147": {
       "date": "2026-10-13",
-      "route": "8"
+      "route": "8",
+      "routes": [
+        "8"
+      ]
     },
     "149": {
       "date": "2026-10-13",
-      "route": "13A"
+      "route": "13A",
+      "routes": [
+        "13A"
+      ]
+    },
+    "151": {
+      "date": "2026-10-13",
+      "route": "14",
+      "routes": [
+        "14"
+      ]
+    },
+    "152": {
+      "date": "2026-10-13",
+      "route": "16",
+      "routes": [
+        "16"
+      ]
     },
     "153": {
       "date": "2026-10-13",
-      "route": "16"
+      "route": "16",
+      "routes": [
+        "16"
+      ]
     },
     "154": {
       "date": "2026-10-13",
-      "route": "1A"
+      "route": "1A",
+      "routes": [
+        "1A"
+      ]
     },
     "157": {
       "date": "2026-10-13",
-      "route": "1"
+      "route": "1",
+      "routes": [
+        "1"
+      ]
     },
     "159": {
       "date": "2026-10-13",
-      "route": "1"
+      "route": "1",
+      "routes": [
+        "1"
+      ]
     },
     "165": {
       "date": "2026-10-13",
-      "route": "387 Bistrița - Silivașu de Câmpie"
+      "route": "387 Bistrița - Silivașu de Câmpie",
+      "routes": [
+        "387 Bistrița - Silivașu de Câmpie"
+      ]
     },
     "168": {
       "date": "2026-10-13",
-      "route": "368 Bistrița - Teaca"
+      "route": "368 Bistrița - Teaca",
+      "routes": [
+        "368 Bistrița - Teaca"
+      ]
     },
     "173": {
       "date": "2026-10-13",
-      "route": "470 Bistrița - Posmuș"
+      "route": "470 Bistrița - Posmuș",
+      "routes": [
+        "470 Bistrița - Posmuș"
+      ]
     },
     "182": {
       "date": "2026-10-13",
-      "route": "2"
+      "route": "2",
+      "routes": [
+        "2"
+      ]
     },
     "187": {
       "date": "2026-10-13",
@@ -146,7 +252,10 @@
     },
     "196": {
       "date": "2026-10-13",
-      "route": "2"
+      "route": "2",
+      "routes": [
+        "2"
+      ]
     }
   },
   "ani-tour": {
@@ -164,7 +273,10 @@
     },
     "32": {
       "date": "2026-10-13",
-      "route": "723 Bistrița - Romuli"
+      "route": "723 Bistrița - Romuli",
+      "routes": [
+        "723 Bistrița - Romuli"
+      ]
     }
   }
 }
