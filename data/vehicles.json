@@ -393,6 +393,11 @@
       "model": "Setra S416 UL",
       "assignedRoutes": ["244 Beclean - Cireșoaia", "247 Beclean - Jimbor"]
     },
+    "161": {
+      "licensePlate": "BN 03 TMX",
+      "model": "Setra S419 UL",
+      "assignedRoutes": ["244 Beclean - Cireșoaia", "246 Beclean - Chiochiș"]
+    },
     "162": {
       "licensePlate": "Unknown",
       "model": "Mercedes-Benz Sprinter"
