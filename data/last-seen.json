@@ -284,6 +284,13 @@
         "13A"
       ]
     },
+    "150": {
+      "date": "2026-10-13",
+      "route": "13A",
+      "routes": [
+        "13A"
+      ]
+    },
     "151": {
       "date": "2026-10-13",
       "route": "14",
@@ -342,6 +349,13 @@
         "368 Bistrița - Teaca"
       ]
     },
+    "170": {
+      "date": "2026-10-13",
+      "route": "354 Bistrița - Caila",
+      "routes": [
+        "354 Bistrița - Caila"
+      ]
+    },
     "173": {
       "date": "2026-10-13",
       "route": "470 Bistrița - Posmuș",
@@ -380,6 +394,13 @@
   },
   "ani-tour": {
     "1": {
+      "date": "2026-10-13",
+      "route": "615 Bistrița - Năsăud",
+      "routes": [
+        "615 Bistrița - Năsăud"
+      ]
+    },
+    "3": {
       "date": "2026-10-13",
       "route": "615 Bistrița - Năsăud",
       "routes": [
