@@ -282,6 +282,13 @@
         "474 Bistrița - Buduș"
       ]
     },
+    "113": {
+      "date": "2026-10-13",
+      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "routes": [
+        "503 Bistrița - Bistrița Bârgăului - Colibița"
+      ]
+    },
     "114": {
       "date": "2026-10-13",
       "route": "502 Bistrița - Mureșenii Bârgăului",
@@ -375,9 +382,10 @@
     },
     "150": {
       "date": "2026-10-13",
-      "route": "13A",
+      "route": "10",
       "routes": [
-        "13A"
+        "13A",
+        "10"
       ]
     },
     "151": {
@@ -403,7 +411,7 @@
     },
     "154": {
       "date": "2026-10-13",
-      "route": "1B",
+      "route": "9",
       "routes": [
         "1A",
         "1B",
@@ -530,7 +538,7 @@
     },
     "176": {
       "date": "2026-10-13",
-      "route": "361 Bistrița - Vermeș",
+      "route": "354 Bistrița - Caila",
       "routes": [
         "354 Bistrița - Caila",
         "361 Bistrița - Vermeș"
