@@ -1,0 +1,31 @@
+name: Archive Vehicle History
+
+on:
+  schedule:
+    # 20:45 UTC = 23:45 Romanian summer time / 22:45 winter time,
+    # after the bus checker stops at 22:30 and before midnight
+    - cron: '45 20 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vehicle-history
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Archive today's last seen data
+        run: node archive-history.js
