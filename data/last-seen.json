@@ -511,6 +511,13 @@
       "date": "2026-10-13",
       "route": "727 Năsăud - Telcișor"
     },
+    "15": {
+      "date": "2026-10-13",
+      "route": "725 Năsăud - Telciu",
+      "routes": [
+        "725 Năsăud - Telciu"
+      ]
+    },
     "20": {
       "date": "2026-10-13",
       "route": "817 Bistrița - Parva",
