@@ -249,6 +249,13 @@
         "911 Bistrița - Șanț"
       ]
     },
+    "121": {
+      "date": "2026-10-13",
+      "route": "911 Bistrița - Șanț",
+      "routes": [
+        "911 Bistrița - Șanț"
+      ]
+    },
     "122": {
       "date": "2026-10-13",
       "route": "502 Bistrița - Mureșenii Bârgăului",
@@ -361,6 +368,13 @@
       "route": "354 Bistrița - Caila",
       "routes": [
         "354 Bistrița - Caila"
+      ]
+    },
+    "171": {
+      "date": "2026-10-13",
+      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "routes": [
+        "503 Bistrița - Bistrița Bârgăului - Colibița"
       ]
     },
     "173": {
