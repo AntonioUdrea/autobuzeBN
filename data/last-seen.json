@@ -21,6 +21,13 @@
         "3"
       ]
     },
+    "37": {
+      "date": "2026-10-13",
+      "route": "18",
+      "routes": [
+        "18"
+      ]
+    },
     "42": {
       "date": "2026-10-13",
       "route": "3",
@@ -130,6 +137,20 @@
         "1"
       ]
     },
+    "83": {
+      "date": "2026-10-13",
+      "route": "14",
+      "routes": [
+        "14"
+      ]
+    },
+    "86": {
+      "date": "2026-10-13",
+      "route": "4",
+      "routes": [
+        "4"
+      ]
+    },
     "89": {
       "date": "2026-10-13",
       "route": "4",
@@ -157,9 +178,10 @@
     },
     "110": {
       "date": "2026-10-13",
-      "route": "478 Bistrița - Satu Nou",
+      "route": "474 Bistrița - Buduș",
       "routes": [
-        "478 Bistrița - Satu Nou"
+        "478 Bistrița - Satu Nou",
+        "474 Bistrița - Buduș"
       ]
     },
     "115": {
@@ -337,6 +359,13 @@
     "12": {
       "date": "2026-10-13",
       "route": "727 Năsăud - Telcișor"
+    },
+    "20": {
+      "date": "2026-10-13",
+      "route": "817 Bistrița - Parva",
+      "routes": [
+        "817 Bistrița - Parva"
+      ]
     },
     "31": {
       "date": "2026-10-13",
