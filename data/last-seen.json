@@ -489,6 +489,13 @@
         "503 Bistrița - Bistrița Bârgăului - Colibița"
       ]
     },
+    "172": {
+      "date": "2026-10-13",
+      "route": "136 Bistrița - Molișet",
+      "routes": [
+        "136 Bistrița - Molișet"
+      ]
+    },
     "173": {
       "date": "2026-10-13",
       "route": "470 Bistrița - Posmuș",
@@ -634,6 +641,13 @@
       ]
     },
     "23": {
+      "date": "2026-10-13",
+      "route": "818 Năsăud - Parva",
+      "routes": [
+        "818 Năsăud - Parva"
+      ]
+    },
+    "26": {
       "date": "2026-10-13",
       "route": "818 Năsăud - Parva",
       "routes": [
