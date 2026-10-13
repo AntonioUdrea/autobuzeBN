@@ -172,6 +172,13 @@
         "4"
       ]
     },
+    "91": {
+      "date": "2026-10-13",
+      "route": "4",
+      "routes": [
+        "4"
+      ]
+    },
     "104": {
       "date": "2026-10-13",
       "route": "139 Bistrița - Beclean",
@@ -189,6 +196,13 @@
       "routes": [
         "478 Bistrița - Satu Nou",
         "474 Bistrița - Buduș"
+      ]
+    },
+    "114": {
+      "date": "2026-10-13",
+      "route": "502 Bistrița - Mureșenii Bârgăului",
+      "routes": [
+        "502 Bistrița - Mureșenii Bârgăului"
       ]
     },
     "115": {
