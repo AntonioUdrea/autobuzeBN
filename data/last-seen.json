@@ -235,9 +235,10 @@
     },
     "91": {
       "date": "2026-10-14",
-      "route": "2",
+      "route": "4",
       "routes": [
-        "2"
+        "2",
+        "4"
       ]
     },
     "92": {
@@ -262,7 +263,7 @@
       ]
     },
     "101": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "142 Bistrița - Breaza",
       "routes": [
         "142 Bistrița - Breaza"
@@ -341,6 +342,13 @@
       ]
     },
     "115": {
+      "date": "2026-10-14",
+      "route": "502 Bistrița - Mureșenii Bârgăului",
+      "routes": [
+        "502 Bistrița - Mureșenii Bârgăului"
+      ]
+    },
+    "116": {
       "date": "2026-10-14",
       "route": "502 Bistrița - Mureșenii Bârgăului",
       "routes": [
