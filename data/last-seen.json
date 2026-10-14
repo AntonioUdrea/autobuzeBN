@@ -8,7 +8,7 @@
       ]
     },
     "28": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "10",
       "routes": [
         "10"
@@ -50,7 +50,7 @@
       ]
     },
     "49": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "13",
       "routes": [
         "13"
@@ -103,7 +103,7 @@
       ]
     },
     "64": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "13",
       "routes": [
         "13"
@@ -173,7 +173,7 @@
       ]
     },
     "76": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "140 Bistrița - Ciceu Poieni",
       "routes": [
         "140 Bistrița - Ciceu Poieni"
@@ -228,6 +228,13 @@
       "route": "142 Bistrița - Breaza",
       "routes": [
         "142 Bistrița - Breaza"
+      ]
+    },
+    "103": {
+      "date": "2026-10-14",
+      "route": "188 Bistrița - Șendroaia",
+      "routes": [
+        "188 Bistrița - Șendroaia"
       ]
     },
     "104": {
@@ -366,9 +373,10 @@
     },
     "147": {
       "date": "2026-10-14",
-      "route": "8",
+      "route": "12",
       "routes": [
-        "8"
+        "8",
+        "12"
       ]
     },
     "149": {
@@ -439,17 +447,17 @@
     },
     "161": {
       "date": "2026-10-14",
-      "route": "247 Beclean - Jimbor",
+      "route": "244 Beclean - Cireșoaia",
       "routes": [
-        "247 Beclean - Jimbor"
+        "247 Beclean - Jimbor",
+        "244 Beclean - Cireșoaia"
       ]
     },
     "162": {
-      "date": "2026-10-13",
-      "route": "252 Beclean - Agrișu de Jos",
+      "date": "2026-10-14",
+      "route": "244 Beclean - Cireșoaia",
       "routes": [
-        "244 Beclean - Cireșoaia",
-        "252 Beclean - Agrișu de Jos"
+        "244 Beclean - Cireșoaia"
       ]
     },
     "163": {
@@ -467,10 +475,10 @@
       ]
     },
     "165": {
-      "date": "2026-10-13",
-      "route": "387 Bistrița - Silivașu de Câmpie",
+      "date": "2026-10-14",
+      "route": "471 Bistrița - Ardan",
       "routes": [
-        "387 Bistrița - Silivașu de Câmpie"
+        "471 Bistrița - Ardan"
       ]
     },
     "167": {
@@ -579,6 +587,13 @@
       "routes": [
         "2"
       ]
+    },
+    "197": {
+      "date": "2026-10-14",
+      "route": "2",
+      "routes": [
+        "2"
+      ]
     }
   },
   "ani-tour": {
@@ -604,7 +619,7 @@
       ]
     },
     "6": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "628A Năsăud - Săsarm - Beclean - Suplai",
       "routes": [
         "628A Năsăud - Săsarm - Beclean - Suplai"
@@ -675,7 +690,7 @@
       ]
     },
     "22": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "816 Năsăud - Lunca Leșului",
       "routes": [
         "816 Năsăud - Lunca Leșului"
