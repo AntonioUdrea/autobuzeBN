@@ -464,12 +464,10 @@
       ]
     },
     "154": {
-      "date": "2026-10-13",
-      "route": "9",
+      "date": "2026-10-14",
+      "route": "13A",
       "routes": [
-        "1A",
-        "1B",
-        "9"
+        "13A"
       ]
     },
     "157": {
@@ -695,9 +693,10 @@
     },
     "10": {
       "date": "2026-10-14",
-      "route": "630 Năsăud - Suplai",
+      "route": "631 Năsăud - Săsarm",
       "routes": [
-        "630 Năsăud - Suplai"
+        "630 Năsăud - Suplai",
+        "631 Năsăud - Săsarm"
       ]
     },
     "11": {
@@ -709,7 +708,7 @@
     },
     "12": {
       "date": "2026-10-14",
-      "route": "727 Năsăud - Telcișor",
+      "route": "632 Năsăud - Runcu Salvei",
       "routes": [
         "632 Năsăud - Runcu Salvei",
         "727 Năsăud - Telcișor"
