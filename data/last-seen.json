@@ -118,7 +118,7 @@
       ]
     },
     "66": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "13",
       "routes": [
         "13"
@@ -366,14 +366,14 @@
       ]
     },
     "147": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "8",
       "routes": [
         "8"
       ]
     },
     "149": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "13A",
       "routes": [
         "13A"
@@ -497,7 +497,7 @@
       ]
     },
     "170": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "354 Bistrița - Caila",
       "routes": [
         "354 Bistrița - Caila"
@@ -533,11 +533,10 @@
       ]
     },
     "176": {
-      "date": "2026-10-13",
-      "route": "354 Bistrița - Caila",
+      "date": "2026-10-14",
+      "route": "329 Bistrița - Bretea",
       "routes": [
-        "354 Bistrița - Caila",
-        "361 Bistrița - Vermeș"
+        "329 Bistrița - Bretea"
       ]
     },
     "182": {
@@ -562,7 +561,7 @@
       ]
     },
     "196": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "2",
       "routes": [
         "2"
@@ -599,7 +598,7 @@
       ]
     },
     "7": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "628 Bistrița - Suplai",
       "routes": [
         "628 Bistrița - Suplai"
@@ -698,7 +697,7 @@
       ]
     },
     "29": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "807 Bistrița - Leșu Ilvei",
       "routes": [
         "807 Bistrița - Leșu Ilvei"
