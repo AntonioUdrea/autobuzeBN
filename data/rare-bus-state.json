@@ -12,9 +12,14 @@
       "unusual": true
     },
     "transmixt:77": {
-      "route": "1A",
+      "route": "1B",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:171": {
+      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "rare": false,
+      "unusual": true
     }
   }
 }

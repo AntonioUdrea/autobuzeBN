@@ -188,7 +188,7 @@
     },
     "77": {
       "date": "2026-10-14",
-      "route": "1A",
+      "route": "1B",
       "routes": [
         "1B",
         "1A"
@@ -202,11 +202,9 @@
       ]
     },
     "83": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "18",
       "routes": [
-        "14",
-        "16",
         "18"
       ]
     },
@@ -359,7 +357,7 @@
       ]
     },
     "120": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "911 Bistrița - Șanț",
       "routes": [
         "911 Bistrița - Șanț"
@@ -437,7 +435,7 @@
       ]
     },
     "152": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "16",
       "routes": [
         "16"
@@ -548,11 +546,10 @@
       ]
     },
     "171": {
-      "date": "2026-10-13",
-      "route": "329 Bistrița - Bretea",
+      "date": "2026-10-14",
+      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
       "routes": [
-        "503 Bistrița - Bistrița Bârgăului - Colibița",
-        "329 Bistrița - Bretea"
+        "503 Bistrița - Bistrița Bârgăului - Colibița"
       ]
     },
     "172": {
@@ -680,10 +677,9 @@
       ]
     },
     "10": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "630 Năsăud - Suplai",
       "routes": [
-        "631 Năsăud - Săsarm",
         "630 Năsăud - Suplai"
       ]
     },
@@ -696,9 +692,10 @@
     },
     "12": {
       "date": "2026-10-14",
-      "route": "632 Năsăud - Runcu Salvei",
+      "route": "727 Năsăud - Telcișor",
       "routes": [
-        "632 Năsăud - Runcu Salvei"
+        "632 Năsăud - Runcu Salvei",
+        "727 Năsăud - Telcișor"
       ]
     },
     "13": {
