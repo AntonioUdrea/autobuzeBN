@@ -317,9 +317,10 @@
     },
     "110": {
       "date": "2026-10-14",
-      "route": "474 Bistrița - Buduș",
+      "route": "478 Bistrița - Satu Nou",
       "routes": [
-        "474 Bistrița - Buduș"
+        "474 Bistrița - Buduș",
+        "478 Bistrița - Satu Nou"
       ]
     },
     "113": {
@@ -637,9 +638,10 @@
   "ani-tour": {
     "1": {
       "date": "2026-10-14",
-      "route": "808 Bistrița - Lunca Ilvei",
+      "route": "615 Bistrița - Năsăud",
       "routes": [
-        "808 Bistrița - Lunca Ilvei"
+        "808 Bistrița - Lunca Ilvei",
+        "615 Bistrița - Năsăud"
       ]
     },
     "3": {
