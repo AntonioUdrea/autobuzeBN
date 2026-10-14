@@ -2,7 +2,7 @@
   "date": "2026-10-14",
   "buses": {
     "transmixt:62": {
-      "route": "13",
+      "route": "9",
       "rare": true,
       "unusual": false
     },
@@ -12,7 +12,7 @@
       "unusual": true
     },
     "transmixt:77": {
-      "route": "1A",
+      "route": "1B",
       "rare": true,
       "unusual": false
     },
