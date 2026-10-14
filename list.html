@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Route list - Bistrița Bus Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    header a {
+      color: white;
+    }
+
+    main {
+      overflow: auto;
+      padding: 12px 16px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 6px 10px;
+      border-bottom: 1px solid #ddd;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    th {
+      cursor: pointer;
+      position: sticky;
+      top: 0;
+      background: #f2f2f2;
+      user-select: none;
+    }
+
+    td.muted {
+      color: #999;
+    }
+
+    td.late {
+      color: #c62828;
+      font-weight: bold;
+    }
+
+    td.early {
+      color: #1565c0;
+      font-weight: bold;
+    }
+
+    td.ontime {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    #empty {
+      padding: 16px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Route list</h1>
+
+    <div class="controls">
+      <a href="index.html">&larr; Map</a>
+
+      <select id="routeFilter">
+        <option value="">Choose a route</option>
+      </select>
+
+      <button id="refreshButton">Refresh</button>
+    </div>
+
+    <div id="status">Loading...</div>
+  </header>
+
+  <main>
+    <div id="empty">Choose a route to see its buses.</div>
+
+    <table id="table" hidden>
+      <thead>
+        <tr>
+          <th data-key="delay">Delay</th>
+          <th data-key="plate">Plate</th>
+          <th data-key="id">ID</th>
+          <th data-key="model">Model</th>
+          <th data-key="direction">Direction</th>
+          <th data-key="stop">Stop</th>
+          <th data-key="arrival">Arrives</th>
+          <th data-key="operator">Operator</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </main>
+
+  <script>
+    // Same endpoints as app.js
+    const API_URLS = [
+      {
+        operator: "transmixt",
+        name: "Transmixt",
+        url: "https://app.bistrita-transport.com/api/v1/0697fb4a-6530-4bf2-a143-98225b196a32/transport/planner/vehicles"
+      },
+      {
+        operator: "ani-tour",
+        name: "Ani Tour",
+        url: "https://www.telelink.city/api/v1/a5f27685-3239-4aa9-9105-48b19a9bb2cc/transport/planner/vehicles"
+      }
+    ];
+
+    const ON_TIME_SECONDS = 60; // within +/- 1 min counts as on time, same as the map popup
+    const REFRESH_MS = 10000;
+
+    let VEHICLES = {};
+    let ROUTES = {};
+    let STOPS = {};     // operator -> { stopId: stop name }
+    let PATTERNS = {};  // operator -> { "routeId:patternIndex": { from, to } }
+    let buses = [];
+    let sortKey = "delay";
+    let sortDir = -1; // most late first
+
+    const el = id => document.getElementById(id);
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"]/g, c =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+    }
+
+    async function loadLocalData() {
+      const [v, r] = await Promise.all([
+        fetch("data/vehicles.json"),
+        fetch("data/routes.json")
+      ]);
+      if (!v.ok) throw new Error("Could not load data/vehicles.json");
+      if (!r.ok) throw new Error("Could not load data/routes.json");
+      VEHICLES = await v.json();
+      ROUTES = await r.json();
+    }
+
+    // Stop names and each pattern's first/last stop come from the .../stops endpoint
+    async function loadStops() {
+      const results = await Promise.allSettled(API_URLS.map(async api => {
+        const response = await fetch(api.url.replace(/vehicles$/, "stops"));
+        if (!response.ok) throw new Error(`${api.name} stops API returned ${response.status}`);
+        return response.json();
+      }));
+
+      results.forEach((result, i) => {
+        const operator = API_URLS[i].operator;
+        STOPS[operator] = {};
+        PATTERNS[operator] = {};
+
+        if (result.status !== "fulfilled" || !Array.isArray(result.value)) {
+          console.error(`Could not load stops for ${API_URLS[i].name}:`, result.reason);
+          return;
+        }
+
+        for (const stop of result.value) {
+          STOPS[operator][stop.id] = stop.name;
+          for (const p of stop.patterns ?? []) {
+            PATTERNS[operator][`${p.routeId}:${p.index}`] ??= { from: p.fromStopId, to: p.toStopId };
+          }
+        }
+      });
+    }
+
+    async function fetchFromAPI(api) {
+      const response = await fetch(api.url);
+      if (!response.ok) throw new Error(`${api.name} API returned ${response.status}`);
+      const data = await response.json();
+      if (!Array.isArray(data)) throw new Error(`${api.name} API did not return an array`);
+      return data.map(b => ({ ...b, operator: api.operator, operatorName: api.name }));
+    }
+
+    function enrich(b) {
+      const routeInfo = ROUTES[b.operator]?.[String(b.routeId)];
+      const info = VEHICLES[b.operator]?.[String(b.vehicleId)];
+      const plate = info?.licensePlate && info.licensePlate.toLowerCase() !== "unknown"
+        ? info.licensePlate : "Unknown";
+      const model = info?.model && info.model.toLowerCase() !== "unknown"
+        ? info.model : "Unknown";
+
+      const stopName = id => STOPS[b.operator]?.[id];
+
+      // Direction: the vehicle's headsign, else "first stop -> last stop" of its pattern,
+      // else the name from routes.json (the API has no direction field, so derive it
+      // from patternIndex: 1-10 = 0, 11+ = 1, negative = out of service)
+      const pattern = PATTERNS[b.operator]?.[`${b.routeId}:${b.patternIndex}`];
+      const directionIndex = b.patternIndex < 0 ? -1 : b.patternIndex >= 11 ? 1 : 0;
+      let patternText = "";
+      if (pattern && pattern.from !== pattern.to && stopName(pattern.from) && stopName(pattern.to)) {
+        patternText = `${stopName(pattern.from)} \u2192 ${stopName(pattern.to)}`;
+      }
+      const direction = b.headsign?.trim()
+        || patternText
+        || routeInfo?.directions?.[String(directionIndex)]
+        || "Unknown";
+
+      // stopId is the stop the bus is at or heading to
+      const name = b.stopId != null ? (stopName(b.stopId) ?? `Stop ${b.stopId}`) : "";
+      const stop = !name ? ""
+        : b.stopStatus === "STOPPED_AT" ? `At ${name}`
+        : b.stopStatus === "INCOMING_AT" ? `Arriving at ${name}`
+        : `Next: ${name}`;
+
+      return {
+        operator: b.operator,
+        operatorName: b.operatorName,
+        routeKey: `${b.operator}|${b.routeId}`,
+        routeLabel: routeInfo?.indicative ?? String(b.routeId),
+        id: String(b.vehicleId),
+        plate,
+        model,
+        direction,
+        stop,
+        arrival: b.nextStopArrival ?? "",
+        delay: Number(b.delaySeconds ?? 0)
+      };
+    }
+
+    function formatTime(iso) {
+      if (!iso) return "";
+      return new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Bucharest", hour: "2-digit", minute: "2-digit"
+      }).format(new Date(iso));
+    }
+
+    function describeDelay(seconds) {
+      const minutes = Math.round(Math.abs(seconds) / 60);
+      if (seconds > ON_TIME_SECONDS) return { text: `${minutes} min late`, cls: "late" };
+      if (seconds < -ON_TIME_SECONDS) return { text: `${minutes} min early`, cls: "early" };
+      return { text: "On time", cls: "ontime" };
+    }
+
+    async function refresh() {
+      el("status").textContent = "Updating...";
+
+      const results = await Promise.allSettled(API_URLS.map(fetchFromAPI));
+      const fetched = [];
+      const failed = [];
+
+      results.forEach((r, i) => {
+        if (r.status === "fulfilled") fetched.push(...r.value);
+        else {
+          failed.push(API_URLS[i].name);
+          console.error(`Could not load ${API_URLS[i].name}:`, r.reason);
+        }
+      });
+
+      buses = fetched.map(enrich);
+      updateRouteFilter();
+      render(failed);
+    }
+
+    function updateRouteFilter() {
+      const select = el("routeFilter");
+      const previous = select.value || new URLSearchParams(location.search).get("route") || "";
+
+      const routes = new Map();
+      for (const b of buses) {
+        if (!routes.has(b.routeKey)) routes.set(b.routeKey, b);
+      }
+
+      const sorted = [...routes.values()].sort((a, b) =>
+        String(a.routeLabel).localeCompare(String(b.routeLabel), undefined, { numeric: true }));
+
+      select.innerHTML = `<option value="">Choose a route</option>` + sorted.map(r =>
+        `<option value="${escapeHtml(r.routeKey)}">${escapeHtml(r.routeLabel)} (${escapeHtml(r.operatorName)})</option>`
+      ).join("");
+
+      // Keep the selection even if the route has no buses right now
+      if (previous && !routes.has(previous)) {
+        const [operator, routeId] = previous.split("|");
+        const label = ROUTES[operator]?.[routeId]?.indicative ?? routeId;
+        select.insertAdjacentHTML("beforeend",
+          `<option value="${escapeHtml(previous)}">${escapeHtml(label)} (no buses now)</option>`);
+      }
+
+      select.value = previous;
+    }
+
+    function compare(a, b) {
+      let x, y;
+      if (sortKey === "delay") { x = a.delay; y = b.delay; }
+      else if (sortKey === "id") { x = Number(a.id); y = Number(b.id); }
+      else { x = String(a[sortKey]).toLowerCase(); y = String(b[sortKey]).toLowerCase(); }
+      if (x < y) return -1 * sortDir;
+      if (x > y) return 1 * sortDir;
+      return 0;
+    }
+
+    function render(failed = []) {
+      const route = el("routeFilter").value;
+      const time = new Date().toLocaleTimeString();
+      const warning = failed.length ? ` • Could not load: ${failed.join(", ")}` : "";
+
+      if (!route) {
+        el("table").hidden = true;
+        el("empty").hidden = false;
+        el("empty").textContent = "Choose a route to see its buses.";
+        el("status").textContent = `${buses.length} buses running • Last update: ${time}${warning}`;
+        return;
+      }
+
+      const shown = buses.filter(b => b.routeKey === route).sort(compare);
+
+      if (shown.length === 0) {
+        el("table").hidden = true;
+        el("empty").hidden = false;
+        el("empty").textContent = "No buses are running on this route right now.";
+        el("status").textContent = `0 buses • Last update: ${time}${warning}`;
+        return;
+      }
+
+      el("empty").hidden = true;
+      el("table").hidden = false;
+
+      el("rows").innerHTML = shown.map(b => {
+        const d = describeDelay(b.delay);
+        return `<tr>
+          <td class="${d.cls}">${escapeHtml(d.text)}</td>
+          <td class="${b.plate === "Unknown" ? "muted" : ""}">${escapeHtml(b.plate)}</td>
+          <td><a href="history.html?operator=${encodeURIComponent(b.operator)}&id=${encodeURIComponent(b.id)}">${escapeHtml(b.id)}</a></td>
+          <td class="${b.model === "Unknown" ? "muted" : ""}">${escapeHtml(b.model)}</td>
+          <td class="${b.direction === "Unknown" ? "muted" : ""}">${escapeHtml(b.direction)}</td>
+          <td class="${b.stop ? "" : "muted"}">${escapeHtml(b.stop || "Unknown")}</td>
+          <td>${escapeHtml(formatTime(b.arrival))}</td>
+          <td>${escapeHtml(b.operatorName)}</td>
+        </tr>`;
+      }).join("");
+
+      document.querySelectorAll("th").forEach(th => {
+        const label = th.textContent.replace(/ [▲▼]$/, "");
+        th.textContent = th.dataset.key === sortKey
+          ? `${label} ${sortDir === 1 ? "▲" : "▼"}`
+          : label;
+      });
+
+      el("status").textContent = `${shown.length} bus${shown.length === 1 ? "" : "es"} on this route • Last update: ${time}${warning}`;
+    }
+
+    document.querySelectorAll("th").forEach(th => {
+      th.addEventListener("click", () => {
+        if (sortKey === th.dataset.key) {
+          sortDir = -sortDir;
+        } else {
+          sortKey = th.dataset.key;
+          sortDir = th.dataset.key === "delay" ? -1 : 1;
+        }
+        render();
+      });
+    });
+
+    el("routeFilter").addEventListener("change", () => {
+      const url = new URL(location.href);
+      if (el("routeFilter").value) url.searchParams.set("route", el("routeFilter").value);
+      else url.searchParams.delete("route");
+      history.replaceState(null, "", url);
+      render();
+    });
+
+    el("refreshButton").addEventListener("click", refresh);
+
+    (async function start() {
+      try {
+        await loadLocalData();
+        await loadStops();
+        await refresh();
+        setInterval(refresh, REFRESH_MS);
+      } catch (error) {
+        console.error(error);
+        el("status").textContent = `Startup error: ${error.message}`;
+      }
+    })();
+  </script>
+
+</body>
+
+</html>

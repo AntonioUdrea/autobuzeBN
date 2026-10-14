@@ -24,6 +24,10 @@ const API_URLS = [
 let VEHICLES = {};
 let ROUTES = {};
 
+// Stop names and pattern end points, loaded from the .../stops endpoints
+let STOPS = {};     // operator -> { stopId: stop name }
+let PATTERNS = {};  // operator -> { "routeId:patternIndex": { from, to } }
+
 let allVehicles = [];
 
 let markers = {};
@@ -87,6 +91,105 @@ async function loadLocalData() {
 
 
 // ============================================================
+// STOPS
+// ============================================================
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"]/g, c =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+}
+
+function formatTime(iso) {
+  if (!iso) return "";
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/Bucharest",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(new Date(iso));
+}
+
+async function loadStops() {
+
+  const results = await Promise.allSettled(
+    API_URLS.map(async api => {
+      const response = await fetch(
+        api.url.replace(/vehicles$/, "stops")
+      );
+      if (!response.ok) {
+        throw new Error(`${api.name} stops API returned ${response.status}`);
+      }
+      return response.json();
+    })
+  );
+
+  results.forEach((result, index) => {
+
+    const operator = API_URLS[index].operator;
+
+    STOPS[operator] = {};
+    PATTERNS[operator] = {};
+
+    if (result.status !== "fulfilled" || !Array.isArray(result.value)) {
+      console.error(
+        `Could not load stops for ${API_URLS[index].name}:`,
+        result.reason
+      );
+      return;
+    }
+
+    for (const stop of result.value) {
+      STOPS[operator][stop.id] = stop.name;
+
+      for (const p of stop.patterns ?? []) {
+        PATTERNS[operator][`${p.routeId}:${p.index}`] ??=
+          { from: p.fromStopId, to: p.toStopId };
+      }
+    }
+  });
+}
+
+
+// Direction: headsign, else "first stop -> last stop" of the pattern,
+// else the name from routes.json. The API has no direction field, so the
+// index is derived from patternIndex (1-10 = 0, 11+ = 1, negative = none).
+// stopId is the stop the bus is at or heading to.
+
+function describeTrip(vehicle, routesJsonDirection) {
+
+  const stopName = id => STOPS[vehicle.operator]?.[id];
+
+  const pattern =
+    PATTERNS[vehicle.operator]?.[
+    `${vehicle.routeId}:${vehicle.patternIndex}`
+    ];
+
+  let patternText = "";
+
+  if (
+    pattern &&
+    pattern.from !== pattern.to &&
+    stopName(pattern.from) &&
+    stopName(pattern.to)
+  ) {
+    patternText = `${stopName(pattern.to)}`;
+  }
+
+  return {
+    direction:
+      vehicle.headsign?.trim() ||
+      patternText ||
+      routesJsonDirection ||
+      "Unknown",
+
+    stopName:
+      vehicle.stopId != null
+        ? (stopName(vehicle.stopId) ?? `Stop ${vehicle.stopId}`)
+        : ""
+  };
+}
+
+
+// ============================================================
 // ENRICH VEHICLE DATA
 // ============================================================
 
@@ -98,8 +201,12 @@ function enrichVehicle(vehicle) {
   const routeInfo =
     operatorRoutes?.[String(vehicle.routeId)];
 
+  const directionIndex =
+    vehicle.patternIndex < 0 ? -1 :
+      vehicle.patternIndex >= 11 ? 1 : 0;
+
   const directionName =
-    routeInfo?.directions?.[String(vehicle.direction)];
+    routeInfo?.directions?.[String(directionIndex)];
 
   const vehicleInfo =
     VEHICLES[vehicle.operator]?.[
@@ -117,19 +224,6 @@ function enrichVehicle(vehicle) {
         availableRoutes: operatorRoutes
           ? Object.keys(operatorRoutes)
           : "NO OPERATOR FOUND"
-      }
-    );
-  }
-
-  if (!directionName) {
-
-    console.warn(
-      "Direction not found:",
-      {
-        operator: vehicle.operator,
-        routeId: vehicle.routeId,
-        direction: vehicle.direction,
-        routeInfo: routeInfo
       }
     );
   }
@@ -161,8 +255,7 @@ function enrichVehicle(vehicle) {
       routeInfo?.indicative ??
       String(vehicle.routeId),
 
-    direction:
-      directionName ?? "Unknown"
+    ...describeTrip(vehicle, directionName)
   };
 }
 
@@ -314,6 +407,10 @@ function normalizeVehicle(vehicle) {
 // POPUP
 // ============================================================
 
+function stopText(vehicle) {
+  return `${vehicle.stopName}`;
+}
+
 function createPopup(vehicle) {
 
   const delaySeconds =
@@ -365,9 +462,15 @@ function createPopup(vehicle) {
         <strong>Linia:</strong>
         ${vehicle.routeIndicative}
       </p>
+      
 
+      ${vehicle.stopName ? `
       <p>
-        <strong>Întârziere:</strong>
+      <strong>Următoarea stație:</strong>
+        ${escapeHtml(stopText(vehicle))}
+      </p>` : ""}
+
+      <strong>Întârziere:</strong>
         ${delayText}
       </p>
 
@@ -1065,6 +1168,9 @@ async function startApp() {
 
 
     await loadLocalData();
+
+
+    await loadStops();
 
 
     document
