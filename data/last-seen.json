@@ -186,6 +186,13 @@
         "140 Bistrița - Ciceu Poieni"
       ]
     },
+    "77": {
+      "date": "2026-10-14",
+      "route": "1B",
+      "routes": [
+        "1B"
+      ]
+    },
     "80": {
       "date": "2026-10-14",
       "route": "11",
@@ -217,17 +224,17 @@
       ]
     },
     "90": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "4",
       "routes": [
         "4"
       ]
     },
     "91": {
-      "date": "2026-10-13",
-      "route": "4",
+      "date": "2026-10-14",
+      "route": "2",
       "routes": [
-        "4"
+        "2"
       ]
     },
     "93": {
@@ -316,7 +323,7 @@
       ]
     },
     "114": {
-      "date": "2026-10-13",
+      "date": "2026-10-14",
       "route": "502 Bistrița - Mureșenii Bârgăului",
       "routes": [
         "502 Bistrița - Mureșenii Bârgăului"
@@ -503,9 +510,10 @@
     },
     "167": {
       "date": "2026-10-14",
-      "route": "363 Bistrița - Urmeniș",
+      "route": "366 Bistrița - Archiud",
       "routes": [
-        "363 Bistrița - Urmeniș"
+        "363 Bistrița - Urmeniș",
+        "366 Bistrița - Archiud"
       ]
     },
     "168": {
@@ -516,11 +524,10 @@
       ]
     },
     "169": {
-      "date": "2026-10-13",
-      "route": "367 Bistrița - Pinticu",
+      "date": "2026-10-14",
+      "route": "384 Bistrița - Albeștii Bistriței",
       "routes": [
-        "384 Bistrița - Albeștii Bistriței",
-        "367 Bistrița - Pinticu"
+        "384 Bistrița - Albeștii Bistriței"
       ]
     },
     "170": {
@@ -563,9 +570,10 @@
     },
     "176": {
       "date": "2026-10-14",
-      "route": "329 Bistrița - Bretea",
+      "route": "354 Bistrița - Caila",
       "routes": [
-        "329 Bistrița - Bretea"
+        "329 Bistrița - Bretea",
+        "354 Bistrița - Caila"
       ]
     },
     "179": {
