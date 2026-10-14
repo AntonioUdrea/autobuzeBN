@@ -198,7 +198,7 @@
     },
     "77": {
       "date": "2026-10-14",
-      "route": "1B",
+      "route": "1A",
       "routes": [
         "1B",
         "1A",
@@ -500,7 +500,7 @@
     },
     "161": {
       "date": "2026-10-14",
-      "route": "244 Beclean - Cireșoaia",
+      "route": "247 Beclean - Jimbor",
       "routes": [
         "247 Beclean - Jimbor",
         "244 Beclean - Cireșoaia"
@@ -702,7 +702,7 @@
     },
     "10": {
       "date": "2026-10-14",
-      "route": "631 Năsăud - Săsarm",
+      "route": "630 Năsăud - Suplai",
       "routes": [
         "630 Năsăud - Suplai",
         "631 Năsăud - Săsarm"
