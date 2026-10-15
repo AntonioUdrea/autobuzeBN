@@ -22,7 +22,7 @@
       ]
     },
     "37": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "18",
       "routes": [
         "18"
@@ -249,7 +249,7 @@
       ]
     },
     "89": {
-      "date": "2026-10-13",
+      "date": "2026-10-15",
       "route": "4",
       "routes": [
         "4"
@@ -419,7 +419,7 @@
       ]
     },
     "124": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "485 Bistrița - Lunca",
       "routes": [
         "485 Bistrița - Lunca"
@@ -491,9 +491,10 @@
     },
     "154": {
       "date": "2026-10-15",
-      "route": "1B",
+      "route": "1A",
       "routes": [
-        "1B"
+        "1B",
+        "1A"
       ]
     },
     "156": {
@@ -555,16 +556,18 @@
     },
     "165": {
       "date": "2026-10-15",
-      "route": "471 Bistrița - Ardan",
+      "route": "387 Bistrița - Silivașu de Câmpie",
       "routes": [
-        "471 Bistrița - Ardan"
+        "471 Bistrița - Ardan",
+        "387 Bistrița - Silivașu de Câmpie"
       ]
     },
     "167": {
       "date": "2026-10-15",
-      "route": "363 Bistrița - Urmeniș",
+      "route": "366 Bistrița - Archiud",
       "routes": [
-        "363 Bistrița - Urmeniș"
+        "363 Bistrița - Urmeniș",
+        "366 Bistrița - Archiud"
       ]
     },
     "168": {
@@ -800,9 +803,10 @@
     },
     "28": {
       "date": "2026-10-15",
-      "route": "726 Năsăud - Bichigiu",
+      "route": "722 Năsăud - Dealul Ștefăniței",
       "routes": [
-        "726 Năsăud - Bichigiu"
+        "726 Năsăud - Bichigiu",
+        "722 Năsăud - Dealul Ștefăniței"
       ]
     },
     "29": {
