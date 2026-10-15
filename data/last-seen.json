@@ -295,7 +295,7 @@
       ]
     },
     "101": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "142 Bistrița - Breaza",
       "routes": [
         "142 Bistrița - Breaza"
@@ -360,7 +360,7 @@
       ]
     },
     "113": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
       "routes": [
         "503 Bistrița - Bistrița Bârgăului - Colibița"
@@ -547,7 +547,7 @@
       ]
     },
     "163": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "246 Beclean - Chiochiș",
       "routes": [
         "246 Beclean - Chiochiș"
@@ -570,7 +570,7 @@
     },
     "167": {
       "date": "2026-10-15",
-      "route": "366 Bistrița - Archiud",
+      "route": "363 Bistrița - Urmeniș",
       "routes": [
         "363 Bistrița - Urmeniș",
         "366 Bistrița - Archiud"
@@ -578,10 +578,11 @@
     },
     "168": {
       "date": "2026-10-15",
-      "route": "368 Bistrița - Teaca",
+      "route": "320 Bistrița - Tărpiu",
       "routes": [
         "367 Bistrița - Pinticu",
-        "368 Bistrița - Teaca"
+        "368 Bistrița - Teaca",
+        "320 Bistrița - Tărpiu"
       ]
     },
     "169": {
@@ -813,7 +814,7 @@
     },
     "28": {
       "date": "2026-10-15",
-      "route": "722 Năsăud - Dealul Ștefăniței",
+      "route": "726 Năsăud - Bichigiu",
       "routes": [
         "726 Năsăud - Bichigiu",
         "722 Năsăud - Dealul Ștefăniței"
