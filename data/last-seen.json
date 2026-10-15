@@ -406,7 +406,7 @@
       ]
     },
     "122": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "502 Bistrița - Mureșenii Bârgăului",
       "routes": [
         "502 Bistrița - Mureșenii Bârgăului"
@@ -558,11 +558,10 @@
       ]
     },
     "167": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "363 Bistrița - Urmeniș",
       "routes": [
-        "363 Bistrița - Urmeniș",
-        "366 Bistrița - Archiud"
+        "363 Bistrița - Urmeniș"
       ]
     },
     "168": {
