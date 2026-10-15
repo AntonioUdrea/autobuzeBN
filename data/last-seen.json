@@ -828,9 +828,10 @@
     },
     "31": {
       "date": "2026-10-15",
-      "route": "723 Bistrița - Romuli",
+      "route": "721 Bistrița - Dealul Ștefăniței",
       "routes": [
-        "723 Bistrița - Romuli"
+        "723 Bistrița - Romuli",
+        "721 Bistrița - Dealul Ștefăniței"
       ]
     },
     "32": {
