@@ -726,7 +726,7 @@
     },
     "9": {
       "date": "2026-10-15",
-      "route": "615 Bistrița - Năsăud",
+      "route": "633 Bistrița - Săsarm",
       "routes": [
         "633 Bistrița - Săsarm",
         "615 Bistrița - Năsăud"
@@ -734,7 +734,7 @@
     },
     "10": {
       "date": "2026-10-15",
-      "route": "630 Năsăud - Suplai",
+      "route": "631 Năsăud - Săsarm",
       "routes": [
         "631 Năsăud - Săsarm",
         "630 Năsăud - Suplai"
@@ -749,7 +749,7 @@
     },
     "12": {
       "date": "2026-10-15",
-      "route": "727 Năsăud - Telcișor",
+      "route": "632 Năsăud - Runcu Salvei",
       "routes": [
         "632 Năsăud - Runcu Salvei",
         "727 Năsăud - Telcișor"
@@ -763,7 +763,7 @@
       ]
     },
     "15": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "725 Năsăud - Telciu",
       "routes": [
         "725 Năsăud - Telciu"
