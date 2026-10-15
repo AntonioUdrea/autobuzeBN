@@ -36,7 +36,7 @@
       ]
     },
     "42": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "3",
       "routes": [
         "3"
@@ -162,10 +162,17 @@
       ]
     },
     "70": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "1",
       "routes": [
         "1"
+      ]
+    },
+    "71": {
+      "date": "2026-10-15",
+      "route": "2",
+      "routes": [
+        "2"
       ]
     },
     "72": {
@@ -327,11 +334,10 @@
       ]
     },
     "108": {
-      "date": "2026-10-14",
-      "route": "476 Bistrița - Budacu de Sus",
+      "date": "2026-10-15",
+      "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
       "routes": [
-        "476 Bistrița - Budacu de Sus (via Satu Nou)",
-        "476 Bistrița - Budacu de Sus"
+        "476 Bistrița - Budacu de Sus (via Satu Nou)"
       ]
     },
     "109": {
@@ -520,11 +526,10 @@
       ]
     },
     "161": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "247 Beclean - Jimbor",
       "routes": [
-        "247 Beclean - Jimbor",
-        "244 Beclean - Cireșoaia"
+        "247 Beclean - Jimbor"
       ]
     },
     "162": {
@@ -565,12 +570,10 @@
       ]
     },
     "168": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "367 Bistrița - Pinticu",
       "routes": [
-        "367 Bistrița - Pinticu",
-        "368 Bistrița - Teaca",
-        "320 Bistrița - Tărpiu"
+        "367 Bistrița - Pinticu"
       ]
     },
     "169": {
@@ -655,7 +658,7 @@
       ]
     },
     "191": {
-      "date": "2026-10-13",
+      "date": "2026-10-15",
       "route": "2",
       "routes": [
         "2"
@@ -678,11 +681,10 @@
   },
   "ani-tour": {
     "1": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "808 Bistrița - Lunca Ilvei",
       "routes": [
-        "808 Bistrița - Lunca Ilvei",
-        "615 Bistrița - Năsăud"
+        "808 Bistrița - Lunca Ilvei"
       ]
     },
     "3": {
