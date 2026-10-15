@@ -338,7 +338,7 @@
     },
     "108": {
       "date": "2026-10-15",
-      "route": "476 Bistrița - Budacu de Sus",
+      "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
       "routes": [
         "476 Bistrița - Budacu de Sus (via Satu Nou)",
         "476 Bistrița - Budacu de Sus"
@@ -496,7 +496,7 @@
     },
     "154": {
       "date": "2026-10-15",
-      "route": "1A",
+      "route": "9",
       "routes": [
         "1B",
         "1A",
@@ -587,9 +587,10 @@
     },
     "169": {
       "date": "2026-10-15",
-      "route": "384 Bistrița - Albeștii Bistriței",
+      "route": "367 Bistrița - Pinticu",
       "routes": [
-        "384 Bistrița - Albeștii Bistriței"
+        "384 Bistrița - Albeștii Bistriței",
+        "367 Bistrița - Pinticu"
       ]
     },
     "170": {
@@ -631,7 +632,7 @@
     },
     "176": {
       "date": "2026-10-15",
-      "route": "361 Bistrița - Vermeș",
+      "route": "354 Bistrița - Caila",
       "routes": [
         "329 Bistrița - Bretea",
         "354 Bistrița - Caila",
