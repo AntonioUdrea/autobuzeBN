@@ -256,7 +256,7 @@
       ]
     },
     "90": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "4",
       "routes": [
         "4"
@@ -377,7 +377,7 @@
       ]
     },
     "116": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "502 Bistrița - Mureșenii Bârgăului",
       "routes": [
         "502 Bistrița - Mureșenii Bârgăului"
@@ -490,10 +490,10 @@
       ]
     },
     "154": {
-      "date": "2026-10-14",
-      "route": "13A",
+      "date": "2026-10-15",
+      "route": "1B",
       "routes": [
-        "13A"
+        "1B"
       ]
     },
     "156": {
@@ -575,7 +575,7 @@
       ]
     },
     "169": {
-      "date": "2026-10-14",
+      "date": "2026-10-15",
       "route": "384 Bistrița - Albeștii Bistriței",
       "routes": [
         "384 Bistrița - Albeștii Bistriței"
@@ -621,9 +621,10 @@
     },
     "176": {
       "date": "2026-10-15",
-      "route": "329 Bistrița - Bretea",
+      "route": "354 Bistrița - Caila",
       "routes": [
-        "329 Bistrița - Bretea"
+        "329 Bistrița - Bretea",
+        "354 Bistrița - Caila"
       ]
     },
     "179": {
@@ -819,10 +820,10 @@
       ]
     },
     "32": {
-      "date": "2026-10-14",
-      "route": "721 Bistrița - Dealul Ștefăniței",
+      "date": "2026-10-15",
+      "route": "723 Bistrița - Romuli",
       "routes": [
-        "721 Bistrița - Dealul Ștefăniței"
+        "723 Bistrița - Romuli"
       ]
     }
   }
