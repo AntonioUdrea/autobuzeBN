@@ -496,7 +496,7 @@
     },
     "154": {
       "date": "2026-10-15",
-      "route": "1A",
+      "route": "1B",
       "routes": [
         "1B",
         "1A",
@@ -578,7 +578,7 @@
     },
     "168": {
       "date": "2026-10-15",
-      "route": "320 Bistrița - Tărpiu",
+      "route": "367 Bistrița - Pinticu",
       "routes": [
         "367 Bistrița - Pinticu",
         "368 Bistrița - Teaca",
@@ -735,7 +735,7 @@
     },
     "10": {
       "date": "2026-10-15",
-      "route": "631 Năsăud - Săsarm",
+      "route": "630 Năsăud - Suplai",
       "routes": [
         "631 Năsăud - Săsarm",
         "630 Năsăud - Suplai"
