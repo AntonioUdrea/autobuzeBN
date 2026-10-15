@@ -631,10 +631,11 @@
     },
     "176": {
       "date": "2026-10-15",
-      "route": "354 Bistrița - Caila",
+      "route": "361 Bistrița - Vermeș",
       "routes": [
         "329 Bistrița - Bretea",
-        "354 Bistrița - Caila"
+        "354 Bistrița - Caila",
+        "361 Bistrița - Vermeș"
       ]
     },
     "179": {
