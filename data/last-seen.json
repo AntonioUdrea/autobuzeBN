@@ -236,9 +236,10 @@
     },
     "83": {
       "date": "2026-10-16",
-      "route": "18",
+      "route": "14",
       "routes": [
-        "18"
+        "18",
+        "14"
       ]
     },
     "86": {
@@ -349,7 +350,7 @@
     },
     "110": {
       "date": "2026-10-16",
-      "route": "478 Bistrița - Satu Nou",
+      "route": "474 Bistrița - Buduș",
       "routes": [
         "474 Bistrița - Buduș",
         "478 Bistrița - Satu Nou"
