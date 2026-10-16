@@ -199,7 +199,7 @@
       ]
     },
     "75": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "1",
       "routes": [
         "1"
@@ -243,7 +243,7 @@
       ]
     },
     "86": {
-      "date": "2026-10-14",
+      "date": "2026-10-16",
       "route": "4",
       "routes": [
         "4"
@@ -285,7 +285,7 @@
       ]
     },
     "95": {
-      "date": "2026-10-14",
+      "date": "2026-10-16",
       "route": "4",
       "routes": [
         "4"
@@ -306,7 +306,7 @@
       ]
     },
     "104": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "139 Bistrița - Beclean",
       "routes": [
         "139 Bistrița - Beclean"
@@ -335,13 +335,14 @@
     },
     "108": {
       "date": "2026-10-16",
-      "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "route": "476 Bistrița - Budacu de Sus",
       "routes": [
-        "476 Bistrița - Budacu de Sus (via Satu Nou)"
+        "476 Bistrița - Budacu de Sus (via Satu Nou)",
+        "476 Bistrița - Budacu de Sus"
       ]
     },
     "109": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "478 Bistrița - Satu Nou",
       "routes": [
         "478 Bistrița - Satu Nou"
@@ -447,7 +448,7 @@
     },
     "147": {
       "date": "2026-10-16",
-      "route": "12",
+      "route": "8",
       "routes": [
         "8",
         "12"
@@ -512,14 +513,14 @@
       ]
     },
     "159": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "1",
       "routes": [
         "1"
       ]
     },
     "160": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "364 Bistrița - Milaș",
       "routes": [
         "364 Bistrița - Milaș"
@@ -535,9 +536,10 @@
     },
     "162": {
       "date": "2026-10-16",
-      "route": "244 Beclean - Cireșoaia",
+      "route": "252 Beclean - Agrișu de Jos",
       "routes": [
-        "244 Beclean - Cireșoaia"
+        "244 Beclean - Cireșoaia",
+        "252 Beclean - Agrișu de Jos"
       ]
     },
     "163": {
@@ -548,7 +550,7 @@
       ]
     },
     "164": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "358 Bistrița - Fântânele",
       "routes": [
         "358 Bistrița - Fântânele"
@@ -584,9 +586,10 @@
     },
     "170": {
       "date": "2026-10-16",
-      "route": "354 Bistrița - Caila",
+      "route": "390 Bistrița - Sâniacob",
       "routes": [
-        "354 Bistrița - Caila"
+        "354 Bistrița - Caila",
+        "390 Bistrița - Sâniacob"
       ]
     },
     "171": {
@@ -612,9 +615,10 @@
     },
     "175": {
       "date": "2026-10-16",
-      "route": "359 Bistrița - Țăgșor",
+      "route": "476 Bistrița - Budacu de Sus",
       "routes": [
-        "359 Bistrița - Țăgșor"
+        "359 Bistrița - Țăgșor",
+        "476 Bistrița - Budacu de Sus"
       ]
     },
     "176": {
@@ -625,7 +629,7 @@
       ]
     },
     "179": {
-      "date": "2026-10-14",
+      "date": "2026-10-16",
       "route": "2",
       "routes": [
         "2"
@@ -683,7 +687,7 @@
       ]
     },
     "3": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "615 Bistrița - Năsăud",
       "routes": [
         "615 Bistrița - Năsăud"
@@ -712,9 +716,10 @@
     },
     "9": {
       "date": "2026-10-16",
-      "route": "633 Bistrița - Săsarm",
+      "route": "615 Bistrița - Năsăud",
       "routes": [
-        "633 Bistrița - Săsarm"
+        "633 Bistrița - Săsarm",
+        "615 Bistrița - Năsăud"
       ]
     },
     "10": {
@@ -774,7 +779,7 @@
       ]
     },
     "23": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "818 Năsăud - Parva",
       "routes": [
         "818 Năsăud - Parva"
