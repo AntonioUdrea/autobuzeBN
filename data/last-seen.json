@@ -8,7 +8,7 @@
       ]
     },
     "28": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "10",
       "routes": [
         "10"
@@ -122,7 +122,7 @@
       ]
     },
     "64": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "13",
       "routes": [
         "13"
@@ -143,7 +143,7 @@
       ]
     },
     "67": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "8",
       "routes": [
         "8"
@@ -206,7 +206,7 @@
       ]
     },
     "76": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "140 Bistrița - Ciceu Poieni",
       "routes": [
         "140 Bistrița - Ciceu Poieni"
@@ -448,9 +448,10 @@
     },
     "147": {
       "date": "2026-10-16",
-      "route": "8",
+      "route": "12",
       "routes": [
-        "8"
+        "8",
+        "12"
       ]
     },
     "149": {
@@ -527,13 +528,14 @@
     },
     "161": {
       "date": "2026-10-16",
-      "route": "247 Beclean - Jimbor",
+      "route": "244 Beclean - Cireșoaia",
       "routes": [
-        "247 Beclean - Jimbor"
+        "247 Beclean - Jimbor",
+        "244 Beclean - Cireșoaia"
       ]
     },
     "162": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "244 Beclean - Cireșoaia",
       "routes": [
         "244 Beclean - Cireșoaia"
@@ -554,11 +556,10 @@
       ]
     },
     "165": {
-      "date": "2026-10-15",
-      "route": "387 Bistrița - Silivașu de Câmpie",
+      "date": "2026-10-16",
+      "route": "471 Bistrița - Ardan",
       "routes": [
-        "471 Bistrița - Ardan",
-        "387 Bistrița - Silivașu de Câmpie"
+        "471 Bistrița - Ardan"
       ]
     },
     "167": {
@@ -668,7 +669,7 @@
       ]
     },
     "197": {
-      "date": "2026-10-14",
+      "date": "2026-10-16",
       "route": "2",
       "routes": [
         "2"
@@ -698,7 +699,7 @@
       ]
     },
     "6": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "628A Năsăud - Săsarm - Beclean - Suplai",
       "routes": [
         "628A Năsăud - Săsarm - Beclean - Suplai"
@@ -768,7 +769,7 @@
       ]
     },
     "22": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "816 Năsăud - Lunca Leșului",
       "routes": [
         "816 Năsăud - Lunca Leșului"
