@@ -506,7 +506,7 @@
     },
     "154": {
       "date": "2026-10-16",
-      "route": "1B",
+      "route": "1A",
       "routes": [
         "1A",
         "1B",
@@ -543,7 +543,7 @@
     },
     "161": {
       "date": "2026-10-16",
-      "route": "244 Beclean - Cireșoaia",
+      "route": "247 Beclean - Jimbor",
       "routes": [
         "247 Beclean - Jimbor",
         "244 Beclean - Cireșoaia"
@@ -551,7 +551,7 @@
     },
     "162": {
       "date": "2026-10-16",
-      "route": "252 Beclean - Agrișu de Jos",
+      "route": "244 Beclean - Cireșoaia",
       "routes": [
         "244 Beclean - Cireșoaia",
         "252 Beclean - Agrișu de Jos"
@@ -588,7 +588,7 @@
     },
     "167": {
       "date": "2026-10-16",
-      "route": "366 Bistrița - Archiud",
+      "route": "363 Bistrița - Urmeniș",
       "routes": [
         "363 Bistrița - Urmeniș",
         "366 Bistrița - Archiud"
