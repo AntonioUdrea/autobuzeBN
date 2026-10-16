@@ -25,6 +25,11 @@
       "route": "13",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:121": {
+      "route": "910 Bistrița - Valea Vinului",
+      "rare": false,
+      "unusual": true
     }
   }
 }

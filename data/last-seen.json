@@ -411,9 +411,10 @@
     },
     "121": {
       "date": "2026-10-16",
-      "route": "911 Bistrița - Șanț",
+      "route": "910 Bistrița - Valea Vinului",
       "routes": [
-        "911 Bistrița - Șanț"
+        "911 Bistrița - Șanț",
+        "910 Bistrița - Valea Vinului"
       ]
     },
     "122": {
