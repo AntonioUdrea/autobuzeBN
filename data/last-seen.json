@@ -264,10 +264,10 @@
       ]
     },
     "91": {
-      "date": "2026-10-15",
-      "route": "4",
+      "date": "2026-10-16",
+      "route": "2",
       "routes": [
-        "4"
+        "2"
       ]
     },
     "92": {
@@ -292,7 +292,7 @@
       ]
     },
     "101": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "142 Bistrița - Breaza",
       "routes": [
         "142 Bistrița - Breaza"
@@ -493,9 +493,10 @@
     },
     "154": {
       "date": "2026-10-16",
-      "route": "1A",
+      "route": "1B",
       "routes": [
-        "1A"
+        "1A",
+        "1B"
       ]
     },
     "156": {
@@ -565,9 +566,10 @@
     },
     "167": {
       "date": "2026-10-16",
-      "route": "363 Bistrița - Urmeniș",
+      "route": "366 Bistrița - Archiud",
       "routes": [
-        "363 Bistrița - Urmeniș"
+        "363 Bistrița - Urmeniș",
+        "366 Bistrița - Archiud"
       ]
     },
     "168": {
@@ -623,9 +625,10 @@
     },
     "176": {
       "date": "2026-10-16",
-      "route": "329 Bistrița - Bretea",
+      "route": "354 Bistrița - Caila",
       "routes": [
-        "329 Bistrița - Bretea"
+        "329 Bistrița - Bretea",
+        "354 Bistrița - Caila"
       ]
     },
     "179": {
