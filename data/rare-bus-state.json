@@ -40,6 +40,11 @@
       "route": "911 Bistrița - Șanț",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:8": {
+      "route": "329 Bistrița - Bretea",
+      "rare": false,
+      "unusual": true
     }
   }
 }
