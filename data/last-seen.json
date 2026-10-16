@@ -118,7 +118,7 @@
       ]
     },
     "63": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "5",
       "routes": [
         "5"
@@ -390,9 +390,10 @@
     },
     "118": {
       "date": "2026-10-16",
-      "route": "910 Bistrița - Valea Vinului",
+      "route": "911 Bistrița - Șanț",
       "routes": [
-        "910 Bistrița - Valea Vinului"
+        "910 Bistrița - Valea Vinului",
+        "911 Bistrița - Șanț"
       ]
     },
     "119": {
@@ -578,6 +579,13 @@
         "387 Bistrița - Silivașu de Câmpie"
       ]
     },
+    "166": {
+      "date": "2026-10-16",
+      "route": "387 Bistrița - Silivașu de Câmpie",
+      "routes": [
+        "387 Bistrița - Silivașu de Câmpie"
+      ]
+    },
     "167": {
       "date": "2026-10-16",
       "route": "366 Bistrița - Archiud",
@@ -759,7 +767,7 @@
     },
     "12": {
       "date": "2026-10-16",
-      "route": "727 Năsăud - Telcișor",
+      "route": "632 Năsăud - Runcu Salvei",
       "routes": [
         "632 Năsăud - Runcu Salvei",
         "727 Năsăud - Telcișor"
@@ -773,7 +781,7 @@
       ]
     },
     "15": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "725 Năsăud - Telciu",
       "routes": [
         "725 Năsăud - Telciu"

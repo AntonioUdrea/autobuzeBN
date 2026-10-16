@@ -30,6 +30,16 @@
       "route": "910 Bistrița - Valea Vinului",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:166": {
+      "route": "387 Bistrița - Silivașu de Câmpie",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:118": {
+      "route": "911 Bistrița - Șanț",
+      "rare": false,
+      "unusual": true
     }
   }
 }
