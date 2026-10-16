@@ -492,7 +492,7 @@
     },
     "154": {
       "date": "2026-10-16",
-      "route": "1B",
+      "route": "1A",
       "routes": [
         "1A",
         "1B"
@@ -574,9 +574,10 @@
     },
     "168": {
       "date": "2026-10-16",
-      "route": "367 Bistrița - Pinticu",
+      "route": "368 Bistrița - Teaca",
       "routes": [
-        "367 Bistrița - Pinticu"
+        "367 Bistrița - Pinticu",
+        "368 Bistrița - Teaca"
       ]
     },
     "169": {
