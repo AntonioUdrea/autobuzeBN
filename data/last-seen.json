@@ -475,9 +475,10 @@
     },
     "150": {
       "date": "2026-10-16",
-      "route": "16",
+      "route": "13A",
       "routes": [
-        "16"
+        "16",
+        "13A"
       ]
     },
     "151": {
@@ -601,7 +602,7 @@
     },
     "170": {
       "date": "2026-10-16",
-      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "route": "354 Bistrița - Caila",
       "routes": [
         "354 Bistrița - Caila",
         "390 Bistrița - Sâniacob",
