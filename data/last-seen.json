@@ -238,7 +238,7 @@
     },
     "83": {
       "date": "2026-10-16",
-      "route": "16",
+      "route": "18",
       "routes": [
         "18",
         "14",
@@ -324,7 +324,7 @@
       ]
     },
     "106": {
-      "date": "2026-10-15",
+      "date": "2026-10-16",
       "route": "142 Bistrița - Breaza",
       "routes": [
         "142 Bistrița - Breaza"
@@ -504,7 +504,7 @@
     },
     "154": {
       "date": "2026-10-16",
-      "route": "1A",
+      "route": "1B",
       "routes": [
         "1A",
         "1B",
@@ -549,7 +549,7 @@
     },
     "162": {
       "date": "2026-10-16",
-      "route": "252 Beclean - Agrișu de Jos",
+      "route": "244 Beclean - Cireșoaia",
       "routes": [
         "244 Beclean - Cireșoaia",
         "252 Beclean - Agrișu de Jos"
