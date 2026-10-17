@@ -10,6 +10,11 @@
       "route": "13",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:156": {
+      "route": "16-Meci",
+      "rare": false,
+      "unusual": true
     }
   }
 }
