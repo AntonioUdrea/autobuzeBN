@@ -254,7 +254,7 @@
       ]
     },
     "89": {
-      "date": "2026-10-15",
+      "date": "2026-10-17",
       "route": "4",
       "routes": [
         "4"
@@ -493,10 +493,10 @@
       ]
     },
     "152": {
-      "date": "2026-10-16",
-      "route": "16",
+      "date": "2026-10-17",
+      "route": "9",
       "routes": [
-        "16"
+        "9"
       ]
     },
     "153": {
@@ -606,10 +606,10 @@
       ]
     },
     "169": {
-      "date": "2026-10-16",
-      "route": "384 Bistrița - Albeștii Bistriței",
+      "date": "2026-10-17",
+      "route": "364 Bistrița - Milaș",
       "routes": [
-        "384 Bistrița - Albeștii Bistriței"
+        "364 Bistrița - Milaș"
       ]
     },
     "170": {
