@@ -16,15 +16,53 @@
       padding: 12px 16px;
     }
 
+    select {
+      max-width: 100%;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin: 20px 0 8px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px;
+      max-width: 900px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 8px 10px;
+    }
+
+    .card .label {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .card .value {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .card .note {
+      font-size: 12px;
+      color: #999;
+    }
+
     table {
       border-collapse: collapse;
       width: 100%;
-      max-width: 700px;
+      max-width: 900px;
     }
 
     th,
     td {
       text-align: left;
+      vertical-align: top;
       padding: 6px 10px;
       border-bottom: 1px solid #ddd;
       font-size: 14px;
@@ -32,12 +70,34 @@
 
     th {
       background: #f2f2f2;
-      position: sticky;
-      top: 0;
     }
 
-    select {
-      max-width: 100%;
+    td.muted,
+    .muted {
+      color: #999;
+    }
+
+    .route {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0 6px;
+      border-radius: 4px;
+      background: #e3f2fd;
+      color: #0d47a1;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .stint {
+      white-space: nowrap;
+    }
+
+    .bar {
+      display: inline-block;
+      height: 8px;
+      background: #1565c0;
+      border-radius: 4px;
+      vertical-align: middle;
     }
   </style>
 </head>
@@ -56,68 +116,55 @@
   </header>
 
   <main>
-    <table>
+    <div id="summary" class="cards"></div>
+
+    <h2 id="routesTitle" hidden>Routes</h2>
+    <table id="routesTable" hidden>
+      <thead>
+        <tr>
+          <th>Route</th>
+          <th>Days</th>
+          <th>Share of days</th>
+          <th>Last on this route</th>
+        </tr>
+      </thead>
+      <tbody id="routes"></tbody>
+    </table>
+
+    <h2 id="daysTitle" hidden>Day by day</h2>
+    <table id="daysTable" hidden>
       <thead>
         <tr>
           <th>Date</th>
+          <th>Seen</th>
           <th>Routes</th>
         </tr>
       </thead>
-      <tbody id="rows"></tbody>
+      <tbody id="days"></tbody>
     </table>
   </main>
 
+  <script src="common.js"></script>
   <script>
-    const OPERATOR_NAMES = { "transmixt": "Transmixt", "ani-tour": "Ani Tour" };
+    const { OPERATOR_NAMES, escapeHtml, naturalCompare, toMinutes, bucharestDate } = Common;
 
     const el = id => document.getElementById(id);
 
-    // vehicle key ("operator:id") -> Map(date -> [routes])
-    const history = new Map();
+    // "operator:id" -> Map(date -> stints[])
+    // stint = { route, from, to, polls, directions }; old imported rows only have { route }
+    const visits = new Map();
     let vehicles = {};
 
-    function escapeHtml(s) {
-      return String(s).replace(/[&<>"]/g, c =>
-        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
-    }
-
-    function parseCsv(text) {
-      const rows = [];
-      let row = [], field = "", quoted = false;
-
-      for (let i = 0; i < text.length; i++) {
-        const c = text[i];
-
-        if (quoted) {
-          if (c === '"') {
-            if (text[i + 1] === '"') { field += '"'; i++; }
-            else quoted = false;
-          } else {
-            field += c;
-          }
-        } else if (c === '"') {
-          quoted = true;
-        } else if (c === ",") {
-          row.push(field); field = "";
-        } else if (c === "\n") {
-          row.push(field); rows.push(row); row = []; field = "";
-        } else if (c !== "\r") {
-          field += c;
-        }
-      }
-
-      if (field || row.length) { row.push(field); rows.push(row); }
-      return rows;
-    }
-
-    async function loadText(url) {
+    async function getJson(url, fallback) {
       try {
         const r = await fetch(url, { cache: "no-store" });
-        return r.ok ? await r.text() : "";
+        return r.ok ? await r.json() : fallback;
       } catch {
-        return "";
+        return fallback;
       }
     }
+
+    // ---------- formatting ----------
 
     function label(key) {
       const [operator, id] = key.split(":");
@@ -126,42 +173,163 @@
         `(ID ${id}${info?.model ? ", " + info.model : ""})`;
     }
 
-    function render() {
-      const days = history.get(el("vehicle").value);
-      if (!days) { el("rows").innerHTML = ""; return; }
-
-      const dates = [...days.keys()].sort().reverse();
-
-      el("rows").innerHTML = dates.map(d =>
-        `<tr><td>${escapeHtml(d)}</td><td>${escapeHtml(days.get(d).join(", "))}</td></tr>`
-      ).join("");
-
-      el("status").textContent =
-        `Seen on ${dates.length} day${dates.length === 1 ? "" : "s"} ` +
-        `(first: ${dates[dates.length - 1]}, latest: ${dates[0]})`;
+    function hhmm(minutes) {
+      const m = Math.round(minutes);
+      return `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
     }
 
+    function duration(minutes) {
+      const h = Math.floor(minutes / 60);
+      const m = Math.round(minutes % 60);
+      return h ? `${h} h ${m} min` : `${m} min`;
+    }
+
+    function weekday(date) {
+      return new Date(`${date}T12:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", timeZone: "UTC" });
+    }
+
+    function daysAgo(date) {
+      return Math.round((Date.parse(bucharestDate()) - Date.parse(date)) / 86400000);
+    }
+
+    function median(numbers) {
+      if (!numbers.length) return null;
+      const sorted = [...numbers].sort((a, b) => a - b);
+      const mid = Math.floor(sorted.length / 2);
+      return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+    }
+
+    // ---------- statistics for one vehicle ----------
+
+    function summarize(days) {
+      const dates = [...days.keys()].sort();
+      const routes = new Map(); // route -> { days, last }
+      const firstSeen = [];
+      const lastSeen = [];
+      let recordedMinutes = 0;
+      let seenLast30 = 0;
+
+      for (const date of dates) {
+        const stints = days.get(date);
+        if (daysAgo(date) < 30) seenLast30++;
+
+        for (const route of new Set(stints.map(s => s.route))) {
+          const r = routes.get(route) ?? { days: 0, last: "" };
+          r.days++;
+          r.last = date;            // dates are sorted, so the last write is the latest
+          routes.set(route, r);
+        }
+
+        const timed = stints.filter(s => s.from && s.to);
+        if (timed.length) {
+          firstSeen.push(toMinutes(timed[0].from));
+          lastSeen.push(toMinutes(timed[timed.length - 1].to));
+          for (const s of timed) recordedMinutes += toMinutes(s.to) - toMinutes(s.from);
+        }
+      }
+
+      return {
+        dates,
+        routes: [...routes.entries()].sort((a, b) => b[1].days - a[1].days),
+        typicalStart: median(firstSeen),
+        typicalEnd: median(lastSeen),
+        timedDays: firstSeen.length,
+        recordedMinutes,
+        seenLast30
+      };
+    }
+
+    // ---------- rendering ----------
+
+    function card(labelText, value, note = "") {
+      return `<div class="card"><div class="label">${escapeHtml(labelText)}</div>` +
+        `<div class="value">${escapeHtml(value)}</div>` +
+        (note ? `<div class="note">${escapeHtml(note)}</div>` : "") + `</div>`;
+    }
+
+    function stintHtml(s) {
+      const time = !s.from ? `<span class="muted">no time recorded</span>`
+        : s.from === s.to ? escapeHtml(s.from)
+        : `${escapeHtml(s.from)}&ndash;${escapeHtml(s.to)}`;
+
+      const directions = s.directions?.length
+        ? ` <span class="muted">&rarr; ${escapeHtml(s.directions.join(" / "))}</span>`
+        : "";
+
+      return `<div class="stint">${time} <span class="route">${escapeHtml(s.route)}</span>${directions}</div>`;
+    }
+
+    function render() {
+      const days = visits.get(el("vehicle").value);
+      if (!days) return;
+
+      const s = summarize(days);
+      const first = s.dates[0];
+      const latest = s.dates[s.dates.length - 1];
+      const ago = daysAgo(latest);
+
+      el("summary").innerHTML = [
+        card("Last seen", latest, ago === 0 ? "today" : `${ago} day${ago === 1 ? "" : "s"} ago`),
+        card("First recorded", first),
+        card("Days seen", String(s.dates.length), `${s.seenLast30} in the last 30 days`),
+        card("Usually first seen", s.typicalStart == null ? "-" : hhmm(s.typicalStart),
+          s.timedDays ? `median of ${s.timedDays} days` : "no times recorded yet"),
+        card("Usually last seen", s.typicalEnd == null ? "-" : hhmm(s.typicalEnd)),
+        card("Time on route", s.recordedMinutes ? duration(s.recordedMinutes) : "-", "approximate, from the checks")
+      ].join("");
+
+      el("routes").innerHTML = s.routes.map(([route, r]) => {
+        const share = Math.round(100 * r.days / s.dates.length);
+        return `<tr>
+          <td><span class="route">${escapeHtml(route)}</span></td>
+          <td>${r.days}</td>
+          <td><span class="bar" style="width:${share}px"></span> ${share}%</td>
+          <td>${escapeHtml(r.last)}</td>
+        </tr>`;
+      }).join("");
+
+      el("days").innerHTML = [...s.dates].reverse().map(date => {
+        const stints = days.get(date);
+        const timed = stints.filter(x => x.from && x.to);
+        const span = timed.length ? `${timed[0].from}&ndash;${timed[timed.length - 1].to}` : `<span class="muted">-</span>`;
+
+        return `<tr>
+          <td>${escapeHtml(date)} <span class="muted">${weekday(date)}</span></td>
+          <td>${span}</td>
+          <td>${stints.map(stintHtml).join("")}</td>
+        </tr>`;
+      }).join("");
+
+      for (const id of ["routesTitle", "routesTable", "daysTitle", "daysTable"]) el(id).hidden = false;
+
+      el("status").textContent =
+        `Seen on ${s.dates.length} day${s.dates.length === 1 ? "" : "s"} (first: ${first}, latest: ${latest})`;
+    }
+
+    // ---------- loading ----------
+
     async function load() {
-      const [csv, vehiclesText] = await Promise.all([
-        loadText("data/history.csv"),
-        loadText("data/vehicles.json")
+      const [index, vehiclesData] = await Promise.all([
+        getJson("data/history/index.json", { months: [] }),
+        getJson("data/vehicles.json", {})
       ]);
+      vehicles = vehiclesData;
 
-      try { vehicles = JSON.parse(vehiclesText); } catch { vehicles = {}; }
+      const months = await Promise.all((index.months ?? []).map(m => getJson(`data/history/${m}.json`, {})));
 
-      parseCsv(csv).slice(1).forEach(([date, operator, id, route]) => {
-        if (!date || !operator || !id) return;
-        const key = `${operator}:${id}`;
-        if (!history.has(key)) history.set(key, new Map());
-        const days = history.get(key);
-        if (!days.has(date)) days.set(date, []);
-        if (route) days.get(date).push(route);
-      });
+      for (const month of months) {
+        for (const [date, dayVehicles] of Object.entries(month)) {
+          for (const [key, stints] of Object.entries(dayVehicles)) {
+            if (!visits.has(key)) visits.set(key, new Map());
+            visits.get(key).set(date, stints);
+          }
+        }
+      }
 
-      const keys = [...history.keys()].sort((a, b) => label(a).localeCompare(label(b), undefined, { numeric: true }));
+      const keys = [...visits.keys()].sort((a, b) => naturalCompare(label(a), label(b)));
 
       if (keys.length === 0) {
-        el("status").textContent = "No history recorded yet. The first entries appear after tonight's archive run.";
+        el("status").textContent = "No history recorded yet. The first entries appear after the next check runs.";
         return;
       }
 
@@ -170,7 +338,7 @@
 
       const params = new URLSearchParams(location.search);
       const wanted = `${params.get("operator")}:${params.get("id")}`;
-      if (history.has(wanted)) el("vehicle").value = wanted;
+      if (visits.has(wanted)) el("vehicle").value = wanted;
 
       render();
     }

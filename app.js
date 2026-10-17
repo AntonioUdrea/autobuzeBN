@@ -1,51 +1,33 @@
+// Needs common.js loaded first: <script src="common.js"></script>
+const {
+  API_URLS, OPERATOR_NAMES, escapeHtml, naturalCompare, describeDelay,
+  getPosition, loadLocalData, fetchAllVehicles, fetchStops, enrichVehicle
+} = Common;
+
+const REFRESH_MS = 10_000;
 
 // ============================================================
-// API CONFIGURATION
+// State
 // ============================================================
 
-const API_URLS = [
-  {
-    operator: "transmixt",
-    name: "Transmixt",
-    url: "https://app.bistrita-transport.com/api/v1/0697fb4a-6530-4bf2-a143-98225b196a32/transport/planner/vehicles"
-  },
-  {
-    operator: "ani-tour",
-    name: "Ani Tour",
-    url: "https://www.telelink.city/api/v1/a5f27685-3239-4aa9-9105-48b19a9bb2cc/transport/planner/vehicles"
-  }
-];
-
-
-// ============================================================
-// GLOBAL VARIABLES
-// ============================================================
-
-let VEHICLES = {};
-let ROUTES = {};
-
-// Stop names and pattern end points, loaded from the .../stops endpoints
-let STOPS = {};     // operator -> { stopId: stop name }
-let PATTERNS = {};  // operator -> { "routeId:patternIndex": { from, to } }
+const ctx = { vehicles: {}, routes: {}, stops: {}, patterns: {} };
 
 let allVehicles = [];
+let lastWarning = "";
+let isRefreshing = false;
+let refreshTimer = null;
 
-let markers = {};
+const markers = new Map();        // vehicle.key -> Leaflet marker
+const warnedRoutes = new Set();
 
-let selectedOperator = "all";
-let selectedRoute = "all";
-let selectedModel = "all";
-let selectedUnknown = "all";
+const $ = id => document.getElementById(id);
 
 
 // ============================================================
-// MAP
+// Map
 // ============================================================
 
-const map = L.map("map").setView(
-  [47.133, 24.500],
-  13
-);
+const map = L.map("map").setView([47.133, 24.500], 13);
 
 const markerBus = L.icon({
   iconUrl: "markerBus.png",
@@ -54,1158 +36,260 @@ const markerBus = L.icon({
   popupAnchor: [0, -32]
 });
 
-L.tileLayer(
-  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  {
-    maxZoom: 19,
-    attribution: "&copy; OpenStreetMap contributors"
-  }
-).addTo(map);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution: "&copy; OpenStreetMap contributors"
+}).addTo(map);
 
 
 // ============================================================
-// LOAD LOCAL DATA
+// Popup + markers
 // ============================================================
 
-async function loadLocalData() {
-
-  const [
-    vehiclesResponse,
-    routesResponse
-  ] = await Promise.all([
-    fetch("data/vehicles.json"),
-    fetch("data/routes.json")
-  ]);
-
-  if (!vehiclesResponse.ok) {
-    throw new Error("Could not load data/vehicles.json");
-  }
-
-  if (!routesResponse.ok) {
-    throw new Error("Could not load data/routes.json");
-  }
-
-  VEHICLES = await vehiclesResponse.json();
-  ROUTES = await routesResponse.json();
+function delayText(seconds) {
+  const { kind, minutes } = describeDelay(seconds);
+  if (kind === "early") return `${minutes} min în avans`;
+  if (kind === "late") return `${minutes} min întârziere`;
+  return "La timp";
 }
 
+function popupHtml(v) {
+  const row = (label, value) => `<p><strong>${label}:</strong> ${escapeHtml(value)}</p>`;
 
-// ============================================================
-// STOPS
-// ============================================================
-
-function escapeHtml(value) {
-  return String(value).replace(/[&<>"]/g, c =>
-    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+  return `<div class="vehicle-popup">${[
+    row("Operator", v.operatorName),
+    row("Nr. Inmatriculare", v.unknownPlate ? `Unknown (vehicle ${v.id})` : v.licensePlate),
+    row("Model", v.model),
+    row("Linia", v.routeIndicative),
+    v.stopName ? row("Următoarea stație", v.stopName) : "",
+    row("Întârziere", delayText(Number(v.delaySeconds ?? 0)))
+  ].join("")}</div>`;
 }
 
-function formatTime(iso) {
-  if (!iso) return "";
-  return new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Europe/Bucharest",
-    hour: "2-digit",
-    minute: "2-digit"
-  }).format(new Date(iso));
-}
+function upsertMarker(v) {
+  const position = getPosition(v);
+  if (!position) return;
 
-async function loadStops() {
+  const existing = markers.get(v.key);
 
-  const results = await Promise.allSettled(
-    API_URLS.map(async api => {
-      const response = await fetch(
-        api.url.replace(/vehicles$/, "stops")
-      );
-      if (!response.ok) {
-        throw new Error(`${api.name} stops API returned ${response.status}`);
-      }
-      return response.json();
-    })
-  );
-
-  results.forEach((result, index) => {
-
-    const operator = API_URLS[index].operator;
-
-    STOPS[operator] = {};
-    PATTERNS[operator] = {};
-
-    if (result.status !== "fulfilled" || !Array.isArray(result.value)) {
-      console.error(
-        `Could not load stops for ${API_URLS[index].name}:`,
-        result.reason
-      );
-      return;
-    }
-
-    for (const stop of result.value) {
-      STOPS[operator][stop.id] = stop.name;
-
-      for (const p of stop.patterns ?? []) {
-        PATTERNS[operator][`${p.routeId}:${p.index}`] ??=
-          { from: p.fromStopId, to: p.toStopId };
-      }
-    }
-  });
-}
-
-
-// Direction: headsign, else "first stop -> last stop" of the pattern,
-// else the name from routes.json. The API has no direction field, so the
-// index is derived from patternIndex (1-10 = 0, 11+ = 1, negative = none).
-// stopId is the stop the bus is at or heading to.
-
-function describeTrip(vehicle, routesJsonDirection) {
-
-  const stopName = id => STOPS[vehicle.operator]?.[id];
-
-  const pattern =
-    PATTERNS[vehicle.operator]?.[
-    `${vehicle.routeId}:${vehicle.patternIndex}`
-    ];
-
-  let patternText = "";
-
-  if (
-    pattern &&
-    pattern.from !== pattern.to &&
-    stopName(pattern.from) &&
-    stopName(pattern.to)
-  ) {
-    patternText = `${stopName(pattern.to)}`;
-  }
-
-  return {
-    direction:
-      vehicle.headsign?.trim() ||
-      patternText ||
-      routesJsonDirection ||
-      "Unknown",
-
-    stopName:
-      vehicle.stopId != null
-        ? (stopName(vehicle.stopId) ?? `Stop ${vehicle.stopId}`)
-        : ""
-  };
-}
-
-
-// ============================================================
-// ENRICH VEHICLE DATA
-// ============================================================
-
-function enrichVehicle(vehicle) {
-
-  const operatorRoutes =
-    ROUTES[vehicle.operator];
-
-  const routeInfo =
-    operatorRoutes?.[String(vehicle.routeId)];
-
-  const directionIndex =
-    vehicle.patternIndex < 0 ? -1 :
-      vehicle.patternIndex >= 11 ? 1 : 0;
-
-  const directionName =
-    routeInfo?.directions?.[String(directionIndex)];
-
-  const vehicleInfo =
-    VEHICLES[vehicle.operator]?.[
-    String(vehicle.vehicleId)
-    ];
-
-  // Debug information
-  if (!routeInfo) {
-
-    console.warn(
-      "Route not found:",
-      {
-        operator: vehicle.operator,
-        routeId: vehicle.routeId,
-        availableRoutes: operatorRoutes
-          ? Object.keys(operatorRoutes)
-          : "NO OPERATOR FOUND"
-      }
-    );
-  }
-
-  const hasPlate =
-    vehicleInfo?.licensePlate &&
-    vehicleInfo.licensePlate.toLowerCase() !== "unknown";
-
-  const hasModel =
-    vehicleInfo?.model &&
-    vehicleInfo.model.toLowerCase() !== "unknown";
-
-  return {
-
-    ...vehicle,
-
-    unknownPlate: !hasPlate,
-    unknownModel: !hasModel,
-
-    licensePlate: hasPlate
-      ? vehicleInfo.licensePlate
-      : `Unknown (vehicle ${vehicle.vehicleId})`,
-
-    model: hasModel
-      ? vehicleInfo.model
-      : "Unknown",
-
-    routeIndicative:
-      routeInfo?.indicative ??
-      String(vehicle.routeId),
-
-    ...describeTrip(vehicle, directionName)
-  };
-}
-
-
-// ============================================================
-// FETCH VEHICLES FROM ONE API
-// ============================================================
-
-async function fetchFromAPI(api) {
-
-  const response = await fetch(api.url);
-
-  if (!response.ok) {
-
-    throw new Error(
-      `${api.name} API returned ${response.status}`
-    );
-  }
-
-  const vehicles = await response.json();
-
-  if (!Array.isArray(vehicles)) {
-
-    throw new Error(
-      `${api.name} API did not return an array`
-    );
-  }
-
-  return vehicles.map(vehicle => ({
-
-    ...vehicle,
-
-    operator: api.operator,
-
-    operatorName: api.name
-  }));
-}
-
-
-// ============================================================
-// FETCH ALL VEHICLES
-// ============================================================
-
-async function fetchVehicles() {
-
-  const results = await Promise.allSettled(
-    API_URLS.map(fetchFromAPI)
-  );
-
-  const vehicles = [];
-
-  results.forEach((result, index) => {
-
-    const api = API_URLS[index];
-
-    if (result.status === "fulfilled") {
-
-      vehicles.push(...result.value);
-
-    } else {
-
-      console.error(
-        `Could not load ${api.name}:`,
-        result.reason
-      );
-    }
-  });
-
-  return vehicles.map(enrichVehicle);
-}
-
-
-// ============================================================
-// GET VEHICLE COORDINATES
-// ============================================================
-
-function getLatitude(vehicle) {
-
-  return (
-    vehicle.latitude ??
-    vehicle.lat ??
-    vehicle.position?.latitude ??
-    vehicle.position?.lat ??
-    null
-  );
-}
-
-
-function getLongitude(vehicle) {
-
-  return (
-    vehicle.longitude ??
-    vehicle.lng ??
-    vehicle.lon ??
-    vehicle.position?.longitude ??
-    vehicle.position?.lng ??
-    null
-  );
-}
-
-
-// ============================================================
-// GET VEHICLE ID
-// ============================================================
-
-function getVehicleId(vehicle) {
-
-  return (
-    vehicle.vehicleId ??
-    null
-  );
-}
-
-
-// ============================================================
-// GET ROUTE ID
-// ============================================================
-
-function getRouteId(vehicle) {
-
-  return (
-    vehicle.routeId ??
-    vehicle.route_id ??
-    null
-  );
-}
-
-
-// ============================================================
-// NORMALIZE VEHICLE
-// ============================================================
-
-function normalizeVehicle(vehicle) {
-
-  return {
-
-    ...vehicle,
-
-    vehicleId: vehicle.vehicleId,
-
-    routeId: vehicle.routeId,
-
-    direction: vehicle.direction
-  };
-}
-
-
-// ============================================================
-// POPUP
-// ============================================================
-
-function stopText(vehicle) {
-  return `${vehicle.stopName}`;
-}
-
-function createPopup(vehicle) {
-
-  const delaySeconds =
-    Number(vehicle.delaySeconds ?? 0);
-
-  const delayMinutes =
-    Math.round(
-      Math.abs(delaySeconds) / 60
-    );
-
-  let delayText;
-
-  if (delaySeconds < -60) {
-
-    delayText =
-      `${delayMinutes} min în avans`;
-
-  } else if (delaySeconds > 60) {
-
-    delayText =
-      `${delayMinutes} min întârziere`;
-
-  } else {
-
-    delayText =
-      "La timp";
-  }
-
-  return `
-
-    <div class="vehicle-popup">
-
-      <p>
-        <strong>Operator:</strong>
-        ${vehicle.operatorName}
-      </p>
-
-      <p>
-        <strong>Nr. Inmatriculare:</strong>
-        ${vehicle.licensePlate}
-      </p>
-
-      <p>
-        <strong>Model:</strong>
-        ${vehicle.model}
-      </p>
-
-      <p>
-        <strong>Linia:</strong>
-        ${vehicle.routeIndicative}
-      </p>
-      
-
-      ${vehicle.stopName ? `
-      <p>
-      <strong>Următoarea stație:</strong>
-        ${escapeHtml(stopText(vehicle))}
-      </p>` : ""}
-
-      <strong>Întârziere:</strong>
-        ${delayText}
-      </p>
-
-    </div>
-
-  `;
-}
-
-
-// ============================================================
-// CREATE / UPDATE MARKER
-// ============================================================
-
-function updateMarker(vehicle) {
-
-  const latitude =
-    getLatitude(vehicle);
-
-  const longitude =
-    getLongitude(vehicle);
-
-  if (
-    latitude === null ||
-    longitude === null ||
-    latitude === undefined ||
-    longitude === undefined
-  ) {
-
+  if (existing) {
+    existing.setLatLng(position).setPopupContent(popupHtml(v));
     return;
   }
 
-  // Important:
-  // Vehicle IDs can overlap between operators.
-  // Therefore we use operator + vehicle ID.
-
-  const vehicleKey =
-    `${vehicle.operator}-${vehicle.vehicleId}`;
-
-  const position = [
-    Number(latitude),
-    Number(longitude)
-  ];
-
-  if (
-    Number.isNaN(position[0]) ||
-    Number.isNaN(position[1])
-  ) {
-
-    return;
-  }
-
-
-  // ----------------------------------------------------------
-  // Existing marker
-  // ----------------------------------------------------------
-
-  if (markers[vehicleKey]) {
-
-    markers[vehicleKey]
-      .setLatLng(position)
-      .setPopupContent(
-        createPopup(vehicle)
-      );
-
-    return;
-  }
-
-
-  // ----------------------------------------------------------
-  // New marker
-  // ----------------------------------------------------------
-
-  const marker =
-    L.marker(
-      position,
-      {
-        icon: markerBus
-      }
-    ).addTo(map);
-
-  marker.bindPopup(
-    createPopup(vehicle)
-  );
-
-  marker.addTo(map);
-
-  markers[vehicleKey] =
-    marker;
+  markers.set(v.key, L.marker(position, { icon: markerBus }).bindPopup(popupHtml(v)).addTo(map));
 }
 
+function removeStaleMarkers(currentVehicles) {
+  const currentKeys = new Set(currentVehicles.map(v => v.key));
 
-// ============================================================
-// REMOVE OLD MARKERS
-// ============================================================
-
-function removeOldMarkers(currentVehicles) {
-
-  const currentKeys =
-    new Set();
-
-  currentVehicles.forEach(vehicle => {
-
-    const key =
-      `${vehicle.operator}-${vehicle.vehicleId}`;
-
-    currentKeys.add(key);
-  });
-
-
-  Object.keys(markers).forEach(key => {
-
+  for (const [key, marker] of markers) {
     if (!currentKeys.has(key)) {
-
-      map.removeLayer(
-        markers[key]
-      );
-
-      delete markers[key];
+      marker.remove();
+      markers.delete(key);
     }
-  });
+  }
 }
 
 
 // ============================================================
-// DISPLAY VEHICLES
+// Filters
+//
+// The <select> elements are the single source of truth; nothing is
+// mirrored into separate variables.
 // ============================================================
 
-function displayVehicles() {
+function readFilters() {
+  const route = $("routeFilter").value;
 
-  const filteredVehicles =
-    allVehicles.filter(vehicle => {
-
-      // ------------------------------------------------------
-      // Operator filter
-      // ------------------------------------------------------
-
-      if (
-        selectedOperator !== "all" &&
-        vehicle.operator !== selectedOperator
-      ) {
-
-        return false;
-      }
-
-
-      // ------------------------------------------------------
-      // Route filter
-      // ------------------------------------------------------
-
-      if (
-        selectedRoute !== "all" &&
-        String(vehicle.routeId) !==
-        String(selectedRoute)
-      ) {
-
-        return false;
-      }
-
-
-      // ------------------------------------------------------
-      // Model filter
-      // ------------------------------------------------------
-
-      if (
-        selectedModel !== "all" &&
-        vehicle.model !== selectedModel
-      ) {
-
-        return false;
-      }
-
-      // ------------------------------------------------------
-      // Unknown plate / model filter
-      // ------------------------------------------------------
-
-      if (selectedUnknown === "any" &&
-        !vehicle.unknownPlate && !vehicle.unknownModel) {
-        return false;
-      }
-
-      if (selectedUnknown === "plate" && !vehicle.unknownPlate) {
-        return false;
-      }
-
-      if (selectedUnknown === "model" && !vehicle.unknownModel) {
-        return false;
-      }
-
-
-      return true;
-    });
-
-
-  removeOldMarkers(
-    filteredVehicles
-  );
-
-
-  filteredVehicles.forEach(vehicle => {
-
-    updateMarker(vehicle);
-
-  });
-
-
-  updateStatus(
-    filteredVehicles
-  );
+  return {
+    operator: $("operatorFilter").value,
+    route: route === "all" ? null : route.split("|"), // [operator, routeId]
+    model: $("modelFilter").value,
+    unknown: $("unknownFilter").value
+  };
 }
 
+function matches(v, f) {
+  if (f.operator !== "all" && v.operator !== f.operator) return false;
+  if (f.route && v.routeKey !== f.route.join("|")) return false;
+  if (f.model !== "all" && v.model !== f.model) return false;
 
-// ============================================================
-// UPDATE MODEL FILTER
-// ============================================================
+  if (f.unknown === "plate") return v.unknownPlate;
+  if (f.unknown === "model") return v.unknownModel;
+  if (f.unknown === "any") return v.unknownPlate || v.unknownModel;
+
+  return true;
+}
+
+// Rebuilds a <select> only when its options actually changed, so an open
+// dropdown isn't closed by the 10 second refresh. Keeps the selection if it
+// still exists, otherwise falls back to "all".
+function fillSelect(select, placeholder, options) {
+  const signature = JSON.stringify(options);
+  if (select.dataset.signature === signature) return;
+
+  const previous = select.value;
+
+  select.replaceChildren(
+    new Option(placeholder, "all"),
+    ...options.map(o => new Option(o.label, o.value))
+  );
+  select.dataset.signature = signature;
+  select.value = options.some(o => o.value === previous) ? previous : "all";
+}
+
+const byLabel = (a, b) => naturalCompare(a.label, b.label);
+
+function vehiclesForSelectedOperator() {
+  const operator = $("operatorFilter").value;
+  return operator === "all" ? allVehicles : allVehicles.filter(v => v.operator === operator);
+}
 
 function updateModelFilter() {
+  const models = new Set();
 
-  const modelFilter =
-    document.getElementById(
-      "modelFilter"
-    );
-
-  document
-    .getElementById("unknownFilter")
-    .addEventListener("change", event => {
-      selectedUnknown = event.target.value;
-      displayVehicles();
-    });
-
-  if (!modelFilter) {
-    return;
+  for (const v of vehiclesForSelectedOperator()) {
+    if (!v.unknownModel) models.add(v.model);
   }
 
-  const previousValue =
-    modelFilter.value;
-
-
-  modelFilter.innerHTML = `
-
-    <option value="all">
-      All models
-    </option>
-
-  `;
-
-
-  const models =
-    new Set();
-
-
-  allVehicles.forEach(vehicle => {
-
-    // If an operator is selected,
-    // only show models from that operator.
-
-    if (
-      selectedOperator !== "all" &&
-      vehicle.operator !== selectedOperator
-    ) {
-
-      return;
-    }
-
-
-    if (
-      vehicle.model &&
-      vehicle.model !== "Unknown"
-    ) {
-
-      models.add(
-        vehicle.model
-      );
-    }
-
-  });
-
-
-  const sortedModels =
-    [...models].sort(
-      (a, b) =>
-        String(a).localeCompare(
-          String(b),
-          undefined,
-          {
-            numeric: true
-          }
-        )
-    );
-
-
-  sortedModels.forEach(model => {
-
-    const option =
-      document.createElement(
-        "option"
-      );
-
-    option.value =
-      model;
-
-    option.textContent =
-      model;
-
-    modelFilter.appendChild(
-      option
-    );
-
-  });
-
-
-  // Restore previous selection
-  // if it is still available.
-
-  if (
-    [...modelFilter.options]
-      .some(
-        option =>
-          option.value ===
-          previousValue
-      )
-  ) {
-
-    modelFilter.value =
-      previousValue;
-
-  } else {
-
-    modelFilter.value =
-      "all";
-
-    selectedModel =
-      "all";
-  }
+  fillSelect(
+    $("modelFilter"),
+    "All models",
+    [...models].map(m => ({ value: m, label: m })).sort(byLabel)
+  );
 }
-
-
-// ============================================================
-// UPDATE ROUTE FILTER
-// ============================================================
 
 function updateRouteFilter() {
+  const routes = new Map();
 
-  const routeFilter =
-    document.getElementById(
-      "routeFilter"
-    );
+  for (const v of vehiclesForSelectedOperator()) {
+    if (v.routeId == null) continue;
 
-  const previousValue =
-    routeFilter.value;
-
-
-  routeFilter.innerHTML = `
-
-    <option value="all">
-      All routes
-    </option>
-
-  `;
-
-
-  const routes =
-    new Map();
-
-
-  allVehicles.forEach(vehicle => {
-
-    if (
-      selectedOperator !== "all" &&
-      vehicle.operator !== selectedOperator
-    ) {
-
-      return;
-    }
-
-
-    if (
-      vehicle.routeId === null ||
-      vehicle.routeId === undefined
-    ) {
-
-      return;
-    }
-
-
-    const key =
-      `${vehicle.operator}-${vehicle.routeId}`;
-
-
-    if (!routes.has(key)) {
-
-      routes.set(
-        key,
-        {
-          operator:
-            vehicle.operator,
-
-          routeId:
-            vehicle.routeId,
-
-          indicative:
-            vehicle.routeIndicative
-        }
-      );
-    }
-
-  });
-
-
-  const sortedRoutes =
-    [...routes.values()]
-      .sort((a, b) => {
-
-        return String(a.indicative)
-          .localeCompare(
-            String(b.indicative),
-            undefined,
-            {
-              numeric: true
-            }
-          );
-
-      });
-
-
-  sortedRoutes.forEach(route => {
-
-    const option =
-      document.createElement(
-        "option"
-      );
-
-
-    option.value =
-      `${route.operator}|${route.routeId}`;
-
-
-    option.textContent =
-      `${route.indicative} (${route.operator === "transmixt"
-        ? "Transmixt"
-        : "Ani Tour"
-      })`;
-
-
-    routeFilter.appendChild(
-      option
-    );
-
-  });
-
-
-  // Restore selection if possible
-
-  if (
-    [...routeFilter.options]
-      .some(
-        option =>
-          option.value ===
-          previousValue
-      )
-  ) {
-
-    routeFilter.value =
-      previousValue;
-
-  } else {
-
-    routeFilter.value =
-      "all";
-
-    selectedRoute =
-      "all";
+    routes.set(v.routeKey, {
+      value: v.routeKey,
+      label: `${v.routeIndicative} (${OPERATOR_NAMES[v.operator] ?? v.operator})`
+    });
   }
+
+  fillSelect($("routeFilter"), "All routes", [...routes.values()].sort(byLabel));
 }
 
 
 // ============================================================
-// STATUS
+// Display
 // ============================================================
 
-function updateStatus(vehicles) {
+function updateStatus(count) {
+  const warning = lastWarning ? ` • Could not load: ${lastWarning}` : "";
+  $("status").textContent =
+    `${count} buses shown • Last update: ${new Date().toLocaleTimeString()}${warning}`;
+}
 
-  const status =
-    document.getElementById(
-      "status"
-    );
+function displayVehicles() {
+  const filters = readFilters();
+  const shown = allVehicles.filter(v => matches(v, filters));
 
-  const time =
-    new Date()
-      .toLocaleTimeString();
-
-
-  status.textContent =
-    `${vehicles.length} buses shown • Last update: ${time}`;
+  removeStaleMarkers(shown);
+  shown.forEach(upsertMarker);
+  updateStatus(shown.length);
 }
 
 
 // ============================================================
-// UPDATE EVERYTHING
+// Refresh loop
 // ============================================================
 
 async function updateVehicles() {
-
-  const status =
-    document.getElementById(
-      "status"
-    );
-
-
-  status.textContent =
-    "Updating...";
-
+  if (isRefreshing) return;
+  isRefreshing = true;
+  $("status").textContent = "Updating...";
 
   try {
+    const { buses, failed } = await fetchAllVehicles();
 
-    allVehicles =
-      await fetchVehicles();
+    if (failed.length === API_URLS.length) {
+      // Every API failed: keep what is on the map instead of wiping it.
+      $("status").textContent = "Could not load any operator. Showing the last known positions.";
+      return;
+    }
 
+    allVehicles = buses.map(bus => enrichVehicle(bus, ctx));
+    lastWarning = failed.join(", ");
 
-    allVehicles =
-      allVehicles.map(
-        normalizeVehicle
-      );
-
+    for (const v of allVehicles) {
+      const warnKey = `${v.operator}:${v.routeId}`;
+      if (!v.routeKnown && !warnedRoutes.has(warnKey)) {
+        warnedRoutes.add(warnKey);
+        console.warn("Route not found in routes.json:", v.operator, v.routeId);
+      }
+    }
 
     updateModelFilter();
-
     updateRouteFilter();
-
     displayVehicles();
-
-
-    console.log(
-      "Vehicles:",
-      allVehicles
-    );
-
-
   } catch (error) {
-
     console.error(error);
-
-    status.textContent =
-      `Error updating buses: ${error.message}`;
+    $("status").textContent = `Error updating buses: ${error.message}`;
+  } finally {
+    isRefreshing = false;
   }
+}
+
+// setTimeout chain instead of setInterval: a slow response can't stack up
+// requests, and nothing is fetched while the tab is in the background.
+async function refreshLoop() {
+  clearTimeout(refreshTimer);
+  if (!document.hidden) await updateVehicles();
+  refreshTimer = setTimeout(refreshLoop, REFRESH_MS);
 }
 
 
 // ============================================================
-// OPERATOR FILTER
+// Events
 // ============================================================
 
-document
-  .getElementById(
-    "operatorFilter"
-  )
-  .addEventListener(
-    "change",
-    event => {
+$("operatorFilter").addEventListener("change", () => {
+  updateModelFilter();
+  updateRouteFilter();
+  displayVehicles();
+});
 
-      selectedOperator =
-        event.target.value;
+$("routeFilter").addEventListener("change", () => {
+  const route = $("routeFilter").value;
 
+  // Picking a route also selects its operator
+  if (route !== "all") {
+    $("operatorFilter").value = route.split("|")[0];
+    updateModelFilter();
+  }
 
-      // Changing operator resets route
-      selectedRoute =
-        "all";
+  displayVehicles();
+});
 
+$("modelFilter").addEventListener("change", displayVehicles);
+$("unknownFilter").addEventListener("change", displayVehicles);
+$("refreshButton").addEventListener("click", refreshLoop);
 
-      // Changing operator also refreshes
-      // the available models.
-
-      updateModelFilter();
-
-      updateRouteFilter();
-
-
-      displayVehicles();
-    }
-  );
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) refreshLoop();
+});
 
 
 // ============================================================
-// ROUTE FILTER
+// Start
 // ============================================================
 
-document
-  .getElementById(
-    "routeFilter"
-  )
-  .addEventListener(
-    "change",
-    event => {
-
-      const value =
-        event.target.value;
-
-
-      if (value === "all") {
-
-        selectedRoute =
-          "all";
-
-      } else {
-
-        // Format:
-        // operator|routeId
-
-        const [
-          operator,
-          routeId
-        ] =
-          value.split("|");
-
-
-        // Make sure the selected operator
-        // matches the selected route.
-
-        selectedOperator =
-          operator;
-
-
-        document
-          .getElementById(
-            "operatorFilter"
-          )
-          .value =
-          operator;
-
-
-        selectedRoute =
-          routeId;
-
-
-        // Refresh available models
-        // for the selected operator.
-
-        updateModelFilter();
-      }
-
-
-      displayVehicles();
-    }
-  );
-
-
-// ============================================================
-// MODEL FILTER
-// ============================================================
-
-document
-  .getElementById(
-    "modelFilter"
-  )
-  .addEventListener(
-    "change",
-    event => {
-
-      selectedModel =
-        event.target.value;
-
-
-      displayVehicles();
-    }
-  );
-
-
-// ============================================================
-// MANUAL REFRESH
-// ============================================================
-
-document
-  .getElementById(
-    "refreshButton"
-  )
-  .addEventListener(
-    "click",
-    updateVehicles
-  );
-
-
-// ============================================================
-// START APPLICATION
-// ============================================================
-
-async function startApp() {
-
+(async function startApp() {
   try {
+    $("status").textContent = "Loading local data...";
+    const [local, stopData] = await Promise.all([loadLocalData(), fetchStops()]);
+    Object.assign(ctx, local, stopData);
 
-    document
-      .getElementById(
-        "status"
-      )
-      .textContent =
-      "Loading local data...";
-
-
-    await loadLocalData();
-
-
-    await loadStops();
-
-
-    document
-      .getElementById(
-        "status"
-      )
-      .textContent =
-      "Loading buses...";
-
-
-    await updateVehicles();
-
-
-    // Refresh every 10 seconds
-
-    setInterval(
-      updateVehicles,
-      10000
-    );
-
-
+    $("status").textContent = "Loading buses...";
+    await refreshLoop();
   } catch (error) {
-
     console.error(error);
-
-
-    document
-      .getElementById(
-        "status"
-      )
-      .textContent =
-      `Startup error: ${error.message}`;
+    $("status").textContent = `Startup error: ${error.message}`;
   }
-}
-
-
-startApp();
-
+})();

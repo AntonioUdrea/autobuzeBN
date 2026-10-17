@@ -1,21 +1,27 @@
-const fs = require('fs');
-const { execSync } = require('child_process');
+/*
+ * check-buses.js: runs from GitHub Actions every ~15 minutes.
+ *
+ * One run does, in order:
+ *   1. Read every data file first (so a corrupt file stops the run BEFORE anything is sent or changed).
+ *   2. Fetch the live vehicles and stops from both operators.
+ *   3. Record every vehicle in the detailed history (data/history/YYYY-MM.json).
+ *   4. Update data/last-seen.json.
+ *   5. Send Discord alerts for rare vehicles / vehicles on an unusual route.
+ *   6. Write the files and push them to git.
+ */
+const fs = require("fs");
+const path = require("path");
+const { execFileSync } = require("child_process");
 
-const API_URLS = [
-  {
-    operator: "transmixt",
-    name: "Transmixt",
-    url: "https://app.bistrita-transport.com/api/v1/0697fb4a-6530-4bf2-a143-98225b196a32/transport/planner/vehicles"
-  },
-  {
-    operator: "ani-tour",
-    name: "Ani Tour",
-    url: "https://www.telelink.city/api/v1/a5f27685-3239-4aa9-9105-48b19a9bb2cc/transport/planner/vehicles"
-  }
-];
+const Common = require("./common.js");
+const store = require("./history-store.js");
 
-// Rare vehicles.
-// Format: "operator:vehicleId"
+
+// ============================================================
+// Settings
+// ============================================================
+
+// Rare vehicles. Format: "operator:vehicleId" (a licence plate also works)
 const RARE_VEHICLES = new Set([
   "transmixt:41",
   "transmixt:53",
@@ -26,331 +32,198 @@ const RARE_VEHICLES = new Set([
   "transmixt:145"
 ]);
 
-// Leave [] to allow all routes.
+// Route IDs (not line numbers) that rare-vehicle alerts apply to. [] = all routes.
 const TARGET_ROUTES = [];
 
-const STATE_FILE = 'data/rare-bus-state.json';
-const LAST_SEEN_FILE = 'data/last-seen.json';
+// Checks outside these hours are skipped (Bucharest time)
+const ACTIVE_FROM = "05:00";
+const ACTIVE_UNTIL = "22:30";
+
+const STATE_FILE = "data/rare-bus-state.json";
+const LAST_SEEN_FILE = "data/last-seen.json";
 
 
 // ============================================================
-// Discord
+// Files
+// ============================================================
+
+/** Missing file -> fallback. Corrupt file -> throws (never silently start from empty and overwrite). */
+function readJson(file, fallback) {
+  return fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : fallback;
+}
+
+function writeJson(file, data) {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const tmp = `${file}.tmp`;
+  fs.writeFileSync(tmp, JSON.stringify(data, null, 2) + "\n", "utf8");
+  fs.renameSync(tmp, file);
+}
+
+/** vehicles.json / routes.json are nice to have: without them we still run, just with less detail. */
+function loadMeta() {
+  try {
+    return {
+      vehicles: readJson("data/vehicles.json", {}),
+      routes: readJson("data/routes.json", {})
+    };
+  } catch (err) {
+    console.warn("Could not load vehicles.json / routes.json:", err.message);
+    return { vehicles: {}, routes: {} };
+  }
+}
+
+
+// ============================================================
+// Alert state (data/rare-bus-state.json)
+//
+// { "date": "2026-10-15",
+//   "buses": { "transmixt:53": { "route": "1", "rare": true, "unusual": false } } }
+//
+// Only buses that triggered a rare/unusual alert are stored, and the state
+// resets every day. It remembers which route we last alerted about, so a bus
+// only alerts again when it changes route.
+// ============================================================
+
+function loadAlertState(date) {
+  try {
+    const saved = readJson(STATE_FILE, null);
+    if (saved?.date === date) return saved.buses ?? {};
+  } catch (err) {
+    console.warn("Could not read alert state, starting fresh:", err.message);
+  }
+  return {};
+}
+
+// Older state files stored just the route string instead of an object
+const routeOf = entry => (entry == null ? undefined : String(entry.route ?? entry));
+
+
+// ============================================================
+// Duplicates: the API sometimes lists the same vehicle more than once
+// ============================================================
+
+function resolveDuplicates(buses, previousRouteOf) {
+  const groups = new Map();
+
+  for (const bus of buses) {
+    if (!groups.has(bus.key)) groups.set(bus.key, []);
+    groups.get(bus.key).push(bus);
+  }
+
+  return [...groups.entries()].map(([key, entries]) => {
+    if (entries.length === 1) return entries[0];
+
+    console.log(`Duplicate API entries for ${key}: ${entries.map(e => e.routeIndicative).join(", ")}`);
+
+    // Prefer an entry on a different route than last time, so route changes are noticed
+    const previous = previousRouteOf(key);
+    const changed = previous !== undefined && entries.find(e => e.routeIndicative !== previous);
+    return changed || entries[0];
+  });
+}
+
+
+// ============================================================
+// Discord alerts
 // ============================================================
 
 async function sendDiscord(webhookUrl, content) {
   try {
     const response = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        content
-      })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content }),
+      signal: AbortSignal.timeout(8000)
     });
-
-    if (!response.ok) {
-      throw new Error(`Discord HTTP ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Discord HTTP ${response.status}`);
 
     console.log(`Discord notification sent: ${content}`);
-
     return true;
-
   } catch (err) {
-    console.error(
-      `Failed to send Discord notification: ${err.message}`
-    );
-
+    console.error(`Failed to send Discord notification: ${err.message}`);
     return false;
   }
 }
 
-
-// ============================================================
-// Write state safely
-// ============================================================
-
-function writeStateFile(state) {
-  fs.mkdirSync('data', {
-    recursive: true
-  });
-
-  const temporaryFile =
-    `${STATE_FILE}.tmp`;
-
-  fs.writeFileSync(
-    temporaryFile,
-    JSON.stringify(state, null, 2) + '\n',
-    'utf8'
-  );
-
-  fs.renameSync(
-    temporaryFile,
-    STATE_FILE
-  );
-}
-
-
-// ============================================================
-// Last seen dates (date only, never reset)
-//
-// Format:
-// {
-//   "transmixt": { "8": { "date": "2026-10-13", "route": "10", "routes": ["10"] } },
-//   "ani-tour": { "3": { "date": "2026-10-12", "route": "633 Bistrița - Săsarm" } }
-// }
-// ============================================================
-
-function updateLastSeen(buses, localDate, routesMeta) {
-
-  let lastSeen = {};
-
-  try {
-
-    if (fs.existsSync(LAST_SEEN_FILE)) {
-
-      lastSeen = JSON.parse(
-        fs.readFileSync(
-          LAST_SEEN_FILE,
-          'utf8'
-        )
-      );
-    }
-
-  } catch (err) {
-
-    console.warn(
-      "Could not read last seen file:",
-      err.message
-    );
-  }
-
+/** Sends the alerts and returns the new alert state. */
+async function sendAlerts(buses, previousState, webhookUrl) {
+  // Start from ALL previous state, so a bus that briefly drops out of the API keeps its entry
+  const state = { ...previousState };
 
   for (const bus of buses) {
+    const isRare =
+      RARE_VEHICLES.has(bus.key) ||
+      (!bus.unknownPlate && RARE_VEHICLES.has(bus.licensePlate));
 
-    if (
-      bus.vehicleId === undefined ||
-      bus.vehicleId === null
-    ) {
-      continue;
+    const isTargetRoute =
+      TARGET_ROUTES.length === 0 || TARGET_ROUTES.includes(String(bus.routeId));
+
+    const isUnusual =
+      bus.assignedRoutes.length > 0 && !bus.assignedRoutes.map(String).includes(bus.routeIndicative);
+
+    const previousRoute = routeOf(previousState[bus.key]);
+    const routeChanged = previousRoute !== bus.routeIndicative; // also true when undefined
+
+    // One message at most, even if the bus is both rare and unusual
+    const shouldNotify = routeChanged && ((isRare && isTargetRoute) || isUnusual);
+
+    if (shouldNotify) {
+      const plate = bus.unknownPlate ? `Vehicle ${bus.id}` : bus.licensePlate;
+      const model = bus.unknownModel ? "Unknown Model" : bus.model;
+
+      const sent = await sendDiscord(webhookUrl, `${plate} (${model}) e pe linia ${bus.routeIndicative}`);
+
+      // Only move the state forward if Discord got it, so the next run retries
+      if (!sent) continue;
     }
 
-    lastSeen[bus.operator] ??= {};
-
-    const routeInfo =
-      routesMeta[
-        bus.operator
-      ]?.[
-        String(bus.routeId)
-      ];
-
-    const route = String(
-      routeInfo?.indicative ??
-      bus.routeId
-    );
-
-    // Keep every route this vehicle ran today (for the daily history)
-    const previous =
-      lastSeen[bus.operator][
-        String(bus.vehicleId)
-      ];
-
-    const routes =
-      (
-        previous &&
-        typeof previous === 'object' &&
-        previous.date === localDate &&
-        Array.isArray(previous.routes)
-      )
-        ? previous.routes
-        : [];
-
-    if (!routes.includes(route)) {
-      routes.push(route);
+    if (isRare || isUnusual || previousState[bus.key]) {
+      state[bus.key] = { route: bus.routeIndicative, rare: isRare, unusual: isUnusual };
     }
-
-    lastSeen[bus.operator][
-      String(bus.vehicleId)
-    ] = {
-      date: localDate,
-      route,
-      routes
-    };
   }
 
-
-  fs.mkdirSync('data', {
-    recursive: true
-  });
-
-  const temporaryFile =
-    `${LAST_SEEN_FILE}.tmp`;
-
-  fs.writeFileSync(
-    temporaryFile,
-    JSON.stringify(lastSeen, null, 2) + '\n',
-    'utf8'
-  );
-
-  fs.renameSync(
-    temporaryFile,
-    LAST_SEEN_FILE
-  );
-
-  console.log(
-    `Last seen dates updated in ${LAST_SEEN_FILE}.`
-  );
+  return state;
 }
 
 
 // ============================================================
-// Commit + push state
+// Git
 // ============================================================
 
-function persistStateToGit() {
+const git = (...args) => execFileSync("git", args, { stdio: "inherit" });
+
+function hasStagedChanges(paths) {
   try {
+    execFileSync("git", ["diff", "--cached", "--quiet", "--", ...paths]);
+    return false;  // exit code 0 = no differences
+  } catch {
+    return true;   // exit code 1 = there are differences
+  }
+}
 
-    execSync(
-      `git config user.name "github-actions[bot]"`,
-      {
-        stdio: 'inherit'
-      }
-    );
+function persistToGit(paths, message) {
+  git("config", "user.name", "github-actions[bot]");
+  git("config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com");
+  git("add", ...paths);
 
-    execSync(
-      `git config user.email "41898282+github-actions[bot]@users.noreply.github.com"`,
-      {
-        stdio: 'inherit'
-      }
-    );
+  if (!hasStagedChanges(paths)) {
+    console.log("Git reports no changes.");
+    return;
+  }
 
+  git("commit", "-m", message);
 
-    console.log(
-      "Fetching latest main..."
-    );
-
-    execSync(
-      `git fetch origin main`,
-      {
-        stdio: 'inherit'
-      }
-    );
-
-
-    execSync(
-      `git add ${STATE_FILE} ${LAST_SEEN_FILE}`,
-      {
-        stdio: 'inherit'
-      }
-    );
-
-
-    let hasChanges = false;
-
+  for (let attempt = 1; attempt <= 3; attempt++) {
     try {
-
-      execSync(
-        `git diff --cached --quiet -- ${STATE_FILE} ${LAST_SEEN_FILE}`
-      );
-
-      console.log(
-        "Git reports no change to bus state."
-      );
-
-    } catch {
-
-      hasChanges = true;
-
-      console.log(
-        "Git detected a change to bus state."
-      );
+      git("push", "origin", "HEAD:main");
+      console.log("Pushed to main.");
+      return;
+    } catch (err) {
+      if (attempt === 3) throw err;
+      console.log(`Push attempt ${attempt} failed, rebasing and retrying...`);
+      git("fetch", "origin", "main");
+      git("rebase", "origin/main");
     }
-
-
-    if (!hasChanges) {
-      return true;
-    }
-
-
-    execSync(
-      `git commit -m "Update bus alert state [skip ci]"`,
-      {
-        stdio: 'inherit'
-      }
-    );
-
-
-    for (
-      let attempt = 1;
-      attempt <= 3;
-      attempt++
-    ) {
-
-      try {
-
-        console.log(
-          `Pushing state to main (attempt ${attempt}/3)...`
-        );
-
-        execSync(
-          `git push origin HEAD:main`,
-          {
-            stdio: 'inherit'
-          }
-        );
-
-        console.log(
-          "Bus state successfully pushed."
-        );
-
-        return true;
-
-      } catch (err) {
-
-        console.error(
-          `Push attempt ${attempt} failed.`
-        );
-
-        if (attempt === 3) {
-          throw err;
-        }
-
-
-        console.log(
-          "Fetching latest main and rebasing..."
-        );
-
-        execSync(
-          `git fetch origin main`,
-          {
-            stdio: 'inherit'
-          }
-        );
-
-        execSync(
-          `git rebase origin/main`,
-          {
-            stdio: 'inherit'
-          }
-        );
-      }
-    }
-
-
-    return false;
-
-  } catch (err) {
-
-    console.error(
-      "CRITICAL: Failed to persist bus state."
-    );
-
-    console.error(
-      err.message
-    );
-
-    return false;
   }
 }
 
@@ -359,749 +232,82 @@ function persistStateToGit() {
 // Main
 // ============================================================
 
-async function run() {
+async function run(now = new Date()) {
+  const date = Common.bucharestDate(now);
+  const time = Common.bucharestTime(now);
+  const minutes = Common.toMinutes(time);
 
-  // ==========================================================
-  // Time guard
-  // ==========================================================
-
-  const now = new Date();
-
-  const timeString =
-    now.toLocaleString("en-GB", {
-      timeZone: "Europe/Bucharest",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false
-    });
-
-  const [hour, minute] =
-    timeString
-      .split(":")
-      .map(Number);
-
-  const currentMinutes =
-    hour * 60 + minute;
-
-  const startMinutes =
-    5 * 60;
-
-  const stopMinutes =
-    22 * 60 + 30;
-
-
-  if (
-    currentMinutes >= stopMinutes ||
-    currentMinutes < startMinutes
-  ) {
-
-    console.log(
-      `Skipping: Outside active bus hours (${timeString} Europe/Bucharest).`
-    );
-
+  if (minutes < Common.toMinutes(ACTIVE_FROM) || minutes >= Common.toMinutes(ACTIVE_UNTIL)) {
+    console.log(`Skipping: outside active bus hours (${time} Europe/Bucharest).`);
     return;
   }
 
-
-  // ==========================================================
-  // Local Bucharest date
-  // ==========================================================
-
-  const localDate =
-    new Intl.DateTimeFormat("en-CA", {
-      timeZone: "Europe/Bucharest",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    }).format(now);
-
-
-  console.log(
-    `Bus checker running at ${timeString} Europe/Bucharest (${localDate}).`
-  );
-
-
-  // ==========================================================
-  // Discord
-  // ==========================================================
-
-  const webhookUrl =
-    process.env.DISCORD_WEBHOOK_URL;
-
-
+  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) {
-
-    console.error(
-      "Missing DISCORD_WEBHOOK_URL environment variable."
-    );
-
+    console.error("Missing DISCORD_WEBHOOK_URL environment variable.");
     process.exit(1);
   }
 
+  console.log(`Bus checker running at ${time} Europe/Bucharest (${date}).`);
 
-  // ==========================================================
-  // Load metadata
-  // ==========================================================
+  // 1. Read everything first. If a file is corrupt this throws before anything is sent.
+  const { vehicles, routes } = loadMeta();
+  const alertState = loadAlertState(date);
+  const lastSeen = readJson(LAST_SEEN_FILE, {});
+  const month = store.monthOf(date);
+  const history = store.loadMonth(month);
 
-  let vehiclesMeta = {};
-  let routesMeta = {};
+  // 2. Fetch
+  const [{ buses, failed }, { stops, patterns }] = await Promise.all([
+    Common.fetchAllVehicles(),
+    Common.fetchStops()
+  ]);
 
-
-  try {
-
-    if (
-      fs.existsSync(
-        'data/vehicles.json'
-      )
-    ) {
-
-      vehiclesMeta =
-        JSON.parse(
-          fs.readFileSync(
-            'data/vehicles.json',
-            'utf8'
-          )
-        );
-    }
-
-
-    if (
-      fs.existsSync(
-        'data/routes.json'
-      )
-    ) {
-
-      routesMeta =
-        JSON.parse(
-          fs.readFileSync(
-            'data/routes.json',
-            'utf8'
-          )
-        );
-    }
-
-  } catch (err) {
-
-    console.warn(
-      "Warning loading metadata:",
-      err.message
-    );
+  if (failed.length === Common.API_URLS.length) {
+    console.error("Every API failed. Nothing recorded this run.");
+    return;
   }
 
+  const ctx = { vehicles, routes, stops, patterns };
+  const enriched = buses
+    .filter(bus => bus.vehicleId != null)
+    .map(bus => Common.enrichVehicle(bus, ctx));
 
-  // ==========================================================
-  // Load previous state
-  //
-  // The state now contains EVERY bus that has triggered
-  // either a rare-bus or unusual-route alert.
-  //
-  // Example:
-  //
-  // {
-  //   "date": "2026-09-22",
-  //   "buses": {
-  //     "transmixt:53": {
-  //       "route": "1",
-  //       "rare": true,
-  //       "unusual": false
-  //     },
-  //     "transmixt:62": {
-  //       "route": "476",
-  //       "rare": false,
-  //       "unusual": true
-  //     }
-  //   }
-  // }
-  // ==========================================================
+  const current = resolveDuplicates(enriched, key => routeOf(alertState[key]));
+  console.log(`${current.length} vehicles running.`);
 
-  let previousState = {};
+  // 3 + 4. History and last seen
+  for (const bus of current) {
+    store.recordSighting(history, {
+      date,
+      time,
+      key: bus.key,
+      route: bus.routeIndicative,
+      destination: bus.destination === "Unknown" ? "" : bus.destination
+    });
 
-
-  if (
-    fs.existsSync(
-      STATE_FILE
-    )
-  ) {
-
-    try {
-
-      const savedState =
-        JSON.parse(
-          fs.readFileSync(
-            STATE_FILE,
-            'utf8'
-          )
-        );
-
-
-      if (
-        savedState.date === localDate
-      ) {
-
-        previousState =
-          savedState.buses ?? {};
-
-
-        console.log(
-          `Loaded bus alert state for ${localDate}.`
-        );
-
-
-        console.log(
-          `Previously stored buses: ${
-            Object.keys(previousState).length
-          }`
-        );
-
-      } else {
-
-        console.log(
-          `New day detected: ${
-            savedState.date ?? "none"
-          } -> ${localDate}.`
-        );
-
-        console.log(
-          "Resetting bus alert state."
-        );
-
-        previousState = {};
-      }
-
-    } catch (err) {
-
-      console.warn(
-        "Could not read bus alert state:",
-        err.message
-      );
-
-      previousState = {};
-    }
-
-  } else {
-
-    console.log(
-      "No bus alert state file exists yet."
-    );
+    (lastSeen[bus.operator] ??= {})[bus.id] = { date, time, route: bus.routeIndicative };
   }
 
+  // 5. Alerts
+  const newAlertState = await sendAlerts(current, alertState, webhookUrl);
 
-  // ==========================================================
-  // Fetch all buses
-  // ==========================================================
+  // 6. Write + push
+  store.saveMonth(month, history);
+  writeJson(LAST_SEEN_FILE, lastSeen);
+  writeJson(STATE_FILE, { date, buses: newAlertState });
 
-  const activeBuses = [];
+  persistToGit([STATE_FILE, LAST_SEEN_FILE, store.HISTORY_DIR], "Update bus data [skip ci]");
 
-
-  for (
-    const api of API_URLS
-  ) {
-
-    try {
-
-      const response =
-        await fetch(api.url);
-
-
-      if (!response.ok) {
-
-        console.error(
-          `Failed to fetch ${api.name}: HTTP ${response.status}`
-        );
-
-        continue;
-      }
-
-
-      const data =
-        await response.json();
-
-
-      if (
-        !Array.isArray(data)
-      ) {
-
-        console.error(
-          `${api.name} returned unexpected data.`
-        );
-
-        continue;
-      }
-
-
-      for (
-        const vehicle of data
-      ) {
-
-        activeBuses.push({
-          ...vehicle,
-          operator: api.operator,
-          operatorName: api.name
-        });
-      }
-
-    } catch (err) {
-
-      console.error(
-        `Failed to fetch from ${api.name}:`,
-        err.message
-      );
-    }
-  }
-
-
-  // ==========================================================
-  // Group API entries by vehicle ID
-  //
-  // This only groups duplicate API records belonging to the
-  // SAME vehicle ID.
-  //
-  // Different vehicle IDs remain completely independent.
-  // ==========================================================
-
-  const busesByKey =
-    new Map();
-
-
-  for (
-    const bus of activeBuses
-  ) {
-
-    const key =
-      `${bus.operator}:${bus.vehicleId}`;
-
-
-    if (
-      !busesByKey.has(key)
-    ) {
-
-      busesByKey.set(
-        key,
-        []
-      );
-    }
-
-
-    busesByKey
-      .get(key)
-      .push(bus);
-  }
-
-
-  // ==========================================================
-  // Resolve duplicate API entries
-  // ==========================================================
-
-  const resolvedBuses = [];
-
-
-  for (
-    const [key, entries]
-    of busesByKey.entries()
-  ) {
-
-    if (
-      entries.length === 1
-    ) {
-
-      resolvedBuses.push(
-        entries[0]
-      );
-
-      continue;
-    }
-
-
-    console.log(
-      `Duplicate API entries for ${key}: ${entries.length}`
-    );
-
-
-    const previousEntry =
-      previousState[key];
-
-
-    const previousRoute =
-      previousEntry?.route ??
-      previousEntry;
-
-
-    const candidates =
-      entries.map(
-        entry => {
-
-          const routeInfo =
-            routesMeta[
-              entry.operator
-            ]?.[
-              String(entry.routeId)
-            ];
-
-
-          return {
-            bus: entry,
-
-            route: String(
-              routeInfo?.indicative ??
-              entry.routeId
-            )
-          };
-        }
-      );
-
-
-    console.log(
-      `${key} API routes: ${
-        candidates
-          .map(
-            item => item.route
-          )
-          .join(', ')
-      }`
-    );
-
-
-    // If we already know this vehicle's previous route,
-    // prefer a candidate representing a route change.
-    if (
-      previousRoute !== undefined
-    ) {
-
-      const changed =
-        candidates.find(
-          candidate =>
-            candidate.route !==
-            String(previousRoute)
-        );
-
-
-      if (changed) {
-
-        console.log(
-          `${key}: selecting changed route ${changed.route}.`
-        );
-
-        resolvedBuses.push(
-          changed.bus
-        );
-
-        continue;
-      }
-    }
-
-
-    // Otherwise use the first API entry.
-    resolvedBuses.push(
-      entries[0]
-    );
-  }
-
-
-  // ==========================================================
-  // Record last seen date + route for every vehicle in the API
-  // ==========================================================
-
-  updateLastSeen(
-    resolvedBuses,
-    localDate,
-    routesMeta
-  );
-
-
-  // ==========================================================
-  // Start with ALL previous state.
-  //
-  // If a bus disappears temporarily from the API, its last
-  // known state remains here.
-  // ==========================================================
-
-  const currentState = {
-    ...previousState
-  };
-
-
-  // ==========================================================
-  // Process every resolved vehicle
-  // ==========================================================
-
-  for (
-    const bus of resolvedBuses
-  ) {
-
-    const key =
-      `${bus.operator}:${bus.vehicleId}`;
-
-
-    const vehicleInfo =
-      vehiclesMeta[
-        bus.operator
-      ]?.[
-        String(bus.vehicleId)
-      ];
-
-
-    const routeInfo =
-      routesMeta[
-        bus.operator
-      ]?.[
-        String(bus.routeId)
-      ];
-
-
-    const licensePlate =
-      vehicleInfo?.licensePlate ??
-      `Vehicle ${bus.vehicleId}`;
-
-
-    const model =
-      vehicleInfo?.model ??
-      "Unknown Model";
-
-
-    const routeIndicative =
-      routeInfo?.indicative ??
-      String(bus.routeId);
-
-
-    const assignedRoutes =
-      vehicleInfo?.assignedRoutes ??
-      [];
-
-
-    // --------------------------------------------------------
-    // Rare check
-    // --------------------------------------------------------
-
-    const isRare =
-      RARE_VEHICLES.has(key) ||
-      (
-        vehicleInfo?.licensePlate &&
-        RARE_VEHICLES.has(
-          vehicleInfo.licensePlate
-        )
-      );
-
-
-    const isTargetRoute =
-      TARGET_ROUTES.length === 0 ||
-      TARGET_ROUTES.includes(
-        String(bus.routeId)
-      );
-
-
-    // --------------------------------------------------------
-    // Unusual route check
-    // --------------------------------------------------------
-
-    const isUnusualRoute =
-      assignedRoutes.length > 0 &&
-      !assignedRoutes.includes(
-        routeIndicative
-      );
-
-
-    // --------------------------------------------------------
-    // Previous state for THIS vehicle
-    // --------------------------------------------------------
-
-    const previousEntry =
-      previousState[key];
-
-
-    const previousRoute =
-      previousEntry?.route ??
-      previousEntry;
-
-
-    const currentRoute =
-      String(routeIndicative);
-
-
-    // --------------------------------------------------------
-    // Determine whether a notification is needed
-    // --------------------------------------------------------
-
-    const rareAlertNeeded =
-      isRare &&
-      isTargetRoute &&
-      (
-        previousRoute === undefined ||
-        String(previousRoute) !== currentRoute
-      );
-
-
-    const unusualAlertNeeded =
-      isUnusualRoute &&
-      (
-        previousRoute === undefined ||
-        String(previousRoute) !== currentRoute
-      );
-
-
-    const shouldNotify =
-      rareAlertNeeded ||
-      unusualAlertNeeded;
-
-
-    // --------------------------------------------------------
-    // Log current classification
-    // --------------------------------------------------------
-
-    console.log(
-      `${key}: route ${currentRoute} | ` +
-      `rare=${isRare} | ` +
-      `unusual=${isUnusualRoute} | ` +
-      `rareAlert=${rareAlertNeeded} | ` +
-      `unusualAlert=${unusualAlertNeeded}`
-    );
-
-
-    // --------------------------------------------------------
-    // Send ONE notification only
-    //
-    // If a bus is both rare and unusual, it still gets only
-    // one Discord message.
-    // --------------------------------------------------------
-
-    if (
-      shouldNotify
-    ) {
-
-      const content =
-        `${licensePlate} (${model}) e pe linia ${routeIndicative}`;
-
-
-      const notificationSent =
-        await sendDiscord(
-          webhookUrl,
-          content
-        );
-
-
-      // ------------------------------------------------------
-      // Only advance the state if Discord successfully
-      // received the notification.
-      //
-      // If Discord failed, the old state remains so the next
-      // run can retry the alert.
-      // ------------------------------------------------------
-
-      if (
-        !notificationSent
-      ) {
-
-        console.error(
-          `${key}: notification failed; keeping previous state.`
-        );
-
-        continue;
-      }
-
-
-      console.log(
-        `${key}: alert sent successfully.`
-      );
-    }
-
-
-    // --------------------------------------------------------
-    // Store this vehicle independently.
-    //
-    // This happens for:
-    //
-    // 1. Rare buses
-    // 2. Unusual-route buses
-    //
-    // It does NOT store ordinary buses that triggered no alert.
-    // --------------------------------------------------------
-
-    if (
-      isRare ||
-      isUnusualRoute ||
-      previousState[key]
-    ) {
-
-      currentState[key] = {
-        route: currentRoute,
-        rare: isRare,
-        unusual: isUnusualRoute
-      };
-    }
-  }
-
-
-  // ==========================================================
-  // Final state
-  // ==========================================================
-
-  const finalState = {
-    date: localDate,
-    buses: currentState
-  };
-
-
-  // ==========================================================
-  // Show every stored vehicle
-  // ==========================================================
-
-  console.log(
-    `Storing ${
-      Object.keys(currentState).length
-    } bus(es) in state:`
-  );
-
-
-  for (
-    const [key, data]
-    of Object.entries(currentState)
-  ) {
-
-    console.log(
-      `  ${key} -> line ${data.route} | ` +
-      `rare=${data.rare} | ` +
-      `unusual=${data.unusual}`
-    );
-  }
-
-
-  // ==========================================================
-  // Write state
-  // ==========================================================
-
-  writeStateFile(
-    finalState
-  );
-
-
-  console.log(
-    `Bus alert state written to ${STATE_FILE}.`
-  );
-
-
-  // ==========================================================
-  // Persist state to GitHub
-  // ==========================================================
-
-  const pushSuccessful =
-    persistStateToGit();
-
-
-  if (
-    !pushSuccessful
-  ) {
-
-    console.error(
-      "ERROR: Bus alert state could not be persisted to GitHub."
-    );
-
-    process.exit(1);
-  }
-
-
-  console.log(
-    "Bus checker completed successfully."
-  );
+  console.log("Bus checker completed successfully.");
 }
 
 
-run();
+module.exports = { resolveDuplicates, sendAlerts, run };
+
+if (require.main === module) {
+  run().catch(err => {
+    console.error("Bus checker failed:", err);
+    process.exit(1);
+  });
+}
