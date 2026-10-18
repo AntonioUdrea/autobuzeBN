@@ -1,25 +1,4 @@
 {
-  "date": "2026-10-17",
-  "buses": {
-    "transmixt:166": {
-      "route": "387 Bistrița - Silivașu de Câmpie",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:77": {
-      "route": "13",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:156": {
-      "route": "16-Meci",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:66": {
-      "route": "16-Meci",
-      "rare": false,
-      "unusual": true
-    }
-  }
+  "date": "2026-10-18",
+  "buses": {}
 }
