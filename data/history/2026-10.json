@@ -421,5 +421,8 @@
     "transmixt:179": [{"route":"2"}],
     "transmixt:180": [{"route":"2"}],
     "transmixt:197": [{"route":"2"}]
+  },
+  "2026-10-18": {
+    "transmixt:154": [{"route":"7","from":"05:45","to":"05:45","polls":1,"directions":["110 SLATINITA"]}]
   }
 }
