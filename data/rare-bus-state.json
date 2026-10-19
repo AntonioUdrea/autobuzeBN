@@ -1,15 +1,4 @@
 {
-  "date": "2026-10-18",
-  "buses": {
-    "transmixt:77": {
-      "route": "13",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:110": {
-      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
-      "rare": false,
-      "unusual": true
-    }
-  }
+  "date": "2026-10-19",
+  "buses": {}
 }

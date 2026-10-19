@@ -444,5 +444,9 @@
     "transmixt:164": [{"route":"358 Bistrița - Fântânele","from":"14:45","to":"16:15","polls":6,"directions":["Fintinele - Bistrita"]}],
     "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:00","to":"06:45","polls":4,"directions":["Milas - Bistrita"]},{"route":"364 Bistrița - Milaș","from":"08:00","to":"08:45","polls":4,"directions":["Bistrita - Milas"]},{"route":"364 Bistrița - Milaș","from":"14:00","to":"17:00","polls":10,"directions":["Milas - Bistrita","Bistrita - Milas"]}],
     "transmixt:172": [{"route":"136 Bistrița - Molișet","from":"13:45","to":"15:15","polls":4,"directions":["MOLISET- BECLEAN- BISTRITA"]}]
+  },
+  "2026-10-19": {
+    "ani-tour:9": [{"route":"633 Bistrița - Săsarm","from":"05:00","to":"05:00","polls":1,"directions":["Bistrita Autogara/Rodnei"]}],
+    "transmixt:175": [{"route":"359 Bistrița - Țăgșor","from":"05:00","to":"05:00","polls":1,"directions":["Tagsor - Bistrita"]}]
   }
 }
