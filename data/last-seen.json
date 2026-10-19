@@ -363,8 +363,8 @@
       ]
     },
     "116": {
-      "date": "2026-10-18",
-      "time": "20:15",
+      "date": "2026-10-19",
+      "time": "05:15",
       "route": "502 Bistrița - Mureșenii Bârgăului"
     },
     "118": {
@@ -529,8 +529,8 @@
       ]
     },
     "164": {
-      "date": "2026-10-18",
-      "time": "16:15",
+      "date": "2026-10-19",
+      "time": "05:15",
       "route": "358 Bistrița - Fântânele"
     },
     "165": {
@@ -549,12 +549,9 @@
       ]
     },
     "167": {
-      "date": "2026-10-16",
-      "route": "363 Bistrița - Urmeniș",
-      "routes": [
-        "363 Bistrița - Urmeniș",
-        "366 Bistrița - Archiud"
-      ]
+      "date": "2026-10-19",
+      "time": "05:15",
+      "route": "363 Bistrița - Urmeniș"
     },
     "168": {
       "date": "2026-10-16",
@@ -598,7 +595,7 @@
     },
     "175": {
       "date": "2026-10-19",
-      "time": "05:00",
+      "time": "05:15",
       "route": "359 Bistrița - Țăgșor"
     },
     "176": {
@@ -697,7 +694,7 @@
     },
     "9": {
       "date": "2026-10-19",
-      "time": "05:00",
+      "time": "05:15",
       "route": "633 Bistrița - Săsarm"
     },
     "10": {
@@ -716,12 +713,9 @@
       ]
     },
     "12": {
-      "date": "2026-10-16",
-      "route": "632 Năsăud - Runcu Salvei",
-      "routes": [
-        "632 Năsăud - Runcu Salvei",
-        "727 Năsăud - Telcișor"
-      ]
+      "date": "2026-10-19",
+      "time": "05:15",
+      "route": "632 Năsăud - Runcu Salvei"
     },
     "13": {
       "date": "2026-10-16",
