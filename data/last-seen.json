@@ -549,12 +549,12 @@
     },
     "6": {
       "date": "2026-10-20",
-      "time": "13:45",
+      "time": "14:00",
       "route": "628A Năsăud - Săsarm - Beclean - Suplai"
     },
     "7": {
       "date": "2026-10-20",
-      "time": "13:45",
+      "time": "14:00",
       "route": "628 Bistrița - Suplai"
     },
     "9": {
@@ -583,8 +583,8 @@
       "route": "632 Năsăud - Runcu Salvei"
     },
     "15": {
-      "date": "2026-10-19",
-      "time": "15:15",
+      "date": "2026-10-20",
+      "time": "14:00",
       "route": "725 Năsăud - Telciu"
     },
     "20": {
@@ -634,7 +634,7 @@
     },
     "32": {
       "date": "2026-10-20",
-      "time": "13:45",
+      "time": "14:00",
       "route": "721 Bistrița - Dealul Ștefăniței"
     }
   }
