@@ -30,6 +30,11 @@
       "route": "329 Bistrița - Bretea",
       "rare": false,
       "unusual": false
+    },
+    "transmixt:123": {
+      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "rare": true,
+      "unusual": false
     }
   }
 }
