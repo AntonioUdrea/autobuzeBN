@@ -40,6 +40,11 @@
       "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:175": {
+      "route": "478 Bistrița - Satu Nou",
+      "rare": false,
+      "unusual": true
     }
   }
 }
