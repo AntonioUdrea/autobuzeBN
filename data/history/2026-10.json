@@ -759,17 +759,25 @@
     "transmixt:196": [{"route":"2","from":"06:00","to":"19:30","polls":50,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}]
   },
   "2026-10-22": {
-    "ani-tour:1": [{"route":"808 Bistrița - Lunca Ilvei","from":"05:30","to":"05:30","polls":1,"directions":["Bistrita Autogara/Rodnei"]}],
-    "ani-tour:9": [{"route":"633 Bistrița - Săsarm","from":"05:00","to":"05:30","polls":3,"directions":["Bistrita Autogara/Rodnei"]}],
+    "ani-tour:1": [{"route":"808 Bistrița - Lunca Ilvei","from":"05:30","to":"05:45","polls":2,"directions":["Bistrita Autogara/Rodnei"]}],
+    "ani-tour:9": [{"route":"633 Bistrița - Săsarm","from":"05:00","to":"05:45","polls":4,"directions":["Bistrita Autogara/Rodnei"]}],
     "ani-tour:12": [{"route":"632 Năsăud - Runcu Salvei","from":"05:00","to":"05:30","polls":3,"directions":["Runcu Salvei","Nasaud Autogara"]}],
-    "transmixt:40": [{"route":"2","from":"05:30","to":"05:30","polls":1,"directions":["28 VIISOARA"]}],
-    "transmixt:42": [{"route":"3","from":"05:30","to":"05:30","polls":1,"directions":["77 C R VIVU"]}],
+    "ani-tour:26": [{"route":"818 Năsăud - Parva","from":"05:45","to":"05:45","polls":1,"directions":["Parva"]}],
+    "transmixt:34": [{"route":"3","from":"05:45","to":"05:45","polls":1,"directions":["77 C R VIVU"]}],
+    "transmixt:40": [{"route":"2","from":"05:30","to":"05:45","polls":2,"directions":["28 VIISOARA"]}],
+    "transmixt:42": [{"route":"3","from":"05:30","to":"05:45","polls":2,"directions":["77 C R VIVU"]}],
+    "transmixt:53": [{"route":"3","from":"05:45","to":"05:45","polls":1,"directions":["69 SCHULLERWALD"]}],
     "transmixt:69": [{"route":"1","from":"05:30","to":"05:30","polls":1,"directions":["1 PASARELA"]}],
-    "transmixt:108": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"05:30","to":"05:30","polls":1,"directions":["RETUR"]}],
-    "transmixt:116": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:15","to":"05:30","polls":2,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
-    "transmixt:161": [{"route":"247 Beclean - Jimbor","from":"05:30","to":"05:30","polls":1,"directions":["Jimbor - Beclean"]}],
-    "transmixt:167": [{"route":"363 Bistrița - Urmeniș","from":"05:15","to":"05:30","polls":2,"directions":["Urmenis - Bistrita"]}],
-    "transmixt:168": [{"route":"367 Bistrița - Pinticu","from":"05:30","to":"05:30","polls":1,"directions":["Pinticu - Bistrita"]}],
-    "transmixt:175": [{"route":"359 Bistrița - Țăgșor","from":"05:00","to":"05:30","polls":3,"directions":["Tagsor - Bistrita"]}]
+    "transmixt:73": [{"route":"2","from":"05:45","to":"05:45","polls":1,"directions":["28 VIISOARA"]}],
+    "transmixt:75": [{"route":"1","from":"05:45","to":"05:45","polls":1,"directions":["12 STEFAN CEL MARE"]}],
+    "transmixt:107": [{"route":"493 Bistrița - Gledin","from":"05:45","to":"05:45","polls":1,"directions":["GLEDIN- BISTRITA"]}],
+    "transmixt:108": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"05:30","to":"05:45","polls":2,"directions":["RETUR"]}],
+    "transmixt:116": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:15","to":"05:45","polls":3,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
+    "transmixt:120": [{"route":"911 Bistrița - Șanț","from":"05:45","to":"05:45","polls":1,"directions":["SANT- BISTRITA"]}],
+    "transmixt:161": [{"route":"247 Beclean - Jimbor","from":"05:30","to":"05:45","polls":2,"directions":["Jimbor - Beclean"]}],
+    "transmixt:167": [{"route":"363 Bistrița - Urmeniș","from":"05:15","to":"05:45","polls":3,"directions":["Urmenis - Bistrita"]}],
+    "transmixt:168": [{"route":"367 Bistrița - Pinticu","from":"05:30","to":"05:45","polls":2,"directions":["Pinticu - Bistrita"]}],
+    "transmixt:175": [{"route":"359 Bistrița - Țăgșor","from":"05:00","to":"05:45","polls":4,"directions":["Tagsor - Bistrita"]}],
+    "transmixt:176": [{"route":"329 Bistrița - Bretea","from":"05:45","to":"05:45","polls":1,"directions":["Bretea - Bistrita"]}]
   }
 }
