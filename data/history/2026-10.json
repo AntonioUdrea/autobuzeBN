@@ -1,7 +1,17 @@
-"2026-10-02": {
-    "transmixt:41": [{"route":"5","from":"06:15","to":"07:30","polls":1,"directions":["(doar cand lucreaza Rombat)","77 C R VIVU"]}
-},
 {
+"2026-10-02": {
+        "transmixt:41": [
+            {
+                "route": "5",
+                "from": "06:15",
+                "to": "07:30",
+                "polls": 1,
+                "directions": [
+                    "(doar cand lucreaza Rombat)",
+                    "77 C R VIVU"
+                ]
+            }]},
+
   "2026-10-13": {
     "ani-tour:1": [{"route":"615 Bistrița - Năsăud"},{"route":"808 Bistrița - Lunca Ilvei"}],
     "ani-tour:3": [{"route":"615 Bistrița - Năsăud"}],
