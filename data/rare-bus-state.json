@@ -40,6 +40,11 @@
       "route": "359 Bistrița - Țăgșor",
       "rare": false,
       "unusual": false
+    },
+    "transmixt:133": {
+      "route": "6",
+      "rare": true,
+      "unusual": false
     }
   }
 }
