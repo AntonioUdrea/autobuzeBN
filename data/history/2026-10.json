@@ -10,7 +10,18 @@
                     "(doar cand lucreaza Rombat)",
                     "77 C R VIVU"
                 ]
+            }],
+        "transmixt:193": [
+            {
+                "route": "2",
+                "from": "08:00",
+                "to": "20:00",
+                "polls": 1,
+                "directions": [
+                    "28 VIISOARA","107 DR SLATINITEI","1 PASARELA","53 AVICOLA"
+                ]
             }]},
+},
 
   "2026-10-13": {
     "ani-tour:1": [{"route":"615 Bistrița - Năsăud"},{"route":"808 Bistrița - Lunca Ilvei"}],
