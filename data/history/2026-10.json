@@ -757,5 +757,10 @@
     "transmixt:184": [{"route":"2","from":"06:15","to":"22:15","polls":55,"directions":["1 PASARELA","107 DR SLATINITEI","28 VIISOARA"]}],
     "transmixt:187": [{"route":"2","from":"06:00","to":"20:15","polls":50,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA","53 AVICOLA"]}],
     "transmixt:196": [{"route":"2","from":"06:00","to":"19:30","polls":50,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}]
+  },
+  "2026-10-22": {
+    "ani-tour:9": [{"route":"633 Bistrița - Săsarm","from":"05:00","to":"05:00","polls":1,"directions":["Bistrita Autogara/Rodnei"]}],
+    "ani-tour:12": [{"route":"632 Năsăud - Runcu Salvei","from":"05:00","to":"05:00","polls":1,"directions":["Runcu Salvei"]}],
+    "transmixt:175": [{"route":"359 Bistrița - Țăgșor","from":"05:00","to":"05:00","polls":1,"directions":["Tagsor - Bistrita"]}]
   }
 }
