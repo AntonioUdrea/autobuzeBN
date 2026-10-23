@@ -32,14 +32,14 @@
       "unusual": false
     },
     "transmixt:84": {
-      "route": "16",
+      "route": "13A",
       "rare": false,
       "unusual": true
     },
     "transmixt:170": {
-      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "route": "354 Bistrița - Caila",
       "rare": false,
-      "unusual": true
+      "unusual": false
     }
   }
 }
