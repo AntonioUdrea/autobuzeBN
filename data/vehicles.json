@@ -172,6 +172,11 @@
       "model": "VW Crafter",
       "assignedRoutes": ["18","14","16"]
     },
+    "84": {
+      "licensePlate": "BN 72 TNR",
+      "model": "VW Crafter",
+      "assignedRoutes": ["2"]
+    },
     "86": {
       "licensePlate": "BN 71 ECO",
       "model": "SOR EBN 9,5"
