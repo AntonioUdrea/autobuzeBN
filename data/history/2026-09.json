@@ -20,5 +20,18 @@
   },
   "2026-09-05": {
     "transmixt:53": [{"route":"3"}]
-  }
+  },
+  {
+"2026-09-18": {
+        "transmixt:41": [
+            {
+                "route": "18",
+                "from": "08:00",
+                "to": "19:30",
+                "polls": 1,
+                "directions": [
+                    "84 AUTOGARA",
+                    "221 HEIDENFELD"
+                ]
+            }]}
 }
