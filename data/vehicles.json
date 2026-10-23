@@ -11,14 +11,22 @@
       ,
       "assignedRoutes": ["10"]
     },
+    "30": {
+      "licensePlate": "BN 35 TMX",
+      "model": "Mercedes-Benz Citaro",
+    },
+    "31": {
+      "licensePlate": "BN 56 TMX",
+      "model": "Mercedes-Benz Citaro",
+    },
     "34": {
       "licensePlate": "BN 38 TMX",
       "model": "Guleryuz Ecoline 10",
       "assignedRoutes": ["3"]
     },
     "36": {
-      "licensePlate": "Unknown",
-      "model": "Mercedes-Benz Citaro G"
+      "licensePlate": "BN 31 TMX",
+      "model": "Mercedes-Benz Citaro Facelift G"
     },
     "37": {
       "licensePlate": "BN 54 TMX",
