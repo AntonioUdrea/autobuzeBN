@@ -1,14 +1,24 @@
 {
-"2026-09-18": {
-        "transmixt:41": [
-            {
-                "route": "18",
-                "from": "08:00",
-                "to": "19:30",
-                "polls": 1,
-                "directions": [
-                    "84 AUTOGARA",
-                    "221 HEIDENFELD"
-                ]
-            }]}
+  "2026-09-01": {
+    "transmixt:53": [{"route":"3"}],
+    "transmixt:145": [{"route":"8"}],
+    "transmixt:62": [{"route":"13"}],
+    "transmixt:43": [{"route":"10"}]
+  },
+  "2026-09-02": {
+    "transmixt:133": [{"route":"6"}],
+    "transmixt:145": [{"route":"8"}],
+    "transmixt:69": [{"route":"3"}],
+    "transmixt:62": [{"route":"10"}]
+  },
+  "2026-09-03": {
+    "transmixt:145": [{"route":"8"}],
+    "transmixt:53": [{"route":"3"}]
+  },
+  "2026-09-04": {
+    "transmixt:145": [{"route":"8"}]
+  },
+  "2026-09-05": {
+    "transmixt:53": [{"route":"3"}]
+  }
 }

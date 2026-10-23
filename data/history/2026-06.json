@@ -1,0 +1,90 @@
+{
+  "2026-06-01": {
+    "transmixt:74": [{"route":"1"}]
+  },
+  "2026-06-02": {
+    "transmixt:47": [{"route":"13"}],
+    "transmixt:145": [{"route":"8"}],
+    "transmixt:62": [{"route":"9"}],
+    "transmixt:83": [{"route":"13A"}]
+  },
+  "2026-06-05": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:47": [{"route":"18"}],
+    "transmixt:75": [{"route":"1"}]
+  },
+  "2026-06-06": {
+    "transmixt:75": [{"route":"1"}]
+  },
+  "2026-06-08": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:63": [{"route":"5"}],
+    "transmixt:47": [{"route":"18"}]
+  },
+  "2026-06-09": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:47": [{"route":"18"}]
+  },
+  "2026-06-10": {
+    "transmixt:47": [{"route":"18"}],
+    "transmixt:62": [{"route":"9"}]
+  },
+  "2026-06-11": {
+    "transmixt:47": [{"route":"18"}]
+  },
+  "2026-06-12": {
+    "transmixt:53": [{"route":"2"}],
+    "transmixt:47": [{"route":"13"}],
+    "transmixt:62": [{"route":"5"}]
+  },
+  "2026-06-15": {
+    "transmixt:62": [{"route":"2"},{"route":"8"}],
+    "transmixt:53": [{"route":"3"}],
+    "transmixt:47": [{"route":"9"}],
+    "transmixt:40": [{"route":"2"}]
+  },
+  "2026-06-16": {
+    "transmixt:62": [{"route":"8"}]
+  },
+  "2026-06-18": {
+    "transmixt:133": [{"route":"6"}],
+    "transmixt:62": [{"route":"8"}]
+  },
+  "2026-06-21": {
+    "transmixt:74": [{"route":"1"}]
+  },
+  "2026-06-22": {
+    "transmixt:62": [{"route":"13"}]
+  },
+  "2026-06-23": {
+    "transmixt:133": [{"route":"7"}],
+    "transmixt:83": [{"route":"18"}],
+    "transmixt:40": [{"route":"2"}]
+  },
+  "2026-06-24": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:62": [{"route":"13"}]
+  },
+  "2026-06-25": {
+    "transmixt:62": [{"route":"13"}],
+    "transmixt:83": [{"route":"18"}],
+    "transmixt:77": [{"route":"16"}],
+    "transmixt:142": [{"route":"2"}]
+  },
+  "2026-06-26": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:83": [{"route":"18"}],
+    "transmixt:62": [{"route":"13"}]
+  },
+  "2026-06-29": {
+    "transmixt:53": [{"route":"2"}],
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:145": [{"route":"8"}],
+    "transmixt:62": [{"route":"13"}]
+  },
+  "2026-06-30": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:62": [{"route":"13"}],
+    "transmixt:145": [{"route":"8"}]
+  }
+}
