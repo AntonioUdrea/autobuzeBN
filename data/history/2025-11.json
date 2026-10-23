@@ -1,0 +1,83 @@
+{
+  "2025-11-03": {
+    "transmixt:47": [{"route":"7"}],
+    "transmixt:75": [{"route":"3"}],
+    "transmixt:40": [{"route":"1"}]
+  },
+  "2025-11-04": {
+    "transmixt:133": [{"route":"3"}],
+    "transmixt:40": [{"route":"2"}]
+  },
+  "2025-11-05": {
+    "transmixt:133": [{"route":"2"}]
+  },
+  "2025-11-06": {
+    "transmixt:40": [{"route":"2"}]
+  },
+  "2025-11-07": {
+    "transmixt:40": [{"route":"1"}],
+    "transmixt:133": [{"route":"8"}],
+    "transmixt:83": [{"route":"14"}],
+    "transmixt:47": [{"route":"7"}]
+  },
+  "2025-11-09": {
+    "transmixt:40": [{"route":"1"}]
+  },
+  "2025-11-10": {
+    "transmixt:133": [{"route":"2"}]
+  },
+  "2025-11-11": {
+    "transmixt:47": [{"route":"13"}]
+  },
+  "2025-11-12": {
+    "transmixt:47": [{"route":"13"}],
+    "transmixt:84": [{"route":"14"}],
+    "transmixt:30": [{"route":"7"}],
+    "transmixt:133": [{"route":"8"}]
+  },
+  "2025-11-13": {
+    "transmixt:30": [{"route":"7"}],
+    "transmixt:47": [{"route":"13"}]
+  },
+  "2025-11-14": {
+    "transmixt:47": [{"route":"7"}],
+    "transmixt:133": [{"route":"10"}],
+    "transmixt:43": [{"route":"2"}],
+    "transmixt:83": [{"route":"14"}]
+  },
+  "2025-11-17": {
+    "transmixt:83": [{"route":"14"}]
+  },
+  "2025-11-18": {
+    "transmixt:133": [{"route":"8"}]
+  },
+  "2025-11-19": {
+    "transmixt:47": [{"route":"13"}],
+    "transmixt:133": [{"route":"13"}]
+  },
+  "2025-11-21": {
+    "transmixt:47": [{"route":"2"}],
+    "transmixt:133": [{"route":"13"}],
+    "transmixt:145": [{"route":"8"}]
+  },
+  "2025-11-24": {
+    "transmixt:133": [{"route":"1"}]
+  },
+  "2025-11-25": {
+    "transmixt:133": [{"route":"13"}],
+    "transmixt:47": [{"route":"7"}]
+  },
+  "2025-11-26": {
+    "transmixt:47": [{"route":"8"}],
+    "transmixt:133": [{"route":"13"}],
+    "transmixt:40": [{"route":"2"}]
+  },
+  "2025-11-27": {
+    "transmixt:133": [{"route":"2"}]
+  },
+  "2025-11-28": {
+    "transmixt:133": [{"route":"2"}],
+    "transmixt:47": [{"route":"13"}],
+    "transmixt:145": [{"route":"13"}]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "2025-12-02": {
+    "transmixt:145": [{"route":"13"}],
+    "transmixt:47": [{"route":"2"}],
+    "transmixt:141": [{"route":"8"}]
+  },
+  "2025-12-04": {
+    "transmixt:145": [{"route":"10"}],
+    "transmixt:133": [{"route":"1"}]
+  },
+  "2025-12-08": {
+    "transmixt:133": [{"route":"3"}],
+    "transmixt:145": [{"route":"2"}]
+  },
+  "2025-12-10": {
+    "transmixt:47": [{"route":"2"}],
+    "transmixt:133": [{"route":"1"}]
+  },
+  "2025-12-11": {
+    "transmixt:47": [{"route":"2"}]
+  },
+  "2025-12-15": {
+    "transmixt:47": [{"route":"2"}]
+  },
+  "2025-12-16": {
+    "transmixt:133": [{"route":"2"}]
+  },
+  "2025-12-17": {
+    "transmixt:133": [{"route":"2"}]
+  },
+  "2025-12-22": {
+    "transmixt:47": [{"route":"1"}],
+    "transmixt:133": [{"route":"13"}],
+    "transmixt:145": [{"route":"2"}]
+  },
+  "2025-12-29": {
+    "transmixt:47": [{"route":"8"}],
+    "transmixt:133": [{"route":"13"}],
+    "transmixt:141": [{"route":"13"}]
+  },
+  "2025-12-31": {
+    "transmixt:40": [{"route":"2"}]
+  }
+}

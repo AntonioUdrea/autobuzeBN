@@ -1,0 +1,100 @@
+{
+  "2025-10-01": {
+    "transmixt:47": [{"route":"5"}],
+    "transmixt:145": [{"route":"8"}],
+    "transmixt:133": [{"route":"10"}]
+  },
+  "2025-10-02": {
+    "transmixt:47": [{"route":"5"}],
+    "transmixt:133": [{"route":"18"}],
+    "transmixt:145": [{"route":"13"}]
+  },
+  "2025-10-03": {
+    "transmixt:145": [{"route":"1"}],
+    "transmixt:133": [{"route":"18"}]
+  },
+  "2025-10-06": {
+    "transmixt:83": [{"route":"14"}],
+    "transmixt:133": [{"route":"18"}]
+  },
+  "2025-10-07": {
+    "transmixt:133": [{"route":"18"}]
+  },
+  "2025-10-08": {
+    "transmixt:133": [{"route":"9"}]
+  },
+  "2025-10-09": {
+    "transmixt:133": [{"route":"13"}],
+    "transmixt:47": [{"route":"2"}]
+  },
+  "2025-10-10": {
+    "transmixt:133": [{"route":"13"}],
+    "transmixt:40": [{"route":"3"}],
+    "transmixt:47": [{"route":"3"}]
+  },
+  "2025-10-11": {
+    "transmixt:133": [{"route":"13"}]
+  },
+  "2025-10-13": {
+    "transmixt:133": [{"route":"3"}]
+  },
+  "2025-10-14": {
+    "transmixt:47": [{"route":"1"}]
+  },
+  "2025-10-15": {
+    "transmixt:47": [{"route":"7"}],
+    "transmixt:133": [{"route":"13"}]
+  },
+  "2025-10-16": {
+    "transmixt:47": [{"route":"7"}],
+    "transmixt:30": [{"route":"18"}],
+    "transmixt:31": [{"route":"8"}]
+  },
+  "2025-10-17": {
+    "transmixt:133": [{"route":"13"}],
+    "transmixt:47": [{"route":"13"}]
+  },
+  "2025-10-18": {
+    "transmixt:47": [{"route":"13"}]
+  },
+  "2025-10-20": {
+    "transmixt:133": [{"route":"2"}],
+    "transmixt:47": [{"route":"13"}]
+  },
+  "2025-10-21": {
+    "transmixt:47": [{"route":"13"},{"route":"9"}],
+    "transmixt:133": [{"route":"2"}]
+  },
+  "2025-10-22": {
+    "transmixt:47": [{"route":"9"}]
+  },
+  "2025-10-23": {
+    "transmixt:47": [{"route":"9"}],
+    "transmixt:133": [{"route":"1"}]
+  },
+  "2025-10-24": {
+    "transmixt:133": [{"route":"1"}]
+  },
+  "2025-10-27": {
+    "transmixt:47": [{"route":"18"}],
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:133": [{"route":"7"}]
+  },
+  "2025-10-28": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:36": [{"route":"12"}],
+    "transmixt:133": [{"route":"7"}]
+  },
+  "2025-10-29": {
+    "transmixt:133": [{"route":"7"}]
+  },
+  "2025-10-30": {
+    "transmixt:47": [{"route":"13"}],
+    "transmixt:133": [{"route":"1"}]
+  },
+  "2025-10-31": {
+    "transmixt:133": [{"route":"1"}],
+    "transmixt:47": [{"route":"7"}],
+    "transmixt:30": [{"route":"8"}]
+  }
+}

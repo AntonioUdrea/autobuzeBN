@@ -1,0 +1,95 @@
+{
+  "2025-09-01": {
+    "transmixt:40": [{"route":"2"}]
+  },
+  "2025-09-02": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:145": [{"route":"1"}]
+  },
+  "2025-09-03": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:133": [{"route":"13"}]
+  },
+  "2025-09-04": {
+    "transmixt:40": [{"route":"2"}]
+  },
+  "2025-09-05": {
+    "transmixt:40": [{"route":"2"}]
+  },
+  "2025-09-06": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:36": [{"route":"12"}]
+  },
+  "2025-09-08": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:133": [{"route":"13"}]
+  },
+  "2025-09-09": {
+    "transmixt:145": [{"route":"10"}],
+    "transmixt:133": [{"route":"13"}]
+  },
+  "2025-09-10": {
+    "transmixt:145": [{"route":"10"}],
+    "transmixt:83": [{"route":"13A"}],
+    "transmixt:40": [{"route":"2"}]
+  },
+  "2025-09-11": {
+    "transmixt:145": [{"route":"10"}],
+    "transmixt:47": [{"route":"9"}],
+    "transmixt:133": [{"route":"13"}]
+  },
+  "2025-09-12": {
+    "transmixt:47": [{"route":"9"}],
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:145": [{"route":"10"}]
+  },
+  "2025-09-13": {
+    "transmixt:69": [{"route":"1"}]
+  },
+  "2025-09-15": {
+    "transmixt:145": [{"route":"10"}],
+    "transmixt:47": [{"route":"18"}]
+  },
+  "2025-09-16": {
+    "transmixt:145": [{"route":"8"}],
+    "transmixt:47": [{"route":"18"}]
+  },
+  "2025-09-17": {
+    "transmixt:47": [{"route":"18"}]
+  },
+  "2025-09-18": {
+    "transmixt:133": [{"route":"2"}]
+  },
+  "2025-09-19": {
+    "transmixt:43": [{"route":"1"}]
+  },
+  "2025-09-22": {
+    "transmixt:40": [{"route":"2"}]
+  },
+  "2025-09-23": {
+    "transmixt:47": [{"route":"18"}]
+  },
+  "2025-09-24": {
+    "transmixt:47": [{"route":"13"}],
+    "transmixt:30": [{"route":"18"}]
+  },
+  "2025-09-25": {
+    "transmixt:47": [{"route":"18"}]
+  },
+  "2025-09-26": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:133": [{"route":"13"}],
+    "transmixt:145": [{"route":"8"}]
+  },
+  "2025-09-28": {
+    "transmixt:71": [{"route":"1"}]
+  },
+  "2025-09-29": {
+    "transmixt:133": [{"route":"8"}]
+  },
+  "2025-09-30": {
+    "transmixt:145": [{"route":"8"}],
+    "transmixt:47": [{"route":"5"}],
+    "transmixt:133": [{"route":"13"}]
+  }
+}

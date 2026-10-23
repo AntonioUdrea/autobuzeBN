@@ -1,0 +1,65 @@
+{
+  "2025-04-02": {
+    "transmixt:145": [{"route":"1"}],
+    "transmixt:83": [{"route":"13A"}],
+    "transmixt:142": [{"route":"3"}]
+  },
+  "2025-04-04": {
+    "transmixt:145": [{"route":"18"}]
+  },
+  "2025-04-08": {
+    "transmixt:145": [{"route":"9"}],
+    "transmixt:141": [{"route":"13"}],
+    "transmixt:36": [{"route":"11"}]
+  },
+  "2025-04-09": {
+    "transmixt:145": [{"route":"13"}],
+    "transmixt:141": [{"route":"1"}]
+  },
+  "2025-04-10": {
+    "transmixt:141": [{"route":"2"}],
+    "transmixt:142": [{"route":"2"}],
+    "transmixt:36": [{"route":"12"}]
+  },
+  "2025-04-11": {
+    "transmixt:142": [{"route":"1"}]
+  },
+  "2025-04-14": {
+    "transmixt:142": [{"route":"2"}],
+    "transmixt:141": [{"route":"1"}]
+  },
+  "2025-04-15": {
+    "transmixt:141": [{"route":"1"}]
+  },
+  "2025-04-17": {
+    "transmixt:47": [{"route":"7"}],
+    "transmixt:142": [{"route":"3"}]
+  },
+  "2025-04-22": {
+    "transmixt:145": [{"route":"9"}]
+  },
+  "2025-04-23": {
+    "transmixt:145": [{"route":"2"}],
+    "transmixt:141": [{"route":"2"}],
+    "transmixt:142": [{"route":"3"}]
+  },
+  "2025-04-24": {
+    "transmixt:145": [{"route":"2"}]
+  },
+  "2025-04-25": {
+    "transmixt:145": [{"route":"2"}],
+    "transmixt:141": [{"route":"13"}]
+  },
+  "2025-04-28": {
+    "transmixt:145": [{"route":"13"}]
+  },
+  "2025-04-29": {
+    "transmixt:145": [{"route":"13"}],
+    "transmixt:147": [{"route":"10"}]
+  },
+  "2025-04-30": {
+    "transmixt:147": [{"route":"10"}],
+    "transmixt:145": [{"route":"13"}],
+    "transmixt:141": [{"route":"2"}]
+  }
+}
