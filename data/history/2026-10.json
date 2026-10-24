@@ -968,5 +968,8 @@
     "transmixt:184": [{"route":"2","from":"06:15","to":"19:30","polls":47,"directions":["1 PASARELA","107 DR SLATINITEI","28 VIISOARA"]},{"route":"7","from":"20:00","to":"20:00","polls":1,"directions":["28 VIISOARA"]},{"route":"2","from":"20:15","to":"22:15","polls":7,"directions":["28 VIISOARA"]}],
     "transmixt:187": [{"route":"2","from":"06:00","to":"19:45","polls":47,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA","53 AVICOLA"]},{"route":"7","from":"20:00","to":"20:00","polls":1,"directions":["1 PASARELA"]},{"route":"2","from":"20:15","to":"20:15","polls":1,"directions":["1 PASARELA"]}],
     "transmixt:188": [{"route":"2","from":"06:45","to":"19:30","polls":48,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}]
+  },
+  "2026-10-24": {
+    "transmixt:115": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:30","to":"05:30","polls":1,"directions":["MURESENII BARGAULUI- BISTRITA"]}]
   }
 }
