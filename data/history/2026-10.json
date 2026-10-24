@@ -970,6 +970,6 @@
     "transmixt:188": [{"route":"2","from":"06:45","to":"19:30","polls":48,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}]
   },
   "2026-10-24": {
-    "transmixt:115": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:30","to":"05:30","polls":1,"directions":["MURESENII BARGAULUI- BISTRITA"]}]
+    "transmixt:115": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:30","to":"05:45","polls":2,"directions":["MURESENII BARGAULUI- BISTRITA"]}]
   }
 }
