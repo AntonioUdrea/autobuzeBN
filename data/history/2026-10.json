@@ -970,9 +970,14 @@
     "transmixt:188": [{"route":"2","from":"06:45","to":"19:30","polls":48,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}]
   },
   "2026-10-24": {
-    "transmixt:40": [{"route":"2","from":"06:00","to":"06:00","polls":1,"directions":["28 VIISOARA"]}],
-    "transmixt:115": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:30","to":"06:00","polls":3,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
-    "transmixt:124": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"06:00","to":"06:00","polls":1,"directions":["RETUR"]}],
-    "transmixt:153": [{"route":"7","from":"06:00","to":"06:00","polls":1,"directions":["110 SLATINITA"]}]
+    "transmixt:40": [{"route":"2","from":"06:00","to":"06:15","polls":2,"directions":["28 VIISOARA"]}],
+    "transmixt:54": [{"route":"3","from":"06:15","to":"06:15","polls":1,"directions":["77 C R VIVU"]}],
+    "transmixt:69": [{"route":"3","from":"06:15","to":"06:15","polls":1,"directions":["77 C R VIVU"]}],
+    "transmixt:74": [{"route":"2","from":"06:15","to":"06:15","polls":1,"directions":["28 VIISOARA"]}],
+    "transmixt:115": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:30","to":"06:15","polls":4,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
+    "transmixt:124": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"06:00","to":"06:15","polls":2,"directions":["RETUR"]}],
+    "transmixt:153": [{"route":"7","from":"06:00","to":"06:15","polls":2,"directions":["110 SLATINITA","84 AUTOGARA"]}],
+    "transmixt:171": [{"route":"354 Bistrița - Caila","from":"06:15","to":"06:15","polls":1,"directions":["Caila - Bistrita"]}],
+    "transmixt:178": [{"route":"2","from":"06:15","to":"06:15","polls":1,"directions":["28 VIISOARA"]}]
   }
 }
