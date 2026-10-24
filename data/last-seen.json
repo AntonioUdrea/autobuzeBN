@@ -36,8 +36,8 @@
       "route": "18"
     },
     "40": {
-      "date": "2026-10-23",
-      "time": "20:30",
+      "date": "2026-10-24",
+      "time": "06:00",
       "route": "2"
     },
     "41": {
@@ -304,7 +304,7 @@
     },
     "115": {
       "date": "2026-10-24",
-      "time": "05:45",
+      "time": "06:00",
       "route": "502 Bistrița - Mureșenii Bârgăului"
     },
     "116": {
@@ -345,9 +345,9 @@
       "route": "503 Bistrița - Bistrița Bârgăului - Colibița"
     },
     "124": {
-      "date": "2026-10-23",
-      "time": "16:15",
-      "route": "485 Bistrița - Lunca"
+      "date": "2026-10-24",
+      "time": "06:00",
+      "route": "476 Bistrița - Budacu de Sus (via Satu Nou)"
     },
     "133": {
       "date": "2026-10-23",
@@ -399,9 +399,9 @@
       "route": "16"
     },
     "153": {
-      "date": "2026-10-23",
-      "time": "19:30",
-      "route": "16"
+      "date": "2026-10-24",
+      "time": "06:00",
+      "route": "7"
     },
     "154": {
       "date": "2026-10-23",
