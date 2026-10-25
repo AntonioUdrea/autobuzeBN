@@ -997,5 +997,8 @@
     "transmixt:170": [{"route":"329 Bistrița - Bretea","from":"16:15","to":"16:45","polls":3,"directions":["Bretea - Bistrita"]}],
     "transmixt:171": [{"route":"354 Bistrița - Caila","from":"06:15","to":"06:30","polls":2,"directions":["Caila - Bistrita"]},{"route":"354 Bistrița - Caila","from":"08:15","to":"08:30","polls":2,"directions":["Bistrita - Caila"]},{"route":"354 Bistrița - Caila","from":"16:15","to":"17:30","polls":4,"directions":["Caila - Bistrita","Bistrita - Caila"]}],
     "transmixt:178": [{"route":"2","from":"06:15","to":"21:30","polls":46,"directions":["28 VIISOARA","1 PASARELA","107 DR SLATINITEI"]}]
+  },
+  "2026-10-25": {
+    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:15","polls":1,"directions":["Milas - Bistrita"]}]
   }
 }
