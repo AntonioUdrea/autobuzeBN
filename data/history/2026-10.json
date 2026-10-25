@@ -999,6 +999,6 @@
     "transmixt:178": [{"route":"2","from":"06:15","to":"21:30","polls":46,"directions":["28 VIISOARA","1 PASARELA","107 DR SLATINITEI"]}]
   },
   "2026-10-25": {
-    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:30","polls":2,"directions":["Milas - Bistrita"]}]
+    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:45","polls":3,"directions":["Milas - Bistrita"]}]
   }
 }
