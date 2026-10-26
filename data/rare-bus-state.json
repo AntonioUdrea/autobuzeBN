@@ -5,6 +5,16 @@
       "route": "3",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:40": {
+      "route": "2",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:77": {
+      "route": "13A",
+      "rare": true,
+      "unusual": false
     }
   }
 }
