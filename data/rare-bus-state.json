@@ -17,9 +17,9 @@
       "unusual": false
     },
     "transmixt:169": {
-      "route": "366 Bistrița - Archiud",
+      "route": "384 Bistrița - Albeștii Bistriței",
       "rare": false,
-      "unusual": true
+      "unusual": false
     },
     "transmixt:84": {
       "route": "16",
@@ -40,6 +40,11 @@
       "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:133": {
+      "route": "6",
+      "rare": true,
+      "unusual": false
     }
   }
 }
