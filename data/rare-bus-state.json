@@ -45,6 +45,11 @@
       "route": "3",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:109": {
+      "route": "363 Bistrița - Urmeniș",
+      "rare": false,
+      "unusual": true
     }
   }
 }
