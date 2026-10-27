@@ -32,9 +32,9 @@
       "unusual": false
     },
     "transmixt:169": {
-      "route": "366 Bistrița - Archiud",
+      "route": "384 Bistrița - Albeștii Bistriței",
       "rare": false,
-      "unusual": true
+      "unusual": false
     },
     "transmixt:176": {
       "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
@@ -50,6 +50,11 @@
       "route": "363 Bistrița - Urmeniș",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:145": {
+      "route": "6",
+      "rare": true,
+      "unusual": false
     }
   }
 }
