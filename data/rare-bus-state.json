@@ -1,4 +1,10 @@
 {
   "date": "2026-10-27",
-  "buses": {}
+  "buses": {
+    "transmixt:8": {
+      "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "rare": false,
+      "unusual": true
+    }
+  }
 }
