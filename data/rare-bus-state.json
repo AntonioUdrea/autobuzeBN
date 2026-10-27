@@ -30,6 +30,11 @@
       "route": "1",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:169": {
+      "route": "366 Bistrița - Archiud",
+      "rare": false,
+      "unusual": true
     }
   }
 }
