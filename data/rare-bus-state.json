@@ -14,7 +14,7 @@
     "transmixt:69": {
       "route": "3",
       "rare": false,
-      "unusual": true
+      "unusual": false
     },
     "transmixt:62": {
       "route": "7",
@@ -23,7 +23,7 @@
     },
     "transmixt:77": {
       "route": "13A",
-      "rare": true,
+      "rare": false,
       "unusual": false
     },
     "transmixt:165": {
@@ -32,9 +32,9 @@
       "unusual": false
     },
     "transmixt:169": {
-      "route": "366 Bistrița - Archiud",
+      "route": "358 Bistrița - Fântânele",
       "rare": false,
-      "unusual": true
+      "unusual": false
     },
     "transmixt:170": {
       "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
@@ -48,6 +48,21 @@
     },
     "transmixt:123": {
       "route": "502 Bistrița - Mureșenii Bârgăului",
+      "rare": true,
+      "unusual": false
+    },
+    "transmixt:71": {
+      "route": "1",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:113": {
+      "route": "502 Bistrița - Mureșenii Bârgăului",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:83": {
+      "route": "18",
       "rare": true,
       "unusual": false
     }
