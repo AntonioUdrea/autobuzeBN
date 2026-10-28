@@ -35,6 +35,11 @@
       "route": "366 Bistrița - Archiud",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:170": {
+      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "rare": false,
+      "unusual": true
     }
   }
 }
