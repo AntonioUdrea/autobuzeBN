@@ -24,9 +24,13 @@ const store = require("./history-store.js");
 // Rare vehicles. Format: "operator:vehicleId" (a licence plate also works)
 const RARE_VEHICLES = new Set([
   "transmixt:41",
+  "transmixt:36",
+  "ani-tour:8",
+  "transmixt:79",
+  "transmixt:81",
+  "transmixt:83",
   "transmixt:53",
   "transmixt:62",
-  "transmixt:77",
   "transmixt:123",
   "transmixt:133",
   "transmixt:145"
@@ -37,7 +41,7 @@ const TARGET_ROUTES = [];
 
 // Checks outside these hours are skipped (Bucharest time)
 const ACTIVE_FROM = "05:00";
-const ACTIVE_UNTIL = "22:30";
+const ACTIVE_UNTIL = "00:30";
 
 const STATE_FILE = "data/rare-bus-state.json";
 const LAST_SEEN_FILE = "data/last-seen.json";
