@@ -41,7 +41,7 @@ const TARGET_ROUTES = [];
 
 // Checks outside these hours are skipped (Bucharest time)
 const ACTIVE_FROM = "05:00";
-const ACTIVE_UNTIL = "00:30";
+const ACTIVE_UNTIL = "23:59";
 
 const STATE_FILE = "data/rare-bus-state.json";
 const LAST_SEEN_FILE = "data/last-seen.json";
