@@ -229,10 +229,6 @@
       "licensePlate": "B 161 TMX",
       "model": "Mercedes-Benz Sprinter"
     },
-    "102": {
-      "licensePlate": "B 163 TMX",
-      "model": "Mercedes-Benz Sprinter"
-    },
     "103": {
       "licensePlate": "B 166 TMX",
       "model": "Mercedes-Benz Sprinter"
@@ -412,13 +408,13 @@
       "assignedRoutes": ["244 Beclean - Cireșoaia", "246 Beclean - Chiochiș"]
     },
     "162": {
-      "licensePlate": "Unknown",
+      "licensePlate": "B 163 TMX",
       "model": "Mercedes-Benz Sprinter"
+      "assignedRoutes": ["244 Beclean - Cireșoaia", "252 Beclean - Agrișu de Jos"]
     },
     "164": {
       "licensePlate": "B 170 TMX",
       "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["358 Bistrița - Fântânele"]
     },
     "165": {
       "licensePlate": "B 171 TMX",
@@ -491,7 +487,7 @@
       "assignedRoutes": ["2"]
     },
     "181": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 72 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
@@ -501,7 +497,7 @@
       "assignedRoutes": ["2"]
     },
     "183": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 74 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
@@ -511,12 +507,12 @@
       "assignedRoutes": ["2"]
     },
     "185": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 77 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
     "186": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 81 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
@@ -530,13 +526,8 @@
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
-    "189": {
-      "licensePlate": "Unknown",
-      "model": "Karsan e-ATA 10",
-      "assignedRoutes": ["2"]
-    },
     "190": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 90 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
@@ -546,7 +537,7 @@
       "assignedRoutes": ["2"]
     },
     "192": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 92 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
@@ -556,12 +547,12 @@
       "assignedRoutes": ["2"]
     },
     "194": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 95 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
     "195": {
-      "licensePlate": "Unknown",
+      "licensePlate": "BN 96 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
     },
@@ -649,6 +640,7 @@
     "28": {
       "licensePlate": "B 139 ANY",
       "model": "Mercedes-Benz Sprinter"
+      "assignedRoutes": ["726 Năsăud - Bichigiu", "722 Năsăud - Dealul Ștefăniței"]
     },
     "29": {
       "licensePlate": "BN 85 ANY",
