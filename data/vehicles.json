@@ -127,7 +127,7 @@
     "69": {
       "licensePlate": "B 107 TMX",
       "model": "Guleryuz Ecoline 10",
-      "assignedRoutes": ["2"]
+      "assignedRoutes": ["2", "3"]
     },
     "70": {
       "licensePlate": "B 108 TMX",
@@ -422,13 +422,11 @@
     },
     "165": {
       "licensePlate": "B 171 TMX",
-      "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["387 Bistrița - Silivașu de Câmpie", "471 Bistrița - Ardan"]
+      "model": "Mercedes-Benz Sprinter"
     },
     "166": {
       "licensePlate": "B 174 TMX",
-      "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["361 Bistrița - Vermeș"]
+      "model": "Mercedes-Benz Sprinter"
     },
     "167": {
       "licensePlate": "B 180 TMX",
@@ -442,18 +440,15 @@
     },
     "169": {
       "licensePlate": "B 173 TMX",
-      "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["384 Bistrița - Albeștii Bistriței","364 Bistrița - Milaș","367 Bistrița - Pinticu"]
+      "model": "Mercedes-Benz Sprinter"
     },
     "170": {
       "licensePlate": "B 172 TMX",
-      "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["329 Bistrița - Bretea","354 Bistrița - Caila","501 Bistrița - Piatra Fântânele","390 Bistrița - Sâniacob"]
+      "model": "Mercedes-Benz Sprinter"
     },
     "171": {
       "licensePlate": "B 175 TMX",
-      "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["354 Bistrița - Caila","329 Bistrița - Bretea","361 Bistrița - Vermeș"]
+      "model": "Mercedes-Benz Sprinter"
     },
     "172": {
       "licensePlate": "B 136 TMX",
@@ -473,7 +468,7 @@
     "176": {
       "licensePlate": "B 190 TMX",
       "model": "Ford e-Transit",
-      "assignedRoutes": ["329 Bistrița - Bretea", "354 Bistrița - Caila", "361 Bistrița - Vermeș"]
+      "assignedRoutes": ["329 Bistrița - Bretea", "354 Bistrița - Caila", "361 Bistrița - Vermeș", "503 Bistrița - Bistrița Bârgăului - Colibița"]
     },
     "177": {
       "licensePlate": "BN 70 PMB",
@@ -609,8 +604,7 @@
     },
     "8": {
       "licensePlate": "BN 26 ANI (neconfirmat)",
-      "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["628B Năsăud - Beclean"]
+      "model": "Mercedes-Benz Sprinter"
     },
     "9": {
       "licensePlate": "BN 54 ANY",
