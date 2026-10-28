@@ -409,12 +409,12 @@
     },
     "162": {
       "licensePlate": "B 163 TMX",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
       "assignedRoutes": ["244 Beclean - Cireșoaia", "252 Beclean - Agrișu de Jos"]
     },
     "164": {
       "licensePlate": "B 170 TMX",
-      "model": "Mercedes-Benz Sprinter",
+      "model": "Mercedes-Benz Sprinter"
     },
     "165": {
       "licensePlate": "B 171 TMX",
@@ -639,7 +639,7 @@
     },
     "28": {
       "licensePlate": "B 139 ANY",
-      "model": "Mercedes-Benz Sprinter"
+      "model": "Mercedes-Benz Sprinter",
       "assignedRoutes": ["726 Năsăud - Bichigiu", "722 Năsăud - Dealul Ștefăniței"]
     },
     "29": {
