@@ -30,6 +30,11 @@
       "route": "361 Bistrița - Vermeș",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:169": {
+      "route": "366 Bistrița - Archiud",
+      "rare": false,
+      "unusual": true
     }
   }
 }
