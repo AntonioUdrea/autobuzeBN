@@ -1,4 +1,10 @@
 {
   "date": "2026-10-28",
-  "buses": {}
+  "buses": {
+    "transmixt:109": {
+      "route": "363 Bistrița - Urmeniș",
+      "rare": false,
+      "unusual": true
+    }
+  }
 }
