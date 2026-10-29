@@ -1,4 +1,10 @@
 {
   "date": "2026-10-29",
-  "buses": {}
+  "buses": {
+    "transmixt:113": {
+      "route": "502 Bistrița - Mureșenii Bârgăului",
+      "rare": false,
+      "unusual": true
+    }
+  }
 }
