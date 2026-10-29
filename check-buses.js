@@ -28,7 +28,6 @@ const RARE_VEHICLES = new Set([
   "ani-tour:8",
   "transmixt:79",
   "transmixt:81",
-  "transmixt:83",
   "transmixt:53",
   "transmixt:62",
   "transmixt:123",
