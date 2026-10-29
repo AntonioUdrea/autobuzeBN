@@ -1290,5 +1290,9 @@
     "transmixt:180": [{"route":"2","from":"05:30","to":"11:45","polls":25,"directions":["28 VIISOARA"]},{"route":"2","from":"14:15","to":"20:45","polls":20,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}],
     "transmixt:196": [{"route":"2","from":"06:00","to":"11:45","polls":23,"directions":["28 VIISOARA"]},{"route":"2","from":"14:30","to":"19:30","polls":18,"directions":["107 DR SLATINITEI","1 PASARELA"]}],
     "transmixt:197": [{"route":"2","from":"06:45","to":"11:45","polls":16,"directions":["107 DR SLATINITEI","1 PASARELA"]},{"route":"2","from":"14:15","to":"21:15","polls":28,"directions":["28 VIISOARA"]}]
+  },
+  "2026-10-29": {
+    "ani-tour:9": [{"route":"633 Bistrița - Săsarm","from":"05:00","to":"05:00","polls":1,"directions":["Bistrita Autogara/Rodnei"]}],
+    "transmixt:175": [{"route":"359 Bistrița - Țăgșor","from":"05:00","to":"05:00","polls":1,"directions":["Tagsor - Bistrita"]}]
   }
 }
