@@ -1,22 +1,7 @@
 /*
  * common.js: code shared by the web pages AND the GitHub Action scripts.
- *
- * Before this file existed, the API URLs, escapeHtml(), formatTime(), the stops
- * loading and the "which direction is this bus going" logic were copy-pasted in
- * app.js, list.html and check-buses.js. Now there is one copy.
- *
- * One file, two environments:
- *   Browser:  <script src="common.js"></script>      then   Common.fetchAllVehicles()
- *   Node:     const Common = require("./common.js"); then   Common.fetchAllVehicles()
- * The wrapper right below is what makes that work. Everything inside the
- * function is private unless it appears in the `return { ... }` at the bottom.
- *
- * Nothing in here keeps hidden global state. Functions that need your local
- * data (vehicles.json, routes.json, stops) receive it as an argument called
- * `ctx`, so they behave the same in the browser and in Node:
- *
- *   ctx = { vehicles, routes, stops, patterns }
  */
+
 (function (root, factory) {
   if (typeof module === "object" && module.exports) {
     module.exports = factory();   // Node
@@ -45,8 +30,8 @@
 
   const OPERATOR_NAMES = Object.fromEntries(API_URLS.map(a => [a.operator, a.name]));
 
-  const ON_TIME_SECONDS = 60;      // within +/- 1 minute counts as on time
-  const FETCH_TIMEOUT_MS = 8000;   // give up on a slow API instead of hanging
+  const ON_TIME_SECONDS = 60;
+  const FETCH_TIMEOUT_MS = 8000;
   const TIME_ZONE = "Europe/Bucharest";
 
 
@@ -59,7 +44,6 @@
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
   }
 
-  // "2" < "10" instead of "10" < "2"
   function naturalCompare(a, b) {
     return String(a).localeCompare(String(b), undefined, { numeric: true });
   }
@@ -70,12 +54,6 @@
     return response.json();
   }
 
-
-  // ============================================================
-  // Dates and times (always Bucharest time, whatever the machine's zone is.
-  // GitHub runners use UTC, so this matters.)
-  // ============================================================
-
   const dateFormat = new Intl.DateTimeFormat("en-CA", {
     timeZone: TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit"
   });
@@ -84,22 +62,18 @@
     timeZone: TIME_ZONE, hour: "2-digit", minute: "2-digit", hourCycle: "h23"
   });
 
-  /** "2026-10-15" */
   function bucharestDate(date = new Date()) {
     return dateFormat.format(date);
   }
 
-  /** "14:05" */
   function bucharestTime(date = new Date()) {
     return timeFormat.format(date);
   }
 
-  /** ISO timestamp from the API -> "14:05" (empty string if missing) */
   function formatTime(iso) {
     return iso ? bucharestTime(new Date(iso)) : "";
   }
 
-  /** "14:05" -> 845 (minutes since midnight) */
   function toMinutes(hhmm) {
     const [h, m] = String(hhmm).split(":").map(Number);
     return h * 60 + m;
@@ -110,7 +84,6 @@
   // Vehicle helpers
   // ============================================================
 
-  /** seconds -> { kind: "late" | "early" | "ontime", minutes }. Each page words it its own way. */
   function describeDelay(seconds) {
     const minutes = Math.round(Math.abs(seconds) / 60);
     if (seconds > ON_TIME_SECONDS) return { kind: "late", minutes };
@@ -118,8 +91,6 @@
     return { kind: "ontime", minutes };
   }
 
-  // The APIs don't always use the same field names, so try the known ones.
-  // Returns [lat, lng] or null.
   function getPosition(v) {
     const lat = Number(v.latitude ?? v.lat ?? v.position?.latitude ?? v.position?.lat);
     const lng = Number(v.longitude ?? v.lng ?? v.lon ?? v.position?.longitude ?? v.position?.lng);
@@ -131,7 +102,6 @@
   // Loading data
   // ============================================================
 
-  /** Browser only: your own data files. */
   async function loadLocalData() {
     const [vehicles, routes] = await Promise.all([
       fetchJson("data/vehicles.json", "data/vehicles.json"),
@@ -140,11 +110,6 @@
     return { vehicles, routes };
   }
 
-  /**
-   * Live vehicles from every operator, in parallel.
-   * One operator being down doesn't stop the other:
-   *   { buses: [...], failed: ["Ani Tour"] }
-   */
   async function fetchAllVehicles() {
     const results = await Promise.allSettled(API_URLS.map(async api => {
       const data = await fetchJson(api.url, `${api.name} API`);
@@ -167,12 +132,7 @@
     return { buses, failed };
   }
 
-  /**
-   * Stop names plus the first/last stop of each route pattern.
-   *   stops:    { operator: { stopId: "Stop name" } }
-   *   patterns: { operator: { "routeId:patternIndex": { from, to } } }
-   * Never throws; a failed operator just gets empty objects.
-   */
+  // stops and routes
   async function fetchStops() {
     const stops = {};
     const patterns = {};
@@ -204,7 +164,7 @@
 
 
   // ============================================================
-  // Enrich: raw API vehicle + your local data = everything a page needs
+  // local data + api data combined
   // ============================================================
 
   /**
@@ -231,8 +191,6 @@
 
     const stopName = id => ctx.stops[operator]?.[id] ?? "";
 
-    // The API has no direction field. patternIndex 1-10 = direction 0, 11+ = direction 1,
-    // negative = out of service.
     const pattern = ctx.patterns[operator]?.[`${bus.routeId}:${bus.patternIndex}`];
     const first = pattern ? stopName(pattern.from) : "";
     const last = pattern ? stopName(pattern.to) : "";
