@@ -10,6 +10,11 @@
       "route": "13",
       "rare": true,
       "unusual": false
+    },
+    "ani-tour:27": {
+      "route": "630 Năsăud - Suplai",
+      "rare": false,
+      "unusual": true
     }
   }
 }
