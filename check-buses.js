@@ -1,7 +1,4 @@
 /*
- * check-buses.js: runs from GitHub Actions every ~15 minutes.
- *
- * One run does, in order:
  *   1. Read every data file first (so a corrupt file stops the run BEFORE anything is sent or changed).
  *   2. Fetch the live vehicles and stops from both operators.
  *   3. Record every vehicle in the detailed history (data/history/YYYY-MM.json).
@@ -21,7 +18,6 @@ const store = require("./history-store.js");
 // Settings
 // ============================================================
 
-// Rare vehicles. Format: "operator:vehicleId" (a licence plate also works)
 const RARE_VEHICLES = new Set([
   "transmixt:41",
   "transmixt:36",
@@ -35,10 +31,9 @@ const RARE_VEHICLES = new Set([
   "transmixt:145"
 ]);
 
-// Route IDs (not line numbers) that rare-vehicle alerts apply to. [] = all routes.
 const TARGET_ROUTES = [];
 
-// Checks outside these hours are skipped (Bucharest time)
+// check times
 const ACTIVE_FROM = "05:00";
 const ACTIVE_UNTIL = "23:59";
 
@@ -50,7 +45,6 @@ const LAST_SEEN_FILE = "data/last-seen.json";
 // Files
 // ============================================================
 
-/** Missing file -> fallback. Corrupt file -> throws (never silently start from empty and overwrite). */
 function readJson(file, fallback) {
   return fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : fallback;
 }
@@ -62,7 +56,6 @@ function writeJson(file, data) {
   fs.renameSync(tmp, file);
 }
 
-/** vehicles.json / routes.json are nice to have: without them we still run, just with less detail. */
 function loadMeta() {
   try {
     return {
@@ -78,13 +71,6 @@ function loadMeta() {
 
 // ============================================================
 // Alert state (data/rare-bus-state.json)
-//
-// { "date": "2026-10-15",
-//   "buses": { "transmixt:53": { "route": "1", "rare": true, "unusual": false } } }
-//
-// Only buses that triggered a rare/unusual alert are stored, and the state
-// resets every day. It remembers which route we last alerted about, so a bus
-// only alerts again when it changes route.
 // ============================================================
 
 function loadAlertState(date) {
@@ -102,7 +88,7 @@ const routeOf = entry => (entry == null ? undefined : String(entry.route ?? entr
 
 
 // ============================================================
-// Duplicates: the API sometimes lists the same vehicle more than once
+// deals with duplicates
 // ============================================================
 
 function resolveDuplicates(buses, previousRouteOf) {
@@ -118,7 +104,6 @@ function resolveDuplicates(buses, previousRouteOf) {
 
     console.log(`Duplicate API entries for ${key}: ${entries.map(e => e.routeIndicative).join(", ")}`);
 
-    // Prefer an entry on a different route than last time, so route changes are noticed
     const previous = previousRouteOf(key);
     const changed = previous !== undefined && entries.find(e => e.routeIndicative !== previous);
     return changed || entries[0];
@@ -148,9 +133,7 @@ async function sendDiscord(webhookUrl, content) {
   }
 }
 
-/** Sends the alerts and returns the new alert state. */
 async function sendAlerts(buses, previousState, webhookUrl) {
-  // Start from ALL previous state, so a bus that briefly drops out of the API keeps its entry
   const state = { ...previousState };
 
   for (const bus of buses) {
@@ -165,7 +148,7 @@ async function sendAlerts(buses, previousState, webhookUrl) {
       bus.assignedRoutes.length > 0 && !bus.assignedRoutes.map(String).includes(bus.routeIndicative);
 
     const previousRoute = routeOf(previousState[bus.key]);
-    const routeChanged = previousRoute !== bus.routeIndicative; // also true when undefined
+    const routeChanged = previousRoute !== bus.routeIndicative;
 
     // One message at most, even if the bus is both rare and unusual
     const shouldNotify = routeChanged && ((isRare && isTargetRoute) || isUnusual);
@@ -176,7 +159,6 @@ async function sendAlerts(buses, previousState, webhookUrl) {
 
       const sent = await sendDiscord(webhookUrl, `${plate} (${model}) e pe linia ${bus.routeIndicative}`);
 
-      // Only move the state forward if Discord got it, so the next run retries
       if (!sent) continue;
     }
 
