@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Istoric rută - Bistrița Bus Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    header a { color: white; }
+    main { overflow: auto; padding: 12px 16px; }
+    h2 { font-size: 16px; margin: 20px 0 8px; }
+    table { border-collapse: collapse; width: 100%; max-width: 900px; }
+    th, td { text-align: left; vertical-align: top; padding: 6px 10px; border-bottom: 1px solid #ddd; font-size: 14px; }
+    th { background: #f2f2f2; white-space: nowrap; }
+    td.muted, .muted { color: #999; }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .stint { white-space: nowrap; }
+    .empty { color: #888; padding: 16px 0; }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Istoric rută</h1>
+
+    <div class="controls">
+      <a href="index.html">&larr; Hartă</a>
+      <a href="last-seen.html">Văzut ultima dată</a>
+
+      <select id="operatorFilter">
+        <option value="all">Toți operatorii</option>
+        <option value="transmixt">Transmixt</option>
+        <option value="ani-tour">Ani Tour</option>
+      </select>
+
+      <select id="routeFilter"></select>
+
+      <select id="rangeFilter">
+        <option value="all">Toată perioada</option>
+        <option value="7">Ultimele 7 zile</option>
+        <option value="30">Ultimele 30 de zile</option>
+        <option value="90">Ultimele 90 de zile</option>
+      </select>
+
+    </div>
+
+    <div id="status">Se încarcă...</div>
+  </header>
+
+  <main>
+    <div id="daysView">
+      <table>
+        <thead>
+          <tr><th>Data</th><th>Vehicule</th></tr>
+        </thead>
+        <tbody id="days"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="common.js"></script>
+  <script>
+    const { OPERATOR_NAMES, escapeHtml, naturalCompare, bucharestDate } = Common;
+
+    const el = id => document.getElementById(id);
+
+    // One record per vehicle, day and route:
+    // { operator, id, date, route, from, to, directions }
+    let records = [];
+    let vehicles = {};
+
+    async function getJson(url, fallback) {
+      try {
+        const r = await fetch(url, { cache: "no-store" });
+        return r.ok ? await r.json() : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function weekday(date) {
+      return new Date(`${date}T12:00:00Z`).toLocaleDateString("ro-RO", { weekday: "short", timeZone: "UTC" });
+    }
+
+    // Sort by license plate; vehicles with an unknown plate go last
+    function comparePlates(a, b) {
+      const pa = vehicles[a.operator]?.[a.id]?.licensePlate;
+      const pb = vehicles[b.operator]?.[b.id]?.licensePlate;
+      if (!pa !== !pb) return pa ? -1 : 1;
+      return (pa && naturalCompare(pa, pb)) || a.operator.localeCompare(b.operator) || Number(a.id) - Number(b.id);
+    }
+
+    // e.g. "BN 71 TMX (41) - Guleryuz Ecoline 10"
+    function vehicleLabel(operator, id) {
+      const info = vehicles[operator]?.[id];
+      return `${info?.licensePlate ?? "Număr necunoscut"} (${id})` + (info?.model ? ` - ${info.model}` : "");
+    }
+
+    function vehicleLink(operator, id, text) {
+      return `<a href="history.html?operator=${encodeURIComponent(operator)}&id=${encodeURIComponent(id)}">${escapeHtml(text)}</a>`;
+    }
+
+    // ---------- loading ----------
+
+    async function load() {
+      const [index, vehiclesData, lastSeen] = await Promise.all([
+        getJson("data/history/index.json", { months: [] }),
+        getJson("data/vehicles.json", {}),
+        getJson("data/last-seen.json", {})
+      ]);
+      vehicles = vehiclesData;
+
+      const months = await Promise.all((index.months ?? []).map(m => getJson(`data/history/${m}.json`, {})));
+
+      // month file: { date: { "operator:id": [ { route, from, to, directions } ] } }
+      for (const month of months) {
+        for (const [date, dayVehicles] of Object.entries(month)) {
+          for (const [key, stints] of Object.entries(dayVehicles)) {
+            const sep = key.indexOf(":");
+            const operator = key.slice(0, sep);
+            const id = key.slice(sep + 1);
+            for (const s of stints) {
+              if (!s.route) continue;
+              records.push({
+                operator, id, date, route: String(s.route),
+                from: s.from ?? null, to: s.to ?? null, directions: s.directions ?? []
+              });
+            }
+          }
+        }
+      }
+
+      // Add recent sightings that haven't been archived yet
+      const known = new Set(records.map(r => `${r.operator}|${r.id}|${r.date}|${r.route}`));
+      for (const [operator, ids] of Object.entries(lastSeen)) {
+        for (const [id, entry] of Object.entries(ids)) {
+          if (!entry || typeof entry === "string" || !entry.date) continue;
+          const routes = entry.routes?.length ? entry.routes : entry.route ? [entry.route] : [];
+          for (const route of routes.map(String)) {
+            if (known.has(`${operator}|${id}|${entry.date}|${route}`)) continue;
+            records.push({ operator, id, date: entry.date, route, from: null, to: null, directions: [] });
+          }
+        }
+      }
+
+      if (!records.length) {
+        el("status").textContent = "Nu există încă istoric înregistrat.";
+        el("routeFilter").innerHTML = `<option value="">Nicio rută înregistrată</option>`;
+        return;
+      }
+
+      fillRoutes();
+
+      const wanted = new URLSearchParams(location.search).get("route");
+      if (wanted && [...el("routeFilter").options].some(o => o.value === wanted)) {
+        el("routeFilter").value = wanted;
+      }
+      render();
+    }
+
+    function fillRoutes() {
+      const op = el("operatorFilter").value;
+      const current = el("routeFilter").value;
+      const routes = [...new Set(records
+        .filter(r => op === "all" || r.operator === op)
+        .map(r => r.route))].sort(naturalCompare);
+
+      el("routeFilter").innerHTML = routes
+        .map(r => `<option value="${escapeHtml(r)}">Ruta ${escapeHtml(r)}</option>`).join("");
+      if (routes.includes(current)) el("routeFilter").value = current;
+    }
+
+    function selected() {
+      const op = el("operatorFilter").value;
+      const route = el("routeFilter").value;
+      const range = el("rangeFilter").value;
+      const cutoff = range === "all" ? null : Date.parse(bucharestDate()) - Number(range) * 86400000;
+
+      return records.filter(r =>
+        r.route === route &&
+        (op === "all" || r.operator === op) &&
+        (cutoff === null || Date.parse(r.date) >= cutoff));
+    }
+
+    // "1 zi", "5 zile", "25 de zile"
+    function count(n, one, many) {
+      return n === 1 ? `1 ${one}` : `${n} ${n >= 20 ? "de " : ""}${many}`;
+    }
+
+    // ---------- rendering ----------
+
+    function render() {
+      const recs = selected();
+      const dates = new Set(recs.map(r => r.date));
+
+      if (!recs.length) {
+        el("days").innerHTML = "";
+        el("status").textContent = "Niciun istoric pentru această selecție";
+        return;
+      }
+
+      const byDay = new Map();   // date -> Map(operator:id -> { operator, id })
+      for (const r of recs) {
+        if (!byDay.has(r.date)) byDay.set(r.date, new Map());
+        byDay.get(r.date).set(`${r.operator}:${r.id}`, r);
+      }
+      el("days").innerHTML = [...byDay.entries()]
+        .sort((a, b) => b[0].localeCompare(a[0]))
+        .map(([date, map]) => {
+          const lines = [...map.values()]
+            .sort((a, b) => comparePlates(a, b))
+            .map(r => `<div class="stint">${vehicleLink(r.operator, r.id, vehicleLabel(r.operator, r.id))}</div>`)
+            .join("");
+          return `<tr>
+            <td>${escapeHtml(date)} <span class="muted">${weekday(date)}</span></td>
+            <td>${lines}</td>
+          </tr>`;
+        }).join("");
+
+      const vehicleCount = new Set(recs.map(r => `${r.operator}:${r.id}`)).size;
+      el("status").textContent =
+        `Ruta ${el("routeFilter").value}: ${count(vehicleCount, "vehicul", "vehicule")} în ${count(dates.size, "zi", "zile")}`;
+    }
+
+    el("operatorFilter").addEventListener("change", () => { fillRoutes(); render(); });
+    el("routeFilter").addEventListener("change", render);
+    el("rangeFilter").addEventListener("change", render);
+
+    load();
+  </script>
+
+</body>
+
+</html>

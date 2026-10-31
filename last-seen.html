@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Last seen - Bistrița Bus Tracker</title>
+  <title>Văzut ultima dată - Bistrița Bus Tracker</title>
   <link rel="stylesheet" href="style.css">
   <style>
     header a {
@@ -58,33 +58,33 @@
 <body>
 
   <header>
-    <h1>Last seen</h1>
+    <h1>Văzut ultima dată</h1>
 
     <div class="controls">
-      <a href="index.html">&larr; Map</a>
+      <a href="index.html">&larr; Hartă</a>
 
       <select id="operatorFilter">
-        <option value="all">All operators</option>
+        <option value="all">Toți operatorii</option>
         <option value="transmixt">Transmixt</option>
         <option value="ani-tour">Ani Tour</option>
       </select>
 
       <select id="modelFilter">
-        <option value="all">All models</option>
+        <option value="all">Toate modelele</option>
       </select>
 
       <select id="ageFilter">
-        <option value="all">Any date</option>
-        <option value="today">Seen today</option>
-        <option value="7">Not seen for 7+ days</option>
-        <option value="30">Not seen for 30+ days</option>
-        <option value="never">Not recorded yet</option>
+        <option value="all">Orice dată</option>
+        <option value="today">Văzut azi</option>
+        <option value="7">Nevăzut de 7+ zile</option>
+        <option value="30">Nevăzut de 30+ zile</option>
+        <option value="never">Încă neînregistrat</option>
       </select>
 
-      <input id="search" type="search" placeholder="Plate, ID or route">
+      <input id="search" type="search" placeholder="Număr, ID sau rută">
     </div>
 
-    <div id="status">Loading...</div>
+    <div id="status">Se încarcă...</div>
   </header>
 
   <main>
@@ -93,10 +93,10 @@
         <tr>
           <th data-key="operator">Operator</th>
           <th data-key="id">ID</th>
-          <th data-key="plate">Plate</th>
+          <th data-key="plate">Număr</th>
           <th data-key="model">Model</th>
-          <th data-key="days">Last seen</th>
-          <th data-key="route">Route</th>
+          <th data-key="days">Văzut ultima dată</th>
+          <th data-key="route">Rută</th>
         </tr>
       </thead>
       <tbody id="rows"></tbody>
@@ -106,6 +106,7 @@
   <script>
     const OPERATOR_NAMES = { "transmixt": "Transmixt", "ani-tour": "Ani Tour" };
     const NEVER = 1e9;
+    const UNKNOWN = "Necunoscut";
 
     let rows = [];
     let sortKey = "days";
@@ -161,8 +162,8 @@
           rows.push({
             operator,
             id,
-            plate: info?.licensePlate ?? "Unknown",
-            model: info?.model ?? "Unknown",
+            plate: info?.licensePlate ?? UNKNOWN,
+            model: info?.model ?? UNKNOWN,
             date,
             route,
             days: date ? Math.round((today - Date.parse(date)) / 86400000) : null
@@ -216,11 +217,16 @@
       return 0;
     }
 
+    // Romanian uses "de" before numbers of 20 and above: "acum 25 de zile"
+    function daysAgo(n) {
+      return `acum ${n} ${n >= 20 ? "de " : ""}zile`;
+    }
+
     function describe(r) {
-      if (r.date === null) return { text: "Not recorded yet", cls: "muted" };
-      if (r.days === 0) return { text: "Today", cls: "today" };
-      if (r.days === 1) return { text: `${r.date} (yesterday)`, cls: "" };
-      return { text: `${r.date} (${r.days} days ago)`, cls: "" };
+      if (r.date === null) return { text: "Încă neînregistrat", cls: "muted" };
+      if (r.days === 0) return { text: "Azi", cls: "today" };
+      if (r.days === 1) return { text: `${r.date} (ieri)`, cls: "" };
+      return { text: `${r.date} (${daysAgo(r.days)})`, cls: "" };
     }
 
     function render() {
@@ -231,8 +237,8 @@
         return `<tr>
           <td>${escapeHtml(OPERATOR_NAMES[r.operator] ?? r.operator)}</td>
           <td><a href="history.html?operator=${encodeURIComponent(r.operator)}&id=${encodeURIComponent(r.id)}">${escapeHtml(r.id)}</a></td>
-          <td class="${r.plate === "Unknown" ? "muted" : ""}">${escapeHtml(r.plate)}</td>
-          <td class="${r.model === "Unknown" ? "muted" : ""}">${escapeHtml(r.model)}</td>
+          <td class="${r.plate === UNKNOWN ? "muted" : ""}">${escapeHtml(r.plate)}</td>
+          <td class="${r.model === UNKNOWN ? "muted" : ""}">${escapeHtml(r.model)}</td>
           <td class="${d.cls}">${escapeHtml(d.text)}</td>
           <td>${escapeHtml(r.route)}</td>
         </tr>`;
@@ -245,7 +251,7 @@
           : label;
       });
 
-      el("status").textContent = `${shown.length} of ${rows.length} vehicles`;
+      el("status").textContent = `${shown.length} din ${rows.length} vehicule`;
     }
 
     document.querySelectorAll("th").forEach(th => {

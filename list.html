@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Route list - Bistrița Bus Tracker</title>
+  <title>Listă rute - Bistrița Bus Tracker</title>
   <link rel="stylesheet" href="style.css">
   <style>
     header a {
@@ -68,34 +68,34 @@
 <body>
 
   <header>
-    <h1>Route list</h1>
+    <h1>Listă rute</h1>
 
     <div class="controls">
-      <a href="index.html">&larr; Map</a>
+      <a href="index.html">&larr; Hartă</a>
 
       <select id="routeFilter">
-        <option value="">Choose a route</option>
+        <option value="">Alege o rută</option>
       </select>
 
-      <button id="refreshButton">Refresh</button>
+      <button id="refreshButton">Reîmprospătare</button>
     </div>
 
-    <div id="status">Loading...</div>
+    <div id="status">Se încarcă...</div>
   </header>
 
   <main>
-    <div id="empty">Choose a route to see its buses.</div>
+    <div id="empty">Alege o rută pentru a vedea autobuzele.</div>
 
     <table id="table" hidden>
       <thead>
         <tr>
-          <th data-key="delay">Delay</th>
-          <th data-key="plate">Plate</th>
+          <th data-key="delay">Întârziere</th>
+          <th data-key="plate">Număr</th>
           <th data-key="id">ID</th>
           <th data-key="model">Model</th>
-          <th data-key="direction">Direction</th>
-          <th data-key="stop">Stop</th>
-          <th data-key="arrival">Arrives</th>
+          <th data-key="direction">Direcție</th>
+          <th data-key="stop">Stație</th>
+          <th data-key="arrival">Sosește</th>
           <th data-key="operator">Operator</th>
         </tr>
       </thead>
@@ -121,12 +121,15 @@
 
     const el = id => document.getElementById(id);
 
+    // Common.enrichVehicle returns "Unknown" for missing values; shown as "Necunoscut"
+    const unknownRo = value => value === "Unknown" ? "Necunoscut" : value;
+
     // Turns an enriched vehicle into the plain values this table shows and sorts by
     function toRow(v) {
       const stop = !v.stopName ? ""
-        : v.stopStatus === "STOPPED_AT" ? `At ${v.stopName}`
-        : v.stopStatus === "INCOMING_AT" ? `Arriving at ${v.stopName}`
-        : `Next: ${v.stopName}`;
+        : v.stopStatus === "STOPPED_AT" ? `La ${v.stopName}`
+        : v.stopStatus === "INCOMING_AT" ? `Sosește la ${v.stopName}`
+        : `Următoarea: ${v.stopName}`;
 
       return {
         operator: v.operator,
@@ -145,15 +148,15 @@
 
     function delayCell(seconds) {
       const { kind, minutes } = describeDelay(seconds);
-      if (kind === "late") return { text: `${minutes} min late`, cls: "late" };
-      if (kind === "early") return { text: `${minutes} min early`, cls: "early" };
-      return { text: "On time", cls: "ontime" };
+      if (kind === "late") return { text: `${minutes} min întârziere`, cls: "late" };
+      if (kind === "early") return { text: `${minutes} min mai devreme`, cls: "early" };
+      return { text: "La timp", cls: "ontime" };
     }
 
     async function refresh() {
       if (isRefreshing) return;
       isRefreshing = true;
-      el("status").textContent = "Updating...";
+      el("status").textContent = "Se actualizează...";
 
       try {
         const { buses: fetched, failed } = await fetchAllVehicles();
@@ -184,13 +187,13 @@
       if (previous && !routes.has(previous)) {
         const [operator, routeId] = previous.split("|");
         const label = ctx.routes[operator]?.[routeId]?.indicative ?? routeId;
-        options.push({ value: previous, label: `${label} (no buses now)` });
+        options.push({ value: previous, label: `${label} (niciun autobuz acum)` });
       }
 
       const signature = JSON.stringify(options);
       if (select.dataset.signature !== signature) {
         select.replaceChildren(
-          new Option("Choose a route", ""),
+          new Option("Alege o rută", ""),
           ...options.map(o => new Option(o.label, o.value))
         );
         select.dataset.signature = signature;
@@ -211,14 +214,14 @@
 
     function render(failed = []) {
       const route = el("routeFilter").value;
-      const time = new Date().toLocaleTimeString();
-      const warning = failed.length ? ` • Could not load: ${failed.join(", ")}` : "";
+      const time = new Date().toLocaleTimeString("ro-RO");
+      const warning = failed.length ? ` • Nu s-a putut încărca: ${failed.join(", ")}` : "";
 
       if (!route) {
         el("table").hidden = true;
         el("empty").hidden = false;
-        el("empty").textContent = "Choose a route to see its buses.";
-        el("status").textContent = `${buses.length} buses running • Last update: ${time}${warning}`;
+        el("empty").textContent = "Alege o rută pentru a vedea autobuzele.";
+        el("status").textContent = `${buses.length} autobuze în circulație • Ultima actualizare: ${time}${warning}`;
         return;
       }
 
@@ -227,8 +230,8 @@
       if (shown.length === 0) {
         el("table").hidden = true;
         el("empty").hidden = false;
-        el("empty").textContent = "No buses are running on this route right now.";
-        el("status").textContent = `0 buses • Last update: ${time}${warning}`;
+        el("empty").textContent = "Momentan nu circulă niciun autobuz pe această rută.";
+        el("status").textContent = `0 autobuze • Ultima actualizare: ${time}${warning}`;
         return;
       }
 
@@ -239,11 +242,11 @@
         const d = delayCell(b.delay);
         return `<tr>
           <td class="${d.cls}">${escapeHtml(d.text)}</td>
-          <td class="${b.plate === "Unknown" ? "muted" : ""}">${escapeHtml(b.plate)}</td>
+          <td class="${b.plate === "Unknown" ? "muted" : ""}">${escapeHtml(unknownRo(b.plate))}</td>
           <td><a href="history.html?operator=${encodeURIComponent(b.operator)}&id=${encodeURIComponent(b.id)}">${escapeHtml(b.id)}</a></td>
-          <td class="${b.model === "Unknown" ? "muted" : ""}">${escapeHtml(b.model)}</td>
-          <td class="${b.direction === "Unknown" ? "muted" : ""}">${escapeHtml(b.direction)}</td>
-          <td class="${b.stop ? "" : "muted"}">${escapeHtml(b.stop || "Unknown")}</td>
+          <td class="${b.model === "Unknown" ? "muted" : ""}">${escapeHtml(unknownRo(b.model))}</td>
+          <td class="${b.direction === "Unknown" ? "muted" : ""}">${escapeHtml(unknownRo(b.direction))}</td>
+          <td class="${b.stop ? "" : "muted"}">${escapeHtml(b.stop || "Necunoscută")}</td>
           <td>${escapeHtml(formatTime(b.arrival))}</td>
           <td>${escapeHtml(b.operatorName)}</td>
         </tr>`;
@@ -256,7 +259,8 @@
           : label;
       });
 
-      el("status").textContent = `${shown.length} bus${shown.length === 1 ? "" : "es"} on this route • Last update: ${time}${warning}`;
+      el("status").textContent =
+        `${shown.length === 1 ? "1 autobuz" : `${shown.length} ${shown.length >= 20 ? "de " : ""}autobuze`} pe această rută • Ultima actualizare: ${time}${warning}`;
     }
 
     async function refreshLoop() {
@@ -298,7 +302,7 @@
         await refreshLoop();
       } catch (error) {
         console.error(error);
-        el("status").textContent = `Startup error: ${error.message}`;
+        el("status").textContent = `Eroare la pornire: ${error.message}`;
       }
     })();
   </script>

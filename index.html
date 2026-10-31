@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 
 <head>
   <meta charset="UTF-8">
@@ -10,6 +10,47 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .menu {
+      display: inline-block;
+    }
+
+    #menuButton {
+      font-size: 18px;
+      line-height: 1;
+      padding: 4px 10px;
+      cursor: pointer;
+    }
+
+    #menuList {
+      position: fixed;
+      z-index: 2000;
+      min-width: 160px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      padding: 4px 0;
+    }
+
+    #menuList[hidden] {
+      display: none;
+    }
+
+    #menuList a {
+      display: block;
+      padding: 8px 14px;
+      color: #222;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    #menuList a:hover,
+    #menuList a:focus {
+      background: #f0f0f0;
+    }
+  </style>
 </head>
 
 <body>
@@ -22,41 +63,47 @@
       <label>
         Operator:
         <select id="operatorFilter">
-          <option value="all">All operators</option>
+          <option value="all">Toți operatorii</option>
           <option value="transmixt">Transmixt</option>
           <option value="ani-tour">Ani Tour</option>
         </select>
       </label>
 
       <label>
-        Route:
+        Rută:
         <select id="routeFilter">
-          <option value="all">All routes</option>
+          <option value="all">Toate rutele</option>
         </select>
       </label>
 
       <select id="modelFilter">
-        <option value="all">All models</option>
+        <option value="all">Toate modelele</option>
       </select>
 
       <select id="unknownFilter">
-        <option value="all">All vehicles</option>
-        <option value="any">Unknown plate or model</option>
-        <option value="plate">Unknown plate only</option>
-        <option value="model">Unknown model only</option>
+        <option value="all">Toate vehiculele</option>
+        <option value="any">Număr sau model necunoscut</option>
+        <option value="plate">Doar număr necunoscut</option>
+        <option value="model">Doar model necunoscut</option>
       </select>
 
-      <a href="last-seen.html" style="color: white;">Last seen</a>
-<a href="list.html" style="color: white;">Route list</a>
-
       <button id="refreshButton">
-        Refresh
+        Reîmprospătare
       </button>
+
+      <div class="menu">
+        <button id="menuButton" type="button" aria-label="Meniu" aria-haspopup="true" aria-expanded="false">&#9776;</button>
+        <nav id="menuList" hidden>
+          <a href="last-seen.html">Văzut ultima dată</a>
+          <a href="route-history.html">Istoric rute</a>
+          <a href="list.html">Listă rute</a>
+        </nav>
+      </div>
 
     </div>
 
     <div id="status">
-      Loading...
+      Se încarcă...
     </div>
   </header>
 
@@ -71,6 +118,44 @@
 
   <script src="common.js"></script>
   <script src="app.js"></script>
+
+  <script>
+    (function () {
+      const button = document.getElementById("menuButton");
+      const list = document.getElementById("menuList");
+
+      function close() {
+        list.hidden = true;
+        button.setAttribute("aria-expanded", "false");
+      }
+
+      function open() {
+        list.hidden = false;
+        button.setAttribute("aria-expanded", "true");
+
+        // Place under the button, kept inside the screen
+        const b = button.getBoundingClientRect();
+        const w = list.offsetWidth;
+        list.style.top = `${b.bottom + 4}px`;
+        list.style.left = `${Math.max(4, Math.min(b.left, window.innerWidth - w - 4))}px`;
+      }
+
+      button.addEventListener("click", e => {
+        e.stopPropagation();
+        list.hidden ? open() : close();
+      });
+
+      document.addEventListener("click", e => {
+        if (!list.contains(e.target)) close();
+      });
+
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape") close();
+      });
+
+      window.addEventListener("resize", close);
+    })();
+  </script>
 
 </body>
 
