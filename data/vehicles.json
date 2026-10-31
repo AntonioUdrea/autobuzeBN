@@ -567,12 +567,17 @@
       "assignedRoutes": ["2"]
     },
     "198": {
-      "licensePlate": "BN 19 TNR (neconfirmat)",
+      "licensePlate": "BN 13 TNR",
       "model": "Mercedes-Benz Citaro Facelift LE",
       "assignedRoutes": ["2"]
     },
     "199": {
       "licensePlate": "BN 16 TNR",
+      "model": "Mercedes-Benz Citaro Facelift LE",
+      "assignedRoutes": ["2"]
+    },
+    "200": {
+      "licensePlate": "BN 19 TNR",
       "model": "Mercedes-Benz Citaro Facelift LE",
       "assignedRoutes": ["2"]
     }
