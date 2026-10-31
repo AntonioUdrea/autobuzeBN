@@ -1469,12 +1469,16 @@
     "transmixt:197": [{"route":"2","from":"06:45","to":"10:00","polls":13,"directions":["107 DR SLATINITEI","1 PASARELA"]},{"route":"2","from":"11:30","to":"21:15","polls":38,"directions":["1 PASARELA","107 DR SLATINITEI","28 VIISOARA"]}]
   },
   "2026-10-31": {
-    "transmixt:34": [{"route":"3","from":"06:00","to":"06:15","polls":2,"directions":["77 C R VIVU"]}],
-    "transmixt:53": [{"route":"1","from":"06:00","to":"06:15","polls":2,"directions":["tur"]}],
+    "transmixt:34": [{"route":"3","from":"06:00","to":"06:30","polls":3,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
+    "transmixt:53": [{"route":"1","from":"06:00","to":"06:30","polls":3,"directions":["tur","1 PASARELA"]}],
     "transmixt:65": [{"route":"2","from":"06:00","to":"06:15","polls":2,"directions":["28 VIISOARA"]}],
+    "transmixt:69": [{"route":"3","from":"06:30","to":"06:30","polls":1,"directions":["77 C R VIVU"]}],
+    "transmixt:71": [{"route":"2","from":"06:30","to":"06:30","polls":1,"directions":["107 DR SLATINITEI"]}],
+    "transmixt:73": [{"route":"2","from":"06:30","to":"06:30","polls":1,"directions":["28 VIISOARA"]}],
     "transmixt:74": [{"route":"2","from":"06:15","to":"06:15","polls":1,"directions":["28 VIISOARA"]}],
-    "transmixt:107": [{"route":"493 Bistrița - Gledin","from":"06:00","to":"06:15","polls":2,"directions":["GLEDIN- BISTRITA"]}],
-    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:15","polls":1,"directions":["Milas - Bistrita"]}],
-    "transmixt:171": [{"route":"354 Bistrița - Caila","from":"06:15","to":"06:15","polls":1,"directions":["Caila - Bistrita"]}]
+    "transmixt:107": [{"route":"493 Bistrița - Gledin","from":"06:00","to":"06:30","polls":3,"directions":["GLEDIN- BISTRITA"]}],
+    "transmixt:159": [{"route":"1","from":"06:30","to":"06:30","polls":1,"directions":["tur"]}],
+    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:30","polls":2,"directions":["Milas - Bistrita"]}],
+    "transmixt:171": [{"route":"354 Bistrița - Caila","from":"06:15","to":"06:30","polls":2,"directions":["Caila - Bistrita"]}]
   }
 }
