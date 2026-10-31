@@ -1470,7 +1470,7 @@
   },
   "2026-10-31": {
     "ani-tour:4": [{"route":"615 Bistrița - Năsăud","from":"07:15","to":"08:15","polls":4,"directions":["Bistrita Autogara/Rodnei","Nasaud Autogara"]},{"route":"615 Bistrița - Năsăud","from":"13:30","to":"14:00","polls":3,"directions":["Bistrita Autogara/Rodnei"]},{"route":"615 Bistrița - Năsăud","from":"15:30","to":"15:45","polls":2,"directions":["Nasaud Autogara"]},{"route":"615 Bistrița - Năsăud","from":"18:45","to":"20:30","polls":6,"directions":["Bistrita Autogara/Rodnei","Nasaud Autogara"]}],
-    "transmixt:34": [{"route":"3","from":"06:00","to":"22:00","polls":64,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
+    "transmixt:34": [{"route":"3","from":"06:00","to":"22:15","polls":65,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
     "transmixt:42": [{"route":"3","from":"06:45","to":"20:30","polls":36,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
     "transmixt:53": [{"route":"1","from":"06:00","to":"20:15","polls":57,"directions":["tur","1 PASARELA"]},{"route":"1","from":"21:45","to":"22:00","polls":2,"directions":["tur","1 PASARELA"]}],
     "transmixt:65": [{"route":"2","from":"06:00","to":"21:30","polls":46,"directions":["28 VIISOARA","1 PASARELA","107 DR SLATINITEI"]}],
