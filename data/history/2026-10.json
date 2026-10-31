@@ -1467,5 +1467,11 @@
     "transmixt:180": [{"route":"2","from":"05:30","to":"20:45","polls":52,"directions":["28 VIISOARA","1 PASARELA","107 DR SLATINITEI"]}],
     "transmixt:182": [{"route":"2","from":"06:45","to":"14:00","polls":27,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]},{"route":"2","from":"16:00","to":"19:30","polls":11,"directions":["107 DR SLATINITEI","1 PASARELA"]}],
     "transmixt:197": [{"route":"2","from":"06:45","to":"10:00","polls":13,"directions":["107 DR SLATINITEI","1 PASARELA"]},{"route":"2","from":"11:30","to":"21:15","polls":38,"directions":["1 PASARELA","107 DR SLATINITEI","28 VIISOARA"]}]
+  },
+  "2026-10-31": {
+    "transmixt:34": [{"route":"3","from":"06:00","to":"06:00","polls":1,"directions":["77 C R VIVU"]}],
+    "transmixt:53": [{"route":"1","from":"06:00","to":"06:00","polls":1,"directions":["tur"]}],
+    "transmixt:65": [{"route":"2","from":"06:00","to":"06:00","polls":1,"directions":["28 VIISOARA"]}],
+    "transmixt:107": [{"route":"493 Bistrița - Gledin","from":"06:00","to":"06:00","polls":1,"directions":["GLEDIN- BISTRITA"]}]
   }
 }
