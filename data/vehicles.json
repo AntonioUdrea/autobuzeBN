@@ -565,6 +565,16 @@
       "licensePlate": "BN 98 PMB",
       "model": "Karsan e-ATA 10",
       "assignedRoutes": ["2"]
+    },
+    "198": {
+      "licensePlate": "BN 19 TNR (neconfirmat)",
+      "model": "Mercedes-Benz Citaro Facelift LE",
+      "assignedRoutes": ["2"]
+    },
+    "199": {
+      "licensePlate": "BN 16 TNR",
+      "model": "Mercedes-Benz Citaro Facelift LE",
+      "assignedRoutes": ["2"]
     }
   },
   "ani-tour": {
