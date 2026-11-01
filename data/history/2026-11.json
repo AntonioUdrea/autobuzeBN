@@ -1,8 +1,10 @@
 {
   "2026-11-01": {
+    "ani-tour:4": [{"route":"615 Bistrița - Năsăud","from":"07:15","to":"07:15","polls":1,"directions":["Bistrita Autogara/Rodnei"]}],
     "transmixt:70": [{"route":"1","from":"07:00","to":"07:00","polls":1,"directions":["tur"]}],
-    "transmixt:92": [{"route":"4","from":"07:00","to":"07:00","polls":1,"directions":["tur"]}],
-    "transmixt:95": [{"route":"4","from":"07:00","to":"07:00","polls":1,"directions":["UNIREA- VIISOARA"]}],
+    "transmixt:77": [{"route":"13","from":"07:15","to":"07:15","polls":1,"directions":["174 CARTIER RAAL"]}],
+    "transmixt:92": [{"route":"4","from":"07:00","to":"07:15","polls":2,"directions":["tur"]}],
+    "transmixt:95": [{"route":"4","from":"07:00","to":"07:15","polls":2,"directions":["UNIREA- VIISOARA"]}],
     "transmixt:154": [{"route":"7","from":"05:45","to":"06:30","polls":4,"directions":["110 SLATINITA","84 AUTOGARA"]}]
   }
 }
