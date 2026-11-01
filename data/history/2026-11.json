@@ -1,5 +1,8 @@
 {
   "2026-11-01": {
+    "transmixt:70": [{"route":"1","from":"07:00","to":"07:00","polls":1,"directions":["tur"]}],
+    "transmixt:92": [{"route":"4","from":"07:00","to":"07:00","polls":1,"directions":["tur"]}],
+    "transmixt:95": [{"route":"4","from":"07:00","to":"07:00","polls":1,"directions":["UNIREA- VIISOARA"]}],
     "transmixt:154": [{"route":"7","from":"05:45","to":"06:30","polls":4,"directions":["110 SLATINITA","84 AUTOGARA"]}]
   }
 }
