@@ -627,6 +627,16 @@
       "model": "Setra S416 GT-HD",
       "assignedRoutes": ["630 Năsăud - Suplai"]
     },
+    "12": {
+      "licensePlate": "B 119 ANY",
+      "model": "Mercus City (MAN e-TGE)",
+      "assignedRoutes": ["632 Năsăud - Runcu Salvei", "727 Năsăud - Telcișor"]
+    },
+    "13": {
+      "licensePlate": "B 132 ANY",
+      "model": "Mercus City (MAN e-TGE)",
+      "assignedRoutes": ["632 Năsăud - Runcu Salvei", "727 Năsăud - Telcișor"]
+    },
     "15": {
       "licensePlate": "BN 51 ANY (neconfirmat)",
       "model": "Mercedes-Benz Citaro Facelift Ü",
