@@ -24,12 +24,12 @@
     "transmixt:198": {
       "route": "506 Bistrița - Cușma",
       "rare": false,
-      "unusual": true
+      "unusual": false
     },
     "transmixt:200": {
       "route": "358 Bistrița - Fântânele",
       "rare": false,
-      "unusual": true
+      "unusual": false
     }
   }
 }
