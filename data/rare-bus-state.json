@@ -30,6 +30,11 @@
       "route": "16-Meci",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:8": {
+      "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "rare": false,
+      "unusual": true
     }
   }
 }
