@@ -1,4 +1,10 @@
 {
   "date": "2026-11-05",
-  "buses": {}
+  "buses": {
+    "transmixt:62": {
+      "route": "13",
+      "rare": true,
+      "unusual": false
+    }
+  }
 }
