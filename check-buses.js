@@ -78,9 +78,9 @@ function loadMeta() {
 // ============================================================
 // Position history (data/positions/YYYY-MM-DD.json)
 //
-// { "operator:id": [ [time, lat, lng, route], ... ] }
+// { "operator:id": [ [time, lat, lng, route, destination], ... ] }
 // Coordinates are rounded to 5 decimals (about 1 m). A point is only added
-// when the bus moved or changed route since its previous point.
+// when the bus moved or changed route/destination since its previous point.
 // ============================================================
 
 function toLatLng(position) {
@@ -95,12 +95,15 @@ function recordPositions(positions, buses, time) {
     const point = toLatLng(Common.getPosition(bus));
     if (!point) continue;
 
+    const destination = bus.destination === "Unknown" ? "" : bus.destination;
+
     const list = (positions[bus.key] ??= []);
     const last = list[list.length - 1];
 
-    if (last && last[1] === point[0] && last[2] === point[1] && last[3] === bus.routeIndicative) continue;
+    if (last && last[1] === point[0] && last[2] === point[1] &&
+        last[3] === bus.routeIndicative && (last[4] ?? "") === destination) continue;
 
-    list.push([time, point[0], point[1], bus.routeIndicative]);
+    list.push([time, point[0], point[1], bus.routeIndicative, destination]);
   }
 }
 

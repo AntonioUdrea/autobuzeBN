@@ -308,7 +308,7 @@
       };
 
       points.forEach((p, i) => {
-        const [time, lat, lng, route] = p;
+        const [time, lat, lng, route, destination] = p;
 
         if (segment.length && segment[0][3] !== route) {
           const last = segment[segment.length - 1];
@@ -326,7 +326,10 @@
           fillOpacity: 0.9,
           weight: 2
         })
-          .bindTooltip(`${escapeHtml(time)} - linia ${escapeHtml(route)}`)
+          .bindTooltip(
+            `${escapeHtml(time)} - linia ${escapeHtml(route)}` +
+            (destination ? ` &rarr; ${escapeHtml(destination)}` : "")
+          )
           .addTo(dayLayer);
       });
       flush();
