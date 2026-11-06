@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Istoric vehicul - Bistrița Bus Tracker</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="style.css">
   <style>
     header a {
@@ -67,6 +68,40 @@
       white-space: nowrap;
     }
 
+    .mapBtn {
+      margin-left: 6px;
+      padding: 2px 8px;
+      font-size: 12px;
+    }
+
+    #mapDialog {
+      width: min(900px, 95vw);
+      height: min(600px, 85vh);
+      padding: 0;
+      border: 0;
+      border-radius: 8px;
+    }
+
+    #mapDialog[open] {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #mapHead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #f2f2f2;
+      font-size: 14px;
+    }
+
+    #dayMap {
+      flex: 1;
+      min-height: 0;
+    }
+
   </style>
 </head>
 
@@ -96,6 +131,15 @@
     </table>
   </main>
 
+  <dialog id="mapDialog">
+    <div id="mapHead">
+      <span><strong id="mapTitle"></strong> <span id="mapNote" class="muted"></span></span>
+      <button id="mapClose" type="button">Închide</button>
+    </div>
+    <div id="dayMap"></div>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="common.js"></script>
   <script>
     const { OPERATOR_NAMES, escapeHtml, naturalCompare } = Common;
@@ -106,6 +150,7 @@
     // stint = { route, from, to, polls, directions }; old imported rows only have { route }
     const visits = new Map();
     let vehicles = {};
+    let positionDays = new Set();   // days that have a data/positions/<date>.json file
 
     async function getJson(url, fallback) {
       try {
@@ -159,7 +204,8 @@
         const span = timed.length ? `${timed[0].from}&ndash;${timed[timed.length - 1].to}` : `<span class="muted">-</span>`;
 
         return `<tr>
-          <td>${escapeHtml(date)} <span class="muted">${weekday(date)}</span></td>
+          <td>${escapeHtml(date)} <span class="muted">${weekday(date)}</span>
+            ${positionDays.has(date) ? `<button class="mapBtn" type="button" data-date="${escapeHtml(date)}">Hartă</button>` : ""}</td>
           <td>${span}</td>
           <td>${stints.map(stintHtml).join("")}</td>
         </tr>`;
@@ -175,11 +221,13 @@
     // ---------- loading ----------
 
     async function load() {
-      const [index, vehiclesData] = await Promise.all([
+      const [index, vehiclesData, positionIndex] = await Promise.all([
         getJson("data/history/index.json", { months: [] }),
-        getJson("data/vehicles.json", {})
+        getJson("data/vehicles.json", {}),
+        getJson("data/positions/index.json", { days: [] })
       ]);
       vehicles = vehiclesData;
+      positionDays = new Set(positionIndex.days ?? []);
 
       const months = await Promise.all((index.months ?? []).map(m => getJson(`data/history/${m}.json`, {})));
 
@@ -208,6 +256,91 @@
 
       render();
     }
+
+    // ---------- day map ----------
+
+    let dayMap, dayLayer, mapRequest = 0;
+
+    function routeColor(route) {
+      let hash = 0;
+      for (const ch of String(route)) hash = (hash * 31 + ch.charCodeAt(0)) % 360;
+      return `hsl(${hash}, 70%, 40%)`;
+    }
+
+    async function showDayMap(date) {
+      const key = el("vehicle").value;
+      const request = ++mapRequest;
+
+      el("mapTitle").textContent = `${label(key)} - ${date}`;
+      el("mapNote").textContent = "Se încarcă...";
+      el("mapDialog").showModal();
+
+      if (!dayMap) {
+        dayMap = L.map("dayMap");
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: "&copy; OpenStreetMap contributors"
+        }).addTo(dayMap);
+        dayLayer = L.layerGroup().addTo(dayMap);
+      }
+
+      dayMap.setView([47.133, 24.5], 13);
+      dayMap.invalidateSize();
+      dayLayer.clearLayers();
+
+      const data = await getJson(`data/positions/${date}.json`, null);
+      if (request !== mapRequest) return;   // another day was opened meanwhile
+
+      const points = data?.[key];
+      if (!points?.length) {
+        el("mapNote").textContent = "Nu există poziții înregistrate pentru această zi.";
+        return;
+      }
+
+      // One dashed line per run of the same route, so a route change changes the color
+      let segment = [];
+      const flush = () => {
+        if (segment.length > 1) {
+          L.polyline(segment.map(p => [p[1], p[2]]), {
+            color: routeColor(segment[0][3]), weight: 3, opacity: 0.7, dashArray: "6 6"
+          }).addTo(dayLayer);
+        }
+      };
+
+      points.forEach((p, i) => {
+        const [time, lat, lng, route] = p;
+
+        if (segment.length && segment[0][3] !== route) {
+          const last = segment[segment.length - 1];
+          flush();
+          segment = [last];   // keep the line connected
+        }
+        segment.push(p);
+
+        const first = i === 0;
+        const final = i === points.length - 1;
+        L.circleMarker([lat, lng], {
+          radius: first || final ? 8 : 5,
+          color: routeColor(route),
+          fillColor: first ? "#2e7d32" : final ? "#c62828" : routeColor(route),
+          fillOpacity: 0.9,
+          weight: 2
+        })
+          .bindTooltip(`${escapeHtml(time)} - linia ${escapeHtml(route)}`)
+          .addTo(dayLayer);
+      });
+      flush();
+
+      dayMap.fitBounds(L.latLngBounds(points.map(p => [p[1], p[2]])), { padding: [30, 30], maxZoom: 16 });
+      el("mapNote").textContent = `${points.length} poziții (verde = prima, roșu = ultima)`;
+    }
+
+    el("days").addEventListener("click", e => {
+      const button = e.target.closest(".mapBtn");
+      if (button) showDayMap(button.dataset.date);
+    });
+
+    el("mapClose").addEventListener("click", () => el("mapDialog").close());
 
     el("vehicle").addEventListener("change", render);
     load();

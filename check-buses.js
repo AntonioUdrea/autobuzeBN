@@ -3,6 +3,7 @@
  *   2. Fetch the live vehicles and stops from both operators.
  *   3. Record every vehicle in the detailed history (data/history/YYYY-MM.json).
  *   4. Update data/last-seen.json.
+ *      Also record each vehicle's position (data/positions/YYYY-MM-DD.json).
  *   5. Send Discord alerts for rare vehicles / vehicles on an unusual route.
  *   6. Write the files and push them to git.
  */
@@ -40,6 +41,11 @@ const ACTIVE_UNTIL = "23:59";
 const STATE_FILE = "data/rare-bus-state.json";
 const LAST_SEEN_FILE = "data/last-seen.json";
 
+// One file per day: data/positions/YYYY-MM-DD.json
+// plus data/positions/index.json = { days: ["2026-11-06", ...] }
+const POSITIONS_DIR = "data/positions";
+const POSITIONS_INDEX_FILE = `${POSITIONS_DIR}/index.json`;
+
 
 // ============================================================
 // Files
@@ -65,6 +71,36 @@ function loadMeta() {
   } catch (err) {
     console.warn("Could not load vehicles.json / routes.json:", err.message);
     return { vehicles: {}, routes: {} };
+  }
+}
+
+
+// ============================================================
+// Position history (data/positions/YYYY-MM-DD.json)
+//
+// { "operator:id": [ [time, lat, lng, route], ... ] }
+// Coordinates are rounded to 5 decimals (about 1 m). A point is only added
+// when the bus moved or changed route since its previous point.
+// ============================================================
+
+function toLatLng(position) {
+  if (!position) return null;
+  const [lat, lng] = position;
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  return [Math.round(lat * 1e5) / 1e5, Math.round(lng * 1e5) / 1e5];
+}
+
+function recordPositions(positions, buses, time) {
+  for (const bus of buses) {
+    const point = toLatLng(Common.getPosition(bus));
+    if (!point) continue;
+
+    const list = (positions[bus.key] ??= []);
+    const last = list[list.length - 1];
+
+    if (last && last[1] === point[0] && last[2] === point[1] && last[3] === bus.routeIndicative) continue;
+
+    list.push([time, point[0], point[1], bus.routeIndicative]);
   }
 }
 
@@ -241,6 +277,9 @@ async function run(now = new Date()) {
   const lastSeen = readJson(LAST_SEEN_FILE, {});
   const month = store.monthOf(date);
   const history = store.loadMonth(month);
+  const positionsFile = `${POSITIONS_DIR}/${date}.json`;
+  const positions = readJson(positionsFile, {});
+  const positionsIndex = readJson(POSITIONS_INDEX_FILE, { days: [] });
 
   // 2. Fetch
   const [{ buses, failed }, { stops, patterns }] = await Promise.all([
@@ -274,6 +313,14 @@ async function run(now = new Date()) {
     (lastSeen[bus.operator] ??= {})[bus.id] = { date, time, route: bus.routeIndicative };
   }
 
+  // 3b. Positions
+  recordPositions(positions, current, time);
+
+  if (Object.keys(positions).length > 0 && !positionsIndex.days.includes(date)) {
+    positionsIndex.days.push(date);
+    positionsIndex.days.sort();
+  }
+
   // 5. Alerts
   const newAlertState = await sendAlerts(current, alertState, webhookUrl);
 
@@ -281,14 +328,19 @@ async function run(now = new Date()) {
   store.saveMonth(month, history);
   writeJson(LAST_SEEN_FILE, lastSeen);
   writeJson(STATE_FILE, { date, buses: newAlertState });
+  writeJson(positionsFile, positions);
+  writeJson(POSITIONS_INDEX_FILE, positionsIndex);
 
-  persistToGit([STATE_FILE, LAST_SEEN_FILE, store.HISTORY_DIR], "Update bus data [skip ci]");
+  persistToGit(
+    [STATE_FILE, LAST_SEEN_FILE, store.HISTORY_DIR, POSITIONS_DIR],
+    "Update bus data [skip ci]"
+  );
 
   console.log("Bus checker completed successfully.");
 }
 
 
-module.exports = { resolveDuplicates, sendAlerts, run };
+module.exports = { resolveDuplicates, sendAlerts, recordPositions, run };
 
 if (require.main === module) {
   run().catch(err => {
