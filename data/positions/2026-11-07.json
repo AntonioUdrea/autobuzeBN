@@ -41,6 +41,13 @@
       24.85728,
       "502 Bistrița - Mureșenii Bârgăului",
       "BISTRITA- MURESENII BARGAULUI"
+    ],
+    [
+      "08:30",
+      47.23012,
+      24.79502,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "MURESENII BARGAULUI- BISTRITA"
     ]
   ],
   "transmixt:8": [
@@ -85,6 +92,13 @@
       24.65332,
       "476 Bistrița - Budacu de Sus (via Satu Nou)",
       "TUR"
+    ],
+    [
+      "08:30",
+      47.0605,
+      24.65972,
+      "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "RETUR"
     ]
   ],
   "transmixt:124": [
@@ -136,6 +150,13 @@
       24.64756,
       "493 Bistrița - Gledin",
       "BISTRITA- GLEDIN"
+    ],
+    [
+      "08:30",
+      46.95787,
+      24.70597,
+      "493 Bistrița - Gledin",
+      "GLEDIN- BISTRITA"
     ]
   ],
   "transmixt:171": [
@@ -164,6 +185,13 @@
       "08:15",
       47.13832,
       24.42613,
+      "354 Bistrița - Caila",
+      "Bistrita - Caila"
+    ],
+    [
+      "08:30",
+      47.15044,
+      24.34657,
       "354 Bistrița - Caila",
       "Bistrita - Caila"
     ]
@@ -217,6 +245,13 @@
       24.41684,
       "364 Bistrița - Milaș",
       "Bistrita - Milas"
+    ],
+    [
+      "08:30",
+      46.94629,
+      24.45921,
+      "364 Bistrița - Milaș",
+      "Bistrita - Milas"
     ]
   ],
   "ani-tour:4": [
@@ -254,6 +289,13 @@
       24.49094,
       "615 Bistrița - Năsăud",
       "Nasaud Autogara"
+    ],
+    [
+      "08:30",
+      47.25721,
+      24.43128,
+      "615 Bistrița - Năsăud",
+      "Nasaud Autogara"
     ]
   ],
   "transmixt:165": [
@@ -275,6 +317,13 @@
       "08:15",
       46.96108,
       24.35932,
+      "387 Bistrița - Silivașu de Câmpie",
+      "Bistrita - Silivasu de Campie"
+    ],
+    [
+      "08:30",
+      46.86866,
+      24.31161,
       "387 Bistrița - Silivașu de Câmpie",
       "Bistrita - Silivasu de Campie"
     ]
@@ -300,6 +349,13 @@
       24.46776,
       "1",
       "tur"
+    ],
+    [
+      "08:30",
+      47.13223,
+      24.48798,
+      "1",
+      "tur"
     ]
   ],
   "transmixt:34": [
@@ -323,6 +379,13 @@
       24.46863,
       "3",
       "77 C R VIVU"
+    ],
+    [
+      "08:30",
+      47.13292,
+      24.49304,
+      "3",
+      "77 C R VIVU"
     ]
   ],
   "transmixt:64": [
@@ -337,6 +400,13 @@
       "08:15",
       47.12896,
       24.4929,
+      "13",
+      "39 BIBL JUDETEANA"
+    ],
+    [
+      "08:30",
+      47.12847,
+      24.49373,
       "13",
       "39 BIBL JUDETEANA"
     ]
@@ -364,6 +434,13 @@
       24.52386,
       "9",
       "141 GHINDA"
+    ],
+    [
+      "08:30",
+      47.13887,
+      24.54209,
+      "9",
+      "84 AUTOGARA"
     ]
   ],
   "transmixt:42": [
@@ -380,6 +457,13 @@
       24.5075,
       "3",
       "77 C R VIVU"
+    ],
+    [
+      "08:30",
+      47.13409,
+      24.50777,
+      "3",
+      "69 SCHULLERWALD"
     ]
   ],
   "transmixt:153": [
@@ -396,6 +480,13 @@
       24.50657,
       "7",
       "84 AUTOGARA"
+    ],
+    [
+      "08:30",
+      47.1256,
+      24.45148,
+      "8",
+      "125 SIGMIR"
     ]
   ],
   "transmixt:70": [
@@ -412,6 +503,13 @@
       24.5054,
       "1",
       "tur"
+    ],
+    [
+      "08:30",
+      47.13733,
+      24.50847,
+      "1",
+      "1 PASARELA"
     ]
   ],
   "transmixt:159": [
@@ -453,6 +551,33 @@
       24.50434,
       "3",
       "69 SCHULLERWALD"
+    ]
+  ],
+  "transmixt:178": [
+    [
+      "08:30",
+      47.12608,
+      24.48361,
+      "2",
+      "107 DR SLATINITEI"
+    ]
+  ],
+  "transmixt:77": [
+    [
+      "08:30",
+      47.117,
+      24.49692,
+      "13",
+      "39 BIBL JUDETEANA"
+    ]
+  ],
+  "transmixt:74": [
+    [
+      "08:30",
+      47.1463,
+      24.51248,
+      "2",
+      "28 VIISOARA"
     ]
   ]
 }
