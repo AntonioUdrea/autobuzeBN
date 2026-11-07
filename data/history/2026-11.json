@@ -565,10 +565,10 @@
   "2026-11-07": {
     "ani-tour:4": [{"route":"615 Bistrița - Năsăud","from":"07:15","to":"08:30","polls":6,"directions":["Bistrita Autogara/Rodnei","Nasaud Autogara"]},{"route":"615 Bistrița - Năsăud","from":"13:30","to":"14:00","polls":3,"directions":["Bistrita Autogara/Rodnei"]},{"route":"615 Bistrița - Năsăud","from":"15:30","to":"16:00","polls":3,"directions":["Nasaud Autogara"]},{"route":"615 Bistrița - Năsăud","from":"18:45","to":"20:30","polls":6,"directions":["Bistrita Autogara/Rodnei","Nasaud Autogara"]}],
     "transmixt:8": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"06:00","to":"09:00","polls":9,"directions":["RETUR","TUR"]}],
-    "transmixt:34": [{"route":"3","from":"07:45","to":"21:45","polls":57,"directions":["69 SCHULLERWALD","77 C R VIVU"]}],
-    "transmixt:42": [{"route":"3","from":"08:00","to":"21:45","polls":55,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
+    "transmixt:34": [{"route":"3","from":"07:45","to":"22:00","polls":58,"directions":["69 SCHULLERWALD","77 C R VIVU"]}],
+    "transmixt:42": [{"route":"3","from":"08:00","to":"22:00","polls":56,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
     "transmixt:64": [{"route":"13","from":"08:00","to":"12:15","polls":17,"directions":["39 BIBL JUDETEANA","181 LOGOS"]},{"route":"13","from":"13:30","to":"18:15","polls":17,"directions":["181 LOGOS","39 BIBL JUDETEANA"]}],
-    "transmixt:70": [{"route":"1","from":"08:00","to":"21:45","polls":53,"directions":["tur","1 PASARELA"]}],
+    "transmixt:70": [{"route":"1","from":"08:00","to":"22:00","polls":54,"directions":["tur","1 PASARELA"]}],
     "transmixt:74": [{"route":"2","from":"08:30","to":"20:30","polls":43,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}],
     "transmixt:77": [{"route":"13","from":"08:30","to":"11:30","polls":4,"directions":["39 BIBL JUDETEANA"]},{"route":"13","from":"13:00","to":"16:30","polls":6,"directions":["174 CARTIER RAAL","39 BIBL JUDETEANA"]},{"route":"13","from":"18:30","to":"21:30","polls":11,"directions":["181 LOGOS","174 CARTIER RAAL"]}],
     "transmixt:92": [{"route":"4","from":"09:45","to":"18:45","polls":27,"directions":["UNIREA- VIISOARA","tur"]}],
