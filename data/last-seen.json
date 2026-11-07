@@ -2,7 +2,7 @@
   "transmixt": {
     "8": {
       "date": "2026-11-07",
-      "time": "06:00",
+      "time": "06:15",
       "route": "476 Bistrița - Budacu de Sus (via Satu Nou)"
     },
     "28": {
@@ -304,7 +304,7 @@
     },
     "116": {
       "date": "2026-11-07",
-      "time": "06:00",
+      "time": "06:15",
       "route": "502 Bistrița - Mureșenii Bârgăului"
     },
     "118": {
@@ -338,9 +338,9 @@
       "route": "502 Bistrița - Mureșenii Bârgăului"
     },
     "124": {
-      "date": "2026-11-06",
-      "time": "19:45",
-      "route": "470 Bistrița - Posmuș"
+      "date": "2026-11-07",
+      "time": "06:15",
+      "route": "493 Bistrița - Gledin"
     },
     "133": {
       "date": "2026-10-26",
@@ -463,9 +463,9 @@
       "route": "367 Bistrița - Pinticu"
     },
     "169": {
-      "date": "2026-11-06",
-      "time": "15:00",
-      "route": "384 Bistrița - Albeștii Bistriței"
+      "date": "2026-11-07",
+      "time": "06:15",
+      "route": "364 Bistrița - Milaș"
     },
     "170": {
       "date": "2026-11-06",
@@ -473,8 +473,8 @@
       "route": "354 Bistrița - Caila"
     },
     "171": {
-      "date": "2026-11-06",
-      "time": "20:00",
+      "date": "2026-11-07",
+      "time": "06:15",
       "route": "354 Bistrița - Caila"
     },
     "172": {
