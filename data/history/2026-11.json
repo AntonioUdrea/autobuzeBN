@@ -563,10 +563,10 @@
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"06:30","to":"07:15","polls":4,"directions":["Fintinele - Bistrita"]},{"route":"358 Bistrița - Fântânele","from":"14:15","to":"15:15","polls":5,"directions":["Bistrita - Fintinele"]}]
   },
   "2026-11-07": {
-    "transmixt:8": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"06:00","to":"06:15","polls":2,"directions":["RETUR"]}],
+    "transmixt:8": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"06:00","to":"06:30","polls":3,"directions":["RETUR"]}],
     "transmixt:116": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"06:15","polls":3,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
-    "transmixt:124": [{"route":"493 Bistrița - Gledin","from":"06:15","to":"06:15","polls":1,"directions":["GLEDIN- BISTRITA"]}],
-    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:15","polls":1,"directions":["Milas - Bistrita"]}],
-    "transmixt:171": [{"route":"354 Bistrița - Caila","from":"06:15","to":"06:15","polls":1,"directions":["Caila - Bistrita"]}]
+    "transmixt:124": [{"route":"493 Bistrița - Gledin","from":"06:15","to":"06:30","polls":2,"directions":["GLEDIN- BISTRITA"]}],
+    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:30","polls":2,"directions":["Milas - Bistrita"]}],
+    "transmixt:171": [{"route":"354 Bistrița - Caila","from":"06:15","to":"06:30","polls":2,"directions":["Caila - Bistrita"]}]
   }
 }

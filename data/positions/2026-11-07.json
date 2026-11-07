@@ -36,6 +36,13 @@
       24.61231,
       "476 Bistrița - Budacu de Sus (via Satu Nou)",
       "RETUR"
+    ],
+    [
+      "06:30",
+      47.11969,
+      24.52459,
+      "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "RETUR"
     ]
   ],
   "transmixt:124": [
@@ -43,6 +50,13 @@
       "06:15",
       47.00522,
       24.59625,
+      "493 Bistrița - Gledin",
+      "GLEDIN- BISTRITA"
+    ],
+    [
+      "06:30",
+      47.02809,
+      24.49468,
       "493 Bistrița - Gledin",
       "GLEDIN- BISTRITA"
     ]
@@ -54,6 +68,13 @@
       24.41029,
       "354 Bistrița - Caila",
       "Caila - Bistrita"
+    ],
+    [
+      "06:30",
+      47.12893,
+      24.48879,
+      "354 Bistrița - Caila",
+      "Caila - Bistrita"
     ]
   ],
   "transmixt:169": [
@@ -61,6 +82,13 @@
       "06:15",
       46.82628,
       24.45961,
+      "364 Bistrița - Milaș",
+      "Milas - Bistrita"
+    ],
+    [
+      "06:30",
+      46.93659,
+      24.47644,
       "364 Bistrița - Milaș",
       "Milas - Bistrita"
     ]
