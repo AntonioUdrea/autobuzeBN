@@ -563,6 +563,7 @@
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"06:30","to":"07:15","polls":4,"directions":["Fintinele - Bistrita"]},{"route":"358 Bistrița - Fântânele","from":"14:15","to":"15:15","polls":5,"directions":["Bistrita - Fintinele"]}]
   },
   "2026-11-07": {
-    "transmixt:116": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"05:45","polls":1,"directions":["MURESENII BARGAULUI- BISTRITA"]}]
+    "transmixt:8": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"06:00","to":"06:00","polls":1,"directions":["RETUR"]}],
+    "transmixt:116": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"06:00","polls":2,"directions":["MURESENII BARGAULUI- BISTRITA"]}]
   }
 }
