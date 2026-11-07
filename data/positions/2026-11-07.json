@@ -20,6 +20,13 @@
       24.5086,
       "502 Bistrița - Mureșenii Bârgăului",
       "MURESENII BARGAULUI- BISTRITA"
+    ],
+    [
+      "07:30",
+      47.18066,
+      24.55884,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "BISTRITA- MURESENII BARGAULUI"
     ]
   ],
   "transmixt:8": [
@@ -43,6 +50,13 @@
       24.52459,
       "476 Bistrița - Budacu de Sus (via Satu Nou)",
       "RETUR"
+    ],
+    [
+      "07:30",
+      47.13239,
+      24.48506,
+      "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "TUR"
     ]
   ],
   "transmixt:124": [
@@ -71,6 +85,13 @@
       "07:15",
       47.1323,
       24.48521,
+      "493 Bistrița - Gledin",
+      "BISTRITA- GLEDIN"
+    ],
+    [
+      "07:30",
+      47.07339,
+      24.43505,
       "493 Bistrița - Gledin",
       "BISTRITA- GLEDIN"
     ]
@@ -135,6 +156,22 @@
       24.42279,
       "615 Bistrița - Năsăud",
       "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "07:30",
+      47.22004,
+      24.46792,
+      "615 Bistrița - Năsăud",
+      "Bistrita Autogara/Rodnei"
+    ]
+  ],
+  "transmixt:165": [
+    [
+      "07:30",
+      47.13279,
+      24.48692,
+      "387 Bistrița - Silivașu de Câmpie",
+      "Bistrita - Silivasu de Campie"
     ]
   ]
 }
