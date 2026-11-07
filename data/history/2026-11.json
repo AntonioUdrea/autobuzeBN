@@ -561,5 +561,8 @@
     "transmixt:198": [{"route":"506 Bistrița - Cușma","from":"06:45","to":"07:15","polls":3,"directions":["CUSMA- BISTRITA"]},{"route":"506 Bistrița - Cușma","from":"14:30","to":"15:00","polls":3,"directions":["BISTRITA- CUSMA"]}],
     "transmixt:199": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"12:30","to":"13:30","polls":5,"directions":["BISTRITA- MURESENII BARGAULUI"]}],
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"06:30","to":"07:15","polls":4,"directions":["Fintinele - Bistrita"]},{"route":"358 Bistrița - Fântânele","from":"14:15","to":"15:15","polls":5,"directions":["Bistrita - Fintinele"]}]
+  },
+  "2026-11-07": {
+    "transmixt:116": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"05:45","polls":1,"directions":["MURESENII BARGAULUI- BISTRITA"]}]
   }
 }
