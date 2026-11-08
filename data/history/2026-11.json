@@ -590,5 +590,8 @@
     "transmixt:178": [{"route":"2","from":"08:30","to":"20:00","polls":40,"directions":["107 DR SLATINITEI","28 VIISOARA","1 PASARELA"]}],
     "transmixt:179": [{"route":"2","from":"08:00","to":"21:30","polls":45,"directions":["28 VIISOARA","107 DR SLATINITEI"]}],
     "transmixt:180": [{"route":"2","from":"08:00","to":"21:00","polls":46,"directions":["28 VIISOARA","1 PASARELA","107 DR SLATINITEI"]}]
+  },
+  "2026-11-08": {
+    "transmixt:152": [{"route":"7","from":"05:45","to":"05:45","polls":1,"directions":["110 SLATINITA"]}]
   }
 }
