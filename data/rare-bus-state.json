@@ -1,20 +1,4 @@
 {
-  "date": "2026-11-08",
-  "buses": {
-    "transmixt:182": {
-      "route": "16-Meci",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:179": {
-      "route": "16-Meci",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:54": {
-      "route": "16-Meci",
-      "rare": false,
-      "unusual": true
-    }
-  }
+  "date": "2026-11-09",
+  "buses": {}
 }

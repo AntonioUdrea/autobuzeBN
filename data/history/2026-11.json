@@ -614,5 +614,10 @@
     "transmixt:176": [{"route":"503 Bistrița - Bistrița Bârgăului - Colibița","from":"17:15","to":"18:15","polls":5,"directions":["COLIBITA- BISTRITA"]}],
     "transmixt:179": [{"route":"16-Meci","from":"16:15","to":"16:30","polls":2,"directions":["224 TERAPLAST ARENA 1"]},{"route":"16-Meci","from":"19:00","to":"19:00","polls":1,"directions":["21 INDEPENDENTEI MAT"]}],
     "transmixt:182": [{"route":"16-Meci","from":"15:45","to":"16:45","polls":5,"directions":["224 TERAPLAST ARENA 1","21 INDEPENDENTEI MAT"]},{"route":"16-Meci","from":"19:00","to":"19:00","polls":1,"directions":["21 INDEPENDENTEI MAT"]}]
+  },
+  "2026-11-09": {
+    "ani-tour:9": [{"route":"633 Bistrița - Săsarm","from":"05:00","to":"05:00","polls":1,"directions":["Bistrita Autogara/Rodnei"]}],
+    "ani-tour:12": [{"route":"632 Năsăud - Runcu Salvei","from":"05:00","to":"05:00","polls":1,"directions":["Runcu Salvei"]}],
+    "transmixt:175": [{"route":"359 Bistrița - Țăgșor","from":"05:00","to":"05:00","polls":1,"directions":["Tagsor - Bistrita"]}]
   }
 }
