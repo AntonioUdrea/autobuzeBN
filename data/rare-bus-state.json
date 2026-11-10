@@ -30,6 +30,11 @@
       "route": "485 Bistrița - Lunca",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:124": {
+      "route": "470 Bistrița - Posmuș",
+      "rare": false,
+      "unusual": true
     }
   }
 }
