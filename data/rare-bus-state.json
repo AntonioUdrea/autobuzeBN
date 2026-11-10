@@ -2,9 +2,9 @@
   "date": "2026-11-10",
   "buses": {
     "ani-tour:32": {
-      "route": "721 Bistrița - Dealul Ștefăniței",
+      "route": "818 Năsăud - Parva",
       "rare": false,
-      "unusual": false
+      "unusual": true
     },
     "transmixt:62": {
       "route": "10",
