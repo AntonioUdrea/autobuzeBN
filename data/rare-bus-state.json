@@ -1,4 +1,10 @@
 {
   "date": "2026-11-11",
-  "buses": {}
+  "buses": {
+    "ani-tour:32": {
+      "route": "818 Năsăud - Parva",
+      "rare": false,
+      "unusual": true
+    }
+  }
 }
