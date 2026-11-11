@@ -10,6 +10,11 @@
       "route": "10",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:199": {
+      "route": "502 Bistrița - Mureșenii Bârgăului",
+      "rare": false,
+      "unusual": true
     }
   }
 }
