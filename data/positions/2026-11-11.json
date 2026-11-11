@@ -148,6 +148,13 @@
       24.5115,
       "615 Bistrița - Năsăud",
       "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "14:30",
+      47.14535,
+      24.51166,
+      "633 Bistrița - Săsarm",
+      "Sasarm"
     ]
   ],
   "ani-tour:12": [
@@ -232,6 +239,13 @@
       "14:15",
       47.28213,
       24.41138,
+      "632 Năsăud - Runcu Salvei",
+      "Runcu Salvei"
+    ],
+    [
+      "14:30",
+      47.29532,
+      24.32461,
       "632 Năsăud - Runcu Salvei",
       "Runcu Salvei"
     ]
@@ -390,6 +404,13 @@
       24.515,
       "502 Bistrița - Mureșenii Bârgăului",
       "MURESENII BARGAULUI- BISTRITA via STRAMBA"
+    ],
+    [
+      "14:30",
+      47.13193,
+      24.48477,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "BISTRITA- MURESENII BARGAULUI via STRAMBA"
     ]
   ],
   "transmixt:167": [
@@ -476,6 +497,13 @@
       24.50683,
       "366 Bistrița - Archiud",
       "Bistrita - Archiud"
+    ],
+    [
+      "14:30",
+      47.13239,
+      24.48423,
+      "363 Bistrița - Urmeniș",
+      "Bistrita - Urmenis"
     ]
   ],
   "transmixt:70": [
@@ -688,6 +716,13 @@
       24.48885,
       "1",
       "1 PASARELA"
+    ],
+    [
+      "14:30",
+      47.11761,
+      24.46768,
+      "1",
+      "12 STEFAN CEL MARE"
     ]
   ],
   "transmixt:168": [
@@ -800,6 +835,13 @@
       "14:15",
       47.13224,
       24.48414,
+      "320 Bistrița - Tărpiu",
+      "Bistrita - Tarpiu"
+    ],
+    [
+      "14:30",
+      47.14315,
+      24.50902,
       "320 Bistrița - Tărpiu",
       "Bistrita - Tarpiu"
     ]
@@ -944,6 +986,13 @@
       24.49116,
       "14",
       "186 LUCIAN BLAGA"
+    ],
+    [
+      "14:30",
+      47.15604,
+      24.50875,
+      "14",
+      "84 AUTOGARA"
     ]
   ],
   "transmixt:42": [
@@ -1142,6 +1191,13 @@
       24.47785,
       "3",
       "77 C R VIVU"
+    ],
+    [
+      "14:30",
+      47.13757,
+      24.50581,
+      "3",
+      "77 C R VIVU"
     ]
   ],
   "transmixt:109": [
@@ -1235,6 +1291,13 @@
       24.59312,
       "478 Bistrița - Satu Nou",
       "SATU NOU- BISTRITA"
+    ],
+    [
+      "14:30",
+      47.1409,
+      24.50648,
+      "478 Bistrița - Satu Nou",
+      "SATU NOU- BISTRITA"
     ]
   ],
   "transmixt:161": [
@@ -1286,6 +1349,13 @@
       24.12065,
       "244 Beclean - Cireșoaia",
       "18- BECLEAN AUTOGARA"
+    ],
+    [
+      "14:30",
+      47.17266,
+      24.10474,
+      "244 Beclean - Cireșoaia",
+      "244 - BECLEAN - CIRESOAIA"
     ]
   ],
   "transmixt:179": [
@@ -1531,6 +1601,13 @@
       "14:15",
       47.14254,
       24.50806,
+      "2",
+      "28 VIISOARA"
+    ],
+    [
+      "14:30",
+      47.12645,
+      24.48396,
       "2",
       "28 VIISOARA"
     ]
@@ -1980,6 +2057,13 @@
       24.50399,
       "2",
       "1 PASARELA"
+    ],
+    [
+      "14:30",
+      47.13373,
+      24.4943,
+      "2",
+      "107 DR SLATINITEI"
     ]
   ],
   "transmixt:120": [
@@ -2078,6 +2162,13 @@
       "14:15",
       47.36544,
       24.66891,
+      "911 Bistrița - Șanț",
+      "BISTRITA- SANT"
+    ],
+    [
+      "14:30",
+      47.40471,
+      24.7547,
       "911 Bistrița - Șanț",
       "BISTRITA- SANT"
     ]
@@ -2278,6 +2369,13 @@
       24.49375,
       "9",
       "84 AUTOGARA"
+    ],
+    [
+      "14:30",
+      47.14275,
+      24.50205,
+      "9",
+      "141 GHINDA"
     ]
   ],
   "transmixt:54": [
@@ -2476,6 +2574,13 @@
       24.49142,
       "3",
       "69 SCHULLERWALD"
+    ],
+    [
+      "14:30",
+      47.12949,
+      24.46885,
+      "3",
+      "77 C R VIVU"
     ]
   ],
   "transmixt:176": [
@@ -2590,6 +2695,13 @@
       "14:15",
       47.28344,
       24.41202,
+      "721 Bistrița - Dealul Ștefăniței",
+      "Dealu Stefanitei"
+    ],
+    [
+      "14:30",
+      47.28329,
+      24.41003,
       "721 Bistrița - Dealul Ștefăniței",
       "Dealu Stefanitei"
     ]
@@ -2783,6 +2895,13 @@
       24.503,
       "13",
       "66 AL ODOBESCU"
+    ],
+    [
+      "14:30",
+      47.12896,
+      24.49305,
+      "13",
+      "TUR"
     ]
   ],
   "transmixt:170": [
@@ -3025,6 +3144,13 @@
       24.48744,
       "1",
       "12 STEFAN CEL MARE"
+    ],
+    [
+      "14:30",
+      47.13734,
+      24.50836,
+      "1",
+      "1 PASARELA"
     ]
   ],
   "transmixt:147": [
@@ -3230,6 +3356,13 @@
       24.48876,
       "8",
       "RETUR"
+    ],
+    [
+      "14:30",
+      47.1324,
+      24.48526,
+      "8",
+      "125 SIGMIR"
     ]
   ],
   "transmixt:75": [
@@ -3398,6 +3531,13 @@
       "14:15",
       47.14322,
       24.50254,
+      "1",
+      "1 PASARELA"
+    ],
+    [
+      "14:30",
+      47.12327,
+      24.47773,
       "1",
       "1 PASARELA"
     ]
@@ -3584,6 +3724,13 @@
       24.50206,
       "13",
       "TUR"
+    ],
+    [
+      "14:30",
+      47.14732,
+      24.48329,
+      "13",
+      "TUR"
     ]
   ],
   "transmixt:62": [
@@ -3740,6 +3887,13 @@
       24.45595,
       "10",
       "84 AUTOGARA"
+    ],
+    [
+      "14:30",
+      47.12139,
+      24.47356,
+      "10",
+      "232 SARATA"
     ]
   ],
   "ani-tour:29": [
@@ -4033,6 +4187,13 @@
       24.46328,
       "2",
       "53 AVICOLA"
+    ],
+    [
+      "14:30",
+      47.13285,
+      24.49283,
+      "2",
+      "53 AVICOLA"
     ]
   ],
   "transmixt:197": [
@@ -4236,6 +4397,13 @@
       "14:15",
       47.17344,
       24.53711,
+      "2",
+      "28 VIISOARA"
+    ],
+    [
+      "14:30",
+      47.13777,
+      24.50068,
       "2",
       "28 VIISOARA"
     ]
@@ -4545,6 +4713,13 @@
       24.50161,
       "7",
       "84 AUTOGARA"
+    ],
+    [
+      "14:30",
+      47.1325,
+      24.48535,
+      "7",
+      "110 SLATINITA"
     ]
   ],
   "transmixt:142": [
@@ -4736,6 +4911,13 @@
       24.50713,
       "3",
       "69 SCHULLERWALD"
+    ],
+    [
+      "14:30",
+      47.12759,
+      24.4817,
+      "3",
+      "69 SCHULLERWALD"
     ]
   ],
   "transmixt:154": [
@@ -4892,6 +5074,13 @@
       24.50887,
       "1B",
       "191 VALEA JELNEI"
+    ],
+    [
+      "14:30",
+      47.12171,
+      24.5249,
+      "1B",
+      "104 STEFAN CEL MARE"
     ]
   ],
   "transmixt:34": [
@@ -5083,6 +5272,13 @@
       24.48942,
       "3",
       "77 C R VIVU"
+    ],
+    [
+      "14:30",
+      47.13511,
+      24.50172,
+      "3",
+      "69 SCHULLERWALD"
     ]
   ],
   "transmixt:149": [
@@ -5288,6 +5484,13 @@
       24.49965,
       "13A",
       "18 POLICLINICA"
+    ],
+    [
+      "14:30",
+      47.13139,
+      24.48919,
+      "13A",
+      "174 CARTIER RAAL"
     ]
   ],
   "transmixt:55": [
@@ -5500,6 +5703,13 @@
       24.49833,
       "1",
       "12 STEFAN CEL MARE"
+    ],
+    [
+      "14:30",
+      47.14252,
+      24.50158,
+      "1",
+      "1 PASARELA"
     ]
   ],
   "transmixt:49": [
@@ -5696,6 +5906,13 @@
       "14:15",
       47.12896,
       24.49307,
+      "13",
+      "TUR"
+    ],
+    [
+      "14:30",
+      47.143,
+      24.49242,
       "13",
       "TUR"
     ]
@@ -5896,6 +6113,13 @@
       24.51267,
       "2",
       "107 DR SLATINITEI"
+    ],
+    [
+      "14:30",
+      47.14759,
+      24.51408,
+      "2",
+      "1 PASARELA"
     ]
   ],
   "ani-tour:10": [
@@ -5968,6 +6192,13 @@
       24.41102,
       "631 Năsăud - Săsarm",
       "Sasarm"
+    ],
+    [
+      "14:30",
+      47.28061,
+      24.31845,
+      "631 Năsăud - Săsarm",
+      "Sasarm"
     ]
   ],
   "ani-tour:21": [
@@ -6017,6 +6248,13 @@
       "14:15",
       47.13262,
       24.48497,
+      "817 Bistrița - Parva",
+      "Parva"
+    ],
+    [
+      "14:30",
+      47.14547,
+      24.51177,
       "817 Bistrița - Parva",
       "Parva"
     ]
@@ -6275,6 +6513,13 @@
       24.48331,
       "13",
       "TUR"
+    ],
+    [
+      "14:30",
+      47.14146,
+      24.5055,
+      "13",
+      "66 AL ODOBESCU"
     ]
   ],
   "transmixt:67": [
@@ -6473,6 +6718,13 @@
       24.46793,
       "8",
       "TUR"
+    ],
+    [
+      "14:30",
+      47.13937,
+      24.42468,
+      "8",
+      "RETUR"
     ]
   ],
   "transmixt:199": [
@@ -6538,6 +6790,13 @@
       "14:15",
       47.13268,
       24.4856,
+      "358 Bistrița - Fântânele",
+      "Bistrita - Fintinele"
+    ],
+    [
+      "14:30",
+      47.12091,
+      24.47302,
       "358 Bistrița - Fântânele",
       "Bistrita - Fintinele"
     ]
@@ -6735,6 +6994,13 @@
       24.13322,
       "140 Bistrița - Ciceu Poieni",
       "BISTRITA- CICEU POIENI"
+    ],
+    [
+      "14:30",
+      47.22534,
+      24.06779,
+      "140 Bistrița - Ciceu Poieni",
+      "BISTRITA- CICEU POIENI"
     ]
   ],
   "transmixt:178": [
@@ -6912,6 +7178,13 @@
       24.50199,
       "2",
       "28 VIISOARA"
+    ],
+    [
+      "14:30",
+      47.11514,
+      24.46438,
+      "2",
+      "28 VIISOARA"
     ]
   ],
   "ani-tour:6": [
@@ -7005,6 +7278,13 @@
       24.18022,
       "628A Năsăud - Săsarm - Beclean - Suplai",
       "Suplai"
+    ],
+    [
+      "14:30",
+      47.1879,
+      24.17894,
+      "628A Năsăud - Săsarm - Beclean - Suplai",
+      "Suplai"
     ]
   ],
   "transmixt:105": [
@@ -7075,6 +7355,13 @@
       "13:30",
       47.32888,
       24.1627,
+      "138 Beclean - Agrieșel",
+      "BECLEAN- AGRIESEL"
+    ],
+    [
+      "14:30",
+      47.18752,
+      24.11664,
       "138 Beclean - Agrieșel",
       "BECLEAN- AGRIESEL"
     ]
@@ -7251,6 +7538,13 @@
       24.48449,
       "474 Bistrița - Buduș",
       "BISTRITA- BUDUS"
+    ],
+    [
+      "14:30",
+      47.12999,
+      24.52046,
+      "474 Bistrița - Buduș",
+      "BISTRITA- BUDUS"
     ]
   ],
   "transmixt:118": [
@@ -7377,6 +7671,13 @@
       "14:15",
       47.41434,
       24.76948,
+      "910 Bistrița - Valea Vinului",
+      "BISTRITA- VALEA VINULUI"
+    ],
+    [
+      "14:30",
+      47.44041,
+      24.87603,
       "910 Bistrița - Valea Vinului",
       "BISTRITA- VALEA VINULUI"
     ]
@@ -7707,6 +8008,13 @@
       24.50093,
       "3",
       "77 C R VIVU"
+    ],
+    [
+      "14:30",
+      47.13937,
+      24.50705,
+      "3",
+      "69 SCHULLERWALD"
     ]
   ],
   "transmixt:157": [
@@ -7877,6 +8185,13 @@
       24.46771,
       "1",
       "12 STEFAN CEL MARE"
+    ],
+    [
+      "14:30",
+      47.12654,
+      24.48428,
+      "1",
+      "12 STEFAN CEL MARE"
     ]
   ],
   "transmixt:198": [
@@ -7905,6 +8220,13 @@
       "14:15",
       47.13229,
       24.485,
+      "506 Bistrița - Cușma",
+      "BISTRITA- CUSMA"
+    ],
+    [
+      "14:30",
+      47.1413,
+      24.50574,
       "506 Bistrița - Cușma",
       "BISTRITA- CUSMA"
     ]
@@ -8070,6 +8392,13 @@
       "14:15",
       47.18304,
       24.18604,
+      "142 Bistrița - Breaza",
+      "BISTRITA- BREAZA"
+    ],
+    [
+      "14:30",
+      47.17624,
+      24.17981,
       "142 Bistrița - Breaza",
       "BISTRITA- BREAZA"
     ]
@@ -8251,6 +8580,13 @@
       24.41144,
       "723 Bistrița - Romuli",
       "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "14:30",
+      47.22386,
+      24.46316,
+      "723 Bistrița - Romuli",
+      "Bistrita Autogara/Rodnei"
     ]
   ],
   "ani-tour:20": [
@@ -8365,6 +8701,13 @@
       "14:15",
       47.28219,
       24.41091,
+      "630 Năsăud - Suplai",
+      "Suplai"
+    ],
+    [
+      "14:30",
+      47.29552,
+      24.38233,
       "630 Năsăud - Suplai",
       "Suplai"
     ]
@@ -8502,6 +8845,13 @@
       24.48471,
       "4",
       "UNIREA- VIISOARA"
+    ],
+    [
+      "14:30",
+      47.12308,
+      24.47759,
+      "4",
+      "tur"
     ]
   ],
   "transmixt:104": [
@@ -8567,6 +8917,13 @@
       24.15611,
       "139 Bistrița - Beclean",
       "BISTRITA- BECLEAN"
+    ],
+    [
+      "14:30",
+      47.18372,
+      24.21549,
+      "139 Bistrița - Beclean",
+      "BECLEAN- BISTRITA"
     ]
   ],
   "transmixt:68": [
@@ -8730,6 +9087,13 @@
       24.47707,
       "1",
       "12 STEFAN CEL MARE"
+    ],
+    [
+      "14:30",
+      47.14295,
+      24.50247,
+      "1",
+      "12 STEFAN CEL MARE"
     ]
   ],
   "transmixt:108": [
@@ -8781,6 +9145,13 @@
       24.52363,
       "476 Bistrița - Budacu de Sus",
       "BUDACU DE SUS- BISTRITA"
+    ],
+    [
+      "14:30",
+      47.13205,
+      24.48384,
+      "476 Bistrița - Budacu de Sus",
+      "BISTRITA- BUDACU DE SUS"
     ]
   ],
   "transmixt:93": [
@@ -8925,6 +9296,13 @@
       24.49381,
       "818 Năsăud - Parva",
       "Nasaud Autogara"
+    ],
+    [
+      "14:30",
+      47.28519,
+      24.43613,
+      "818 Năsăud - Parva",
+      "Parva"
     ]
   ],
   "ani-tour:3": [
@@ -8969,6 +9347,13 @@
       24.4262,
       "615 Bistrița - Năsăud",
       "Nasaud Autogara"
+    ],
+    [
+      "14:30",
+      47.28185,
+      24.41092,
+      "615 Bistrița - Năsăud",
+      "Bistrita Autogara/Rodnei"
     ]
   ],
   "ani-tour:28": [
@@ -9027,6 +9412,13 @@
       24.4109,
       "726 Năsăud - Bichigiu",
       "Bichigiu"
+    ],
+    [
+      "14:30",
+      47.35107,
+      24.38868,
+      "726 Năsăud - Bichigiu",
+      "Bichigiu"
     ]
   ],
   "transmixt:171": [
@@ -9036,6 +9428,13 @@
       24.39943,
       "354 Bistrița - Caila",
       "Caila - Bistrita"
+    ],
+    [
+      "14:30",
+      47.13227,
+      24.48505,
+      "354 Bistrița - Caila",
+      "Bistrita - Caila"
     ]
   ],
   "transmixt:91": [
@@ -9113,6 +9512,13 @@
       "14:15",
       47.16228,
       24.53038,
+      "4",
+      "UNIREA- VIISOARA"
+    ],
+    [
+      "14:30",
+      47.13625,
+      24.50417,
       "4",
       "UNIREA- VIISOARA"
     ]
@@ -9320,6 +9726,13 @@
       24.4683,
       "2",
       "1 PASARELA"
+    ],
+    [
+      "14:30",
+      47.12243,
+      24.47596,
+      "2",
+      "107 DR SLATINITEI"
     ]
   ],
   "transmixt:160": [
@@ -9383,6 +9796,13 @@
       "14:15",
       46.96666,
       24.43479,
+      "364 Bistrița - Milaș",
+      "Bistrita - Milas"
+    ],
+    [
+      "14:30",
+      46.90574,
+      24.49857,
       "364 Bistrița - Milaș",
       "Bistrita - Milas"
     ]
@@ -9706,6 +10126,13 @@
       24.50742,
       "4",
       "UNIREA- VIISOARA"
+    ],
+    [
+      "14:30",
+      47.12463,
+      24.48056,
+      "4",
+      "UNIREA- VIISOARA"
     ]
   ],
   "transmixt:112": [
@@ -9899,6 +10326,13 @@
       "14:15",
       47.13201,
       24.48468,
+      "387 Bistrița - Silivașu de Câmpie",
+      "Bistrita - Silivasu de Campie"
+    ],
+    [
+      "14:30",
+      47.10578,
+      24.45178,
       "387 Bistrița - Silivașu de Câmpie",
       "Bistrita - Silivasu de Campie"
     ]
@@ -10129,6 +10563,13 @@
       24.46299,
       "18",
       "221 HEIDENFELD"
+    ],
+    [
+      "14:30",
+      47.10256,
+      24.45084,
+      "18",
+      "84 AUTOGARA"
     ]
   ],
   "transmixt:95": [
@@ -10299,6 +10740,13 @@
       24.46671,
       "4",
       "tur"
+    ],
+    [
+      "14:30",
+      47.1147,
+      24.46677,
+      "4",
+      "UNIREA- VIISOARA"
     ]
   ],
   "transmixt:150": [
@@ -10392,6 +10840,13 @@
       24.48641,
       "13A",
       "18 POLICLINICA"
+    ],
+    [
+      "14:30",
+      47.10944,
+      24.49972,
+      "13A",
+      "18 POLICLINICA"
     ]
   ],
   "transmixt:119": [
@@ -10462,6 +10917,13 @@
       "14:15",
       47.13237,
       24.48517,
+      "911 Bistrița - Șanț",
+      "BISTRITA- SANT"
+    ],
+    [
+      "14:30",
+      47.14524,
+      24.51151,
       "911 Bistrița - Șanț",
       "BISTRITA- SANT"
     ]
@@ -10536,6 +10998,13 @@
       24.48613,
       "18",
       "84 AUTOGARA"
+    ],
+    [
+      "14:30",
+      47.1323,
+      24.48515,
+      "18",
+      "221 HEIDENFELD"
     ]
   ],
   "transmixt:164": [
@@ -10564,6 +11033,13 @@
       "14:15",
       47.02034,
       24.33174,
+      "358 Bistrița - Fântânele",
+      "Bistrita - Fintinele"
+    ],
+    [
+      "14:30",
+      47.04954,
+      24.24247,
       "358 Bistrița - Fântânele",
       "Bistrita - Fintinele"
     ]
@@ -10675,6 +11151,13 @@
       24.50569,
       "615 Bistrița - Năsăud",
       "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "14:30",
+      47.13282,
+      24.48528,
+      "615 Bistrița - Năsăud",
+      "Nasaud Autogara"
     ]
   ],
   "transmixt:74": [
@@ -10796,6 +11279,13 @@
       24.49628,
       "2",
       "53 AVICOLA"
+    ],
+    [
+      "14:30",
+      47.15986,
+      24.52807,
+      "2",
+      "53 AVICOLA"
     ]
   ],
   "transmixt:53": [
@@ -10903,6 +11393,13 @@
       24.46891,
       "3",
       "69 SCHULLERWALD"
+    ],
+    [
+      "14:30",
+      47.13163,
+      24.48423,
+      "3",
+      "77 C R VIVU"
     ]
   ],
   "transmixt:12": [
@@ -10984,6 +11481,13 @@
       24.36896,
       "725 Năsăud - Telciu",
       "Telciu 2"
+    ],
+    [
+      "14:30",
+      47.4237,
+      24.39231,
+      "725 Năsăud - Telciu",
+      "Telciu 2"
     ]
   ],
   "transmixt:115": [
@@ -11007,6 +11511,13 @@
       24.71909,
       "502 Bistrița - Mureșenii Bârgăului",
       "BISTRITA- MURESENII BARGAULUI"
+    ],
+    [
+      "14:30",
+      47.22941,
+      24.80349,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "BISTRITA- MURESENII BARGAULUI"
     ]
   ],
   "transmixt:8": [
@@ -11023,6 +11534,13 @@
       24.86731,
       "503 Bistrița - Bistrița Bârgăului - Colibița",
       "MITA- BISTRITA"
+    ],
+    [
+      "14:30",
+      47.22058,
+      24.7252,
+      "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "MITA- BISTRITA"
     ]
   ],
   "ani-tour:22": [
@@ -11030,6 +11548,13 @@
       "14:15",
       47.28214,
       24.41098,
+      "816 Năsăud - Lunca Leșului",
+      "Lunca Lesului"
+    ],
+    [
+      "14:30",
+      47.28179,
+      24.50045,
       "816 Năsăud - Lunca Leșului",
       "Lunca Lesului"
     ]
