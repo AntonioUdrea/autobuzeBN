@@ -5,6 +5,11 @@
       "route": "818 Năsăud - Parva",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:62": {
+      "route": "10",
+      "rare": true,
+      "unusual": false
     }
   }
 }
