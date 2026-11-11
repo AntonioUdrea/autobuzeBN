@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vehicle manager</title>
+<style>
+:root{--bg:#f6f7f9;--panel:#fff;--ink:#1b2430;--mute:#667385;--line:#d9dee5;--accent:#0b6bcb;--accent-ink:#fff;--warn:#a15c00;--warn-bg:#fff4e0;--ok:#17713a;--bad:#b3261e;--chip:#e8eef7}
+@media(prefers-color-scheme:dark){:root{--bg:#12161c;--panel:#1a2029;--ink:#e6eaf0;--mute:#93a0b2;--line:#2c3542;--accent:#5aa2f0;--accent-ink:#0b1420;--warn:#f0b35a;--warn-bg:#2f2514;--ok:#5cc88a;--bad:#f2837c;--chip:#263243}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;padding:.9rem 1.25rem;background:var(--panel);border-bottom:1px solid var(--line)}
+h1{font-size:1.1rem;margin:0}
+h2{font-size:1rem;margin:0 0 .75rem}
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+main{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:1rem;padding:1rem 1.25rem;max-width:1200px;margin:0 auto}
+@media(max-width:800px){main{grid-template-columns:1fr}}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:1rem}
+label{display:block;font-weight:600;font-size:.85rem;margin:.75rem 0 .25rem}
+input[type=text],input[type=search],select{width:100%;padding:.5rem .6rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.check{display:flex;gap:.5rem;align-items:center;font-weight:400;margin:.4rem 0 0}
+button{font:inherit;padding:.45rem .8rem;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+button:disabled{opacity:.45;cursor:default}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.4rem}
+.chip{background:var(--chip);border-radius:999px;padding:.15rem .3rem .15rem .7rem;font-size:.85rem;display:inline-flex;gap:.3rem;align-items:center}
+.chip button{border:0;background:none;padding:0 .35rem;color:var(--mute);font-size:1rem;line-height:1}
+.note{font-size:.85rem;margin:.6rem 0 0;padding:.45rem .6rem;border-radius:6px;background:var(--warn-bg);color:var(--warn)}
+.hint{color:var(--mute);font-size:.8rem;margin-top:.25rem}
+.actions{display:flex;gap:.5rem;margin-top:1rem}
+#status{font-size:.85rem;color:var(--mute)}
+#status.ok{color:var(--ok)}#status.err{color:var(--bad)}
+.tablewrap{overflow-x:auto;margin-top:.75rem}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:.4rem .5rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mute);font-weight:600;font-size:.8rem}
+tr.row{cursor:pointer}tr.row:hover{background:var(--bg)}
+tr.changed td:first-child{box-shadow:inset 3px 0 var(--accent)}
+td.id{font-variant-numeric:tabular-nums;font-weight:600}
+.routes{color:var(--mute)}
+.listhead{display:flex;gap:.5rem;align-items:center}
+.listhead input{flex:1}
+dialog{border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);max-width:420px;width:92vw}
+dialog::backdrop{background:#0008}
+</style>
+</head>
+<body>
+<header>
+  <h1>Vehicle manager</h1>
+  <div class="bar">
+    <span id="status">Loading…</span>
+    <button id="openBtn">Open file</button>
+    <button id="dlBtn" disabled>Download vehicles.json</button>
+    <button id="ghBtn" class="primary" disabled>Commit to GitHub</button>
+    <button id="cfgBtn" title="GitHub settings">Settings</button>
+  </div>
+</header>
+
+<main>
+  <section>
+    <h2 id="formTitle">Add vehicle</h2>
+    <form id="f" autocomplete="off">
+      <label for="op">Operator</label>
+      <select id="op"></select>
+      <input type="text" id="newOp" placeholder="New operator key, e.g. my-company" hidden>
+
+      <label for="vid">Vehicle ID</label>
+      <input type="text" id="vid" inputmode="numeric" pattern="[0-9]+" required>
+
+      <label for="plate">License plate</label>
+      <input type="text" id="plate" placeholder="BN 12 ABC" required>
+      <label class="check"><input type="checkbox" id="unconf"> Plate not confirmed</label>
+
+      <label for="model">Model</label>
+      <input type="text" id="model" list="models" required>
+      <datalist id="models"></datalist>
+
+      <label for="route">Assigned routes</label>
+      <input type="text" id="route" list="routelist" placeholder="Type a route, press Enter">
+      <datalist id="routelist"></datalist>
+      <div class="chips" id="chips"></div>
+
+      <div id="warn"></div>
+      <div class="actions">
+        <button type="submit" class="primary" id="saveBtn">Add vehicle</button>
+        <button type="button" id="clearBtn">Clear</button>
+        <button type="button" id="delBtn" hidden>Delete</button>
+      </div>
+      <div class="hint">After adding, the operator stays selected so you can enter the next one.</div>
+    </form>
+  </section>
+
+  <section>
+    <div class="listhead">
+      <h2 id="listTitle" style="margin:0">Vehicles</h2>
+      <input type="search" id="q" placeholder="Search ID, plate, model or route">
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>ID</th><th>Plate</th><th>Model</th><th>Routes</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<dialog id="dlg">
+  <form method="dialog" id="cfgForm">
+    <h2>GitHub settings</h2>
+    <label for="gOwner">Owner</label><input type="text" id="gOwner">
+    <label for="gRepo">Repository</label><input type="text" id="gRepo">
+    <label for="gBranch">Branch</label><input type="text" id="gBranch" placeholder="main">
+    <label for="gPath">Path to file</label><input type="text" id="gPath" placeholder="vehicles.json">
+    <label for="gToken">Personal access token</label><input type="text" id="gToken" placeholder="github_pat_…">
+    <div class="hint">Use a fine-grained token limited to this repo with “Contents: read and write”. It is stored only in this browser (localStorage).</div>
+    <div class="actions"><button class="primary" value="save">Save</button><button value="cancel">Cancel</button></div>
+  </form>
+</dialog>
+<input type="file" id="file" accept=".json,application/json" hidden>
+
+<script>
+const $ = s => document.querySelector(s);
+let data = {};           // working copy
+let changes = new Map(); // "op|id" -> entry object, or null for delete
+let routes = [];         // routes of the vehicle in the form
+let editing = null;      // {op,id} when editing an existing vehicle
+const SUFFIX = ' (neconfirmat)';
+
+/* ---------- helpers ---------- */
+const idSort = (a, b) => Number(a) - Number(b);
+const normPlate = p => p.toUpperCase().replace(/\s+/g, ' ').trim();
+const stripSuffix = p => (p || '').replace(/\s*\(neconfirmat\)\s*$/i, '');
+const curOp = () => $('#op').value === '__new' ? $('#newOp').value.trim() : $('#op').value;
+function status(msg, cls = '') { const s = $('#status'); s.textContent = msg; s.className = cls; }
+function store(k, v) { try { v === undefined ? localStorage.getItem(k) : localStorage.setItem(k, v); } catch (e) {} return (() => { try { return localStorage.getItem(k); } catch (e) { return null; } })(); }
+
+/* Writes JSON in the same style as the original file (routes inline). */
+function serialize(d) {
+  const ops = Object.keys(d).map(op => {
+    const veh = Object.keys(d[op]).sort(idSort).map(id => {
+      const v = d[op][id], f = [];
+      f.push(`      "licensePlate": ${JSON.stringify(v.licensePlate || '')}`);
+      f.push(`      "model": ${JSON.stringify(v.model || '')}`);
+      if (v.assignedRoutes && v.assignedRoutes.length)
+        f.push(`      "assignedRoutes": [${v.assignedRoutes.map(r => JSON.stringify(r)).join(', ')}]`);
+      return `    ${JSON.stringify(id)}: {\n${f.join(',\n')}\n    }`;
+    });
+    return `  ${JSON.stringify(op)}: {\n${veh.join(',\n')}\n  }`;
+  });
+  return `{\n${ops.join(',\n')}\n}\n`;
+}
+
+/* ---------- loading ---------- */
+function setData(obj, label) {
+  data = obj; changes.clear(); resetForm();
+  const op = $('#op').value;
+  renderAll(); if (op && data[op]) $('#op').value = op;
+  renderList(); updateButtons();
+  const n = Object.values(data).reduce((a, o) => a + Object.keys(o).length, 0);
+  status(`${label}: ${n} vehicles`, 'ok');
+}
+async function autoLoad() {
+  try {
+    const r = await fetch('vehicles.json', { cache: 'no-store' });
+    if (!r.ok) throw 0;
+    setData(await r.json(), 'Loaded vehicles.json');
+  } catch (e) { status('Couldn’t load vehicles.json automatically. Click “Open file”.', 'err'); }
+}
+$('#openBtn').onclick = () => $('#file').click();
+$('#file').onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try { setData(JSON.parse(await f.text()), `Opened ${f.name}`); }
+  catch (err) { status('That file isn’t valid JSON.', 'err'); }
+  e.target.value = '';
+};
+
+/* ---------- rendering ---------- */
+function renderAll() {
+  const sel = $('#op'); const keep = sel.value;
+  sel.innerHTML = Object.keys(data).map(o => `<option>${o}</option>`).join('') + '<option value="__new">+ New operator…</option>';
+  if (keep && [...sel.options].some(o => o.value === keep)) sel.value = keep;
+  const models = new Set(), rts = new Set();
+  Object.values(data).forEach(o => Object.values(o).forEach(v => { if (v.model) models.add(v.model); (v.assignedRoutes || []).forEach(r => rts.add(r)); }));
+  $('#models').innerHTML = [...models].sort().map(m => `<option value="${esc(m)}">`).join('');
+  $('#routelist').innerHTML = [...rts].sort((a, b) => a.localeCompare(b, undefined, { numeric: true })).map(r => `<option value="${esc(r)}">`).join('');
+  $('#newOp').hidden = sel.value !== '__new';
+}
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function renderList() {
+  const op = $('#op').value, q = $('#q').value.trim().toLowerCase();
+  $('#listTitle').textContent = op && op !== '__new' ? `Vehicles · ${op}` : 'Vehicles';
+  const o = data[op] || {};
+  const rows = Object.keys(o).sort(idSort).filter(id => {
+    if (!q) return true; const v = o[id];
+    return (id + ' ' + v.licensePlate + ' ' + v.model + ' ' + (v.assignedRoutes || []).join(' ')).toLowerCase().includes(q);
+  });
+  $('#rows').innerHTML = rows.map(id => {
+    const v = o[id];
+    return `<tr class="row ${changes.has(op + '|' + id) ? 'changed' : ''}" data-id="${id}">
+      <td class="id">${id}</td><td>${esc(v.licensePlate || '')}</td><td>${esc(v.model || '')}</td>
+      <td class="routes">${esc((v.assignedRoutes || []).join(', '))}</td></tr>`;
+  }).join('') || '<tr><td colspan="4" class="hint">No vehicles match.</td></tr>';
+}
+function renderChips() {
+  $('#chips').innerHTML = routes.map((r, i) => `<span class="chip">${esc(r)}<button type="button" data-i="${i}" aria-label="Remove ${esc(r)}">×</button></span>`).join('');
+}
+function updateButtons() {
+  const has = changes.size > 0;
+  $('#dlBtn').disabled = !Object.keys(data).length;
+  $('#ghBtn').disabled = !has;
+  $('#ghBtn').textContent = has ? `Commit to GitHub (${changes.size})` : 'Commit to GitHub';
+}
+
+/* ---------- form ---------- */
+function resetForm(keepOp = true) {
+  editing = null; routes = [];
+  ['vid', 'plate', 'model', 'route'].forEach(i => $('#' + i).value = '');
+  $('#unconf').checked = false;
+  $('#formTitle').textContent = 'Add vehicle'; $('#saveBtn').textContent = 'Add vehicle'; $('#delBtn').hidden = true;
+  renderChips(); checkForm();
+}
+function loadIntoForm(op, id) {
+  const v = data[op][id];
+  editing = { op, id }; $('#op').value = op; $('#newOp').hidden = true;
+  $('#vid').value = id;
+  $('#unconf').checked = /neconfirmat/i.test(v.licensePlate || '');
+  $('#plate').value = stripSuffix(v.licensePlate);
+  $('#model').value = v.model || '';
+  routes = [...(v.assignedRoutes || [])];
+  $('#formTitle').textContent = `Edit vehicle ${id}`; $('#saveBtn').textContent = 'Save changes'; $('#delBtn').hidden = false;
+  renderChips(); checkForm(); window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function checkForm() {
+  const op = curOp(), id = $('#vid').value.trim(), plate = normPlate($('#plate').value), msgs = [];
+  const exists = op && id && data[op] && data[op][id];
+  if (exists && !(editing && editing.op === op && editing.id === id)) {
+    msgs.push(`ID ${id} already exists (${stripSuffix(exists.licensePlate)}). Saving will overwrite it.`);
+  }
+  if (plate) for (const [o, vs] of Object.entries(data)) for (const [vid, v] of Object.entries(vs)) {
+    if (normPlate(stripSuffix(v.licensePlate)) === plate && !(o === op && vid === id)) msgs.push(`Plate ${plate} is already used by ${o} #${vid}.`);
+  }
+  $('#warn').innerHTML = msgs.map(m => `<div class="note">${esc(m)}</div>`).join('');
+}
+function addRoute() {
+  const r = $('#route').value.trim();
+  if (r && !routes.includes(r)) { routes.push(r); renderChips(); }
+  $('#route').value = '';
+}
+$('#route').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); addRoute(); } });
+$('#route').addEventListener('change', addRoute);   // picking from the suggestion list
+$('#chips').onclick = e => { const b = e.target.closest('button'); if (b) { routes.splice(+b.dataset.i, 1); renderChips(); } };
+['vid', 'plate', 'newOp'].forEach(i => $('#' + i).addEventListener('input', checkForm));
+$('#op').onchange = () => { $('#newOp').hidden = $('#op').value !== '__new'; if (!$('#newOp').hidden) $('#newOp').focus(); editing = null; resetForm(); renderList(); };
+$('#clearBtn').onclick = () => { resetForm(); $('#vid').focus(); };
+$('#rows').onclick = e => { const tr = e.target.closest('tr.row'); if (tr) loadIntoForm($('#op').value, tr.dataset.id); };
+$('#q').oninput = renderList;
+
+$('#f').onsubmit = e => {
+  e.preventDefault(); addRoute();
+  const op = curOp(), id = $('#vid').value.trim();
+  if (!op) return status('Enter an operator key.', 'err');
+  if (!/^\d+$/.test(id)) return status('Vehicle ID must be a number.', 'err');
+  const plate = normPlate($('#plate').value) + ($('#unconf').checked ? SUFFIX : '');
+  const entry = { licensePlate: plate, model: $('#model').value.trim() };
+  if (routes.length) entry.assignedRoutes = [...routes];
+  // if the ID or operator changed while editing, remove the old entry
+  if (editing && (editing.op !== op || editing.id !== id)) removeVehicle(editing.op, editing.id);
+  data[op] = data[op] || {};
+  data[op][id] = entry; changes.set(op + '|' + id, entry);
+  const wasEdit = !!editing;
+  renderAll(); $('#op').value = op; resetForm(); renderList(); updateButtons();
+  status(`${wasEdit ? 'Updated' : 'Added'} #${id} · ${changes.size} unsaved change${changes.size > 1 ? 's' : ''}`, 'ok');
+  $('#vid').focus();
+};
+function removeVehicle(op, id) {
+  delete data[op][id]; changes.set(op + '|' + id, null);
+}
+$('#delBtn').onclick = () => {
+  if (!editing || !confirm(`Delete vehicle ${editing.id} (${$('#plate').value})?`)) return;
+  removeVehicle(editing.op, editing.id); resetForm(); renderList(); updateButtons();
+  status('Vehicle deleted (unsaved).', 'ok');
+};
+
+/* ---------- download ---------- */
+$('#dlBtn').onclick = () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([serialize(data)], { type: 'application/json' }));
+  a.download = 'vehicles.json'; a.click(); URL.revokeObjectURL(a.href);
+  status('Downloaded. Replace vehicles.json in your repo with it.', 'ok');
+};
+
+/* ---------- GitHub commit ---------- */
+const cfgKeys = ['Owner', 'Repo', 'Branch', 'Path', 'Token'];
+function readCfg() { const c = {}; cfgKeys.forEach(k => { try { c[k] = localStorage.getItem('vm' + k) || ''; } catch (e) { c[k] = ''; } }); return c; }
+$('#cfgBtn').onclick = () => { const c = readCfg(); cfgKeys.forEach(k => $('#g' + k).value = c[k]); $('#dlg').showModal(); };
+$('#cfgForm').addEventListener('submit', e => {
+  if (e.submitter && e.submitter.value === 'save') cfgKeys.forEach(k => { try { localStorage.setItem('vm' + k, $('#g' + k).value.trim()); } catch (er) {} });
+});
+const b64enc = s => { const b = new TextEncoder().encode(s); let t = ''; b.forEach(c => t += String.fromCharCode(c)); return btoa(t); };
+const b64dec = s => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g, '')), c => c.charCodeAt(0)));
+
+$('#ghBtn').onclick = async () => {
+  const c = readCfg();
+  if (!c.Owner || !c.Repo || !c.Token) { $('#cfgBtn').click(); return status('Fill in the GitHub settings first.', 'err'); }
+  const path = c.Path || 'vehicles.json', branch = c.Branch || 'main';
+  const url = `https://api.github.com/repos/${c.Owner}/${c.Repo}/contents/${path}`;
+  const hdr = { Authorization: `Bearer ${c.Token}`, Accept: 'application/vnd.github+json' };
+  $('#ghBtn').disabled = true; status('Committing…');
+  try {
+    // Re-read the file on GitHub and apply only my changes, so edits made elsewhere aren't overwritten.
+    const g = await fetch(`${url}?ref=${encodeURIComponent(branch)}`, { headers: hdr, cache: 'no-store' });
+    if (!g.ok) throw new Error(`Couldn’t read ${path} (${g.status}). Check owner, repo, branch and token.`);
+    const remote = await g.json();
+    const merged = JSON.parse(b64dec(remote.content));
+    for (const [k, entry] of changes) {
+      const [op, id] = k.split('|');
+      if (entry === null) { if (merged[op]) delete merged[op][id]; }
+      else { merged[op] = merged[op] || {}; merged[op][id] = entry; }
+    }
+    const added = [...changes.values()].filter(Boolean).length;
+    const p = await fetch(url, {
+      method: 'PUT', headers: { ...hdr, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: `Update vehicles (${added} added/changed, ${changes.size - added} removed)`, content: b64enc(serialize(merged)), sha: remote.sha, branch })
+    });
+    if (!p.ok) throw new Error(`Commit failed (${p.status}): ${(await p.json().catch(() => ({}))).message || ''}`);
+    setData(merged, 'Committed to GitHub');
+  } catch (e) { status(e.message, 'err'); updateButtons(); }
+};
+
+window.addEventListener('beforeunload', e => { if (changes.size) { e.preventDefault(); e.returnValue = ''; } });
+renderAll(); renderList(); autoLoad();
+</script>
+</body>
+</html>
