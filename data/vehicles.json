@@ -10,6 +10,11 @@
       "model": "Mercedes-Benz Sprinter",
       "assignedRoutes": ["472 Bistrița - Sebiș"]
     },
+    "14": {
+      "licensePlate": "B 132 TMX",
+      "model": "Mercedes-Benz Sprinter",
+      "assignedRoutes": ["909 Bistrița - Valea Mare"]
+    },
     "28": {
       "licensePlate": "BN 10 TMX",
       "model": "Mercedes-Benz Citaro Ü"
