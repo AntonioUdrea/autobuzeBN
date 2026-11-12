@@ -591,12 +591,12 @@
     },
     "6": {
       "date": "2026-11-12",
-      "time": "14:00",
+      "time": "14:15",
       "route": "628A Năsăud - Săsarm - Beclean - Suplai"
     },
     "7": {
       "date": "2026-11-12",
-      "time": "14:00",
+      "time": "14:15",
       "route": "628 Bistrița - Suplai"
     },
     "9": {
@@ -606,27 +606,27 @@
     },
     "10": {
       "date": "2026-11-12",
-      "time": "09:45",
-      "route": "630 Năsăud - Suplai"
+      "time": "14:15",
+      "route": "631 Năsăud - Săsarm"
     },
     "11": {
       "date": "2026-11-12",
-      "time": "07:30",
+      "time": "14:15",
       "route": "630 Năsăud - Suplai"
     },
     "12": {
       "date": "2026-11-12",
-      "time": "09:30",
-      "route": "727 Năsăud - Telcișor"
+      "time": "14:15",
+      "route": "632 Năsăud - Runcu Salvei"
     },
     "13": {
       "date": "2026-11-12",
-      "time": "13:30",
+      "time": "14:15",
       "route": "632 Năsăud - Runcu Salvei"
     },
     "15": {
       "date": "2026-11-12",
-      "time": "14:00",
+      "time": "14:15",
       "route": "725 Năsăud - Telciu"
     },
     "20": {
@@ -636,12 +636,12 @@
     },
     "21": {
       "date": "2026-11-12",
-      "time": "07:45",
+      "time": "14:15",
       "route": "817 Bistrița - Parva"
     },
     "22": {
-      "date": "2026-11-11",
-      "time": "15:00",
+      "date": "2026-11-12",
+      "time": "14:15",
       "route": "816 Năsăud - Lunca Leșului"
     },
     "23": {
@@ -661,8 +661,8 @@
     },
     "28": {
       "date": "2026-11-12",
-      "time": "09:45",
-      "route": "722 Năsăud - Dealul Ștefăniței"
+      "time": "14:15",
+      "route": "726 Năsăud - Bichigiu"
     },
     "29": {
       "date": "2026-11-12",
@@ -671,12 +671,12 @@
     },
     "31": {
       "date": "2026-11-12",
-      "time": "14:00",
+      "time": "14:15",
       "route": "723 Bistrița - Romuli"
     },
     "32": {
       "date": "2026-11-12",
-      "time": "14:00",
+      "time": "14:15",
       "route": "721 Bistrița - Dealul Ștefăniței"
     }
   }

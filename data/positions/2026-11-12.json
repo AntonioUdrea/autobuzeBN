@@ -318,6 +318,13 @@
       24.37385,
       "727 Năsăud - Telcișor",
       "Nasaud Autogara"
+    ],
+    [
+      "14:15",
+      47.28216,
+      24.41124,
+      "632 Năsăud - Runcu Salvei",
+      "Runcu Salvei"
     ]
   ],
   "transmixt:116": [
@@ -2543,6 +2550,13 @@
       24.45704,
       "721 Bistrița - Dealul Ștefăniței",
       "Dealu Stefanitei"
+    ],
+    [
+      "14:15",
+      47.28316,
+      24.41148,
+      "721 Bistrița - Dealul Ștefăniței",
+      "Dealu Stefanitei"
     ]
   ],
   "transmixt:64": [
@@ -4140,6 +4154,13 @@
       24.31539,
       "628 Bistrița - Suplai",
       "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "14:15",
+      47.2936,
+      24.3861,
+      "628 Bistrița - Suplai",
+      "Bistrita Autogara/Rodnei"
     ]
   ],
   "transmixt:74": [
@@ -5660,6 +5681,13 @@
       24.37669,
       "630 Năsăud - Suplai",
       "Nasaud Autogara"
+    ],
+    [
+      "14:15",
+      47.2822,
+      24.41147,
+      "631 Năsăud - Săsarm",
+      "Sasarm"
     ]
   ],
   "ani-tour:21": [
@@ -5704,6 +5732,13 @@
       24.50191,
       "817 Bistrița - Parva",
       "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "14:15",
+      47.13268,
+      24.4849,
+      "817 Bistrița - Parva",
+      "Parva"
     ]
   ],
   "ani-tour:4": [
@@ -7118,6 +7153,13 @@
       24.18032,
       "628A Năsăud - Săsarm - Beclean - Suplai",
       "Suplai"
+    ],
+    [
+      "14:15",
+      47.17644,
+      24.18031,
+      "628A Năsăud - Săsarm - Beclean - Suplai",
+      "Suplai"
     ]
   ],
   "transmixt:105": [
@@ -7978,6 +8020,13 @@
       24.32519,
       "632 Năsăud - Runcu Salvei",
       "Nasaud Autogara"
+    ],
+    [
+      "14:15",
+      47.28213,
+      24.411,
+      "632 Năsăud - Runcu Salvei",
+      "Runcu Salvei"
     ]
   ],
   "ani-tour:31": [
@@ -8120,6 +8169,13 @@
       24.41103,
       "723 Bistrița - Romuli",
       "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "14:15",
+      47.2823,
+      24.41157,
+      "723 Bistrița - Romuli",
+      "Bistrita Autogara/Rodnei"
     ]
   ],
   "ani-tour:20": [
@@ -8229,6 +8285,13 @@
       24.33083,
       "630 Năsăud - Suplai",
       "Nasaud Autogara"
+    ],
+    [
+      "14:15",
+      47.28214,
+      24.41092,
+      "630 Năsăud - Suplai",
+      "Suplai"
     ]
   ],
   "transmixt:90": [
@@ -9919,6 +9982,13 @@
       24.37043,
       "722 Năsăud - Dealul Ștefăniței",
       "Nasaud Autogara"
+    ],
+    [
+      "14:15",
+      47.28221,
+      24.41141,
+      "726 Năsăud - Bichigiu",
+      "Bichigiu"
     ]
   ],
   "transmixt:150": [
@@ -10360,6 +10430,13 @@
       24.41137,
       "725 Năsăud - Telciu",
       "Telciu 2"
+    ],
+    [
+      "14:15",
+      47.34896,
+      24.38486,
+      "725 Năsăud - Telciu",
+      "Telciu 2"
     ]
   ],
   "transmixt:103": [
@@ -10445,6 +10522,15 @@
       24.44294,
       "4",
       "tur"
+    ]
+  ],
+  "ani-tour:22": [
+    [
+      "14:15",
+      47.28212,
+      24.41106,
+      "816 Năsăud - Lunca Leșului",
+      "Lunca Lesului"
     ]
   ]
 }
