@@ -1,35 +1,4 @@
 {
-  "date": "2026-11-11",
-  "buses": {
-    "ani-tour:32": {
-      "route": "818 Năsăud - Parva",
-      "rare": false,
-      "unusual": false
-    },
-    "transmixt:62": {
-      "route": "10",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:199": {
-      "route": "502 Bistrița - Mureșenii Bârgăului",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:53": {
-      "route": "3",
-      "rare": true,
-      "unusual": false
-    },
-    "transmixt:173": {
-      "route": "485 Bistrița - Lunca",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:124": {
-      "route": "470 Bistrița - Posmuș",
-      "rare": false,
-      "unusual": true
-    }
-  }
+  "date": "2026-11-12",
+  "buses": {}
 }
