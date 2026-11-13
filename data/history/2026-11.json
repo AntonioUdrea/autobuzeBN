@@ -1034,5 +1034,10 @@
     "transmixt:198": [{"route":"506 Bistrița - Cușma","from":"06:30","to":"07:00","polls":3,"directions":["CUSMA- BISTRITA"]},{"route":"506 Bistrița - Cușma","from":"14:30","to":"15:00","polls":3,"directions":["BISTRITA- CUSMA"]}],
     "transmixt:199": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"06:30","to":"07:15","polls":4,"directions":["RETUR"]},{"route":"503 Bistrița - Bistrița Bârgăului - Colibița","from":"19:30","to":"20:15","polls":4,"directions":["BISTRITA- BISTRITA BARGAULUI"]}],
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"06:30","to":"07:15","polls":4,"directions":["Fintinele - Bistrita"]},{"route":"358 Bistrița - Fântânele","from":"14:30","to":"15:30","polls":5,"directions":["Bistrita - Fintinele"]}]
+  },
+  "2026-11-13": {
+    "ani-tour:9": [{"route":"633 Bistrița - Săsarm","from":"05:00","to":"05:00","polls":1,"directions":["Bistrita Autogara/Rodnei"]}],
+    "ani-tour:12": [{"route":"632 Năsăud - Runcu Salvei","from":"05:00","to":"05:00","polls":1,"directions":["Runcu Salvei"]}],
+    "transmixt:175": [{"route":"359 Bistrița - Țăgșor","from":"05:00","to":"05:00","polls":1,"directions":["Tagsor - Bistrita"]}]
   }
 }
