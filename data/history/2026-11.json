@@ -1144,7 +1144,10 @@
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"06:30","to":"07:30","polls":5,"directions":["Fintinele - Bistrita"]},{"route":"358 Bistrița - Fântânele","from":"14:30","to":"14:30","polls":1,"directions":["Bistrita - Fintinele"]},{"route":"358 Bistrița - Fântânele","from":"15:45","to":"15:45","polls":1,"directions":["Bistrita - Fintinele"]}]
   },
   "2026-11-14": {
-    "transmixt:114": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"05:45","polls":1,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
-    "transmixt:152": [{"route":"9","from":"05:45","to":"05:45","polls":1,"directions":["84 AUTOGARA"]}]
+    "transmixt:42": [{"route":"3","from":"06:00","to":"06:00","polls":1,"directions":["77 C R VIVU"]}],
+    "transmixt:110": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"06:00","to":"06:00","polls":1,"directions":["RETUR"]}],
+    "transmixt:114": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"06:00","polls":2,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
+    "transmixt:152": [{"route":"9","from":"05:45","to":"06:00","polls":2,"directions":["84 AUTOGARA"]}],
+    "transmixt:193": [{"route":"2","from":"06:00","to":"06:00","polls":1,"directions":["28 VIISOARA"]}]
   }
 }
