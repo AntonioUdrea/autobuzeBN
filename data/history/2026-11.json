@@ -1147,7 +1147,7 @@
     "ani-tour:4": [{"route":"615 Bistrița - Năsăud","from":"07:15","to":"08:15","polls":4,"directions":["Bistrita Autogara/Rodnei","Nasaud Autogara"]},{"route":"615 Bistrița - Năsăud","from":"13:30","to":"14:00","polls":3,"directions":["Bistrita Autogara/Rodnei"]},{"route":"615 Bistrița - Năsăud","from":"15:30","to":"16:00","polls":3,"directions":["Nasaud Autogara"]},{"route":"615 Bistrița - Năsăud","from":"18:45","to":"20:30","polls":5,"directions":["Bistrita Autogara/Rodnei","Nasaud Autogara"]}],
     "transmixt:12": [{"route":"493 Bistrița - Gledin","from":"07:15","to":"07:30","polls":2,"directions":["BISTRITA- GLEDIN"]}],
     "transmixt:34": [{"route":"3","from":"06:45","to":"20:15","polls":44,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
-    "transmixt:42": [{"route":"3","from":"06:00","to":"22:00","polls":63,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
+    "transmixt:42": [{"route":"3","from":"06:00","to":"22:15","polls":64,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
     "transmixt:54": [{"route":"3","from":"07:15","to":"21:45","polls":46,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
     "transmixt:66": [{"route":"13","from":"07:00","to":"12:15","polls":17,"directions":["39 BIBL JUDETEANA","181 LOGOS"]},{"route":"13","from":"13:45","to":"18:15","polls":17,"directions":["181 LOGOS","39 BIBL JUDETEANA"]}],
     "transmixt:70": [{"route":"1","from":"06:30","to":"21:45","polls":61,"directions":["tur","1 PASARELA"]}],
