@@ -563,6 +563,13 @@
       24.49803,
       "1",
       "tur"
+    ],
+    [
+      "17:30",
+      47.1375,
+      24.50787,
+      "1",
+      "1 PASARELA"
     ]
   ],
   "transmixt:93": [
@@ -952,6 +959,13 @@
       24.49158,
       "13",
       "174 CARTIER RAAL"
+    ],
+    [
+      "17:30",
+      47.10951,
+      24.49991,
+      "13",
+      "181 LOGOS"
     ]
   ],
   "transmixt:92": [
@@ -1143,6 +1157,13 @@
       24.49529,
       "4",
       "tur"
+    ],
+    [
+      "17:30",
+      47.16252,
+      24.5305,
+      "4",
+      "UNIREA- VIISOARA"
     ]
   ],
   "ani-tour:4": [
@@ -1781,6 +1802,13 @@
       24.47731,
       "3",
       "69 SCHULLERWALD"
+    ],
+    [
+      "17:30",
+      47.13023,
+      24.46823,
+      "3",
+      "77 C R VIVU"
     ]
   ],
   "transmixt:188": [
@@ -2177,6 +2205,13 @@
       24.44181,
       "2",
       "107 DR SLATINITEI"
+    ],
+    [
+      "17:30",
+      47.12452,
+      24.4807,
+      "2",
+      "107 DR SLATINITEI"
     ]
   ],
   "transmixt:151": [
@@ -2407,6 +2442,13 @@
       24.50661,
       "16",
       "DUS"
+    ],
+    [
+      "17:30",
+      47.14066,
+      24.50666,
+      "16",
+      "DUS"
     ]
   ],
   "transmixt:152": [
@@ -2579,6 +2621,13 @@
       24.61802,
       "502 Bistrița - Mureșenii Bârgăului",
       "MURESENII BARGAULUI- BISTRITA"
+    ],
+    [
+      "17:30",
+      47.14183,
+      24.50721,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "MURESENII BARGAULUI- BISTRITA"
     ]
   ],
   "transmixt:164": [
@@ -2602,6 +2651,13 @@
       "17:15",
       47.16718,
       24.86859,
+      "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "COLIBITA- BISTRITA"
+    ],
+    [
+      "17:30",
+      47.21954,
+      24.7414,
       "503 Bistrița - Bistrița Bârgăului - Colibița",
       "COLIBITA- BISTRITA"
     ]
