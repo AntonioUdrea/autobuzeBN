@@ -160,6 +160,13 @@
       24.48538,
       "7",
       "110 SLATINITA"
+    ],
+    [
+      "18:00",
+      47.17867,
+      24.52276,
+      "7",
+      "110 SLATINITA"
     ]
   ],
   "transmixt:169": [
@@ -584,6 +591,13 @@
       24.48491,
       "1",
       "1 PASARELA"
+    ],
+    [
+      "18:00",
+      47.11761,
+      24.46765,
+      "1",
+      "tur"
     ]
   ],
   "transmixt:93": [
@@ -1192,6 +1206,13 @@
       24.49214,
       "4",
       "UNIREA- VIISOARA"
+    ],
+    [
+      "18:00",
+      47.09806,
+      24.44132,
+      "4",
+      "tur"
     ]
   ],
   "ani-tour:4": [
@@ -1569,6 +1590,13 @@
       24.49564,
       "1",
       "tur"
+    ],
+    [
+      "18:00",
+      47.13734,
+      24.50837,
+      "1",
+      "1 PASARELA"
     ]
   ],
   "transmixt:154": [
@@ -1851,6 +1879,13 @@
       24.50533,
       "3",
       "77 C R VIVU"
+    ],
+    [
+      "18:00",
+      47.13382,
+      24.50624,
+      "3",
+      "69 SCHULLERWALD"
     ]
   ],
   "transmixt:188": [
@@ -2047,6 +2082,13 @@
       "17:45",
       47.09843,
       24.4418,
+      "2",
+      "52 CASA AGRONOMULUI"
+    ],
+    [
+      "18:00",
+      47.13011,
+      24.49124,
       "2",
       "52 CASA AGRONOMULUI"
     ]
@@ -2268,6 +2310,13 @@
       24.51675,
       "2",
       "107 DR SLATINITEI"
+    ],
+    [
+      "18:00",
+      47.17106,
+      24.52841,
+      "2",
+      "28 VIISOARA"
     ]
   ],
   "transmixt:151": [
@@ -2691,6 +2740,13 @@
       24.51181,
       "502 Bistrița - Mureșenii Bârgăului",
       "BISTRITA- MURESENII BARGAULUI"
+    ],
+    [
+      "18:00",
+      47.19246,
+      24.61679,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "BISTRITA- MURESENII BARGAULUI"
     ]
   ],
   "transmixt:164": [
@@ -2728,6 +2784,13 @@
       "17:45",
       47.20081,
       24.64186,
+      "503 Bistrița - Bistrița Bârgăului - Colibița",
+      "COLIBITA- BISTRITA"
+    ],
+    [
+      "18:00",
+      47.19491,
+      24.62427,
       "503 Bistrița - Bistrița Bârgăului - Colibița",
       "COLIBITA- BISTRITA"
     ]
