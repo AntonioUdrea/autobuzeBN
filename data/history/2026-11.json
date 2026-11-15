@@ -1173,7 +1173,9 @@
     "transmixt:193": [{"route":"2","from":"06:00","to":"21:30","polls":56,"directions":["28 VIISOARA","53 AVICOLA","52 CASA AGRONOMULUI","107 DR SLATINITEI"]}]
   },
   "2026-11-15": {
+    "transmixt:69": [{"route":"1","from":"07:00","to":"07:00","polls":1,"directions":["tur"]}],
+    "transmixt:93": [{"route":"4","from":"07:00","to":"07:00","polls":1,"directions":["tur"]}],
     "transmixt:153": [{"route":"7","from":"06:00","to":"06:15","polls":2,"directions":["110 SLATINITA","84 AUTOGARA"]}],
-    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:45","polls":3,"directions":["Milas - Bistrita"]}]
+    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"07:00","polls":4,"directions":["Milas - Bistrita"]}]
   }
 }
