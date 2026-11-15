@@ -8,7 +8,7 @@
     "12": {
       "licensePlate": "B 130 TMX",
       "model": "Mercedes-Benz Sprinter",
-      "assignedRoutes": ["472 Bistrița - Sebiș"]
+      "assignedRoutes": ["472 Bistrița - Sebiș", "493 Bistrița - Gledin"]
     },
     "14": {
       "licensePlate": "B 132 TMX",
@@ -274,7 +274,7 @@
     "110": {
       "licensePlate": "BN 75 TNR",
       "model": "VW Crafter",
-      "assignedRoutes": ["474 Bistrița - Buduș", "478 Bistrița - Satu Nou"]
+      "assignedRoutes": ["474 Bistrița - Buduș", "478 Bistrița - Satu Nou", "503 Bistrița - Bistrița Bârgăului - Colibița", "476 Bistrița - Budacu de Sus (via Satu Nou)"]
     },
     "112": {
       "licensePlate": "B 78 KAJ",
