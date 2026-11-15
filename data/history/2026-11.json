@@ -1174,6 +1174,6 @@
   },
   "2026-11-15": {
     "transmixt:153": [{"route":"7","from":"06:00","to":"06:15","polls":2,"directions":["110 SLATINITA","84 AUTOGARA"]}],
-    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:30","polls":2,"directions":["Milas - Bistrita"]}]
+    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:45","polls":3,"directions":["Milas - Bistrita"]}]
   }
 }
