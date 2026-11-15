@@ -1171,5 +1171,8 @@
     "transmixt:176": [{"route":"503 Bistrița - Bistrița Bârgăului - Colibița","from":"17:15","to":"18:15","polls":5,"directions":["COLIBITA- BISTRITA"]}],
     "transmixt:187": [{"route":"2","from":"06:15","to":"21:45","polls":55,"directions":["53 AVICOLA","28 VIISOARA","52 CASA AGRONOMULUI","1 PASARELA","107 DR SLATINITEI"]}],
     "transmixt:193": [{"route":"2","from":"06:00","to":"21:30","polls":56,"directions":["28 VIISOARA","53 AVICOLA","52 CASA AGRONOMULUI","107 DR SLATINITEI"]}]
+  },
+  "2026-11-15": {
+    "transmixt:153": [{"route":"7","from":"06:00","to":"06:00","polls":1,"directions":["110 SLATINITA"]}]
   }
 }
