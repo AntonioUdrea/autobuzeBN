@@ -1174,21 +1174,21 @@
   },
   "2026-11-15": {
     "ani-tour:4": [{"route":"615 Bistrița - Năsăud","from":"07:15","to":"08:15","polls":4,"directions":["Bistrita Autogara/Rodnei","Nasaud Autogara"]}],
-    "transmixt:69": [{"route":"1","from":"07:00","to":"11:45","polls":19,"directions":["tur","1 PASARELA"]}],
-    "transmixt:70": [{"route":"1","from":"08:00","to":"11:45","polls":15,"directions":["1 PASARELA","tur"]}],
-    "transmixt:77": [{"route":"13","from":"07:15","to":"11:45","polls":19,"directions":["174 CARTIER RAAL","181 LOGOS"]}],
+    "transmixt:69": [{"route":"1","from":"07:00","to":"12:00","polls":20,"directions":["tur","1 PASARELA"]}],
+    "transmixt:70": [{"route":"1","from":"08:00","to":"12:00","polls":16,"directions":["1 PASARELA","tur"]}],
+    "transmixt:77": [{"route":"13","from":"07:15","to":"12:00","polls":20,"directions":["174 CARTIER RAAL","181 LOGOS"]}],
     "transmixt:92": [{"route":"4","from":"07:15","to":"11:45","polls":12,"directions":["UNIREA- VIISOARA","tur"]}],
     "transmixt:93": [{"route":"4","from":"07:00","to":"09:15","polls":4,"directions":["tur"]}],
     "transmixt:95": [{"route":"4","from":"08:00","to":"10:15","polls":6,"directions":["UNIREA- VIISOARA","tur"]}],
     "transmixt:110": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"08:30","to":"09:00","polls":3,"directions":["RETUR"]},{"route":"503 Bistrița - Bistrița Bârgăului - Colibița","from":"09:30","to":"10:15","polls":4,"directions":["BISTRITA- COLIBITA"]}],
     "transmixt:114": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"08:45","to":"09:15","polls":3,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
     "transmixt:150": [{"route":"16","from":"08:30","to":"11:30","polls":4,"directions":["DUS"]}],
-    "transmixt:151": [{"route":"3","from":"08:30","to":"09:30","polls":4,"directions":["69 SCHULLERWALD","77 C R VIVU"]}],
+    "transmixt:151": [{"route":"3","from":"08:30","to":"09:30","polls":4,"directions":["69 SCHULLERWALD","77 C R VIVU"]},{"route":"3","from":"12:00","to":"12:00","polls":1,"directions":["77 C R VIVU"]}],
     "transmixt:152": [{"route":"9","from":"08:30","to":"09:15","polls":3,"directions":["84 AUTOGARA","141 GHINDA"]},{"route":"1A","from":"09:30","to":"09:30","polls":1,"directions":["104 STEFAN CEL MARE"]},{"route":"1B","from":"09:45","to":"10:15","polls":2,"directions":["191 VALEA JELNEI"]}],
     "transmixt:153": [{"route":"7","from":"06:00","to":"06:15","polls":2,"directions":["110 SLATINITA","84 AUTOGARA"]},{"route":"6","from":"07:15","to":"07:15","polls":1,"directions":["78 C R VIVU"]},{"route":"7","from":"07:30","to":"08:15","polls":3,"directions":["110 SLATINITA","84 AUTOGARA"]},{"route":"8","from":"08:30","to":"08:45","polls":2,"directions":["125 SIGMIR","84 AUTOGARA"]},{"route":"10","from":"09:00","to":"09:45","polls":4,"directions":["232 SARATA","84 AUTOGARA"]},{"route":"8","from":"10:00","to":"10:30","polls":3,"directions":["TUR","84 AUTOGARA"]}],
-    "transmixt:154": [{"route":"3","from":"08:00","to":"11:45","polls":16,"directions":["69 SCHULLERWALD","77 C R VIVU"]}],
+    "transmixt:154": [{"route":"3","from":"08:00","to":"12:00","polls":17,"directions":["69 SCHULLERWALD","77 C R VIVU"]}],
     "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"09:00","polls":9,"directions":["Milas - Bistrita","Bistrita - Milas"]}],
-    "transmixt:188": [{"route":"2","from":"08:15","to":"11:45","polls":12,"directions":["28 VIISOARA","52 CASA AGRONOMULUI","53 AVICOLA","107 DR SLATINITEI"]}],
+    "transmixt:188": [{"route":"2","from":"08:15","to":"12:00","polls":13,"directions":["28 VIISOARA","52 CASA AGRONOMULUI","53 AVICOLA","107 DR SLATINITEI"]}],
     "transmixt:197": [{"route":"2","from":"08:30","to":"11:45","polls":11,"directions":["107 DR SLATINITEI","28 VIISOARA","52 CASA AGRONOMULUI"]}]
   }
 }
