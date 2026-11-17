@@ -39,7 +39,7 @@
     "transmixt:176": {
       "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
       "rare": false,
-      "unusual": true
+      "unusual": false
     },
     "transmixt:123": {
       "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
