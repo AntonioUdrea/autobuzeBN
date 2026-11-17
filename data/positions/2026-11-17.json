@@ -267,6 +267,13 @@
       24.4062,
       "633 Bistrița - Săsarm",
       "Sasarm"
+    ],
+    [
+      "15:30",
+      47.29778,
+      24.37659,
+      "633 Bistrița - Săsarm",
+      "Sasarm"
     ]
   ],
   "transmixt:116": [
@@ -1070,6 +1077,13 @@
       "15:15",
       47.27825,
       24.42189,
+      "808 Bistrița - Lunca Ilvei",
+      "Lunca Ilvei"
+    ],
+    [
+      "15:30",
+      47.28559,
+      24.48604,
       "808 Bistrița - Lunca Ilvei",
       "Lunca Ilvei"
     ]
@@ -4608,6 +4622,13 @@
       24.41801,
       "807 Bistrița - Leșu Ilvei",
       "Lunca Lesului"
+    ],
+    [
+      "15:30",
+      47.29543,
+      24.38272,
+      "807 Bistrița - Leșu Ilvei",
+      "Lunca Lesului"
     ]
   ],
   "ani-tour:7": [
@@ -4710,6 +4731,13 @@
       24.5134,
       "818 Năsăud - Parva",
       "Parva"
+    ],
+    [
+      "15:30",
+      47.39609,
+      24.5415,
+      "818 Năsăud - Parva",
+      "Nasaud Autogara"
     ]
   ],
   "transmixt:188": [
@@ -6501,6 +6529,13 @@
       24.39445,
       "817 Bistrița - Parva",
       "Parva"
+    ],
+    [
+      "15:30",
+      47.29564,
+      24.38252,
+      "817 Bistrița - Parva",
+      "Parva"
     ]
   ],
   "ani-tour:4": [
@@ -6580,6 +6615,13 @@
       24.46569,
       "615 Bistrița - Năsăud",
       "Nasaud Autogara"
+    ],
+    [
+      "15:30",
+      47.28174,
+      24.41102,
+      "615 Bistrița - Năsăud",
+      "Bistrita Autogara/Rodnei"
     ]
   ],
   "transmixt:67": [
@@ -9747,6 +9789,13 @@
       24.48535,
       "723 Bistrița - Romuli",
       "Romuli 5"
+    ],
+    [
+      "15:30",
+      47.14537,
+      24.51166,
+      "723 Bistrița - Romuli",
+      "Romuli 5"
     ]
   ],
   "ani-tour:20": [
@@ -12293,6 +12342,13 @@
       24.41099,
       "631 Năsăud - Săsarm",
       "Sasarm"
+    ],
+    [
+      "15:30",
+      47.28197,
+      24.41094,
+      "630 Năsăud - Suplai",
+      "Suplai"
     ]
   ],
   "transmixt:153": [
@@ -12850,6 +12906,13 @@
       "15:15",
       47.3117,
       24.74957,
+      "816 Năsăud - Lunca Leșului",
+      "Lunca Lesului"
+    ],
+    [
+      "15:30",
+      47.31307,
+      24.80168,
       "816 Năsăud - Lunca Leșului",
       "Lunca Lesului"
     ]
