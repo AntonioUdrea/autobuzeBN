@@ -22,7 +22,12 @@
       "unusual": true
     },
     "transmixt:124": {
-      "route": "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "route": "493 Bistrița - Gledin",
+      "rare": false,
+      "unusual": false
+    },
+    "transmixt:72": {
+      "route": "3",
       "rare": false,
       "unusual": true
     }
