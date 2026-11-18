@@ -20,6 +20,11 @@
       "route": "493 Bistrița - Gledin",
       "rare": false,
       "unusual": false
+    },
+    "transmixt:8": {
+      "route": "470 Bistrița - Posmuș",
+      "rare": false,
+      "unusual": true
     }
   }
 }
