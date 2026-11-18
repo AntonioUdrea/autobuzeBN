@@ -43,11 +43,27 @@ td.id{font-variant-numeric:tabular-nums;font-weight:600}
 .listhead input{flex:1}
 dialog{border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);max-width:420px;width:92vw}
 dialog::backdrop{background:#0008}
+[hidden]{display:none!important}
+.tabs{display:flex;gap:.25rem}
+.tab.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+input[type=date],input[type=time],input[type=number]{width:100%;padding:.5rem .6rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+input[type=date]:focus-visible,input[type=time]:focus-visible,input[type=number]:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#hVeh{width:100%;margin-top:.4rem;padding:.25rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+.trip{display:grid;grid-template-columns:minmax(0,1fr) 7.5rem 7.5rem 5.5rem auto;gap:.4rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.trip.thead{font-size:.8rem;color:var(--mute);font-weight:600;padding:.2rem 0;border-bottom:0}
+.trip input{min-width:0}
+.tdirs,.twarn{grid-column:1/-1}
+.twarn:empty{display:none}
+.note.err{color:var(--bad)}
+@media(max-width:560px){.trip{grid-template-columns:1fr 1fr}.trip>[data-f=route]{grid-column:1/-1}.trip.thead{display:none}}
 </style>
 </head>
 <body>
 <header>
-  <h1>Vehicle manager</h1>
+  <div class="bar">
+    <h1>Vehicle manager</h1>
+    <div class="tabs"><button type="button" id="tabV" class="tab on">Vehicles</button><button type="button" id="tabH" class="tab">History records</button></div>
+  </div>
   <div class="bar">
     <span id="status">Loading…</span>
     <button id="openBtn">Open file</button>
@@ -57,7 +73,7 @@ dialog::backdrop{background:#0008}
   </div>
 </header>
 
-<main>
+<main id="vMain">
   <section>
     <h2 id="formTitle">Add vehicle</h2>
     <form id="f" autocomplete="off">
@@ -105,6 +121,42 @@ dialog::backdrop{background:#0008}
   </section>
 </main>
 
+<main id="hMain" hidden>
+  <section>
+    <h2>Day and vehicle</h2>
+    <label for="hDate">Date</label>
+    <input type="date" id="hDate">
+    <label for="hQ">Vehicle</label>
+    <input type="search" id="hQ" placeholder="Filter by operator, ID, plate or model">
+    <select id="hVeh" size="8"></select>
+    <div class="hint">● marks vehicles that already have records on this day.</div>
+
+    <h2 style="margin-top:1.25rem">Recorded on this day</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Vehicle</th><th>Trips</th></tr></thead>
+        <tbody id="hDay"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="hTitle">Trips</h2>
+    <div id="hMsg"></div>
+    <div id="hTrips"></div>
+    <div class="actions" style="flex-wrap:wrap">
+      <button type="button" id="hAdd">Add trip</button>
+      <button type="button" class="primary" id="hApply">Apply to day</button>
+      <button type="button" id="hRevert">Revert</button>
+      <button type="button" id="hDelDay">Delete this day’s records</button>
+    </div>
+    <div class="actions"><button type="button" class="primary" id="hGhBtn" disabled>Commit history to GitHub</button></div>
+    <div class="hint">“Apply to day” stages the change; nothing is written until you commit. Polls left blank are estimated from the duration (one poll per 15 minutes).</div>
+  </section>
+  <datalist id="hRoutes"></datalist>
+  <datalist id="hDirs"></datalist>
+</main>
+
 <dialog id="dlg">
   <form method="dialog" id="cfgForm">
     <h2>GitHub settings</h2>
@@ -112,6 +164,8 @@ dialog::backdrop{background:#0008}
     <label for="gRepo">Repository</label><input type="text" id="gRepo">
     <label for="gBranch">Branch</label><input type="text" id="gBranch" placeholder="main">
     <label for="gPath">Path to file</label><input type="text" id="gPath" placeholder="vehicles.json">
+    <label for="gHist">History folder</label><input type="text" id="gHist" placeholder="data/history">
+    <div class="hint">Folder (in the repo and on the site) holding the monthly files, e.g. 2026-11.json and index.json.</div>
     <label for="gToken">Personal access token</label><input type="text" id="gToken" placeholder="github_pat_…">
     <div class="hint">Use a fine-grained token limited to this repo with “Contents: read and write”. It is stored only in this browser (localStorage).</div>
     <div class="actions"><button class="primary" value="save">Save</button><button value="cancel">Cancel</button></div>
@@ -156,7 +210,7 @@ function setData(obj, label) {
   data = obj; changes.clear(); resetForm();
   const op = $('#op').value;
   renderAll(); if (op && data[op]) $('#op').value = op;
-  renderList(); updateButtons();
+  renderList(); updateButtons(); histVehiclesChanged();
   const n = Object.values(data).reduce((a, o) => a + Object.keys(o).length, 0);
   status(`${label}: ${n} vehicles`, 'ok');
 }
@@ -292,7 +346,7 @@ $('#dlBtn').onclick = () => {
 };
 
 /* ---------- GitHub commit ---------- */
-const cfgKeys = ['Owner', 'Repo', 'Branch', 'Path', 'Token'];
+const cfgKeys = ['Owner', 'Repo', 'Branch', 'Path', 'Hist', 'Token'];
 function readCfg() { const c = {}; cfgKeys.forEach(k => { try { c[k] = localStorage.getItem('vm' + k) || ''; } catch (e) { c[k] = ''; } }); return c; }
 $('#cfgBtn').onclick = () => { const c = readCfg(); cfgKeys.forEach(k => $('#g' + k).value = c[k]); $('#dlg').showModal(); };
 $('#cfgForm').addEventListener('submit', e => {
@@ -329,7 +383,321 @@ $('#ghBtn').onclick = async () => {
   } catch (e) { status(e.message, 'err'); updateButtons(); }
 };
 
-window.addEventListener('beforeunload', e => { if (changes.size) { e.preventDefault(); e.returnValue = ''; } });
+/* ---------- tabs ---------- */
+function showTab(hist) {
+  $('#vMain').hidden = hist; $('#hMain').hidden = !hist;
+  $('#tabV').classList.toggle('on', !hist); $('#tabH').classList.toggle('on', hist);
+  ['openBtn', 'dlBtn', 'ghBtn'].forEach(id => $('#' + id).hidden = hist);
+  if (hist) histEnter();
+}
+$('#tabV').onclick = () => showTab(false);
+$('#tabH').onclick = () => showTab(true);
+
+/* ---------- history records ---------- */
+const HIST = { months: new Map(), changes: new Map(), key: null, rows: [], date: '', dirty: false };
+const histDir = () => (readCfg().Hist || 'data/history').replace(/^\/+|\/+$/g, '');
+const timeRe = /^\d{2}:\d{2}$/;
+const mins = t => +t.slice(0, 2) * 60 + +t.slice(3);
+const estPolls = (f, t) => timeRe.test(f) && timeRe.test(t) && mins(t) >= mins(f) ? Math.floor((mins(t) - mins(f)) / 15) + 1 : '';
+const keyCmp = (a, b) => a.localeCompare(b, undefined, { numeric: true });
+const hDate = () => $('#hDate').value;
+const dayObj = () => (HIST.months.get(hDate().slice(0, 7)) || {})[hDate()] || {};
+const isBlank = r => !r.route.trim() && !r.from && !r.to && r.polls === '' && !r.directions.length;
+
+function vehLabel(key) {
+  const [op, id] = key.split(':'), v = data[op] && data[op][id];
+  if (!v) return `${op} #${id} · not in vehicles.json`;
+  return `${op} #${id} · ${stripSuffix(v.licensePlate) || 'no plate'}${v.model ? ' · ' + v.model : ''}`;
+}
+
+/* Same layout as the bot's files: one line per vehicle, trips compact. */
+function serializeHist(o) {
+  const days = Object.keys(o).sort().map(d => {
+    const keys = Object.keys(o[d]).sort(keyCmp).map(k =>
+      `    ${JSON.stringify(k)}: [${o[d][k].map(s => JSON.stringify(s)).join(',')}]`);
+    return `  ${JSON.stringify(d)}: {\n${keys.join(',\n')}\n  }`;
+  });
+  return `{\n${days.join(',\n')}\n}\n`;
+}
+
+/* ----- GitHub helpers ----- */
+const ghUrl = (c, path) => `https://api.github.com/repos/${c.Owner}/${c.Repo}/contents/${path}`;
+const ghHdr = c => ({ Authorization: `Bearer ${c.Token}`, Accept: 'application/vnd.github+json' });
+async function ghRead(c, path) {
+  const q = `?ref=${encodeURIComponent(c.Branch || 'main')}`;
+  const r = await fetch(ghUrl(c, path) + q, { headers: ghHdr(c), cache: 'no-store' });
+  if (r.status === 404) return null;
+  if (!r.ok) throw new Error(`Couldn’t read ${path} (${r.status}). Check owner, repo, branch and token.`);
+  const f = await r.json();
+  if (f.content) return { sha: f.sha, text: b64dec(f.content) };
+  const raw = await fetch(ghUrl(c, path) + q, { headers: { ...ghHdr(c), Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' });
+  if (!raw.ok) throw new Error(`Couldn’t read ${path} (${raw.status}).`);
+  return { sha: f.sha, text: await raw.text() };
+}
+function ghWrite(c, path, text, sha, message) {
+  const body = { message, content: b64enc(text), branch: c.Branch || 'main' };
+  if (sha) body.sha = sha;
+  return fetch(ghUrl(c, path), { method: 'PUT', headers: { ...ghHdr(c), 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+}
+const failMsg = async (what, res) => `${what} failed (${res.status}): ${(await res.json().catch(() => ({}))).message || ''}`;
+
+/* Re-reads the month on GitHub and applies only my changes, so the bot's polls aren't overwritten. */
+async function commitMonth(c, month, list) {
+  const path = `${histDir()}/${month}.json`;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const f = await ghRead(c, path);
+    const merged = f ? JSON.parse(f.text) : {};
+    for (const [date, key, val] of list) {
+      if (val === null) { if (merged[date]) { delete merged[date][key]; if (!Object.keys(merged[date]).length) delete merged[date]; } }
+      else (merged[date] = merged[date] || {})[key] = val;
+    }
+    const res = await ghWrite(c, path, serializeHist(merged), f && f.sha, `Manual history edit: ${list.length} vehicle-day(s) in ${month}`);
+    if (res.ok) return merged;
+    if (res.status !== 409 && res.status !== 422) throw new Error(await failMsg('Commit', res));
+  }
+  throw new Error(`Couldn’t commit ${path}: the file kept changing. Try again.`);
+}
+/* history.html only reads months listed in index.json */
+async function ensureIndex(c, month) {
+  const path = `${histDir()}/index.json`;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const f = await ghRead(c, path);
+    const idx = f ? JSON.parse(f.text) : {};
+    idx.months = idx.months || [];
+    if (idx.months.includes(month)) return;
+    idx.months.push(month); idx.months.sort();
+    const res = await ghWrite(c, path, JSON.stringify(idx, null, 2) + '\n', f && f.sha, `Add ${month} to history index`);
+    if (res.ok) return;
+    if (res.status !== 409 && res.status !== 422) throw new Error(await failMsg('Index update', res));
+  }
+}
+
+/* ----- loading ----- */
+async function loadMonth(m) {
+  if (HIST.months.has(m)) return;
+  let obj = null, failed = false;
+  try {
+    const r = await fetch(`${histDir()}/${m}.json`, { cache: 'no-store' });
+    if (r.ok) obj = await r.json(); else if (r.status === 404) obj = {}; else failed = true;
+  } catch (e) { failed = true; }
+  if (failed) {
+    const c = readCfg();
+    if (c.Owner && c.Repo && c.Token) {
+      try { const f = await ghRead(c, `${histDir()}/${m}.json`); obj = f ? JSON.parse(f.text) : {}; } catch (e) {}
+    }
+  }
+  if (obj === null) { obj = {}; status(`Couldn’t read ${histDir()}/${m}.json. Existing records may not show; check the history folder in Settings.`, 'err'); }
+  HIST.months.set(m, obj);
+}
+function histEnter() {
+  if (!$('#hDate').value) $('#hDate').value = new Date().toLocaleDateString('sv');
+  histLoadDay();
+}
+async function histLoadDay() {
+  const d = hDate();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return;
+  await loadMonth(d.slice(0, 7));
+  if (hDate() !== d) return;
+  HIST.date = d;
+  updateRouteList(); renderHVehicles(); renderDayList();
+  selectVeh(HIST.key);
+  updateHistButtons();
+}
+function histVehiclesChanged() { if (!$('#hMain').hidden) { updateRouteList(); renderHVehicles(); renderDayList(); renderTrips(); } }
+function histRefreshAll() {
+  updateRouteList(); renderHVehicles(); renderDayList(); updateHistButtons();
+  if (!HIST.dirty) selectVeh(HIST.key);
+}
+
+/* ----- rendering ----- */
+function updateRouteList() {
+  const s = new Set();
+  Object.values(data).forEach(o => Object.values(o).forEach(v => (v.assignedRoutes || []).forEach(r => s.add(r))));
+  HIST.months.forEach(mo => Object.values(mo).forEach(day => Object.values(day).forEach(st => st.forEach(x => x.route && s.add(x.route)))));
+  $('#hRoutes').innerHTML = [...s].sort(keyCmp).map(r => `<option value="${esc(r)}">`).join('');
+}
+function renderHVehicles() {
+  const q = $('#hQ').value.trim().toLowerCase(), day = dayObj(), all = new Set();
+  Object.entries(data).forEach(([op, o]) => Object.keys(o).forEach(id => all.add(`${op}:${id}`)));
+  Object.keys(day).forEach(k => all.add(k));
+  if (HIST.key) all.add(HIST.key);
+  const list = [...all].sort(keyCmp).filter(k => k === HIST.key || !q || vehLabel(k).toLowerCase().includes(q));
+  $('#hVeh').innerHTML = list.map(k => `<option value="${esc(k)}">${day[k] ? '● ' : ''}${esc(vehLabel(k))}</option>`).join('');
+  if (HIST.key) $('#hVeh').value = HIST.key;
+}
+function renderDayList() {
+  const day = dayObj(), date = hDate();
+  $('#hDay').innerHTML = Object.keys(day).sort(keyCmp).map(k => {
+    const trips = day[k].map(s => `${esc(s.from || '?')}–${esc(s.to || '?')} ${esc(s.route)}`).join('<br>');
+    return `<tr class="row ${HIST.changes.has(date + '|' + k) ? 'changed' : ''}" data-key="${esc(k)}"><td>${esc(vehLabel(k))}</td><td class="routes">${trips}</td></tr>`;
+  }).join('') || '<tr><td colspan="2" class="hint">No records for this day.</td></tr>';
+}
+function chipsHtml(r) {
+  return r.directions.map((d, j) => `<span class="chip">${esc(d)}<button type="button" data-ci="${j}" aria-label="Remove ${esc(d)}">×</button></span>`).join('');
+}
+function toRow(s) {
+  const { route, from, to, polls, directions, ...extra } = s;
+  return { route: route || '', from: from || '', to: to || '', polls: polls == null ? '' : String(polls), directions: [...(directions || [])], legacy: !from, extra };
+}
+function blankRow() {
+  const [op, id] = (HIST.key || ':').split(':'), ar = (data[op] && data[op][id] && data[op][id].assignedRoutes) || [];
+  const prev = HIST.rows[HIST.rows.length - 1];
+  return { route: prev ? prev.route : (ar.length === 1 ? ar[0] : ''), from: '', to: '', polls: '', directions: [], legacy: false, extra: {} };
+}
+function selectVeh(key) {
+  HIST.key = key || null; HIST.dirty = false;
+  HIST.rows = key ? (dayObj()[key] || []).map(toRow) : [];
+  if (key && !HIST.rows.length) HIST.rows.push(blankRow());
+  if ($('#hVeh').value !== (key || '')) $('#hVeh').value = key || '';
+  renderTrips();
+}
+function renderTrips() {
+  const el = $('#hTrips'), has = !!HIST.key;
+  ['hAdd', 'hApply', 'hRevert', 'hDelDay'].forEach(id => $('#' + id).disabled = !has);
+  $('#hTitle').textContent = has ? `${vehLabel(HIST.key)} · ${hDate()}` : 'Trips';
+  const [op, id] = (HIST.key || ':').split(':');
+  $('#hMsg').innerHTML = has && !(data[op] && data[op][id]) ? `<div class="note">${esc(HIST.key)} isn’t in vehicles.json. You can still save records for it.</div>` : '';
+  if (!has) { el.innerHTML = '<div class="hint">Pick a vehicle to add or edit its trips.</div>'; return; }
+  el.innerHTML = `<div class="trip thead"><span>Route</span><span>From</span><span>To</span><span>Polls</span><span></span></div>` +
+    HIST.rows.map((r, i) => `<div class="trip" data-i="${i}">
+      <input type="text" data-f="route" list="hRoutes" placeholder="Route" value="${esc(r.route)}">
+      <input type="time" data-f="from" value="${esc(r.from)}" aria-label="From">
+      <input type="time" data-f="to" value="${esc(r.to)}" aria-label="To">
+      <input type="number" data-f="polls" min="1" step="1" placeholder="${estPolls(r.from, r.to) || 'auto'}" value="${esc(r.polls)}" aria-label="Polls">
+      <button type="button" data-act="rm" aria-label="Remove trip">×</button>
+      <div class="tdirs"><input type="text" data-f="dir" list="hDirs" placeholder="Direction, press Enter to add"><div class="chips">${chipsHtml(r)}</div></div>
+      <div class="twarn"></div></div>`).join('');
+  updateHWarn();
+}
+function validateRows() {
+  const msgs = HIST.rows.map(() => []), timed = [];
+  HIST.rows.forEach((r, i) => {
+    if (isBlank(r)) return;
+    const m = msgs[i];
+    if (!r.route.trim()) m.push(['err', 'Route is required.']);
+    if (!r.legacy || r.from || r.to) {
+      if (!r.from || !r.to) m.push(['err', 'From and to times are required.']);
+      else if (mins(r.to) < mins(r.from)) m.push(['err', '“To” is earlier than “from”.']);
+      else timed.push({ i, from: mins(r.from), to: mins(r.to) });
+    }
+    if (r.polls !== '' && !(/^\d+$/.test(r.polls) && +r.polls >= 1)) m.push(['err', 'Polls must be a whole number, 1 or more.']);
+  });
+  timed.sort((a, b) => a.from - b.from);
+  for (let k = 1; k < timed.length; k++) if (timed[k].from < timed[k - 1].to) msgs[timed[k].i].push(['warn', 'Overlaps another trip of this vehicle.']);
+  return msgs;
+}
+function updateHWarn() {
+  const msgs = validateRows();
+  document.querySelectorAll('#hTrips .trip[data-i]').forEach(row => {
+    row.querySelector('.twarn').innerHTML = msgs[+row.dataset.i].map(([t, m]) => `<div class="note ${t === 'err' ? 'err' : ''}">${esc(m)}</div>`).join('');
+  });
+  return msgs;
+}
+function updateHistButtons() {
+  const n = HIST.changes.size;
+  $('#hGhBtn').disabled = !n;
+  $('#hGhBtn').textContent = n ? `Commit history to GitHub (${n})` : 'Commit history to GitHub';
+}
+
+/* ----- editing ----- */
+function addDir(i, input) {
+  const v = input.value.trim(), r = HIST.rows[i];
+  if (v && !r.directions.includes(v)) { r.directions.push(v); HIST.dirty = true; }
+  input.value = '';
+  input.closest('.tdirs').querySelector('.chips').innerHTML = chipsHtml(r);
+}
+const rowIndex = el => +el.closest('.trip').dataset.i;
+$('#hTrips').addEventListener('input', e => {
+  const f = e.target.dataset.f; if (!f) return;
+  const i = rowIndex(e.target);
+  if (f === 'dir') { if (e.inputType === 'insertReplacementText') addDir(i, e.target); return; }
+  HIST.rows[i][f] = e.target.value; HIST.dirty = true;
+  if (f === 'from' || f === 'to') e.target.closest('.trip').querySelector('[data-f=polls]').placeholder = estPolls(HIST.rows[i].from, HIST.rows[i].to) || 'auto';
+  updateHWarn();
+});
+$('#hTrips').addEventListener('keydown', e => {
+  if (e.target.dataset.f === 'dir' && e.key === 'Enter') { e.preventDefault(); addDir(rowIndex(e.target), e.target); }
+});
+$('#hTrips').addEventListener('change', e => { if (e.target.dataset.f === 'dir') addDir(rowIndex(e.target), e.target); });
+$('#hTrips').addEventListener('focusin', e => {
+  if (e.target.dataset.f !== 'dir') return;
+  const route = HIST.rows[rowIndex(e.target)].route.trim(), s = new Set();
+  HIST.months.forEach(mo => Object.values(mo).forEach(day => Object.values(day).forEach(st => st.forEach(x => {
+    if (!route || x.route === route) (x.directions || []).forEach(d => s.add(d));
+  }))));
+  $('#hDirs').innerHTML = [...s].sort().map(d => `<option value="${esc(d)}">`).join('');
+});
+$('#hTrips').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const i = rowIndex(b);
+  if (b.dataset.act === 'rm') { HIST.rows.splice(i, 1); HIST.dirty = true; renderTrips(); }
+  else if (b.dataset.ci !== undefined) { HIST.rows[i].directions.splice(+b.dataset.ci, 1); HIST.dirty = true; b.closest('.chips').innerHTML = chipsHtml(HIST.rows[i]); }
+});
+$('#hAdd').onclick = () => {
+  HIST.rows.push(blankRow()); HIST.dirty = true; renderTrips();
+  const rows = document.querySelectorAll('#hTrips .trip[data-i]');
+  rows[rows.length - 1].querySelector('[data-f=route]').focus();
+};
+function stage(date, key, val) {
+  const m = date.slice(0, 7), mo = HIST.months.get(m) || {};
+  HIST.months.set(m, mo);
+  if (val === null) { if (mo[date]) { delete mo[date][key]; if (!Object.keys(mo[date]).length) delete mo[date]; } }
+  else (mo[date] = mo[date] || {})[key] = val;
+  HIST.changes.set(date + '|' + key, val);
+}
+function buildStint(r) {
+  const s = { route: r.route.trim() };
+  if (r.from) { s.from = r.from; s.to = r.to; }
+  const p = r.polls !== '' ? +r.polls : estPolls(r.from, r.to);
+  if (p !== '') s.polls = p;
+  if (r.from || r.directions.length) s.directions = [...r.directions];
+  return { ...s, ...r.extra };
+}
+$('#hApply').onclick = () => {
+  if (!HIST.key) return;
+  if (validateRows().some(m => m.some(([t]) => t === 'err'))) return status('Fix the highlighted trips first.', 'err');
+  const stints = HIST.rows.filter(r => !isBlank(r)).map(buildStint).sort((a, b) => (a.from || '').localeCompare(b.from || ''));
+  const key = HIST.key;
+  stage(hDate(), key, stints.length ? stints : null);
+  renderHVehicles(); renderDayList(); updateHistButtons(); selectVeh(key);
+  status(`${stints.length ? 'Staged' : 'Removed'} ${key} on ${hDate()} · ${HIST.changes.size} unsaved change${HIST.changes.size > 1 ? 's' : ''}`, 'ok');
+};
+$('#hRevert').onclick = () => { if (HIST.key) selectVeh(HIST.key); };
+$('#hDelDay').onclick = () => {
+  if (!HIST.key || !confirm(`Delete all records of ${HIST.key} on ${hDate()}?`)) return;
+  const key = HIST.key;
+  stage(hDate(), key, null);
+  renderHVehicles(); renderDayList(); updateHistButtons(); selectVeh(key);
+  status('Records deleted (unsaved).', 'ok');
+};
+const discardOk = () => !HIST.dirty || confirm('Discard the trip edits you haven’t applied?');
+$('#hVeh').onchange = () => { if (discardOk()) selectVeh($('#hVeh').value); else $('#hVeh').value = HIST.key || ''; };
+$('#hDay').onclick = e => { const tr = e.target.closest('tr.row'); if (tr && discardOk()) { selectVeh(tr.dataset.key); renderHVehicles(); } };
+$('#hQ').oninput = renderHVehicles;
+$('#hDate').onchange = () => { if (discardOk()) histLoadDay(); else $('#hDate').value = HIST.date; };
+
+$('#hGhBtn').onclick = async () => {
+  const c = readCfg();
+  if (!c.Owner || !c.Repo || !c.Token) { $('#cfgBtn').click(); return status('Fill in the GitHub settings first.', 'err'); }
+  const byMonth = new Map();
+  for (const [k, v] of HIST.changes) {
+    const [date, key] = k.split('|'), m = date.slice(0, 7);
+    if (!byMonth.has(m)) byMonth.set(m, []);
+    byMonth.get(m).push([date, key, v]);
+  }
+  $('#hGhBtn').disabled = true; status('Committing…');
+  try {
+    for (const [m, list] of byMonth) {
+      HIST.months.set(m, await commitMonth(c, m, list));
+      for (const [d, k] of list) HIST.changes.delete(d + '|' + k);
+      await ensureIndex(c, m);
+    }
+    status(`Committed history for ${byMonth.size} month${byMonth.size > 1 ? 's' : ''}.`, 'ok');
+  } catch (e) { status(e.message, 'err'); }
+  histRefreshAll();
+};
+
+window.addEventListener('beforeunload', e => { if (changes.size || HIST.changes.size) { e.preventDefault(); e.returnValue = ''; } });
 renderAll(); renderList(); autoLoad();
 </script>
 </body>
