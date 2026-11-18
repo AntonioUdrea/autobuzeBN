@@ -1514,6 +1514,7 @@
     "transmixt:184": [{"route":"2","from":"05:30","to":"19:45","polls":50,"directions":["28 VIISOARA","53 AVICOLA","1 PASARELA","107 DR SLATINITEI"]}],
     "transmixt:187": [{"route":"2","from":"06:15","to":"19:30","polls":46,"directions":["1 PASARELA","107 DR SLATINITEI","28 VIISOARA","53 AVICOLA"]}],
     "transmixt:193": [{"route":"2","from":"06:15","to":"19:30","polls":45,"directions":["53 AVICOLA","28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}],
+    "transmixt:196": [{"route":"2","from":"06:00","to":"19:30","polls":50,"directions":["1 PASARELA","107 DR SLATINITEI","28 VIISOARA","53 AVICOLA"]}],
     "transmixt:198": [{"route":"506 Bistrița - Cușma","from":"06:30","to":"07:00","polls":3,"directions":["CUSMA- BISTRITA"]},{"route":"506 Bistrița - Cușma","from":"14:15","to":"15:01","polls":4,"directions":["BISTRITA- CUSMA"]}],
     "transmixt:199": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"06:30","to":"06:30","polls":1,"directions":["RETUR"]}],
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"06:30","to":"07:30","polls":5,"directions":["Fintinele - Bistrita"]},{"route":"358 Bistrița - Fântânele","from":"14:30","to":"14:45","polls":2,"directions":["Bistrita - Fintinele"]}]
