@@ -13,6 +13,13 @@
       24.27326,
       "359 Bistrița - Țăgșor",
       "Tagsor - Bistrita"
+    ],
+    [
+      "05:30",
+      46.97382,
+      24.35714,
+      "359 Bistrița - Țăgșor",
+      "Tagsor - Bistrita"
     ]
   ],
   "ani-tour:9": [
@@ -27,6 +34,13 @@
       "05:15",
       47.28559,
       24.32212,
+      "633 Bistrița - Săsarm",
+      "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "05:30",
+      47.28184,
+      24.41101,
       "633 Bistrița - Săsarm",
       "Bistrita Autogara/Rodnei"
     ]
@@ -45,6 +59,76 @@
       24.32515,
       "632 Năsăud - Runcu Salvei",
       "Runcu Salvei"
+    ],
+    [
+      "05:30",
+      47.32349,
+      24.32536,
+      "632 Năsăud - Runcu Salvei",
+      "Nasaud Autogara"
+    ]
+  ],
+  "transmixt:122": [
+    [
+      "05:30",
+      47.22054,
+      24.74497,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "MURESENII BARGAULUI- BISTRITA"
+    ]
+  ],
+  "transmixt:42": [
+    [
+      "05:30",
+      47.13025,
+      24.4683,
+      "3",
+      "77 C R VIVU"
+    ]
+  ],
+  "transmixt:157": [
+    [
+      "05:30",
+      47.11716,
+      24.46738,
+      "1",
+      "12 STEFAN CEL MARE"
+    ]
+  ],
+  "transmixt:161": [
+    [
+      "05:30",
+      46.94202,
+      24.19122,
+      "247 Beclean - Jimbor",
+      "Jimbor - Beclean"
+    ]
+  ],
+  "transmixt:167": [
+    [
+      "05:30",
+      46.77943,
+      24.2979,
+      "363 Bistrița - Urmeniș",
+      "Urmenis - Bistrita"
+    ]
+  ],
+  "transmixt:184": [
+    [
+      "05:30",
+      47.17372,
+      24.53697,
+      "2",
+      "28 VIISOARA"
+    ]
+  ],
+  "ani-tour:1": [
+    [
+      "05:30",
+      47.35968,
+      24.98438,
+      "808 Bistrița - Lunca Ilvei",
+      "Bistrita Autogara/Rodnei"
     ]
   ]
 }
