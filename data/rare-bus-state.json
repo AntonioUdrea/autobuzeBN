@@ -10,6 +10,11 @@
       "route": "727 Năsăud - Telcișor",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:62": {
+      "route": "10",
+      "rare": true,
+      "unusual": false
     }
   }
 }
