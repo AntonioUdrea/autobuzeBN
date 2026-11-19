@@ -1,35 +1,4 @@
 {
-  "date": "2026-11-18",
-  "buses": {
-    "transmixt:53": {
-      "route": "3",
-      "rare": true,
-      "unusual": false
-    },
-    "ani-tour:4": {
-      "route": "615 Bistrița - Năsăud",
-      "rare": false,
-      "unusual": false
-    },
-    "transmixt:107": {
-      "route": "470 Bistrița - Posmuș",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:124": {
-      "route": "493 Bistrița - Gledin",
-      "rare": false,
-      "unusual": false
-    },
-    "transmixt:8": {
-      "route": "470 Bistrița - Posmuș",
-      "rare": false,
-      "unusual": true
-    },
-    "transmixt:123": {
-      "route": "503 Bistrița - Bistrița Bârgăului - Colibița",
-      "rare": true,
-      "unusual": false
-    }
-  }
+  "date": "2026-11-19",
+  "buses": {}
 }
