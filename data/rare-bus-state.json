@@ -35,6 +35,11 @@
       "route": "632 Năsăud - Runcu Salvei",
       "rare": false,
       "unusual": true
+    },
+    "transmixt:145": {
+      "route": "10",
+      "rare": true,
+      "unusual": false
     }
   }
 }
