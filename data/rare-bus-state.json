@@ -1,30 +1,4 @@
 {
-  "date": "2026-11-19",
-  "buses": {
-    "transmixt:53": {
-      "route": "3",
-      "rare": true,
-      "unusual": false
-    },
-    "ani-tour:15": {
-      "route": "725 Năsăud - Telciu",
-      "rare": false,
-      "unusual": false
-    },
-    "transmixt:62": {
-      "route": "10",
-      "rare": true,
-      "unusual": false
-    },
-    "ani-tour:4": {
-      "route": "615 Bistrița - Năsăud",
-      "rare": false,
-      "unusual": false
-    },
-    "ani-tour:28": {
-      "route": "632 Năsăud - Runcu Salvei",
-      "rare": false,
-      "unusual": true
-    }
-  }
+  "date": "2026-11-20",
+  "buses": {}
 }
