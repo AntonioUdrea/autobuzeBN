@@ -5,6 +5,16 @@
       "route": "13",
       "rare": true,
       "unusual": false
+    },
+    "transmixt:53": {
+      "route": "3",
+      "rare": true,
+      "unusual": false
+    },
+    "ani-tour:15": {
+      "route": "632 Năsăud - Runcu Salvei",
+      "rare": false,
+      "unusual": true
     }
   }
 }
