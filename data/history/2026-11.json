@@ -1661,6 +1661,7 @@
     "transmixt:55": [{"route":"1","from":"07:01","to":"12:30","polls":23,"directions":["12 STEFAN CEL MARE","1 PASARELA"]},{"route":"1","from":"14:15","to":"15:15","polls":4,"directions":["12 STEFAN CEL MARE","1 PASARELA"]}],
     "transmixt:61": [{"route":"9","from":"05:45","to":"08:30","polls":12,"directions":["141 GHINDA","84 AUTOGARA"]},{"route":"18","from":"09:01","to":"09:30","polls":3,"directions":["221 HEIDENFELD","84 AUTOGARA"]},{"route":"13","from":"12:00","to":"13:00","polls":5,"directions":["181 LOGOS","39 BIBL JUDETEANA"]},{"route":"9","from":"13:15","to":"15:15","polls":8,"directions":["141 GHINDA","84 AUTOGARA"]}],
     "transmixt:62": [{"route":"13","from":"06:30","to":"15:15","polls":34,"directions":["181 LOGOS","66 AL ODOBESCU","TUR"]}],
+    "transmixt:63": [{"route":"5","from":"06:30","to":"06:30","polls":1,"directions":["(via Industriei)"]}],
     "transmixt:64": [{"route":"13","from":"06:30","to":"10:45","polls":18,"directions":["181 LOGOS","66 AL ODOBESCU","TUR"]},{"route":"13","from":"12:15","to":"15:15","polls":10,"directions":["66 AL ODOBESCU","TUR"]}],
     "transmixt:66": [{"route":"13","from":"06:00","to":"11:45","polls":20,"directions":["181 LOGOS","66 AL ODOBESCU","TUR"]},{"route":"13","from":"13:15","to":"15:15","polls":8,"directions":["TUR","66 AL ODOBESCU"]}],
     "transmixt:67": [{"route":"8","from":"06:30","to":"10:45","polls":17,"directions":["84 AUTOGARA","125 SIGMIR","RETUR","TUR"]},{"route":"8","from":"12:15","to":"15:15","polls":12,"directions":["125 SIGMIR","RETUR","TUR"]}],
