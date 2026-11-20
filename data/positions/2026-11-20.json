@@ -13,6 +13,13 @@
       24.26084,
       "359 Bistrița - Țăgșor",
       "Tagsor - Bistrita"
+    ],
+    [
+      "05:30",
+      46.96474,
+      24.3602,
+      "359 Bistrița - Țăgșor",
+      "Tagsor - Bistrita"
     ]
   ],
   "ani-tour:9": [
@@ -29,6 +36,13 @@
       24.32606,
       "633 Bistrița - Săsarm",
       "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "05:30",
+      47.28211,
+      24.41097,
+      "633 Bistrița - Săsarm",
+      "Bistrita Autogara/Rodnei"
     ]
   ],
   "transmixt:116": [
@@ -36,6 +50,13 @@
       "05:15",
       47.2106,
       24.85761,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "MURESENII BARGAULUI- BISTRITA"
+    ],
+    [
+      "05:30",
+      47.21959,
+      24.73888,
       "502 Bistrița - Mureșenii Bârgăului",
       "MURESENII BARGAULUI- BISTRITA"
     ]
@@ -47,6 +68,85 @@
       24.34989,
       "363 Bistrița - Urmeniș",
       "Urmenis - Bistrita"
+    ],
+    [
+      "05:30",
+      46.79399,
+      24.35891,
+      "363 Bistrița - Urmeniș",
+      "Urmenis - Bistrita"
+    ]
+  ],
+  "transmixt:159": [
+    [
+      "05:30",
+      47.13728,
+      24.50874,
+      "1",
+      "1 PASARELA"
+    ]
+  ],
+  "transmixt:71": [
+    [
+      "05:30",
+      47.09811,
+      24.44144,
+      "2",
+      "53 AVICOLA"
+    ]
+  ],
+  "transmixt:168": [
+    [
+      "05:30",
+      46.91149,
+      24.50675,
+      "367 Bistrița - Pinticu",
+      "Pinticu - Bistrita"
+    ]
+  ],
+  "transmixt:42": [
+    [
+      "05:30",
+      47.1302,
+      24.46844,
+      "3",
+      "77 C R VIVU"
+    ]
+  ],
+  "transmixt:157": [
+    [
+      "05:30",
+      47.11721,
+      24.46747,
+      "1",
+      "12 STEFAN CEL MARE"
+    ]
+  ],
+  "transmixt:161": [
+    [
+      "05:30",
+      46.94192,
+      24.19132,
+      "247 Beclean - Jimbor",
+      "Jimbor - Beclean"
+    ]
+  ],
+  "transmixt:184": [
+    [
+      "05:30",
+      47.17373,
+      24.53689,
+      "2",
+      "28 VIISOARA"
+    ]
+  ],
+  "ani-tour:1": [
+    [
+      "05:30",
+      47.35969,
+      24.98441,
+      "808 Bistrița - Lunca Ilvei",
+      "Bistrita Autogara/Rodnei"
     ]
   ]
 }
