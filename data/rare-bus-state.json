@@ -25,6 +25,11 @@
       "route": "2",
       "rare": false,
       "unusual": false
+    },
+    "ani-tour:4": {
+      "route": "632 Năsăud - Runcu Salvei",
+      "rare": false,
+      "unusual": true
     }
   }
 }
