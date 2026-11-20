@@ -1628,7 +1628,9 @@
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"06:30","to":"07:15","polls":4,"directions":["Fintinele - Bistrita"]},{"route":"358 Bistrița - Fântânele","from":"14:15","to":"15:15","polls":5,"directions":["Bistrita - Fintinele"]}]
   },
   "2026-11-20": {
-    "ani-tour:9": [{"route":"633 Bistrița - Săsarm","from":"05:01","to":"05:01","polls":1,"directions":["Bistrita Autogara/Rodnei"]}],
-    "transmixt:175": [{"route":"359 Bistrița - Țăgșor","from":"05:01","to":"05:01","polls":1,"directions":["Tagsor - Bistrita"]}]
+    "ani-tour:9": [{"route":"633 Bistrița - Săsarm","from":"05:01","to":"05:15","polls":2,"directions":["Bistrita Autogara/Rodnei"]}],
+    "transmixt:116": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:15","to":"05:15","polls":1,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
+    "transmixt:167": [{"route":"363 Bistrița - Urmeniș","from":"05:15","to":"05:15","polls":1,"directions":["Urmenis - Bistrita"]}],
+    "transmixt:175": [{"route":"359 Bistrița - Țăgșor","from":"05:01","to":"05:15","polls":2,"directions":["Tagsor - Bistrita"]}]
   }
 }
