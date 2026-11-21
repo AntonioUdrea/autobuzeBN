@@ -27,6 +27,13 @@
       24.40466,
       "358 Bistrița - Fântânele",
       "Fintinele - Bistrita"
+    ],
+    [
+      "06:15",
+      47.11439,
+      24.46328,
+      "358 Bistrița - Fântânele",
+      "Fintinele - Bistrita"
     ]
   ],
   "transmixt:199": [
@@ -41,6 +48,13 @@
       "06:00",
       47.18569,
       24.59653,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "MURESENII BARGAULUI- BISTRITA"
+    ],
+    [
+      "06:15",
+      47.14093,
+      24.49939,
       "502 Bistrița - Mureșenii Bârgăului",
       "MURESENII BARGAULUI- BISTRITA"
     ]
@@ -59,6 +73,13 @@
       24.52453,
       "7",
       "110 SLATINITA"
+    ],
+    [
+      "06:15",
+      47.19814,
+      24.52405,
+      "7",
+      "84 AUTOGARA"
     ]
   ],
   "transmixt:149": [
@@ -77,6 +98,58 @@
       24.53693,
       "2",
       "28 VIISOARA"
+    ],
+    [
+      "06:15",
+      47.13297,
+      24.49272,
+      "2",
+      "28 VIISOARA"
+    ]
+  ],
+  "transmixt:171": [
+    [
+      "06:15",
+      47.15863,
+      24.41545,
+      "354 Bistrița - Caila",
+      "Caila - Bistrita"
+    ]
+  ],
+  "transmixt:194": [
+    [
+      "06:15",
+      47.1291,
+      24.49292,
+      "2",
+      "53 AVICOLA"
+    ]
+  ],
+  "transmixt:112": [
+    [
+      "06:15",
+      47.10331,
+      24.61418,
+      "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "RETUR"
+    ]
+  ],
+  "transmixt:169": [
+    [
+      "06:15",
+      46.84331,
+      24.47619,
+      "364 Bistrița - Milaș",
+      "Milas - Bistrita"
+    ]
+  ],
+  "transmixt:157": [
+    [
+      "06:15",
+      47.14035,
+      24.50715,
+      "1",
+      "tur"
     ]
   ]
 }
