@@ -1739,6 +1739,6 @@
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"06:30","to":"07:15","polls":4,"directions":["Fintinele - Bistrita"]},{"route":"358 Bistrița - Fântânele","from":"14:15","to":"15:30","polls":4,"directions":["Bistrita - Fintinele"]}]
   },
   "2026-11-21": {
-    "transmixt:164": [{"route":"358 Bistrița - Fântânele","from":"05:15","to":"05:15","polls":1,"directions":["Fintinele - Bistrita"]}]
+    "transmixt:164": [{"route":"358 Bistrița - Fântânele","from":"05:15","to":"05:30","polls":2,"directions":["Fintinele - Bistrita"]}]
   }
 }
