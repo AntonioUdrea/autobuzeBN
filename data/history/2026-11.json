@@ -1740,14 +1740,18 @@
   },
   "2026-11-21": {
     "transmixt:74": [{"route":"2","from":"06:00","to":"06:15","polls":2,"directions":["28 VIISOARA"]}],
-    "transmixt:112": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"06:15","to":"06:15","polls":1,"directions":["RETUR"]}],
+    "transmixt:112": [{"route":"476 Bistrița - Budacu de Sus (via Satu Nou)","from":"06:15","to":"06:30","polls":2,"directions":["RETUR"]}],
+    "transmixt:142": [{"route":"3","from":"06:30","to":"06:30","polls":1,"directions":["69 SCHULLERWALD"]}],
     "transmixt:149": [{"route":"9","from":"06:00","to":"06:00","polls":1,"directions":["84 AUTOGARA"]}],
-    "transmixt:153": [{"route":"7","from":"05:45","to":"06:15","polls":3,"directions":["110 SLATINITA","84 AUTOGARA"]}],
-    "transmixt:157": [{"route":"1","from":"06:15","to":"06:15","polls":1,"directions":["tur"]}],
+    "transmixt:153": [{"route":"7","from":"05:45","to":"06:30","polls":4,"directions":["110 SLATINITA","84 AUTOGARA"]}],
+    "transmixt:157": [{"route":"1","from":"06:15","to":"06:30","polls":2,"directions":["tur","1 PASARELA"]}],
+    "transmixt:159": [{"route":"1","from":"06:30","to":"06:30","polls":1,"directions":["tur"]}],
     "transmixt:164": [{"route":"358 Bistrița - Fântânele","from":"05:15","to":"06:15","polls":5,"directions":["Fintinele - Bistrita"]}],
-    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:15","polls":1,"directions":["Milas - Bistrita"]}],
-    "transmixt:171": [{"route":"354 Bistrița - Caila","from":"06:15","to":"06:15","polls":1,"directions":["Caila - Bistrita"]}],
-    "transmixt:194": [{"route":"2","from":"06:15","to":"06:15","polls":1,"directions":["53 AVICOLA"]}],
+    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:30","polls":2,"directions":["Milas - Bistrita"]}],
+    "transmixt:171": [{"route":"354 Bistrița - Caila","from":"06:15","to":"06:30","polls":2,"directions":["Caila - Bistrita"]}],
+    "transmixt:187": [{"route":"2","from":"06:30","to":"06:30","polls":1,"directions":["107 DR SLATINITEI"]}],
+    "transmixt:188": [{"route":"2","from":"06:30","to":"06:30","polls":1,"directions":["28 VIISOARA"]}],
+    "transmixt:194": [{"route":"2","from":"06:15","to":"06:30","polls":2,"directions":["53 AVICOLA"]}],
     "transmixt:199": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"06:15","polls":3,"directions":["MURESENII BARGAULUI- BISTRITA"]}]
   }
 }
