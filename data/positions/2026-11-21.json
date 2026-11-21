@@ -20,6 +20,13 @@
       24.33616,
       "358 Bistrița - Fântânele",
       "Fintinele - Bistrita"
+    ],
+    [
+      "06:00",
+      47.05508,
+      24.40466,
+      "358 Bistrița - Fântânele",
+      "Fintinele - Bistrita"
     ]
   ],
   "transmixt:199": [
@@ -27,6 +34,13 @@
       "05:45",
       47.22195,
       24.75014,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "MURESENII BARGAULUI- BISTRITA"
+    ],
+    [
+      "06:00",
+      47.18569,
+      24.59653,
       "502 Bistrița - Mureșenii Bârgăului",
       "MURESENII BARGAULUI- BISTRITA"
     ]
@@ -38,6 +52,31 @@
       24.48501,
       "7",
       "110 SLATINITA"
+    ],
+    [
+      "06:00",
+      47.17681,
+      24.52453,
+      "7",
+      "110 SLATINITA"
+    ]
+  ],
+  "transmixt:149": [
+    [
+      "06:00",
+      47.13828,
+      24.4956,
+      "9",
+      "84 AUTOGARA"
+    ]
+  ],
+  "transmixt:74": [
+    [
+      "06:00",
+      47.17377,
+      24.53693,
+      "2",
+      "28 VIISOARA"
     ]
   ]
 }
