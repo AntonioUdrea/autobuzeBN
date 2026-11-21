@@ -13,6 +13,31 @@
       24.24538,
       "358 Bistrița - Fântânele",
       "Fintinele - Bistrita"
+    ],
+    [
+      "05:45",
+      47.03854,
+      24.33616,
+      "358 Bistrița - Fântânele",
+      "Fintinele - Bistrita"
+    ]
+  ],
+  "transmixt:199": [
+    [
+      "05:45",
+      47.22195,
+      24.75014,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "MURESENII BARGAULUI- BISTRITA"
+    ]
+  ],
+  "transmixt:153": [
+    [
+      "05:45",
+      47.13214,
+      24.48501,
+      "7",
+      "110 SLATINITA"
     ]
   ]
 }
