@@ -197,6 +197,13 @@
       24.48409,
       "364 Bistrița - Milaș",
       "Bistrita - Milas"
+    ],
+    [
+      "14:00",
+      46.81989,
+      24.43683,
+      "364 Bistrița - Milaș",
+      "Milas - Bistrita"
     ]
   ],
   "transmixt:70": [
@@ -395,6 +402,13 @@
       24.48605,
       "1",
       "1 PASARELA"
+    ],
+    [
+      "14:00",
+      47.11757,
+      24.46762,
+      "1",
+      "tur"
     ]
   ],
   "transmixt:88": [
@@ -644,6 +658,13 @@
       24.49177,
       "4",
       "UNIREA- VIISOARA"
+    ],
+    [
+      "14:00",
+      47.09875,
+      24.44239,
+      "4",
+      "tur"
     ]
   ],
   "ani-tour:4": [
@@ -700,6 +721,13 @@
       "13:45",
       47.22084,
       24.4681,
+      "615 Bistrița - Năsăud",
+      "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "14:00",
+      47.14249,
+      24.50801,
       "615 Bistrița - Năsăud",
       "Bistrita Autogara/Rodnei"
     ]
@@ -986,6 +1014,13 @@
       24.50458,
       "1",
       "tur"
+    ],
+    [
+      "14:00",
+      47.13722,
+      24.50841,
+      "1",
+      "1 PASARELA"
     ]
   ],
   "transmixt:184": [
@@ -1098,6 +1133,13 @@
       "13:45",
       47.09838,
       24.44176,
+      "2",
+      "52 CASA AGRONOMULUI"
+    ],
+    [
+      "14:00",
+      47.12849,
+      24.48789,
       "2",
       "52 CASA AGRONOMULUI"
     ]
@@ -1377,6 +1419,13 @@
       24.47392,
       "3",
       "69 SCHULLERWALD"
+    ],
+    [
+      "14:00",
+      47.12993,
+      24.4687,
+      "3",
+      "77 C R VIVU"
     ]
   ],
   "transmixt:197": [
@@ -1512,6 +1561,13 @@
       24.51456,
       "2",
       "107 DR SLATINITEI"
+    ],
+    [
+      "14:00",
+      47.17151,
+      24.52777,
+      "2",
+      "28 VIISOARA"
     ]
   ],
   "transmixt:193": [
@@ -1665,6 +1721,13 @@
       24.80471,
       "502 Bistrița - Mureșenii Bârgăului",
       "BISTRITA- MURESENII BARGAULUI"
+    ],
+    [
+      "14:00",
+      47.21423,
+      24.74052,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "BISTRITA- MURESENII BARGAULUI"
     ]
   ],
   "transmixt:12": [
@@ -1702,6 +1765,13 @@
       "13:45",
       47.39877,
       24.13903,
+      "136 Bistrița - Molișet",
+      "MOLISET- BECLEAN- BISTRITA"
+    ],
+    [
+      "14:00",
+      47.34455,
+      24.1751,
       "136 Bistrița - Molișet",
       "MOLISET- BECLEAN- BISTRITA"
     ]
