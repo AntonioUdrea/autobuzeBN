@@ -1769,7 +1769,7 @@
     "transmixt:199": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"09:00","polls":10,"directions":["MURESENII BARGAULUI- BISTRITA","BISTRITA- MURESENII BARGAULUI"]},{"route":"502 Bistrița - Mureșenii Bârgăului","from":"11:00","to":"11:45","polls":4,"directions":["BISTRITA- MURESENII BARGAULUI"]},{"route":"502 Bistrița - Mureșenii Bârgăului","from":"14:45","to":"16:15","polls":7,"directions":["MURESENII BARGAULUI- BISTRITA","BISTRITA- MURESENII BARGAULUI"]},{"route":"502 Bistrița - Mureșenii Bârgăului","from":"18:30","to":"20:00","polls":7,"directions":["MURESENII BARGAULUI- BISTRITA","BISTRITA- MURESENII BARGAULUI"]}]
   },
   "2026-11-22": {
-    "transmixt:152": [{"route":"7","from":"06:00","to":"06:00","polls":1,"directions":["110 SLATINITA"]}],
-    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:00","to":"06:00","polls":1,"directions":["Milas - Bistrita"]}]
+    "transmixt:152": [{"route":"7","from":"06:00","to":"06:15","polls":2,"directions":["110 SLATINITA","84 AUTOGARA"]}],
+    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:00","to":"06:15","polls":2,"directions":["Milas - Bistrita"]}]
   }
 }
