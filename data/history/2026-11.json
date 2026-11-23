@@ -1831,7 +1831,7 @@
     "transmixt:70": [{"route":"1","from":"05:30","to":"08:45","polls":13,"directions":["12 STEFAN CEL MARE","1 PASARELA"]},{"route":"1","from":"10:15","to":"17:45","polls":23,"directions":["12 STEFAN CEL MARE","1 PASARELA"]},{"route":"1","from":"19:00","to":"22:15","polls":14,"directions":["12 STEFAN CEL MARE","1 PASARELA"]}],
     "transmixt:71": [{"route":"3","from":"05:45","to":"12:45","polls":27,"directions":["69 SCHULLERWALD","77 C R VIVU"]}],
     "transmixt:73": [{"route":"2","from":"05:45","to":"20:45","polls":51,"directions":["28 VIISOARA","53 AVICOLA","1 PASARELA","107 DR SLATINITEI"]}],
-    "transmixt:74": [{"route":"2","from":"06:15","to":"22:30","polls":58,"directions":["53 AVICOLA","28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}],
+    "transmixt:74": [{"route":"2","from":"06:15","to":"22:45","polls":59,"directions":["53 AVICOLA","28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}],
     "transmixt:75": [{"route":"1","from":"07:00","to":"12:30","polls":16,"directions":["12 STEFAN CEL MARE","1 PASARELA"]},{"route":"1","from":"14:15","to":"20:15","polls":19,"directions":["12 STEFAN CEL MARE","1 PASARELA"]}],
     "transmixt:76": [{"route":"139 Bistrița - Beclean","from":"07:00","to":"08:45","polls":8,"directions":["BECLEAN- BISTRITA","BISTRITA- BECLEAN"]},{"route":"139 Bistrița - Beclean","from":"14:30","to":"15:00","polls":3,"directions":["BECLEAN- BISTRITA"]},{"route":"139 Bistrița - Beclean","from":"16:30","to":"19:15","polls":9,"directions":["BISTRITA- BECLEAN"]}],
     "transmixt:77": [{"route":"13A","from":"06:15","to":"21:30","polls":61,"directions":["174 CARTIER RAAL","18 POLICLINICA"]}],
@@ -1892,7 +1892,7 @@
     "transmixt:188": [{"route":"2","from":"06:45","to":"17:30","polls":39,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA","53 AVICOLA"]},{"route":"2","from":"19:30","to":"20:30","polls":4,"directions":["53 AVICOLA","28 VIISOARA"]}],
     "transmixt:194": [{"route":"2","from":"09:15","to":"17:15","polls":29,"directions":["28 VIISOARA","53 AVICOLA","1 PASARELA","107 DR SLATINITEI"]},{"route":"2","from":"18:30","to":"20:30","polls":6,"directions":["107 DR SLATINITEI","1 PASARELA"]}],
     "transmixt:196": [{"route":"2","from":"06:00","to":"19:30","polls":49,"directions":["53 AVICOLA","28 VIISOARA","107 DR SLATINITEI","1 PASARELA"]}],
-    "transmixt:197": [{"route":"2","from":"06:15","to":"17:00","polls":39,"directions":["1 PASARELA","107 DR SLATINITEI","28 VIISOARA","53 AVICOLA"]},{"route":"2","from":"18:15","to":"22:30","polls":15,"directions":["28 VIISOARA","53 AVICOLA"]}],
+    "transmixt:197": [{"route":"2","from":"06:15","to":"17:00","polls":39,"directions":["1 PASARELA","107 DR SLATINITEI","28 VIISOARA","53 AVICOLA"]},{"route":"2","from":"18:15","to":"22:45","polls":16,"directions":["28 VIISOARA","53 AVICOLA"]}],
     "transmixt:198": [{"route":"506 Bistrița - Cușma","from":"06:30","to":"07:15","polls":4,"directions":["CUSMA- BISTRITA"]},{"route":"506 Bistrița - Cușma","from":"14:15","to":"15:00","polls":4,"directions":["BISTRITA- CUSMA"]}],
     "transmixt:199": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"06:30","to":"07:00","polls":2,"directions":["RETUR"]},{"route":"503 Bistrița - Bistrița Bârgăului - Colibița","from":"19:30","to":"20:15","polls":4,"directions":["BISTRITA- BISTRITA BARGAULUI"]}],
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"06:30","to":"07:30","polls":5,"directions":["Fintinele - Bistrita"]},{"route":"358 Bistrița - Fântânele","from":"14:30","to":"15:15","polls":4,"directions":["Bistrita - Fintinele"]}]
