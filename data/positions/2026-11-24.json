@@ -13,6 +13,13 @@
       24.27356,
       "359 Bistrița - Țăgșor",
       "Tagsor - Bistrita"
+    ],
+    [
+      "05:30",
+      46.97931,
+      24.34784,
+      "359 Bistrița - Țăgșor",
+      "Tagsor - Bistrita"
     ]
   ],
   "ani-tour:9": [
@@ -27,6 +34,13 @@
       "05:15",
       47.29658,
       24.3336,
+      "633 Bistrița - Săsarm",
+      "Bistrita Autogara/Rodnei"
+    ],
+    [
+      "05:30",
+      47.2819,
+      24.41089,
       "633 Bistrița - Săsarm",
       "Bistrita Autogara/Rodnei"
     ]
@@ -47,6 +61,13 @@
       24.82168,
       "502 Bistrița - Mureșenii Bârgăului",
       "MURESENII BARGAULUI- BISTRITA"
+    ],
+    [
+      "05:30",
+      47.21663,
+      24.7046,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "MURESENII BARGAULUI- BISTRITA"
     ]
   ],
   "transmixt:167": [
@@ -56,6 +77,76 @@
       24.35157,
       "363 Bistrița - Urmeniș",
       "Urmenis - Bistrita"
+    ],
+    [
+      "05:30",
+      46.79518,
+      24.36329,
+      "363 Bistrița - Urmeniș",
+      "Urmenis - Bistrita"
+    ]
+  ],
+  "transmixt:193": [
+    [
+      "05:30",
+      47.09829,
+      24.4416,
+      "2",
+      "53 AVICOLA"
+    ]
+  ],
+  "transmixt:168": [
+    [
+      "05:30",
+      46.91674,
+      24.51229,
+      "367 Bistrița - Pinticu",
+      "Pinticu - Bistrita"
+    ]
+  ],
+  "transmixt:34": [
+    [
+      "05:30",
+      47.13392,
+      24.5065,
+      "3",
+      "69 SCHULLERWALD"
+    ]
+  ],
+  "transmixt:109": [
+    [
+      "05:30",
+      47.07114,
+      24.61925,
+      "476 Bistrița - Budacu de Sus (via Satu Nou)",
+      "RETUR"
+    ]
+  ],
+  "transmixt:161": [
+    [
+      "05:30",
+      46.94218,
+      24.19107,
+      "247 Beclean - Jimbor",
+      "Jimbor - Beclean"
+    ]
+  ],
+  "transmixt:73": [
+    [
+      "05:30",
+      47.17378,
+      24.53683,
+      "2",
+      "28 VIISOARA"
+    ]
+  ],
+  "ani-tour:1": [
+    [
+      "05:30",
+      47.35969,
+      24.9844,
+      "808 Bistrița - Lunca Ilvei",
+      "Bistrita Autogara/Rodnei"
     ]
   ]
 }
