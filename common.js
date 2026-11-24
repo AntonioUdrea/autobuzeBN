@@ -34,6 +34,12 @@
   const FETCH_TIMEOUT_MS = 8000;
   const TIME_ZONE = "Europe/Bucharest";
 
+  // The browser goes through the Cloudflare Worker (fixes the CORS error).
+  // Node (the GitHub Action) has no CORS rules, so it calls the APIs directly.
+  const PROXY_URL = "https://bus-proxy.ericantonio-udrea.workers.dev/";
+  const IS_BROWSER = typeof window !== "undefined";
+  const viaProxy = url => IS_BROWSER ? `${PROXY_URL}?url=${encodeURIComponent(url)}` : url;
+
 
   // ============================================================
   // Small helpers
@@ -112,7 +118,7 @@
 
   async function fetchAllVehicles() {
     const results = await Promise.allSettled(API_URLS.map(async api => {
-      const data = await fetchJson(api.url, `${api.name} API`);
+      const data = await fetchJson(viaProxy(api.url), `${api.name} API`);
       if (!Array.isArray(data)) throw new Error(`${api.name} API did not return an array`);
       return data.map(v => ({ ...v, operator: api.operator, operatorName: api.name }));
     }));
@@ -138,7 +144,7 @@
     const patterns = {};
 
     const results = await Promise.allSettled(API_URLS.map(api =>
-      fetchJson(api.url.replace(/vehicles$/, "stops"), `${api.name} stops API`)));
+        fetchJson(viaProxy(api.url.replace(/vehicles$/, "stops")), `${api.name} stops API`)));
 
     results.forEach((result, i) => {
       const { operator, name } = API_URLS[i];
