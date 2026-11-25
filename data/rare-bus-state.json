@@ -12,7 +12,7 @@
       "unusual": false
     },
     "transmixt:43": {
-      "route": "13",
+      "route": "7",
       "rare": false,
       "unusual": true
     },
@@ -28,6 +28,11 @@
     },
     "ani-tour:27": {
       "route": "727 Năsăud - Telcișor",
+      "rare": false,
+      "unusual": true
+    },
+    "transmixt:167": {
+      "route": "470 Bistrița - Posmuș",
       "rare": false,
       "unusual": true
     }
