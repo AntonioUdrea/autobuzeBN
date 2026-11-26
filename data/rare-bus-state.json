@@ -35,6 +35,11 @@
       "route": "8",
       "rare": true,
       "unusual": false
+    },
+    "ani-tour:4": {
+      "route": "631 Năsăud - Săsarm",
+      "rare": false,
+      "unusual": true
     }
   }
 }
