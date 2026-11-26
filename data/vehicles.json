@@ -323,7 +323,8 @@
     },
     "122": {
       "licensePlate": "BN 55 TMX",
-      "model": "Setra S419 UL-GT"
+      "model": "Setra S419 UL-GT",
+      "assignedRoutes": ["502 Bistrița - Mureșenii Bârgăului"]
     },
     "123": {
       "licensePlate": "BN 02 TNR",
