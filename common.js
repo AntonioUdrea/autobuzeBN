@@ -1,12 +1,13 @@
+
 /*
  * common.js: code shared by the web pages AND the GitHub Action scripts.
  */
 
 (function (root, factory) {
   if (typeof module === "object" && module.exports) {
-    module.exports = factory();   // Node
+    module.exports = factory();
   } else {
-    root.Common = factory();      // Browser: window.Common
+    root.Common = factory();
   }
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
@@ -28,17 +29,19 @@
     }
   ];
 
-  const OPERATOR_NAMES = Object.fromEntries(API_URLS.map(a => [a.operator, a.name]));
+  const OPERATOR_NAMES = Object.fromEntries(
+    API_URLS.map(a => [a.operator, a.name])
+  );
 
   const ON_TIME_SECONDS = 60;
-  const FETCH_TIMEOUT_MS = 8000;
+  const FETCH_TIMEOUT_MS = 15000;
   const TIME_ZONE = "Europe/Bucharest";
 
-  // The browser goes through the Cloudflare Worker (fixes the CORS error).
-  // Node (the GitHub Action) has no CORS rules, so it calls the APIs directly.
+  // BOTH browser and GitHub Actions use the Cloudflare proxy.
   const PROXY_URL = "https://bus-proxy.ericantonio-udrea.workers.dev/";
-  const IS_BROWSER = typeof window !== "undefined";
-  const viaProxy = url => IS_BROWSER ? `${PROXY_URL}?url=${encodeURIComponent(url)}` : url;
+
+  const viaProxy = url =>
+    `${PROXY_URL}?url=${encodeURIComponent(url)}`;
 
 
   // ============================================================
@@ -47,25 +50,92 @@
 
   function escapeHtml(value) {
     return String(value).replace(/[&<>"]/g, c =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]));
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;"
+      }[c])
+    );
   }
 
   function naturalCompare(a, b) {
-    return String(a).localeCompare(String(b), undefined, { numeric: true });
+    return String(a).localeCompare(
+      String(b),
+      undefined,
+      { numeric: true }
+    );
   }
+
+  // ============================================================
+  // API fetching
+  // ============================================================
 
   async function fetchJson(url, label = url) {
-    const response = await fetch(url, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
-    if (!response.ok) throw new Error(`${label} returned ${response.status}`);
-    return response.json();
+    const proxyUrl = viaProxy(url);
+
+    console.log(`[FETCH] ${label}`);
+    console.log(`[FETCH] Using Cloudflare proxy`);
+
+    let response;
+
+    try {
+      response = await fetch(proxyUrl, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json"
+        },
+        signal: AbortSignal.timeout(FETCH_TIMEOUT_MS)
+      });
+    } catch (err) {
+      console.error(`[FETCH] Network error (${label}):`, err.message);
+      throw new Error(`${label}: Network error - ${err.message}`);
+    }
+
+    console.log(`[FETCH] ${label}: HTTP ${response.status}`);
+
+    const body = await response.text();
+
+    if (!response.ok) {
+      console.error(
+        `[FETCH] ${label} failed:`,
+        body.slice(0, 500)
+      );
+
+      throw new Error(
+        `${label} returned HTTP ${response.status}: ${body.slice(0, 500)}`
+      );
+    }
+
+    try {
+      return JSON.parse(body);
+    } catch {
+      console.error(
+        `[FETCH] Invalid JSON from ${label}:`,
+        body.slice(0, 500)
+      );
+
+      throw new Error(`${label} returned invalid JSON`);
+    }
   }
 
+
+  // ============================================================
+  // Date and time
+  // ============================================================
+
   const dateFormat = new Intl.DateTimeFormat("en-CA", {
-    timeZone: TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit"
+    timeZone: TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
   });
 
   const timeFormat = new Intl.DateTimeFormat("en-GB", {
-    timeZone: TIME_ZONE, hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+    timeZone: TIME_ZONE,
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23"
   });
 
   function bucharestDate(date = new Date()) {
@@ -92,20 +162,42 @@
 
   function describeDelay(seconds) {
     const minutes = Math.round(Math.abs(seconds) / 60);
-    if (seconds > ON_TIME_SECONDS) return { kind: "late", minutes };
-    if (seconds < -ON_TIME_SECONDS) return { kind: "early", minutes };
+
+    if (seconds > ON_TIME_SECONDS) {
+      return { kind: "late", minutes };
+    }
+
+    if (seconds < -ON_TIME_SECONDS) {
+      return { kind: "early", minutes };
+    }
+
     return { kind: "ontime", minutes };
   }
 
   function getPosition(v) {
-    const lat = Number(v.latitude ?? v.lat ?? v.position?.latitude ?? v.position?.lat);
-    const lng = Number(v.longitude ?? v.lng ?? v.lon ?? v.position?.longitude ?? v.position?.lng);
-    return Number.isFinite(lat) && Number.isFinite(lng) ? [lat, lng] : null;
+    const lat = Number(
+      v.latitude ??
+      v.lat ??
+      v.position?.latitude ??
+      v.position?.lat
+    );
+
+    const lng = Number(
+      v.longitude ??
+      v.lng ??
+      v.lon ??
+      v.position?.longitude ??
+      v.position?.lng
+    );
+
+    return Number.isFinite(lat) && Number.isFinite(lng)
+      ? [lat, lng]
+      : null;
   }
 
 
   // ============================================================
-  // Loading data
+  // Loading local data
   // ============================================================
 
   async function loadLocalData() {
@@ -113,15 +205,42 @@
       fetchJson("data/vehicles.json", "data/vehicles.json"),
       fetchJson("data/routes.json", "data/routes.json")
     ]);
+
     return { vehicles, routes };
   }
 
+
+  // ============================================================
+  // Fetch vehicles
+  // ============================================================
+
   async function fetchAllVehicles() {
-    const results = await Promise.allSettled(API_URLS.map(async api => {
-      const data = await fetchJson(viaProxy(api.url), `${api.name} API`);
-      if (!Array.isArray(data)) throw new Error(`${api.name} API did not return an array`);
-      return data.map(v => ({ ...v, operator: api.operator, operatorName: api.name }));
-    }));
+    console.log("========== FETCHING VEHICLES ==========");
+
+    const results = await Promise.allSettled(
+      API_URLS.map(async api => {
+        const data = await fetchJson(
+          api.url,
+          `${api.name} API`
+        );
+
+        if (!Array.isArray(data)) {
+          throw new Error(
+            `${api.name} API did not return an array`
+          );
+        }
+
+        console.log(
+          `[API] ${api.name}: received ${data.length} vehicles`
+        );
+
+        return data.map(v => ({
+          ...v,
+          operator: api.operator,
+          operatorName: api.name
+        }));
+      })
+    );
 
     const buses = [];
     const failed = [];
@@ -131,85 +250,146 @@
         buses.push(...result.value);
       } else {
         failed.push(API_URLS[i].name);
-        console.error(`Could not load ${API_URLS[i].name}:`, result.reason);
+
+        console.error(
+          `[API] Could not load ${API_URLS[i].name}:`,
+          result.reason
+        );
       }
     });
+
+    console.log(
+      `[API] Total vehicles received: ${buses.length}`
+    );
+
+    console.log("=======================================");
 
     return { buses, failed };
   }
 
-  // stops and routes
+
+  // ============================================================
+  // Fetch stops and patterns
+  // ============================================================
+
   async function fetchStops() {
+    console.log("========== FETCHING STOPS ==========");
+
     const stops = {};
     const patterns = {};
 
-    const results = await Promise.allSettled(API_URLS.map(api =>
-        fetchJson(viaProxy(api.url.replace(/vehicles$/, "stops")), `${api.name} stops API`)));
+    const results = await Promise.allSettled(
+      API_URLS.map(api =>
+        fetchJson(
+          api.url.replace(/vehicles$/, "stops"),
+          `${api.name} stops API`
+        )
+      )
+    );
 
     results.forEach((result, i) => {
       const { operator, name } = API_URLS[i];
+
       stops[operator] = {};
       patterns[operator] = {};
 
-      if (result.status !== "fulfilled" || !Array.isArray(result.value)) {
-        console.error(`Could not load stops for ${name}:`, result.reason);
+      if (
+        result.status !== "fulfilled" ||
+        !Array.isArray(result.value)
+      ) {
+        console.error(
+          `[API] Could not load stops for ${name}:`,
+          result.status === "rejected"
+            ? result.reason
+            : "Invalid response format"
+        );
+
         return;
       }
+
+      console.log(
+        `[API] ${name}: received ${result.value.length} stops`
+      );
 
       for (const stop of result.value) {
         stops[operator][stop.id] = stop.name;
 
         for (const p of stop.patterns ?? []) {
-          patterns[operator][`${p.routeId}:${p.index}`] ??= { from: p.fromStopId, to: p.toStopId };
+          patterns[operator][`${p.routeId}:${p.index}`] ??= {
+            from: p.fromStopId,
+            to: p.toStopId
+          };
         }
       }
     });
+
+    console.log("====================================");
 
     return { stops, patterns };
   }
 
 
   // ============================================================
-  // local data + api data combined
+  // Enrich vehicle information
   // ============================================================
 
-  /**
-   * Adds these fields on top of everything the API sent (lat/lng, delaySeconds, ...):
-   *
-   *   id, key            "53", "transmixt:53"
-   *   routeKey           "transmixt|10"       (handy as a <select> value)
-   *   routeKnown         false if routes.json doesn't know this route yet
-   *   routeIndicative    "10"                 (the line number people see)
-   *   licensePlate       real plate, or "Unknown"
-   *   model              real model, or "Unknown"
-   *   unknownPlate/Model true/false
-   *   assignedRoutes     from vehicles.json, [] if none
-   *   destination        "Gara"                (headsign, else the pattern's last stop,
-   *                                             else routes.json, else "Unknown")
-   *   direction          "Piața → Gara"        (same, but with the first stop too)
-   *   stopName           the stop the bus is at or heading to ("" if none)
-   */
   function enrichVehicle(bus, ctx) {
     const { operator } = bus;
 
-    const routeInfo = ctx.routes[operator]?.[String(bus.routeId)];
-    const vehicleInfo = ctx.vehicles[operator]?.[String(bus.vehicleId)];
+    const routeInfo =
+      ctx.routes[operator]?.[String(bus.routeId)];
 
-    const stopName = id => ctx.stops[operator]?.[id] ?? "";
+    const vehicleInfo =
+      ctx.vehicles[operator]?.[String(bus.vehicleId)];
 
-    const pattern = ctx.patterns[operator]?.[`${bus.routeId}:${bus.patternIndex}`];
-    const first = pattern ? stopName(pattern.from) : "";
-    const last = pattern ? stopName(pattern.to) : "";
-    const patternUsable = Boolean(pattern && pattern.from !== pattern.to && first && last);
+    const stopName = id =>
+      ctx.stops[operator]?.[id] ?? "";
 
-    const directionIndex = bus.patternIndex < 0 ? -1 : bus.patternIndex >= 11 ? 1 : 0;
-    const fromRoutesJson = routeInfo?.directions?.[String(directionIndex)] || "";
+    const pattern =
+      ctx.patterns[operator]?.[
+        `${bus.routeId}:${bus.patternIndex}`
+      ];
+
+    const first = pattern
+      ? stopName(pattern.from)
+      : "";
+
+    const last = pattern
+      ? stopName(pattern.to)
+      : "";
+
+    const patternUsable = Boolean(
+      pattern &&
+      pattern.from !== pattern.to &&
+      first &&
+      last
+    );
+
+    const directionIndex =
+      bus.patternIndex < 0
+        ? -1
+        : bus.patternIndex >= 11
+          ? 1
+          : 0;
+
+    const fromRoutesJson =
+      routeInfo?.directions?.[String(directionIndex)] || "";
+
     const headsign = bus.headsign?.trim() || "";
 
-    const plate = vehicleInfo?.licensePlate ? String(vehicleInfo.licensePlate) : "";
-    const model = vehicleInfo?.model ? String(vehicleInfo.model) : "";
-    const unknownPlate = !plate || plate.toLowerCase() === "unknown";
-    const unknownModel = !model || model.toLowerCase() === "unknown";
+    const plate = vehicleInfo?.licensePlate
+      ? String(vehicleInfo.licensePlate)
+      : "";
+
+    const model = vehicleInfo?.model
+      ? String(vehicleInfo.model)
+      : "";
+
+    const unknownPlate =
+      !plate || plate.toLowerCase() === "unknown";
+
+    const unknownModel =
+      !model || model.toLowerCase() === "unknown";
 
     return {
       ...bus,
@@ -219,35 +399,60 @@
 
       routeKey: `${operator}|${bus.routeId}`,
       routeKnown: Boolean(routeInfo),
-      routeIndicative: String(routeInfo?.indicative ?? bus.routeId),
+
+      routeIndicative: String(
+        routeInfo?.indicative ?? bus.routeId
+      ),
 
       licensePlate: unknownPlate ? "Unknown" : plate,
       model: unknownModel ? "Unknown" : model,
+
       unknownPlate,
       unknownModel,
+
       assignedRoutes: vehicleInfo?.assignedRoutes ?? [],
 
-      destination: headsign || (patternUsable ? last : "") || fromRoutesJson || "Unknown",
-      direction: headsign || (patternUsable ? `${first} \u2192 ${last}` : "") || fromRoutesJson || "Unknown",
+      destination:
+        headsign ||
+        (patternUsable ? last : "") ||
+        fromRoutesJson ||
+        "Unknown",
 
-      stopName: bus.stopId != null ? (stopName(bus.stopId) || `Stop ${bus.stopId}`) : ""
+      direction:
+        headsign ||
+        (patternUsable ? `${first} → ${last}` : "") ||
+        fromRoutesJson ||
+        "Unknown",
+
+      stopName:
+        bus.stopId != null
+          ? (stopName(bus.stopId) || `Stop ${bus.stopId}`)
+          : ""
     };
   }
 
+
+  // ============================================================
+  // Exports
+  // ============================================================
 
   return {
     API_URLS,
     OPERATOR_NAMES,
     ON_TIME_SECONDS,
+
     escapeHtml,
     naturalCompare,
     fetchJson,
+
     bucharestDate,
     bucharestTime,
     formatTime,
     toMinutes,
+
     describeDelay,
     getPosition,
+
     loadLocalData,
     fetchAllVehicles,
     fetchStops,
