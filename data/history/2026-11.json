@@ -2148,6 +2148,7 @@
     "transmixt:53": [{"route":"3","from":"07:15","to":"09:00","polls":5,"directions":["77 C R VIVU","69 SCHULLERWALD"]},{"route":"3","from":"10:15","to":"15:45","polls":23,"directions":["77 C R VIVU","69 SCHULLERWALD"]}],
     "transmixt:61": [{"route":"9","from":"07:15","to":"08:30","polls":6,"directions":["84 AUTOGARA","141 GHINDA"]},{"route":"18","from":"09:00","to":"09:30","polls":3,"directions":["221 HEIDENFELD","84 AUTOGARA"]},{"route":"13","from":"12:00","to":"12:45","polls":4,"directions":["181 LOGOS","39 BIBL JUDETEANA"]},{"route":"9","from":"13:15","to":"15:30","polls":10,"directions":["141 GHINDA","84 AUTOGARA"]}],
     "transmixt:62": [{"route":"8","from":"07:15","to":"10:45","polls":14,"directions":["125 SIGMIR","RETUR","TUR"]},{"route":"8","from":"12:00","to":"15:45","polls":16,"directions":["125 SIGMIR","RETUR","TUR"]}],
+    "transmixt:63": [{"route":"5","from":"06:30","to":"06:30","polls":1,"directions":["(via Industriei)"]}],
     "transmixt:64": [{"route":"13","from":"07:15","to":"10:30","polls":12,"directions":["66 AL ODOBESCU","TUR"]},{"route":"13","from":"12:15","to":"15:45","polls":15,"directions":["66 AL ODOBESCU","TUR"]}],
     "transmixt:66": [{"route":"13","from":"07:15","to":"11:45","polls":19,"directions":["TUR","66 AL ODOBESCU"]},{"route":"13","from":"14:00","to":"15:45","polls":8,"directions":["TUR","66 AL ODOBESCU"]}],
     "transmixt:68": [{"route":"1","from":"07:15","to":"15:45","polls":33,"directions":["12 STEFAN CEL MARE","1 PASARELA"]}],
