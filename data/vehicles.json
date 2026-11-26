@@ -34,8 +34,8 @@
       "assignedRoutes": ["3"]
     },
     "36": {
-      "licensePlate": "BN 31 TMX",
-      "model": "Mercedes-Benz Citaro Facelift G"
+      "licensePlate": "BN 53 TMX",
+      "model": "Mercedes-Benz Citaro G"
     },
     "37": {
       "licensePlate": "BN 54 TMX",
@@ -175,6 +175,10 @@
     "77": {
       "licensePlate": "B 164 TMX",
       "model": "Mercedes-Benz Sprinter"
+    },
+    "79": {
+      "licensePlate": "BN 31 TMX",
+      "model": "Mercedes-Benz Citaro Facelift G"
     },
     "80": {
       "licensePlate": "BN 37 TMX",
