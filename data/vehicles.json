@@ -613,13 +613,9 @@
       "assignedRoutes": ["628A Năsăud - Săsarm - Beclean - Suplai"]
     },
     "7": {
-      "licensePlate": "BN 75 ANY / BN 28 ANI",
+      "licensePlate": "BN 75 ANY",
       "model": "Mercedes-Benz Sprinter",
       "assignedRoutes": ["628 Bistrița - Suplai", "630 Năsăud - Suplai"]
-    },
-    "8": {
-      "licensePlate": "BN 26 ANI (neconfirmat)",
-      "model": "Mercedes-Benz Sprinter"
     },
     "9": {
       "licensePlate": "BN 54 ANY",
@@ -632,7 +628,7 @@
       "assignedRoutes": ["631 Năsăud - Săsarm", "630 Năsăud - Suplai"]
     },
     "11": {
-      "licensePlate": "BN 37 ANY (neconfirmat)",
+      "licensePlate": "BN 37 ANY",
       "model": "Setra S416 GT-HD",
       "assignedRoutes": ["630 Năsăud - Suplai"]
     },
