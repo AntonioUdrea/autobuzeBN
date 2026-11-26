@@ -1,6 +1,9 @@
 
 /*
  * common.js: code shared by the web pages AND the GitHub Action scripts.
+ *
+ * External API requests go through Cloudflare.
+ * Local JSON files are fetched directly.
  */
 
 (function (root, factory) {
@@ -37,9 +40,11 @@
   const FETCH_TIMEOUT_MS = 15000;
   const TIME_ZONE = "Europe/Bucharest";
 
-  // BOTH browser and GitHub Actions use the Cloudflare proxy.
-  const PROXY_URL = "https://bus-proxy.ericantonio-udrea.workers.dev/";
+  // Cloudflare proxy for external API requests.
+  const PROXY_URL =
+    "https://bus-proxy.ericantonio-udrea.workers.dev/";
 
+  // Both browser and GitHub Actions use the proxy.
   const viaProxy = url =>
     `${PROXY_URL}?url=${encodeURIComponent(url)}`;
 
@@ -67,20 +72,30 @@
     );
   }
 
+
   // ============================================================
-  // API fetching
+  // API / JSON fetching
   // ============================================================
 
   async function fetchJson(url, label = url) {
-    const proxyUrl = viaProxy(url);
+    // Local files must NOT go through the Cloudflare proxy.
+    // External HTTP/HTTPS APIs MUST go through the proxy.
+    const isExternal = /^https?:\/\//i.test(url);
+
+    const requestUrl = isExternal
+      ? viaProxy(url)
+      : url;
 
     console.log(`[FETCH] ${label}`);
-    console.log(`[FETCH] Using Cloudflare proxy`);
+
+    console.log(
+      `[FETCH] Route: ${isExternal ? "Cloudflare proxy" : "Local/direct"}`
+    );
 
     let response;
 
     try {
-      response = await fetch(proxyUrl, {
+      response = await fetch(requestUrl, {
         method: "GET",
         headers: {
           "Accept": "application/json"
@@ -88,11 +103,19 @@
         signal: AbortSignal.timeout(FETCH_TIMEOUT_MS)
       });
     } catch (err) {
-      console.error(`[FETCH] Network error (${label}):`, err.message);
-      throw new Error(`${label}: Network error - ${err.message}`);
+      console.error(
+        `[FETCH] Network error (${label}):`,
+        err.message
+      );
+
+      throw new Error(
+        `${label}: Network error - ${err.message}`
+      );
     }
 
-    console.log(`[FETCH] ${label}: HTTP ${response.status}`);
+    console.log(
+      `[FETCH] ${label}: HTTP ${response.status}`
+    );
 
     const body = await response.text();
 
@@ -115,7 +138,9 @@
         body.slice(0, 500)
       );
 
-      throw new Error(`${label} returned invalid JSON`);
+      throw new Error(
+        `${label} returned invalid JSON`
+      );
     }
   }
 
