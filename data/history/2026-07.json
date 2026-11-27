@@ -1,78 +1,81 @@
 {
   "2026-07-01": {
-    "transmixt:83": [{"route":"18"}],
     "transmixt:40": [{"route":"2"}],
-    "transmixt:62": [{"route":"13"}]
-  },
-  "2026-07-02": {
     "transmixt:62": [{"route":"13"}],
-    "transmixt:83": [{"route":"18"}],
-    "transmixt:145": [{"route":"8"}],
-    "transmixt:40": [{"route":"2"}]
-  },
-  "2026-07-03": {
-    "transmixt:62": [{"route":"13"}],
-    "transmixt:40": [{"route":"2"}],
     "transmixt:83": [{"route":"18"}]
   },
-  "2026-07-06": {
-    "transmixt:62": [{"route":"13"}],
+  "2026-07-02": {
     "transmixt:40": [{"route":"2"}],
+    "transmixt:62": [{"route":"13"}],
+    "transmixt:83": [{"route":"18"}],
+    "transmixt:145": [{"route":"8"}]
+  },
+  "2026-07-03": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:62": [{"route":"13"}],
+    "transmixt:83": [{"route":"18"}]
+  },
+  "2026-07-05": {
+    "transmixt:87": [{"route":"4","from":"08:00","to":"19:15","polls":46,"directions":["tur","UNIREA- VIISOARA"]}]
+  },
+  "2026-07-06": {
+    "transmixt:40": [{"route":"2"}],
+    "transmixt:62": [{"route":"13"}],
     "transmixt:83": [{"route":"18"}],
     "transmixt:133": [{"route":"18"}]
   },
   "2026-07-07": {
-    "transmixt:62": [{"route":"13"}],
     "transmixt:40": [{"route":"2"}],
-    "transmixt:83": [{"route":"18"}],
     "transmixt:53": [{"route":"2"}],
+    "transmixt:62": [{"route":"13"}],
+    "transmixt:83": [{"route":"18"}],
     "transmixt:133": [{"route":"18"}]
   },
   "2026-07-08": {
-    "transmixt:62": [{"route":"13"}],
     "transmixt:40": [{"route":"2"}],
+    "transmixt:62": [{"route":"13"}],
     "transmixt:83": [{"route":"18"}],
     "transmixt:145": [{"route":"2"}]
   },
   "2026-07-09": {
-    "transmixt:62": [{"route":"13"}],
     "transmixt:40": [{"route":"2"}],
+    "transmixt:62": [{"route":"13"}],
     "transmixt:83": [{"route":"18"}],
     "transmixt:145": [{"route":"2"}]
   },
   "2026-07-10": {
-    "transmixt:62": [{"route":"13"}],
     "transmixt:40": [{"route":"2"}],
+    "transmixt:49": [{"route":"6"}],
+    "transmixt:62": [{"route":"13"}],
     "transmixt:83": [{"route":"18"}],
-    "transmixt:145": [{"route":"2"}],
-    "transmixt:49": [{"route":"6"}]
+    "transmixt:145": [{"route":"2"}]
   },
   "2026-07-11": {
     "transmixt:53": [{"route":"3"}]
   },
   "2026-07-13": {
-    "transmixt:62": [{"route":"13"}],
     "transmixt:40": [{"route":"2"}],
-    "transmixt:53": [{"route":"3"}]
+    "transmixt:53": [{"route":"3"}],
+    "transmixt:62": [{"route":"13"}]
   },
   "2026-07-14": {
     "transmixt:40": [{"route":"2"}],
-    "transmixt:62": [{"route":"13"}],
     "transmixt:53": [{"route":"3"}],
-    "transmixt:54": [{"route":"2"}]
+    "transmixt:54": [{"route":"2"}],
+    "transmixt:62": [{"route":"13"}]
   },
   "2026-07-15": {
     "transmixt:40": [{"route":"2"}],
-    "transmixt:83": [{"route":"18"}],
-    "transmixt:53": [{"route":"3"}]
+    "transmixt:53": [{"route":"3"}],
+    "transmixt:83": [{"route":"18"}]
   },
   "2026-07-16": {
     "transmixt:40": [{"route":"2"}]
   },
   "2026-07-17": {
     "transmixt:40": [{"route":"2"}],
-    "transmixt:62": [{"route":"2"}],
-    "transmixt:53": [{"route":"2"}]
+    "transmixt:53": [{"route":"2"}],
+    "transmixt:62": [{"route":"2"}]
   },
   "2026-07-18": {
     "transmixt:40": [{"route":"2"}],
@@ -83,8 +86,8 @@
   },
   "2026-07-20": {
     "transmixt:53": [{"route":"2"}],
-    "transmixt:145": [{"route":"2"}],
-    "transmixt:62": [{"route":"1"}]
+    "transmixt:62": [{"route":"1"}],
+    "transmixt:145": [{"route":"2"}]
   },
   "2026-07-21": {
     "transmixt:53": [{"route":"2"}]
