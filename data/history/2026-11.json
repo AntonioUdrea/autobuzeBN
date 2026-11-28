@@ -2334,5 +2334,8 @@
     "transmixt:197": [{"route":"2","from":"06:15","to":"22:45","polls":58,"directions":["1 PASARELA","107 DR SLATINITEI","28 VIISOARA","53 AVICOLA"]}],
     "transmixt:199": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"06:30","to":"07:15","polls":4,"directions":["RETUR"]}],
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"14:15","to":"14:45","polls":3,"directions":["Bistrita - Fintinele"]}]
+  },
+  "2026-11-28": {
+    "transmixt:122": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"05:45","polls":1,"directions":["MURESENII BARGAULUI- BISTRITA"]}]
   }
 }
