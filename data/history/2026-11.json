@@ -2336,6 +2336,9 @@
     "transmixt:200": [{"route":"358 Bistrița - Fântânele","from":"14:15","to":"14:45","polls":3,"directions":["Bistrita - Fintinele"]}]
   },
   "2026-11-28": {
-    "transmixt:122": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"05:45","polls":1,"directions":["MURESENII BARGAULUI- BISTRITA"]}]
+    "transmixt:34": [{"route":"3","from":"06:00","to":"06:00","polls":1,"directions":["77 C R VIVU"]}],
+    "transmixt:73": [{"route":"2","from":"06:00","to":"06:00","polls":1,"directions":["28 VIISOARA"]}],
+    "transmixt:122": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"06:00","polls":2,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
+    "transmixt:124": [{"route":"493 Bistrița - Gledin","from":"06:00","to":"06:00","polls":1,"directions":["GLEDIN- BISTRITA"]}]
   }
 }

@@ -6,6 +6,40 @@
       24.77466,
       "502 Bistrița - Mureșenii Bârgăului",
       "MURESENII BARGAULUI- BISTRITA"
+    ],
+    [
+      "06:00",
+      47.18916,
+      24.60648,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "MURESENII BARGAULUI- BISTRITA"
+    ]
+  ],
+  "transmixt:124": [
+    [
+      "06:00",
+      46.95221,
+      24.70514,
+      "493 Bistrița - Gledin",
+      "GLEDIN- BISTRITA"
+    ]
+  ],
+  "transmixt:34": [
+    [
+      "06:00",
+      47.13027,
+      24.4682,
+      "3",
+      "77 C R VIVU"
+    ]
+  ],
+  "transmixt:73": [
+    [
+      "06:00",
+      47.17379,
+      24.53687,
+      "2",
+      "28 VIISOARA"
     ]
   ]
 }
