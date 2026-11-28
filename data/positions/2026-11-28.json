@@ -34,6 +34,13 @@
       24.53596,
       "502 Bistrița - Mureșenii Bârgăului",
       "BISTRITA- MURESENII BARGAULUI"
+    ],
+    [
+      "07:45",
+      47.2106,
+      24.66815,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "BISTRITA- MURESENII BARGAULUI"
     ]
   ],
   "transmixt:124": [
@@ -78,6 +85,13 @@
       24.43568,
       "493 Bistrița - Gledin",
       "BISTRITA- GLEDIN"
+    ],
+    [
+      "07:45",
+      47.01471,
+      24.55276,
+      "493 Bistrița - Gledin",
+      "BISTRITA- GLEDIN"
     ]
   ],
   "transmixt:34": [
@@ -115,6 +129,13 @@
       24.50167,
       "3",
       "77 C R VIVU"
+    ],
+    [
+      "07:45",
+      47.12669,
+      24.4801,
+      "3",
+      "69 SCHULLERWALD"
     ]
   ],
   "transmixt:73": [
@@ -265,6 +286,13 @@
       24.50182,
       "2",
       "107 DR SLATINITEI"
+    ],
+    [
+      "07:45",
+      47.15671,
+      24.52478,
+      "2",
+      "28 VIISOARA"
     ]
   ],
   "transmixt:193": [
@@ -295,6 +323,13 @@
       24.49271,
       "2",
       "28 VIISOARA"
+    ],
+    [
+      "07:45",
+      47.11203,
+      24.46011,
+      "2",
+      "107 DR SLATINITEI"
     ]
   ],
   "transmixt:69": [
@@ -332,6 +367,13 @@
       24.50173,
       "3",
       "77 C R VIVU"
+    ],
+    [
+      "07:45",
+      47.13366,
+      24.50491,
+      "3",
+      "69 SCHULLERWALD"
     ]
   ],
   "transmixt:157": [
@@ -369,6 +411,13 @@
       24.49094,
       "1",
       "tur"
+    ],
+    [
+      "07:45",
+      47.13726,
+      24.50845,
+      "1",
+      "1 PASARELA"
     ]
   ],
   "transmixt:71": [
@@ -385,6 +434,13 @@
       24.50653,
       "3",
       "69 SCHULLERWALD"
+    ],
+    [
+      "07:45",
+      47.12664,
+      24.48011,
+      "3",
+      "77 C R VIVU"
     ]
   ],
   "transmixt:159": [
@@ -401,6 +457,13 @@
       24.50168,
       "1",
       "1 PASARELA"
+    ],
+    [
+      "07:45",
+      47.12397,
+      24.47968,
+      "1",
+      "tur"
     ]
   ],
   "transmixt:66": [
@@ -410,6 +473,13 @@
       24.48465,
       "13",
       "39 BIBL JUDETEANA"
+    ],
+    [
+      "07:45",
+      47.14336,
+      24.50281,
+      "13",
+      "181 LOGOS"
     ]
   ],
   "transmixt:89": [
@@ -431,6 +501,13 @@
       "07:30",
       47.09874,
       24.44239,
+      "4",
+      "tur"
+    ],
+    [
+      "07:45",
+      47.14527,
+      24.5115,
       "4",
       "tur"
     ]
@@ -472,6 +549,13 @@
       24.49082,
       "387 Bistrița - Silivașu de Câmpie",
       "Bistrita - Silivasu de Campie"
+    ],
+    [
+      "07:45",
+      47.06182,
+      24.39456,
+      "387 Bistrița - Silivașu de Câmpie",
+      "Bistrita - Silivasu de Campie"
     ]
   ],
   "ani-tour:4": [
@@ -497,6 +581,13 @@
       24.48337,
       "358 Bistrița - Fântânele",
       "Bistrita - Fintinele"
+    ],
+    [
+      "07:45",
+      47.05896,
+      24.3986,
+      "358 Bistrița - Fântânele",
+      "Bistrita - Fintinele"
     ]
   ],
   "transmixt:149": [
@@ -513,6 +604,13 @@
       "07:30",
       47.14064,
       24.50656,
+      "16",
+      "DUS"
+    ],
+    [
+      "07:45",
+      47.16004,
+      24.53886,
       "16",
       "DUS"
     ]
