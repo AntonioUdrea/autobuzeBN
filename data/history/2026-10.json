@@ -3,6 +3,9 @@
     "transmixt:41": [{"route":"5","from":"06:15","to":"07:30","polls":1,"directions":["(doar cand lucreaza Rombat)","77 C R VIVU"]}],
     "transmixt:193": [{"route":"2","from":"08:00","to":"20:00","polls":1,"directions":["28 VIISOARA","107 DR SLATINITEI","1 PASARELA","53 AVICOLA"]}]
   },
+  "2026-10-09": {
+    "transmixt:187": [{"route":"3","from":"06:00","to":"06:00","polls":1,"directions":["77 C R VIVU"]},{"route":"2","from":"07:00","to":"20:15","polls":54,"directions":["1 PASARELA","107 DR SLATINITEI","28 VIISOARA","53 AVICOLA"]}]
+  },
   "2026-10-13": {
     "ani-tour:1": [{"route":"615 Bistrița - Năsăud"},{"route":"808 Bistrița - Lunca Ilvei"}],
     "ani-tour:3": [{"route":"615 Bistrița - Năsăud"}],
