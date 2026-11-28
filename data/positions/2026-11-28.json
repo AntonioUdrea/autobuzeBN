@@ -55,6 +55,13 @@
       24.8569,
       "502 Bistrița - Mureșenii Bârgăului",
       "MURESENII BARGAULUI- BISTRITA"
+    ],
+    [
+      "08:30",
+      47.22553,
+      24.76333,
+      "502 Bistrița - Mureșenii Bârgăului",
+      "MURESENII BARGAULUI- BISTRITA"
     ]
   ],
   "transmixt:124": [
@@ -113,6 +120,13 @@
       24.67162,
       "493 Bistrița - Gledin",
       "BISTRITA- GLEDIN"
+    ],
+    [
+      "08:30",
+      46.95829,
+      24.70582,
+      "493 Bistrița - Gledin",
+      "GLEDIN- BISTRITA"
     ]
   ],
   "transmixt:34": [
@@ -252,6 +266,13 @@
       24.42219,
       "354 Bistrița - Caila",
       "Bistrita - Caila"
+    ],
+    [
+      "08:30",
+      47.16899,
+      24.3514,
+      "354 Bistrița - Caila",
+      "Bistrita - Caila"
     ]
   ],
   "transmixt:169": [
@@ -287,6 +308,13 @@
       "08:15",
       47.03176,
       24.42242,
+      "364 Bistrița - Milaș",
+      "Bistrita - Milas"
+    ],
+    [
+      "08:30",
+      46.91257,
+      24.50232,
       "364 Bistrița - Milaș",
       "Bistrita - Milas"
     ]
@@ -326,6 +354,13 @@
       24.46765,
       "1",
       "tur"
+    ],
+    [
+      "08:30",
+      47.13734,
+      24.50815,
+      "1",
+      "1 PASARELA"
     ]
   ],
   "transmixt:187": [
@@ -377,6 +412,13 @@
       24.4748,
       "2",
       "28 VIISOARA"
+    ],
+    [
+      "08:30",
+      47.12848,
+      24.48787,
+      "2",
+      "107 DR SLATINITEI"
     ]
   ],
   "transmixt:193": [
@@ -421,6 +463,13 @@
       24.51167,
       "2",
       "107 DR SLATINITEI"
+    ],
+    [
+      "08:30",
+      47.15095,
+      24.51805,
+      "2",
+      "28 VIISOARA"
     ]
   ],
   "transmixt:69": [
@@ -479,6 +528,13 @@
       24.46851,
       "3",
       "77 C R VIVU"
+    ],
+    [
+      "08:30",
+      47.14015,
+      24.50761,
+      "3",
+      "77 C R VIVU"
     ]
   ],
   "transmixt:157": [
@@ -535,6 +591,13 @@
       "08:15",
       47.1176,
       24.4677,
+      "1",
+      "tur"
+    ],
+    [
+      "08:30",
+      47.13839,
+      24.49602,
       "1",
       "tur"
     ]
@@ -597,6 +660,13 @@
       24.50174,
       "1",
       "1 PASARELA"
+    ],
+    [
+      "08:30",
+      47.12148,
+      24.47353,
+      "1",
+      "1 PASARELA"
     ]
   ],
   "transmixt:66": [
@@ -627,6 +697,13 @@
       24.49273,
       "13",
       "39 BIBL JUDETEANA"
+    ],
+    [
+      "08:30",
+      47.12899,
+      24.49305,
+      "13",
+      "181 LOGOS"
     ]
   ],
   "transmixt:89": [
@@ -657,6 +734,13 @@
       24.5115,
       "4",
       "tur"
+    ],
+    [
+      "08:30",
+      47.16231,
+      24.53038,
+      "4",
+      "UNIREA- VIISOARA"
     ]
   ],
   "transmixt:88": [
@@ -717,6 +801,13 @@
       24.35599,
       "387 Bistrița - Silivașu de Câmpie",
       "Bistrita - Silivasu de Campie"
+    ],
+    [
+      "08:30",
+      46.85945,
+      24.3108,
+      "387 Bistrița - Silivașu de Câmpie",
+      "Bistrita - Silivasu de Campie"
     ]
   ],
   "ani-tour:4": [
@@ -745,6 +836,13 @@
       "08:15",
       47.18023,
       24.48994,
+      "615 Bistrița - Năsăud",
+      "Nasaud Autogara"
+    ],
+    [
+      "08:30",
+      47.25774,
+      24.43119,
       "615 Bistrița - Năsăud",
       "Nasaud Autogara"
     ]
@@ -777,6 +875,13 @@
       24.27224,
       "358 Bistrița - Fântânele",
       "Bistrita - Fintinele"
+    ],
+    [
+      "08:30",
+      46.96128,
+      24.27126,
+      "358 Bistrița - Fântânele",
+      "Bistrita - Fintinele"
     ]
   ],
   "transmixt:149": [
@@ -784,6 +889,13 @@
       "07:30",
       47.10977,
       24.49827,
+      "13",
+      "39 BIBL JUDETEANA"
+    ],
+    [
+      "08:30",
+      47.1095,
+      24.49961,
       "13",
       "39 BIBL JUDETEANA"
     ]
@@ -802,6 +914,13 @@
       24.53886,
       "16",
       "DUS"
+    ],
+    [
+      "08:30",
+      47.14065,
+      24.50658,
+      "16",
+      "DUS"
     ]
   ],
   "transmixt:90": [
@@ -811,6 +930,13 @@
       24.49079,
       "4",
       "UNIREA- VIISOARA"
+    ],
+    [
+      "08:30",
+      47.09813,
+      24.44148,
+      "4",
+      "tur"
     ]
   ]
 }
