@@ -2337,12 +2337,15 @@
   },
   "2026-11-28": {
     "transmixt:34": [{"route":"3","from":"06:00","to":"06:15","polls":2,"directions":["77 C R VIVU"]}],
-    "transmixt:70": [{"route":"1","from":"06:15","to":"06:15","polls":1,"directions":["tur"]}],
+    "transmixt:69": [{"route":"3","from":"06:30","to":"06:30","polls":1,"directions":["77 C R VIVU"]}],
+    "transmixt:70": [{"route":"1","from":"06:15","to":"06:30","polls":2,"directions":["tur","1 PASARELA"]}],
     "transmixt:73": [{"route":"2","from":"06:00","to":"06:15","polls":2,"directions":["28 VIISOARA"]}],
     "transmixt:122": [{"route":"502 Bistrița - Mureșenii Bârgăului","from":"05:45","to":"06:15","polls":3,"directions":["MURESENII BARGAULUI- BISTRITA"]}],
-    "transmixt:124": [{"route":"493 Bistrița - Gledin","from":"06:00","to":"06:15","polls":2,"directions":["GLEDIN- BISTRITA"]}],
-    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:15","polls":1,"directions":["Milas - Bistrita"]}],
-    "transmixt:171": [{"route":"354 Bistrița - Caila","from":"06:15","to":"06:15","polls":1,"directions":["Caila - Bistrita"]}],
-    "transmixt:187": [{"route":"2","from":"06:15","to":"06:15","polls":1,"directions":["28 VIISOARA"]}]
+    "transmixt:124": [{"route":"493 Bistrița - Gledin","from":"06:00","to":"06:30","polls":3,"directions":["GLEDIN- BISTRITA"]}],
+    "transmixt:157": [{"route":"1","from":"06:30","to":"06:30","polls":1,"directions":["tur"]}],
+    "transmixt:169": [{"route":"364 Bistrița - Milaș","from":"06:15","to":"06:30","polls":2,"directions":["Milas - Bistrita"]}],
+    "transmixt:171": [{"route":"354 Bistrița - Caila","from":"06:15","to":"06:30","polls":2,"directions":["Caila - Bistrita"]}],
+    "transmixt:187": [{"route":"2","from":"06:15","to":"06:30","polls":2,"directions":["28 VIISOARA"]}],
+    "transmixt:193": [{"route":"2","from":"06:30","to":"06:30","polls":1,"directions":["107 DR SLATINITEI"]}]
   }
 }
